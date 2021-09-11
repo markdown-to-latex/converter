@@ -1,0 +1,41 @@
+{
+    "name": "@md-to-latex/converter",
+    "version": "1.0.0",
+    "description": "MarkDown To LaTeX Converter",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc --build",
+        "watch": "tsc --build --watch",
+        "dev": "node dist/index.js",
+        "prettier": "prettier",
+        "prettier-fix": "prettier --write .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/markdown-to-latex/converter"
+    },
+    "keywords": [
+        "markdown",
+        "latex",
+        "converter",
+        "transpiler",
+        "report"
+    ],
+    "files": [
+        "dist/**"
+    ],
+    "author": "Anatolii Titov <a@toliak.ru>",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/marked": "^3.0.0",
+        "@types/node": "^16.9.1",
+        "marked": "^3.0.3",
+        "prettier": "^2.4.0",
+        "typescript": "^4.4.3",
+
+        "jest": "^27.0.6",
+        "ts-jest": "^27.0.5",
+        "ts-node": "^10.2.1"
+    }
+}
