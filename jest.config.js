@@ -4,7 +4,7 @@ module.exports = {
     testEnvironment: 'node',
     globals: {
         'ts-jest': {
-            tsconfig: '<rootDir>/src/tests/tsconfig.json',
+            // tsconfig: '<rootDir>/test/tsconfig.json',
         },
     },
 };
