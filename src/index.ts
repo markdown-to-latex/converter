@@ -1,7 +1,6 @@
 import * as marked from 'marked';
 
-export {lexer} from './lexer/lexer'
-
+export { lexer } from './lexer/lexer';
 
 console.log();
 

@@ -1,3 +1,1 @@
-export interface Context {
-
-}
+export interface Context {}

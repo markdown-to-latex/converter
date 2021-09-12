@@ -1,19 +1,29 @@
-import * as marked from "marked";
-import {Token, TokenByType} from "./tokens";
+import * as marked from 'marked';
+import { Token, TokenByType } from './tokens';
+import { captureOpCodes } from './customProcessing';
 
-type Visitor<T extends Token> = (token: Readonly<T>) => Token | Token[]
+type Visitor<T extends Token> = (token: Readonly<T>) => Token | Token[];
 
-export function processTokenChildren(token: { tokens?: Token[] }) {
-    if (token.tokens === undefined) {
+export interface TokenWithChildren {
+    tokens?: Token[];
+    items?: marked.Tokens.ListItem[];
+}
+
+export function processTokenChildren(
+    key: keyof TokenWithChildren,
+    token: TokenWithChildren,
+) {
+    const tokens = token[key];
+    if (tokens === undefined) {
         return;
     }
 
     const newChildren: Token[] = [];
-    for (const child of token.tokens) {
-        newChildren.push(...processTokenIfVisitorExists(child))
+    for (const child of tokens) {
+        newChildren.push(...processTokenIfVisitorExists(child));
     }
 
-    token.tokens = newChildren;
+    token[key] = newChildren as (Token & marked.Tokens.ListItem)[];
 }
 
 export function processTokenIfVisitorExists(token: Readonly<Token>): Token[] {
@@ -37,14 +47,29 @@ const processingVisitors: {
     [key in keyof TokenByType]?: Visitor<TokenByType[key]>;
 } = {
     paragraph: token => {
-        const newToken: marked.Tokens.Paragraph = {...token};
-        processTokenChildren(newToken);
-
+        const newToken: marked.Tokens.Paragraph = { ...token };
         return newToken;
     },
+
     text: token => {
-        console.log('amogus text')
+        return captureOpCodes(token);
+    },
+
+    code: token => {
         return token;
     },
-}
 
+    table: token => {
+        // Workaround
+        for (const headerCell of token.header) {
+            processTokenChildren('tokens', headerCell);
+        }
+        for (const tableCellRow of token.rows) {
+            for (const tableCell of tableCellRow) {
+                processTokenChildren('tokens', tableCell);
+            }
+        }
+
+        return token;
+    },
+};
