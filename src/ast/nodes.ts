@@ -16,6 +16,7 @@ export const enum NodeType {
     Image = 'Image',
     Strong = 'Strong',
     Em = 'Em',
+    Hr = 'Hr',
     CodeSpan = 'CodeSpan',
     Br = 'Br',
     Del = 'Del',
@@ -36,8 +37,7 @@ export const enum NodeTableAlign {
 }
 
 export interface Node {
-    type: string;
-    raw: string;
+    type: NodeType;
     parent: Node | null;
 }
 
@@ -63,19 +63,19 @@ export interface CodeNode extends Node, NodeText {
     lang: string | null;
 }
 
-export interface HeadingNode extends Node, NodeChildren, NodeText {
+export interface HeadingNode extends Node, NodeChildren {
     type: NodeType.Heading;
     depth: number;
 }
 
 export interface TableNode extends Node {
     type: NodeType.Table;
-    align: NodeTableAlign;
+    align: NodeTableAlign[];
     header: TableCellNode[];
     rows: TableCellNode[][];
 }
 
-export interface BlockquoteNode extends Node, NodeChildren, NodeText {
+export interface BlockquoteNode extends Node, NodeChildren {
     type: NodeType.Blockquote;
 }
 
@@ -86,14 +86,14 @@ export interface ListNode extends Node, NodeChildren {
     loose: boolean;
 }
 
-export interface ListItemNode extends Node, NodeChildren, NodeText {
+export interface ListItemNode extends Node, NodeChildren {
     type: NodeType.ListItem;
     task: boolean;
     checked?: boolean;
     loose: boolean;
 }
 
-export interface ParagraphNode extends Node, NodeChildren, NodeText {
+export interface ParagraphNode extends Node, NodeChildren {
     type: NodeType.Paragraph;
     pre?: boolean;
 }
@@ -117,21 +117,21 @@ export interface TextNode extends Node, NodeChildren, NodeText {
     type: NodeType.Text;
 }
 
-export interface LinkNode extends Node, NodeText, NodeHref {
+export interface LinkNode extends Node, NodeHref, NodeChildren {
     type: NodeType.Link;
     title: string;
 }
 
-export interface ImageNode extends Node, NodeHref {
+export interface ImageNode extends Node, NodeHref, NodeText {
     type: NodeType.Image;
     title: string;
 }
 
-export interface StrongNode extends Node, NodeChildren, NodeText {
+export interface StrongNode extends Node, NodeChildren {
     type: NodeType.Strong;
 }
 
-export interface EmNode extends Node, NodeChildren, NodeText {
+export interface EmNode extends Node, NodeChildren {
     type: NodeType.Em;
 }
 
@@ -143,7 +143,11 @@ export interface BrNode extends Node {
     type: NodeType.Br;
 }
 
-export interface DelNode extends Node, NodeChildren, NodeText {
+export interface HrNode extends Node {
+    type: NodeType.Hr;
+}
+
+export interface DelNode extends Node, NodeChildren {
     type: NodeType.Del;
 }
 
@@ -168,4 +172,33 @@ export interface InlineLatexNode extends Node, NodeText {
 
 export interface MathLatexNode extends Node, NodeText {
     type: NodeType.MathLatex;
+}
+
+export function getNodeAllChildren(node: {
+    children?: Node[];
+    header?: Node[];
+    rows?: Node[][];
+}): Node[] {
+    const result: Node[] = [];
+    if (Array.isArray(node.children)) {
+        result.push(...node.children);
+    }
+    if (Array.isArray(node.header)) {
+        result.push(...node.header);
+    }
+    if (Array.isArray(node.rows)) {
+        for (const row of node.rows) {
+            result.push(...row);
+        }
+    }
+
+    return result;
+}
+
+export function getNodeChildren(node: NodeChildren): Node[] {
+    if (Array.isArray(node.children)) {
+        return node.children;
+    }
+
+    return [];
 }

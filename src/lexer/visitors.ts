@@ -1,6 +1,5 @@
 import * as marked from 'marked';
-import {Token, TokenByType} from './tokens';
-import {captureLatexInline, captureOpCodes, processTokenList} from './customProcessing';
+import { Token, TokenByType } from './tokens';
 
 type Visitor<T extends Token> = (token: Readonly<T>) => Token | Token[];
 
@@ -41,41 +40,11 @@ export function processTokenIfVisitorExists(token: Readonly<Token>): Token[] {
 }
 
 // Visitors here
-// Goal: make custom offsets from text into custom tokens
+// Goal: make any pre-processing here
 
 const processingVisitors: {
     [key in keyof TokenByType]?: Visitor<TokenByType[key]>;
 } = {
-    paragraph: token => {
-        const newToken: marked.Tokens.Paragraph = {...token};
-        return newToken;
-    },
-
-    text: token => {
-        const withOpCodes = processTokenList(
-            [token],
-            captureOpCodes
-        );
-        const withLatexInlines: Token[] = [];
-        for (const token of withOpCodes) {
-            if (token.type === 'text') {
-                withLatexInlines.push(...captureLatexInline(token as marked.Tokens.Text));
-            } else {
-                withLatexInlines.push(token);
-            }
-        }
-
-        return withLatexInlines;
-    },
-
-    code: token => {
-        return token;
-    },
-
-    codespan: token => {
-        return token;
-    },
-
     table: token => {
         // Workaround
         for (const headerCell of token.header) {
