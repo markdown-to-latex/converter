@@ -26,7 +26,7 @@ export const enum NodeType {
     TableCell = 'TableCell',
     OpCode = 'OpCode',
     InlineLatex = 'InlineLatex',
-    MathLatex = 'Math',
+    MathLatex = 'MathLatex',
 }
 
 export const enum NodeTableAlign {

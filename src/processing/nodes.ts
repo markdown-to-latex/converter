@@ -1,30 +1,37 @@
 import * as nodes from '../ast/nodes';
 import { NodeType } from '../ast/nodes';
 
-export interface NodesByType {
-    [NodeType.Space]: nodes.SpaceNode;
-    [NodeType.Code]: nodes.CodeNode;
-    [NodeType.Heading]: nodes.HeadingNode;
-    [NodeType.Table]: nodes.TableNode;
-    [NodeType.Blockquote]: nodes.BlockquoteNode;
-    [NodeType.List]: nodes.ListNode;
-    [NodeType.ListItem]: nodes.ListItemNode;
-    [NodeType.Paragraph]: nodes.ParagraphNode;
-    [NodeType.Html]: nodes.HtmlNode;
-    [NodeType.Def]: nodes.DefNode;
-    [NodeType.Escape]: nodes.EscapeNode;
-    [NodeType.Text]: nodes.TextNode;
-    [NodeType.Link]: nodes.LinkNode;
-    [NodeType.Image]: nodes.ImageNode;
-    [NodeType.Strong]: nodes.StrongNode;
-    [NodeType.Em]: nodes.EmNode;
-    [NodeType.Hr]: nodes.HrNode;
-    [NodeType.CodeSpan]: nodes.CodeSpanNode;
-    [NodeType.Br]: nodes.BrNode;
-    [NodeType.Del]: nodes.DelNode;
-    [NodeType.File]: nodes.FileNode;
-    [NodeType.TableCell]: nodes.TableCellNode;
-    [NodeType.OpCode]: nodes.OpCodeNode;
-    [NodeType.InlineLatex]: nodes.InlineLatexNode;
-    [NodeType.MathLatex]: nodes.MathLatexNode;
-}
+const NodesByTypeMap = {
+    [NodeType.Space]: {} as nodes.SpaceNode,
+    [NodeType.Code]: {} as nodes.CodeNode,
+    [NodeType.Heading]: {} as nodes.HeadingNode,
+    [NodeType.Table]: {} as nodes.TableNode,
+    [NodeType.Blockquote]: {} as nodes.BlockquoteNode,
+    [NodeType.List]: {} as nodes.ListNode,
+    [NodeType.ListItem]: {} as nodes.ListItemNode,
+    [NodeType.Paragraph]: {} as nodes.ParagraphNode,
+    [NodeType.Html]: {} as nodes.HtmlNode,
+    [NodeType.Def]: {} as nodes.DefNode,
+    [NodeType.Escape]: {} as nodes.EscapeNode,
+    [NodeType.Text]: {} as nodes.TextNode,
+    [NodeType.Link]: {} as nodes.LinkNode,
+    [NodeType.Image]: {} as nodes.ImageNode,
+    [NodeType.Strong]: {} as nodes.StrongNode,
+    [NodeType.Em]: {} as nodes.EmNode,
+    [NodeType.Hr]: {} as nodes.HrNode,
+    [NodeType.CodeSpan]: {} as nodes.CodeSpanNode,
+    [NodeType.Br]: {} as nodes.BrNode,
+    [NodeType.Del]: {} as nodes.DelNode,
+    [NodeType.File]: {} as nodes.FileNode,
+    [NodeType.TableCell]: {} as nodes.TableCellNode,
+    [NodeType.OpCode]: {} as nodes.OpCodeNode,
+    [NodeType.InlineLatex]: {} as nodes.InlineLatexNode,
+    [NodeType.MathLatex]: {} as nodes.MathLatexNode,
+} as const;
+
+export type NodesByType = typeof NodesByTypeMap;
+
+// Compile-time interface validation
+const _ = NodesByTypeMap as {
+    [Key in NodeType]: nodes.Node;
+};

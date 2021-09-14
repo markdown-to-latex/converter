@@ -2,7 +2,8 @@ import { lexer } from '../../src';
 import { buildMarkdownAST } from '../../src/ast/build';
 import { applyProcessing } from '../../src/processing/process';
 import {
-    InlineLatexNode, MathLatexNode,
+    InlineLatexNode,
+    MathLatexNode,
     Node,
     NodeChildren,
     NodeType,
