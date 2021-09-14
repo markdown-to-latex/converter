@@ -2,7 +2,7 @@ import { lexer } from '../../src';
 import { buildMarkdownAST } from '../../src/ast/build';
 import { applyProcessing } from '../../src/processing/process';
 import {
-    InlineLatexNode,
+    InlineLatexNode, MathLatexNode,
     Node,
     NodeChildren,
     NodeType,
@@ -11,6 +11,7 @@ import {
     TableNode,
     TextNode,
 } from '../../src/ast/nodes';
+import exp = require('constants');
 
 describe('with tokens', function () {
     test('opcode', function () {
@@ -83,11 +84,31 @@ describe('with latex inline', function () {
 });
 
 describe('with latex math', function () {
-    test('latex math', () => {
-        const lexerResult = lexer('$`a=b`$');
+    test('as code span', () => {
+        const lexerResult = lexer('b $`a=b`$ a');
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
         applyProcessing(result);
 
-        expect(result).toHaveLength(1);
+        const paragraph = result.children[0] as ParagraphNode;
+        expect(paragraph.type).toEqual(NodeType.Paragraph);
+
+        const math = paragraph.children[1] as MathLatexNode;
+        expect(math.type).toEqual(NodeType.MathLatex);
+
+        expect(math.text).toEqual('a=b');
+    });
+
+    test('as code', () => {
+        const lexerResult = lexer('b\n```math\ny=x^2\n```');
+        const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
+        applyProcessing(result);
+
+        const paragraph = result.children[0] as ParagraphNode;
+        expect(paragraph.type).toEqual(NodeType.Paragraph);
+
+        const math = result.children[1] as MathLatexNode;
+        expect(math.type).toEqual(NodeType.MathLatex);
+
+        expect(math.text).toEqual('y=x^2');
     });
 });

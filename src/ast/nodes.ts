@@ -174,31 +174,115 @@ export interface MathLatexNode extends Node, NodeText {
     type: NodeType.MathLatex;
 }
 
-export function getNodeAllChildren(node: {
-    children?: Node[];
-    header?: Node[];
-    rows?: Node[][];
-}): Node[] {
-    const result: Node[] = [];
-    if (Array.isArray(node.children)) {
-        result.push(...node.children);
-    }
-    if (Array.isArray(node.header)) {
-        result.push(...node.header);
-    }
-    if (Array.isArray(node.rows)) {
-        for (const row of node.rows) {
-            result.push(...row);
+const nodeListProps = ['children', 'header'] as const;
+
+const nodeMatrixProps = ['rows'] as const;
+
+type NodeWithAnyChildren = {
+    [ListKey in typeof nodeListProps[number]]?: Node[];
+} & {
+    [MatrixKey in typeof nodeMatrixProps[number]]?: Node[][];
+};
+
+export function* traverseNodeChildren(originalNode: Readonly<Node>): Generator<
+    {
+        node: Node;
+        index: number;
+        container: Node[];
+    },
+    void,
+    never
+> {
+    const parent = originalNode as NodeWithAnyChildren;
+
+    for (const prop of nodeListProps) {
+        const toProcess = parent[prop];
+        if (!Array.isArray(toProcess)) {
+            continue;
+        }
+
+        for (let i = 0; i < toProcess.length; i++) {
+            let child = toProcess[i];
+            yield {
+                node: child,
+                index: i,
+                container: toProcess,
+            };
         }
     }
 
-    return result;
+    for (const prop of nodeListProps) {
+        const toProcess = parent.rows;
+        if (!Array.isArray(toProcess)) {
+            continue;
+        }
+        for (const row of toProcess) {
+            for (let i = 0; i < row.length; i++) {
+                let child = row[i];
+                yield {
+                    node: child,
+                    index: i,
+                    container: row,
+                };
+            }
+        }
+    }
 }
 
-export function getNodeChildren(node: NodeChildren): Node[] {
-    if (Array.isArray(node.children)) {
-        return node.children;
+export function getNodeAllChildren(originalNode: Readonly<Node>): Node[] {
+    const node = originalNode as NodeWithAnyChildren;
+
+    return Array.from(traverseNodeChildren(originalNode)).map(
+        data => data.node,
+    );
+}
+
+export function getNodeNeighbours(node: Node): {
+    left: Node | null;
+    right: Node | null;
+} {
+    const parent = node.parent;
+    if (parent === null) {
+        return {
+            left: null,
+            right: null,
+        };
     }
 
-    return [];
+    for (const data of Array.from(traverseNodeChildren(parent))) {
+        if (data.node !== node) {
+            continue;
+        }
+
+        const left: Node | null =
+            data.index !== 0 ? data.container[data.index - 1] : null;
+
+        const right: Node | null =
+            data.index !== data.container.length - 1
+                ? data.container[data.index + 1]
+                : null;
+
+        return { right, left };
+    }
+
+    return {
+        left: null,
+        right: null,
+    };
+}
+
+export function replaceNode(node: Node, newNode: Node): void {
+    const parent = node.parent;
+    if (parent === null) {
+        throw new Error('Cannot replace root node');
+    }
+
+    for (const data of Array.from(traverseNodeChildren(parent))) {
+        if (data.node !== node) {
+            continue;
+        }
+
+        data.container[data.index] = newNode;
+        return;
+    }
 }
