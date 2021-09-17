@@ -149,17 +149,25 @@ const astProcessingVisitors: {
                     default: NodeTableAlign.Default,
                 }[value ?? 'default']),
         ),
-        header: token.header.map(cell => ({
-            type: NodeType.TableCell,
+        header: [
+            {
+                type: NodeType.TableRow,
+                parent: null,
+                children: token.header.map(cell => ({
+                    type: NodeType.TableCell,
+                    parent: null,
+                    children: astProcessTokenList(cell.tokens),
+                })),
+            },
+        ],
+        rows: token.rows.map(cellList => ({
+            type: NodeType.TableRow,
             parent: null,
-            children: astProcessTokenList(cell.tokens),
-        })),
-        rows: token.rows.map(cellList =>
-            cellList.map(cell => ({
+            children: cellList.map(cell => ({
                 type: NodeType.TableCell,
                 parent: null,
                 children: astProcessTokenList(cell.tokens),
             })),
-        ),
+        })),
     }),
 };

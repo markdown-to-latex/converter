@@ -24,6 +24,7 @@ export const enum NodeType {
     // Custom
     File = 'File',
     TableCell = 'TableCell',
+    TableRow = 'TableRow',
     OpCode = 'OpCode',
     InlineLatex = 'InlineLatex',
     MathLatex = 'MathLatex',
@@ -71,8 +72,8 @@ export interface HeadingNode extends Node, NodeChildren {
 export interface TableNode extends Node {
     type: NodeType.Table;
     align: NodeTableAlign[];
-    header: TableCellNode[];
-    rows: TableCellNode[][];
+    header: [TableRowNode];
+    rows: TableRowNode[];
 }
 
 export interface BlockquoteNode extends Node, NodeChildren {
@@ -160,6 +161,10 @@ export interface TableCellNode extends Node, NodeChildren {
     type: NodeType.TableCell;
 }
 
+export interface TableRowNode extends Node, NodeChildren {
+    type: NodeType.TableRow;
+}
+
 export interface OpCodeNode extends Node {
     type: NodeType.OpCode;
     opcode: string;
@@ -174,14 +179,10 @@ export interface MathLatexNode extends Node, NodeText {
     type: NodeType.MathLatex;
 }
 
-const nodeListProps = ['children', 'header'] as const;
-
-const nodeMatrixProps = ['rows'] as const;
+const nodeListProps = ['children', 'rows', 'header'] as const;
 
 type NodeWithAnyChildren = {
     [ListKey in typeof nodeListProps[number]]?: Node[];
-} & {
-    [MatrixKey in typeof nodeMatrixProps[number]]?: Node[][];
 };
 
 export function* traverseNodeChildren(originalNode: Readonly<Node>): Generator<
@@ -208,23 +209,6 @@ export function* traverseNodeChildren(originalNode: Readonly<Node>): Generator<
                 index: i,
                 container: toProcess,
             };
-        }
-    }
-
-    for (const prop of nodeListProps) {
-        const toProcess = parent.rows;
-        if (!Array.isArray(toProcess)) {
-            continue;
-        }
-        for (const row of toProcess) {
-            for (let i = 0; i < row.length; i++) {
-                let child = row[i];
-                yield {
-                    node: child,
-                    index: i,
-                    container: row,
-                };
-            }
         }
     }
 }
