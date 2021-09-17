@@ -163,6 +163,7 @@ export interface TableCellNode extends Node, NodeChildren {
 
 export interface TableRowNode extends Node, NodeChildren {
     type: NodeType.TableRow;
+    children: TableCellNode[];
 }
 
 export interface OpCodeNode extends Node {
@@ -185,15 +186,15 @@ type NodeWithAnyChildren = {
     [ListKey in typeof nodeListProps[number]]?: Node[];
 };
 
-export function* traverseNodeChildren(originalNode: Readonly<Node>): Generator<
-    {
-        node: Node;
-        index: number;
-        container: Node[];
-    },
+export interface NodeParentData {
+    node: Node;
+    index: number;
+    container: Node[];
+}
+
+export function* traverseNodeChildren(originalNode: Readonly<Node>): Generator<NodeParentData,
     void,
-    never
-> {
+    never> {
     const parent = originalNode as NodeWithAnyChildren;
 
     for (const prop of nodeListProps) {
@@ -221,6 +222,7 @@ export function getNodeAllChildren(originalNode: Readonly<Node>): Node[] {
     );
 }
 
+// TODO: also look at children
 export function getNodeNeighbours(node: Node): {
     left: Node | null;
     right: Node | null;
@@ -255,18 +257,22 @@ export function getNodeNeighbours(node: Node): {
     };
 }
 
-export function replaceNode(node: Node, newNode: Node): void {
+export function findNodeData(node: Node): NodeParentData {
     const parent = node.parent;
     if (parent === null) {
-        throw new Error('Cannot replace root node');
+        throw new Error('Cannot find node data for a root node');
     }
 
     for (const data of Array.from(traverseNodeChildren(parent))) {
-        if (data.node !== node) {
-            continue;
+        if (data.node === node) {
+            return data;
         }
-
-        data.container[data.index] = newNode;
-        return;
     }
+
+    throw new Error('Cannot find node data for a root node');
+}
+
+export function replaceNode(node: Node, newNode: Node): void {
+    const data = findNodeData(node);
+    data.container[data.index] = newNode;
 }
