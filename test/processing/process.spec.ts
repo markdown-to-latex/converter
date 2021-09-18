@@ -4,15 +4,12 @@ import { applyProcessing } from '../../src/processing/process';
 import {
     InlineLatexNode,
     MathLatexNode,
-    Node,
-    NodeChildren,
     NodeType,
     OpCodeNode,
     ParagraphNode,
     TableNode,
     TextNode,
 } from '../../src/ast/nodes';
-import exp = require('constants');
 
 describe('with tokens', function () {
     test('opcode', function () {
@@ -60,7 +57,7 @@ describe('with tokens', function () {
         const table = result.children[0] as TableNode;
         expect(table.type).toEqual(NodeType.Table);
 
-        const tableCellText = table.rows[0][1].children[0] as TextNode;
+        const tableCellText = table.rows[0].children[1].children[0] as TextNode;
         expect(tableCellText.type).toEqual(NodeType.Text);
 
         const opCode = tableCellText.children[1] as OpCodeNode;

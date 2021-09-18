@@ -192,9 +192,9 @@ export interface NodeParentData {
     container: Node[];
 }
 
-export function* traverseNodeChildren(originalNode: Readonly<Node>): Generator<NodeParentData,
-    void,
-    never> {
+export function* traverseNodeChildren(
+    originalNode: Readonly<Node>,
+): Generator<NodeParentData, void, never> {
     const parent = originalNode as NodeWithAnyChildren;
 
     for (const prop of nodeListProps) {

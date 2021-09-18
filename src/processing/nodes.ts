@@ -1,5 +1,5 @@
 import * as nodes from '../ast/nodes';
-import {NodeType} from '../ast/nodes';
+import { NodeType } from '../ast/nodes';
 
 const NodesByTypeMap = {
     [NodeType.Space]: {} as nodes.SpaceNode,
