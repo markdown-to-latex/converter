@@ -28,6 +28,7 @@ const NodesByTypeMap = {
     [NodeType.OpCode]: {} as nodes.OpCodeNode,
     [NodeType.InlineLatex]: {} as nodes.InlineLatexNode,
     [NodeType.MathLatex]: {} as nodes.MathLatexNode,
+    [NodeType.MathInlineLatex]: {} as nodes.MathInlineLatexNode,
 } as const;
 
 export type NodesByType = typeof NodesByTypeMap;

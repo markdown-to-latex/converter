@@ -3,7 +3,9 @@ import { WriteFileFunction } from './context';
 import { applyPrinterVisitors } from './visitors';
 
 function prettifyLaTeX(text: string): string {
-    return text.replace(/\n{3,}/g, '\n\n');
+    text = text.replace(/\n{3,}/g, '\n\n');
+    text = text.replace(/\n{2,}$/gm, '\n');
+    return text;
 }
 
 export function printMarkdownAST(

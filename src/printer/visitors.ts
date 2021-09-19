@@ -1,7 +1,6 @@
 import {
     findNodeData,
-    getNodeNeighbours,
-    HeadingNode,
+    getNodeRightNeighbourLeaf,
     ListNode,
     Node,
     NodeType,
@@ -13,6 +12,15 @@ import {
     getOrCreateTableLabel,
 } from './context';
 import { resolveOpCode } from './opcodes';
+import {
+    getLatexCode,
+    getLatexHeader,
+    getLatexImage,
+    getLatexInlineMath,
+    getLatexListItem,
+    getLatexMath,
+    getLatexTable,
+} from './latex';
 
 type Visitor<T extends Node> = (node: T, context: Context) => string;
 
@@ -40,85 +48,23 @@ function throwProcessingError(node: Node): string {
 }
 
 function isNodeBeforeBoxed(node: Node): boolean {
-    const { right } = getNodeNeighbours(node);
-    if (!right) {
+    let right = getNodeRightNeighbourLeaf(node);
+
+    while (
+        right !== null &&
+        [NodeType.Space, NodeType.OpCode].indexOf(right.type) !== -1
+    ) {
+        right = getNodeRightNeighbourLeaf(right);
+    }
+    if (right === null) {
         return false;
     }
 
     return (
-        ([NodeType.Code, NodeType.Table, NodeType.Image] as NodeType[]).filter(
-            v => v == right.type,
-        ).length !== 0
+        [NodeType.Code, NodeType.Table, NodeType.Image].indexOf(right.type) !==
+        -1
     );
 }
-
-const headerByDepth: Record<
-    number,
-    (node: HeadingNode, context: Context) => string
-> = {
-    [1]: (node, context) =>
-        `\\subtitle{${printNodeList(node.children, context, ' ')}}`,
-    [2]: (node, context) =>
-        `\\section{${printNodeList(node.children, context, ' ')}}`,
-    [3]: (node, context) =>
-        `\\subsection{${printNodeList(node.children, context, ' ')}}`,
-};
-
-const orderedListPoints: Record<number, Record<number, string>> = {
-    [1]: {
-        [0]: 'а',
-        [1]: 'б',
-        [2]: 'в',
-        [3]: 'г',
-        [4]: 'д',
-        [5]: 'е',
-        [6]: 'ж',
-        [7]: 'и',
-        [8]: 'к',
-        [9]: 'л',
-        [10]: 'м',
-        [11]: 'н',
-        [12]: 'п',
-        [13]: 'р',
-        [14]: 'с',
-        [15]: 'т',
-        [16]: 'у',
-        [17]: 'ф',
-        [18]: 'х',
-        [19]: 'ц',
-        [20]: 'ш',
-        [21]: 'щ',
-        [22]: 'э',
-        [23]: 'ю',
-        [24]: 'я',
-    },
-    [2]: {
-        [0]: '1',
-        [1]: '2',
-        [2]: '3',
-        [3]: '4',
-        [4]: '5',
-        [5]: '6',
-        [6]: '7',
-        [7]: '8',
-        [8]: '9',
-        [9]: '10',
-        [10]: '11',
-        [11]: '12',
-        [12]: '13',
-        [13]: '14',
-        [14]: '15',
-        [15]: '16',
-        [16]: '17',
-        [17]: '18',
-        [18]: '19',
-        [19]: '20',
-        [20]: '21',
-        [21]: '22',
-        [22]: '23',
-        [23]: '24',
-    },
-};
 
 // Editing
 
@@ -127,63 +73,27 @@ const processingVisitors: {
 } = {
     [NodeType.Space]: () => '\n',
     [NodeType.Code]: (node, context) => {
-        return `
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-${isNodeBeforeBoxed(node) ? '\\addtolength{\\belowcaptionskip}{-1em}' : ''}
-\\setlength{\\abovecaptionskip}{-0.5em}
-
-\\begin{figure}[H]
-    \\fontsize{12}{12}\\selectfont
-    \\begin{minted}
-    [
-    baselinestretch=1.2
-    ]{${node.lang}}
-${node.text}
-    \\end{minted}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
-    \\caption{Рисунок ${getOrCreatePictureLabel(
-        context,
-        context.code.key,
-    )} -- ${context.code.label}}
-\\end{figure}
-`;
+        return getLatexCode(
+            getOrCreatePictureLabel(context, context.code.key),
+            context.code.label,
+            node.lang ?? '',
+            node.text,
+            isNodeBeforeBoxed(node),
+        );
     },
     [NodeType.Heading]: (node, context) => {
-        const lazyResult = headerByDepth[node.depth];
-        if (lazyResult === undefined) {
-            throw new ProcessingError(
-                `Cannot process header with depth ${node.depth}`,
-            );
-        }
-
-        return lazyResult(node, context) + '\n\n';
+        return getLatexHeader(
+            printNodeList(node.children, context),
+            node.depth,
+        );
     },
     [NodeType.Table]: (node, context) => {
-        return `
-\\setlength{\\LTpre}{1.5em}
-\\setlength{\\LTpost}{1.5em}
-
-\\begin{longtable}[H]{|c|c|c|c|c|}
-    \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
-    \\caption{Таблица ${getOrCreateTableLabel(context, context.table.key)} -- ${
-            context.table.label
-        }}
-    \\\\\\hline
-    ${printNodeList(node.header, context)}
-    \\endfirsthead
-    \\caption{Продолжение таблицы ${getOrCreateTableLabel(
-        context,
-        context.table.key,
-    )}} \\\\\\hline
-    ${printNodeList(node.header, context)}
-    \\endhead
-    \\endfoot
-    \\endlastfoot
-
-${printNodeList(node.rows, context)}
-\\end{longtable}
-`;
+        return getLatexTable(
+            getOrCreateTableLabel(context, context.table.key),
+            context.table.label,
+            printNodeList(node.header, context),
+            printNodeList(node.rows, context),
+        );
     },
     [NodeType.Blockquote]: (node, context) =>
         printNodeList(node.children, context),
@@ -204,13 +114,14 @@ ${printNodeList(node.rows, context)}
             throw new ProcessingError('Cannot find List parent for ListItem');
         }
 
-        const point = parentList.ordered
-            ? orderedListPoints[depth][findNodeData(node).index]
-            : '-';
-        return `\n\n\\hspace{${1.25 * (depth - 1)}cm}${point}\\,${printNodeList(
-            node.children,
-            context,
-        )}\n\n`;
+        const index = findNodeData(node).index;
+
+        return getLatexListItem(
+            printNodeList(node.children, context),
+            depth,
+            index,
+            parentList.ordered,
+        );
     },
     [NodeType.Paragraph]: (node, context) =>
         printNodeList(node.children, context) + '\n',
@@ -227,22 +138,13 @@ ${printNodeList(node.rows, context)}
     [NodeType.Html]: throwProcessingError,
     [NodeType.Link]: throwProcessingError,
     [NodeType.Image]: (node, context) => {
-        return `
-\\setlength{\\intextsep}{3em}  % 3em
-\\setlength{\\belowcaptionskip}{-4ex}
-${isNodeBeforeBoxed(node) ? '\\addtolength{\\belowcaptionskip}{-1em}' : ''}
-\\setlength{\\abovecaptionskip}{.5em}
-
-\\begin{figure}[H]
-    \\centering
-    \\includegraphics[height=${context.picture.height}]{${node.href}}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
-    \\caption{Рисунок ${getOrCreatePictureLabel(
-        context,
-        context.picture.key,
-    )} -- ${node.text}}
-\\end{figure}
-`;
+        return getLatexImage(
+            getOrCreatePictureLabel(context, context.picture.key),
+            node.text,
+            context.picture.height,
+            node.href,
+            isNodeBeforeBoxed(node),
+        );
     },
     [NodeType.Strong]: (node, context) =>
         `\\textbf{${printNodeList(node.children, context)}}`,
@@ -265,13 +167,10 @@ ${isNodeBeforeBoxed(node) ? '\\addtolength{\\belowcaptionskip}{-1em}' : ''}
     },
     [NodeType.OpCode]: resolveOpCode,
     [NodeType.InlineLatex]: node => node.text,
-    [NodeType.MathLatex]: node => `
-\\setlength{\\abovedisplayskip}{0pt}
-\\setlength{\\belowdisplayskip}{0pt}
-\\setlength{\\abovedisplayshortskip}{0pt}
-\\setlength{\\belowdisplayshortskip}{0pt}
-\\begin{align*}
-${node.text}
-\\end{align*}    
-`,
+    [NodeType.MathLatex]: node => {
+        return getLatexMath(node.text);
+    },
+    [NodeType.MathInlineLatex]: node => {
+        return getLatexInlineMath(node.text);
+    },
 };

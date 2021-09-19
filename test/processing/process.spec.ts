@@ -63,7 +63,7 @@ describe('with tokens', function () {
         const opCode = tableCellText.children[1] as OpCodeNode;
         expect(opCode.type).toEqual(NodeType.OpCode);
         expect(opCode.opcode).toEqual('B');
-        expect(opCode.arguments).toEqual([1]);
+        expect(opCode.arguments).toEqual(['1']);
     });
 });
 

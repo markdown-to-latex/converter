@@ -28,6 +28,7 @@ export const enum NodeType {
     OpCode = 'OpCode',
     InlineLatex = 'InlineLatex',
     MathLatex = 'MathLatex',
+    MathInlineLatex = 'MathInlineLatex',
 }
 
 export const enum NodeTableAlign {
@@ -180,6 +181,10 @@ export interface MathLatexNode extends Node, NodeText {
     type: NodeType.MathLatex;
 }
 
+export interface MathInlineLatexNode extends Node, NodeText {
+    type: NodeType.MathInlineLatex;
+}
+
 const nodeListProps = ['children', 'rows', 'header'] as const;
 
 type NodeWithAnyChildren = {
@@ -223,16 +228,10 @@ export function getNodeAllChildren(originalNode: Readonly<Node>): Node[] {
 }
 
 // TODO: also look at children
-export function getNodeNeighbours(node: Node): {
-    left: Node | null;
-    right: Node | null;
-} {
+export function getNodeLeftNeighbourLeaf(node: Node): Node | null {
     const parent = node.parent;
     if (parent === null) {
-        return {
-            left: null,
-            right: null,
-        };
+        return null;
     }
 
     for (const data of Array.from(traverseNodeChildren(parent))) {
@@ -240,21 +239,57 @@ export function getNodeNeighbours(node: Node): {
             continue;
         }
 
-        const left: Node | null =
-            data.index !== 0 ? data.container[data.index - 1] : null;
+        if (data.index === 0) {
+            return getNodeLeftNeighbourLeaf(parent);
+        }
+        let left = data.container[data.index - 1] as NodeWithAnyChildren & Node;
 
-        const right: Node | null =
-            data.index !== data.container.length - 1
-                ? data.container[data.index + 1]
-                : null;
+        while (
+            left &&
+            left.children !== undefined &&
+            left.children.length !== 0
+        ) {
+            const child = left.children[left.children.length - 1];
+            left = child as NodeWithAnyChildren & Node;
+        }
 
-        return { right, left };
+        return left;
     }
 
-    return {
-        left: null,
-        right: null,
-    };
+    return getNodeLeftNeighbourLeaf(parent);
+}
+
+// TODO: also look at children
+export function getNodeRightNeighbourLeaf(node: Node): Node | null {
+    const parent = node.parent;
+    if (parent === null) {
+        return null;
+    }
+
+    for (const data of Array.from(traverseNodeChildren(parent))) {
+        if (data.node !== node) {
+            continue;
+        }
+
+        if (data.index === data.container.length - 1) {
+            return getNodeRightNeighbourLeaf(parent);
+        }
+        let right = data.container[data.index + 1] as NodeWithAnyChildren &
+            Node;
+
+        while (
+            right &&
+            right.children !== undefined &&
+            right.children.length !== 0
+        ) {
+            const child = right.children[0];
+            right = child as NodeWithAnyChildren & Node;
+        }
+
+        return right;
+    }
+
+    return getNodeRightNeighbourLeaf(parent);
 }
 
 export function findNodeData(node: Node): NodeParentData {

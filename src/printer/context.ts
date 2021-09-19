@@ -1,3 +1,5 @@
+import { getLatexApplicationLetter } from './latex';
+
 export type WriteFileFunction = (
     content: string,
     fileName: string,
@@ -76,34 +78,6 @@ export function getOrCreateTableLabel(context: Context, key: string): string {
     return label;
 }
 
-const applicationLetters = [
-    'А',
-    'Б',
-    'В',
-    'Г',
-    'Д',
-    'Е',
-    'Ж',
-    'И',
-    'К',
-    'Л',
-    'М',
-    'Н',
-    'П',
-    'Р',
-    'С',
-    'Т',
-    'У',
-    'Ф',
-    'Х',
-    'Ц',
-    'Ш',
-    'Щ',
-    'Э',
-    'Ю',
-    'Я',
-];
-
 class ContextError extends Error {}
 
 export function getApplicationLabelByKey(
@@ -120,7 +94,7 @@ export function getApplicationLabelByKey(
         context.applications.accessKeys.push(key);
     }
 
-    return applicationLetters[index]!;
+    return getLatexApplicationLetter(index);
 }
 
 export function addApplicationByKey(

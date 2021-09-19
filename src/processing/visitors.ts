@@ -1,5 +1,6 @@
 import {
-    getNodeNeighbours,
+    getNodeLeftNeighbourLeaf,
+    getNodeRightNeighbourLeaf,
     MathLatexNode,
     Node,
     NodeType,
@@ -7,7 +8,7 @@ import {
     TextNode,
 } from '../ast/nodes';
 import { NodesByType } from './nodes';
-import { captureLatexInline, captureOpCodes } from './custom';
+import { captureLatexInline, captureOpCodes } from './capture';
 
 type Visitor<T extends Node> = (node: T) => void;
 
@@ -51,7 +52,10 @@ const processingVisitors: {
             } as MathLatexNode);
         },
         [NodeType.CodeSpan]: node => {
-            const { left, right } = getNodeNeighbours(node);
+            const [left, right] = [
+                getNodeLeftNeighbourLeaf(node),
+                getNodeRightNeighbourLeaf(node),
+            ];
             if (
                 !(
                     left !== null &&

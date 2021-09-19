@@ -24,7 +24,10 @@ describe('simple md to latex docs printer', () => {
 Text
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual('\\subtitle{Header}\n\nText\n');
+        expect(result).toEqual(`\\subtitle{Header}
+
+Text
+`);
     });
 
     test('Subheader + List + Code Span', () => {
@@ -46,9 +49,30 @@ Text
 3. Z
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(
-            '\\subtitle{Header}\n\n\\hspace{0cm}-\\,A\n\n\\hspace{0cm}-\\,B\n\n\\hspace{0cm}-\\,C\n\n \\section{Subheader}\n\n\\hspace{0cm}а\\,X\n\n\\hspace{0cm}б\\,Y\n\n\\hspace{1.25cm}1\\,T\n\n\\hspace{2.5cm}-\\,600\n\n\\hspace{2.5cm}-\\,700\n\n\\hspace{1.25cm}2\\,\\texttt{Code span}\n\n\\hspace{0cm}в\\,Z\n\n',
-        );
+        expect(result).toEqual(`\\subtitle{Header}
+
+\\hspace{0cm}-\\,A
+
+\\hspace{0cm}-\\,B
+
+\\hspace{0cm}-\\,C
+
+\\section{Subheader}
+
+\\hspace{0cm}а)\\,X
+
+\\hspace{0cm}б)\\,Y
+
+\\hspace{1.25cm}1)\\,T
+
+\\hspace{2.5cm}-\\,600
+
+\\hspace{2.5cm}-\\,700
+
+\\hspace{1.25cm}2)\\,\\texttt{Code span}
+
+\\hspace{0cm}в)\\,Z
+`);
     });
 
     test('Header + Image + Code + Image', () => {
@@ -68,10 +92,47 @@ def main():
 ![Image name 2](./assets/img/dolphin.png)
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        // TODO: check correctly neighbour nodes
-        expect(result).toEqual(
-            '\\subtitle{Header}\n\n\\setlength{\\intextsep}{3em}  % 3em\n\\setlength{\\belowcaptionskip}{-4ex}\n\n\\setlength{\\abovecaptionskip}{.5em}\n\n\\begin{figure}[H]\n    \\centering\n    \\includegraphics[height=5cm]{./assets/img/dolphin.png}\n    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}\n    \\caption{Рисунок 1 -- Image name}\n\\end{figure}\n\n\\setlength{\\intextsep}{3em}\n\\setlength{\\belowcaptionskip}{-4ex}\n\n\\setlength{\\abovecaptionskip}{-0.5em}\n\n\\begin{figure}[H]\n    \\fontsize{12}{12}\\selectfont\n    \\begin{minted}\n    [\n    baselinestretch=1.2\n    ]{python}\ndef main():\n    print "Hello World"\n    \\end{minted}\n    \\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}\n    \\caption{Рисунок 2 -- Python Sample Code}\n\\end{figure}\n\n\\setlength{\\intextsep}{3em}  % 3em\n\\setlength{\\belowcaptionskip}{-4ex}\n\n\\setlength{\\abovecaptionskip}{.5em}\n\n\\begin{figure}[H]\n    \\centering\n    \\includegraphics[height=7cm]{./assets/img/dolphin.png}\n    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}\n    \\caption{Рисунок 3 -- Image name 2}\n\\end{figure}\n\n',
-        );
+        expect(result).toEqual(`\\subtitle{Header}
+
+\\setlength{\\intextsep}{3em}  % 3em
+\\setlength{\\belowcaptionskip}{-4ex}
+\\addtolength{\\belowcaptionskip}{-1em}
+\\setlength{\\abovecaptionskip}{.5em}
+
+\\begin{figure}[H]
+    \\centering
+    \\includegraphics[height=5cm]{./assets/img/dolphin.png}
+    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\caption{Рисунок 1 -- Image name}
+\\end{figure}
+
+\\setlength{\\intextsep}{3em}
+\\setlength{\\belowcaptionskip}{-4ex}
+\\addtolength{\\belowcaptionskip}{-1em}
+\\setlength{\\abovecaptionskip}{-0.5em}
+
+\\begin{figure}[H]
+    \\fontsize{12}{12}\\selectfont
+    \\begin{minted}
+    [baselinestretch=1.2]{python}
+def main():
+    print "Hello World"
+    \\end{minted}
+    \\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
+    \\caption{Рисунок 2 -- Python Sample Code}
+\\end{figure}
+
+\\setlength{\\intextsep}{3em}  % 3em
+\\setlength{\\belowcaptionskip}{-4ex}
+\\setlength{\\abovecaptionskip}{.5em}
+
+\\begin{figure}[H]
+    \\centering
+    \\includegraphics[height=7cm]{./assets/img/dolphin.png}
+    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\caption{Рисунок 3 -- Image name 2}
+\\end{figure}
+`);
     });
 
     test('Code + Code', () => {});
