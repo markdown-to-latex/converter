@@ -165,7 +165,7 @@ ${text}
 
 export function getLatexMath(text: string): string {
     return `
-\\setlength{\\abovedisplayskip}{0pt}
+\\setlength{\\abovedisplayskip}{-1.3em}
 \\setlength{\\belowdisplayskip}{0pt}
 \\setlength{\\abovedisplayshortskip}{0pt}
 \\setlength{\\belowdisplayshortskip}{0pt}
