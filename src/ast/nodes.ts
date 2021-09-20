@@ -259,7 +259,6 @@ export function getNodeLeftNeighbourLeaf(node: Node): Node | null {
     return getNodeLeftNeighbourLeaf(parent);
 }
 
-// TODO: also look at children
 export function getNodeRightNeighbourLeaf(node: Node): Node | null {
     const parent = node.parent;
     if (parent === null) {

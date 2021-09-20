@@ -1,4 +1,11 @@
-class LatexError extends Error {}
+export class LatexError extends Error {
+    constructor(m: string) {
+        super(m);
+
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, LatexError.prototype);
+    }
+}
 
 const headerByDepth: ((text: string) => string)[] = [
     text => `\\subtitle{${text}}`,

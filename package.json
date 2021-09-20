@@ -4,12 +4,14 @@
     "description": "MarkDown To LaTeX Converter",
     "main": "dist/index.js",
     "scripts": {
+        "prebuild": "npm run convert-schema",
         "build": "tsc --build",
         "watch": "tsc --build --watch",
         "dev": "node dist/index.js",
         "prettier": "prettier",
         "prettier-fix": "prettier --write .",
-        "test": "jest test"
+        "test": "jest test",
+        "convert-schema": "node utils/convert-schema.js && prettier --write src/printer/config.ts"
     },
     "repository": {
         "type": "git",
@@ -23,19 +25,28 @@
         "report"
     ],
     "files": [
-        "dist/**"
+        "dist/**",
+        "*.schema.json"
     ],
     "author": "Anatolii Titov <a@toliak.ru>",
     "license": "MIT",
     "devDependencies": {
         "@types/jest": "^27.0.1",
+        "@types/js-yaml": "^4.0.2",
+        "@types/json5": "^2.2.0",
         "@types/marked": "^3.0.1",
         "@types/node": "^16.9.1",
         "jest": "^27.0.6",
+        "json-schema-to-typescript": "^10.1.5",
         "marked": "^3.0.3",
         "prettier": "^2.4.0",
         "ts-jest": "^27.0.5",
         "ts-node": "^10.2.1",
         "typescript": "^4.4.3"
+    },
+    "dependencies": {
+        "js-yaml": "^4.1.0",
+        "json5": "^2.2.0",
+        "jsonschema": "^1.4.0"
     }
 }

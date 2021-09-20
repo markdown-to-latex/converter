@@ -1,7 +1,11 @@
-import { lexer } from '../../src';
-import { buildMarkdownAST } from '../../src/ast/build';
-import { applyProcessing } from '../../src/processing/process';
-import { printMarkdownAST } from '../../src/printer/printer';
+import {
+    applyProcessing,
+    buildMarkdownAST,
+    lexer,
+    printMarkdownAST,
+} from '../../src';
+import { OpCodeError } from '../../src/printer/opcodes';
+import { ContextError } from '../../src/printer/context';
 
 function processingChain(text: string): Record<string, string> {
     const lexerResult = lexer(text);
@@ -248,5 +252,147 @@ t & r & e & z\\\\ \\hline
     a = b + c
 \\end{align*}    
 `);
+    });
+});
+
+describe('Applications', () => {
+    test('with list', () => {
+        const result = processingChain(`
+!AC[code-full|./assets/code|template-full.py|python]
+!AC[code-full2|./assets/code|template-full2.py|python]
+!APR[picture-large|Large scheme|./assets/img/circuit.png]
+        
+# Header
+
+Code from application !AK[code-full2] describes image from application !AK[picture-large].
+
+See application !AK[code-full].
+
+# Applications
+
+!LAA[]
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`\\subtitle{Header}
+
+Code from application А describes image from application Б.
+
+See application В.
+
+\\subtitle{Applications}
+
+\\pagebreak
+\\subtitle{Приложение А}
+
+\\section*{./assets/code}
+
+\\text{}
+
+\\fontsize{12}{12}\\selectfont
+\\inputminted[baselinestretch=1.2]{python}{template-full2.py}
+\\fontsize{14}{14}\\selectfont
+
+\\pagebreak
+\\begin{landscape}
+    \\thispagestyle{empty}
+    \\subtitle{Приложение Б}
+
+    \\section*{Large scheme}
+    
+    \\text{}
+
+    {\\centering
+        \\includegraphics[height=13.5cm]{./assets/img/circuit.png}
+    }
+
+    \\vfill
+    \\raisebox{.6ex}{\\makebox[\\linewidth]{\\thepage}}
+\\end{landscape}
+
+\\pagebreak
+\\subtitle{Приложение В}
+
+\\section*{./assets/code}
+
+\\text{}
+
+\\fontsize{12}{12}\\selectfont
+\\inputminted[baselinestretch=1.2]{python}{template-full.py}
+\\fontsize{14}{14}\\selectfont
+`);
+    });
+
+    test('Unused application, should throw error', () => {
+        const result = () =>
+            processingChain(`
+!AC[code-full|./assets/code|template-full.py|python]
+
+!LAA[]
+`)['filepath'];
+        expect(result).toThrow(OpCodeError);
+    });
+
+    test('Undefined application, should throw error', () => {
+        const result = () =>
+            processingChain(`
+!AK[nope]
+`)['filepath'];
+        expect(result).toThrow(ContextError);
+    });
+});
+
+describe('References', () => {
+    test('with list', () => {
+        const result = processingChain(`
+!RR[ref-1]
+\`\`\`ref
+H.\\,Y.\\~Ignat. "Reference\\~1" // Some Journal, 1867
+\`\`\`
+
+!RR[ref-2]
+\`\`\`ref
+H.\\,Y.\\~Ignat. "Reference\\~2" // Some Journal, 1867
+\`\`\`
+        
+# Header
+
+Code from application !RK[ref-2] describes image from application !RK[ref-1].
+
+# References
+
+!LAR[]
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`\\subtitle{Header}
+
+Code from application 0 describes image from application 1.
+
+\\subtitle{References}
+
+0.\\,H.\\,Y.\\~Ignat. "Reference\\~2" // Some Journal, 1867
+
+1.\\,H.\\,Y.\\~Ignat. "Reference\\~1" // Some Journal, 1867
+`);
+    });
+
+    test('Unused reference, should throw error', () => {
+        const result = () =>
+            processingChain(`
+!RR[ref]
+\`\`\`ref
+A.\\,A.\\~Amogus. "Impostor\\~theorem" // Steam library, 2021
+\`\`\`
+
+!LAR[]
+`)['filepath'];
+        expect(result).toThrow(OpCodeError);
+    });
+
+    test('Undefined reference, should throw error', () => {
+        const result = () =>
+            processingChain(`
+!RK[nope]
+`)['filepath'];
+        expect(result).toThrow(ContextError);
     });
 });

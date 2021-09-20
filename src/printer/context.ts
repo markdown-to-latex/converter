@@ -1,4 +1,5 @@
 import { getLatexApplicationLetter } from './latex';
+import { MarkDownToLaTeXConfig } from './config';
 
 export type WriteFileFunction = (
     content: string,
@@ -7,9 +8,7 @@ export type WriteFileFunction = (
 ) => void;
 
 export interface Context {
-    config: {
-        defaultFontSize: 14;
-    };
+    config: MarkDownToLaTeXConfig;
     applications: {
         accessKeys: string[];
         keyToData: Record<
@@ -21,6 +20,7 @@ export interface Context {
         >;
     };
     references: {
+        key: string;
         accessKeys: string[];
         keyToData: Record<
             string,
@@ -78,7 +78,14 @@ export function getOrCreateTableLabel(context: Context, key: string): string {
     return label;
 }
 
-class ContextError extends Error {}
+export class ContextError extends Error {
+    constructor(m: string) {
+        super(m);
+
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, ContextError.prototype);
+    }
+}
 
 export function getApplicationLabelByKey(
     context: Context,

@@ -7,6 +7,7 @@ import {
 } from '../ast/nodes';
 import { NodesByType } from '../processing/nodes';
 import {
+    addReferenceByKey,
     Context,
     getOrCreatePictureLabel,
     getOrCreateTableLabel,
@@ -39,7 +40,14 @@ export function printNodeList(
         .join(separator);
 }
 
-class ProcessingError extends Error {}
+export class ProcessingError extends Error {
+    constructor(m: string) {
+        super(m);
+
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, ProcessingError.prototype);
+    }
+}
 
 function throwProcessingError(node: Node): string {
     throw new ProcessingError(
@@ -73,6 +81,14 @@ const processingVisitors: {
 } = {
     [NodeType.Space]: () => '\n',
     [NodeType.Code]: (node, context) => {
+        if (node.lang === 'ref') {
+            addReferenceByKey(context, context.references.key, {
+                text: label => `
+${label}.\\,${node.text}`,
+            });
+            return '';
+        }
+
         return getLatexCode(
             getOrCreatePictureLabel(context, context.code.key),
             context.code.label,
@@ -150,7 +166,8 @@ const processingVisitors: {
         `\\textbf{${printNodeList(node.children, context)}}`,
     [NodeType.Em]: throwProcessingError,
     [NodeType.Hr]: () => '\n\\pagebreak\n',
-    [NodeType.CodeSpan]: node => `\\texttt{${node.text}}`,
+    [NodeType.CodeSpan]: (node, context) =>
+        context.config.useMonospaceFont ? `\\texttt{${node.text}}` : node.text,
     [NodeType.Br]: () => '\n\n',
     [NodeType.Del]: throwProcessingError,
 

@@ -1,12 +1,11 @@
 import {
     addApplicationByKey,
-    addReferenceByKey,
     Context,
     getApplicationLabelByKey,
     getOrCreatePictureLabel,
     getReferenceLabelByKey,
 } from './context';
-import { OpCodeNode } from '../ast/nodes';
+import { getNodeRightNeighbourLeaf, NodeType, OpCodeNode } from '../ast/nodes';
 
 export function resolveOpCode(node: OpCodeNode, context: Context): string {
     const lazy = opCodeMap[node.opcode as OpCodeType];
@@ -14,7 +13,7 @@ export function resolveOpCode(node: OpCodeNode, context: Context): string {
         throw new OpCodeError(`Unknown OpCode "${node.opcode}"`);
     }
 
-    return lazy(node.arguments, context);
+    return lazy(node.arguments, node, context);
 }
 
 export const enum OpCodeType {
@@ -35,17 +34,34 @@ export const enum OpCodeType {
     ListAllReferences = 'LAR',
 }
 
-class OpCodeError extends Error {}
+export class OpCodeError extends Error {
+    constructor(m: string) {
+        super(m);
+
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, OpCodeError.prototype);
+    }
+}
 
 function shouldHaveLength(
-    type: OpCodeType,
+    opCodeType: string,
     args: string[],
     length: number,
 ): void {
     if (args.length !== length) {
         throw new OpCodeError(
-            `OpCode "${type}" should have exactly ${length} arguments`,
+            `OpCode "${opCodeType}" should have exactly ${length} arguments`,
         );
+    }
+}
+
+function shouldNotBeEmptyArguments(opCodeType: string, args: string[]): void {
+    for (const arg of args) {
+        if (!arg) {
+            throw new OpCodeError(
+                `Argument cannot be empty for macros "${opCodeType}"`,
+            );
+        }
     }
 }
 
@@ -59,7 +75,7 @@ function compareKeyArrayAndMap(
             `There are unused application keys: "${unused.join('", "')}"`,
         );
     }
-    const notFound = Object.keys(keys).filter(v => data[v] === undefined);
+    const notFound = keys.filter(v => data[v] === undefined);
     if (notFound.length !== 0) {
         throw new OpCodeError(
             `There are undefined application keys: "${notFound.join('", "')}"`,
@@ -67,52 +83,101 @@ function compareKeyArrayAndMap(
     }
 }
 
+function shouldHaveNodeWithTypeAfter(
+    node: OpCodeNode,
+    expected: NodeType[],
+    blacklisted: NodeType[],
+): void {
+    let right = getNodeRightNeighbourLeaf(node);
+
+    while (right !== null && blacklisted.indexOf(right.type) !== -1) {
+        right = getNodeRightNeighbourLeaf(right);
+    }
+    if (right === null) {
+        throw new OpCodeError(
+            `Expected one of node types after "${
+                node.opcode
+            }" macros: ${JSON.stringify(expected)}.
+Got nothing`,
+        );
+    }
+
+    if (expected.indexOf(right.type) === -1) {
+        throw new OpCodeError(
+            `Expected one of node types after "${
+                node.opcode
+            }" macros: ${JSON.stringify(expected)}.
+Got node with type "${right.type}"`,
+        );
+    }
+}
+
 const opCodeMap: {
-    [Key in OpCodeType]: (args: string[], context: Context) => string;
+    [Key in OpCodeType]: (
+        args: string[],
+        node: OpCodeNode,
+        context: Context,
+    ) => string;
 } = {
     // Usage: !P[key|height]
-    [OpCodeType.Picture]: (args, context) => {
-        shouldHaveLength(OpCodeType.Picture, args, 2);
+    [OpCodeType.Picture]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 2);
+        shouldNotBeEmptyArguments(node.opcode, args);
+        shouldHaveNodeWithTypeAfter(
+            node,
+            [NodeType.Image],
+            [NodeType.OpCode, NodeType.Space],
+        );
 
         context.picture.key = args[0];
         context.picture.height = args[1];
         return '';
     },
     // Usage: !PK[key]
-    [OpCodeType.PictureKey]: (args, context) => {
-        shouldHaveLength(OpCodeType.PictureKey, args, 1);
+    [OpCodeType.PictureKey]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 1);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         return getOrCreatePictureLabel(context, args[0]);
     },
     // Usage: !T[key|label]
-    [OpCodeType.Table]: (args, context) => {
-        shouldHaveLength(OpCodeType.Table, args, 2);
+    [OpCodeType.Table]: (args, node, context) => {
+        shouldHaveLength(node.opcode, args, 2);
+        shouldNotBeEmptyArguments(node.opcode, args);
+        shouldHaveNodeWithTypeAfter(
+            node,
+            [NodeType.Table],
+            [NodeType.OpCode, NodeType.Space],
+        );
 
         context.table.key = args[0];
         context.table.label = args[1];
         return '';
     },
     // Usage: !TK[key]
-    [OpCodeType.TableKey]: (args, context) => {
-        shouldHaveLength(OpCodeType.PictureKey, args, 1);
+    [OpCodeType.TableKey]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 1);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         return getOrCreatePictureLabel(context, args[0]);
     },
     // Usage: !C[key|label]
-    [OpCodeType.Code]: (args, context) => {
-        shouldHaveLength(OpCodeType.Code, args, 2);
+    [OpCodeType.Code]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 2);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         context.code.key = args[0];
         context.code.label = args[1];
         return '';
     },
     // Usage: !MS[]
-    [OpCodeType.MinusSingle]: (args, context) => {
+    [OpCodeType.MinusSingle]: (args, node, context) => {
         return '\\minussingle\n';
     },
     // Usage: !AR[key|title|text]
-    [OpCodeType.ApplicationRaw]: (args, context) => {
-        shouldHaveLength(OpCodeType.ApplicationRaw, args, 3);
+    [OpCodeType.ApplicationRaw]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 3);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         context.applications.keyToData[args[0]] = {
             title: args[1],
@@ -128,8 +193,9 @@ ${args[2]}
         return '';
     },
     // Usage: !AP[key|title|file_name]
-    [OpCodeType.ApplicationPicture]: (args, context) => {
-        shouldHaveLength(OpCodeType.ApplicationPicture, args, 3);
+    [OpCodeType.ApplicationPicture]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 3);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         addApplicationByKey(context, args[0], {
             title: args[1],
@@ -150,8 +216,9 @@ ${args[2]}
         return '';
     },
     // Usage: !APR[key|title|file_name]
-    [OpCodeType.ApplicationPictureRotated]: (args, context) => {
-        shouldHaveLength(OpCodeType.ApplicationPictureRotated, args, 3);
+    [OpCodeType.ApplicationPictureRotated]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 3);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         addApplicationByKey(context, args[0], {
             title: args[1],
@@ -177,8 +244,9 @@ ${args[2]}
         return '';
     },
     // Usage: !AC[key|directory|file_name|language]
-    [OpCodeType.ApplicationCode]: (args, context) => {
-        shouldHaveLength(OpCodeType.ApplicationCode, args, 4);
+    [OpCodeType.ApplicationCode]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 4);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         addApplicationByKey(context, args[0], {
             title: args[1],
@@ -198,29 +266,34 @@ ${args[2]}
         return '';
     },
     // Usage: !AK[key]
-    [OpCodeType.ApplicationKey]: (args, context) => {
-        shouldHaveLength(OpCodeType.ApplicationKey, args, 1);
+    [OpCodeType.ApplicationKey]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 1);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         return getApplicationLabelByKey(context, args[0]);
     },
-    // Usage: !RR[key|text]
-    [OpCodeType.ReferenceRaw]: (args, context) => {
-        shouldHaveLength(OpCodeType.ReferenceRaw, args, 2);
+    // Usage: !RR[key]
+    // Expected code before the Macros
+    [OpCodeType.ReferenceRaw]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 1);
+        shouldNotBeEmptyArguments(node.opcode, args);
+        shouldHaveNodeWithTypeAfter(node, [NodeType.Code], [NodeType.Space]);
 
-        addReferenceByKey(context, args[0], {
-            text: label => `
-${label}.\\,${args[1]}`,
-        });
+        context.references.key = args[0];
         return '';
     },
     // Usage: !RK[key]
-    [OpCodeType.ReferenceKey]: (args, context) => {
-        shouldHaveLength(OpCodeType.ReferenceKey, args, 1);
+    [OpCodeType.ReferenceKey]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 1);
+        shouldNotBeEmptyArguments(node.opcode, args);
 
         return getReferenceLabelByKey(context, args[0]);
     },
     // Usage: !LAA[]
-    [OpCodeType.ListAllApplications]: (args, context) => {
+    [OpCodeType.ListAllApplications]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 0);
+        shouldNotBeEmptyArguments(node.opcode, args);
+
         const keys = context.applications.accessKeys;
         const data = context.applications.keyToData;
         compareKeyArrayAndMap(keys, data);
@@ -230,7 +303,10 @@ ${label}.\\,${args[1]}`,
             .join('\n\n');
     },
     // Usage: !LAR[]
-    [OpCodeType.ListAllReferences]: (args, context) => {
+    [OpCodeType.ListAllReferences]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 0);
+        shouldNotBeEmptyArguments(node.opcode, args);
+
         const keys = context.references.accessKeys;
         const data = context.references.keyToData;
         compareKeyArrayAndMap(keys, data);

@@ -1,17 +1,24 @@
 import { Node } from '../ast/nodes';
-import { WriteFileFunction } from './context';
+import {  WriteFileFunction } from './context';
 import { applyPrinterVisitors } from './visitors';
+import {MarkDownToLaTeXConfig} from "./config";
 
 function prettifyLaTeX(text: string): string {
     text = text.replace(/\n{3,}/g, '\n\n');
-    text = text.replace(/\n{2,}$/gm, '\n');
+
+    // Remove unnecessary breaks in begin and end of the file
+    text = text.replace(/^\n+/g, '');
+    text = text.replace(/\n{2,}$/g, '\n');
     return text;
 }
 
 export function printMarkdownAST(
     rootNode: Node,
     writeFile: WriteFileFunction,
+    config?: Partial<MarkDownToLaTeXConfig>,
 ): void {
+    config = config ?? {};
+
     applyPrinterVisitors(rootNode, {
         writeFile: (content, fileName, context) => {
             content = prettifyLaTeX(content);
@@ -33,6 +40,7 @@ export function printMarkdownAST(
             label: '',
         },
         references: {
+            key: '',
             accessKeys: [],
             keyToData: {},
         },
@@ -42,7 +50,8 @@ export function printMarkdownAST(
             keyToLabel: {},
         },
         config: {
-            defaultFontSize: 14,
+            defaultFontSize: config.defaultFontSize ?? 14,
+            useMonospaceFont: config.useMonospaceFont ?? true,
         },
     });
 }
