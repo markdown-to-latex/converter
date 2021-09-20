@@ -8,7 +8,7 @@
         "build": "tsc --build",
         "watch": "tsc --build --watch",
         "dev": "node dist/index.js",
-        "prettier": "prettier",
+        "prettier": "prettier --check .",
         "prettier-fix": "prettier --write .",
         "test": "jest test",
         "convert-schema": "node utils/convert-schema.js && prettier --write src/printer/config.ts"
