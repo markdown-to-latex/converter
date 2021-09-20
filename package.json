@@ -24,6 +24,9 @@
         "transpiler",
         "report"
     ],
+    "bin": {
+        "md-to-latex": "./dist/cli.js"
+    },
     "files": [
         "dist/**",
         "*.schema.json"

@@ -1,7 +1,7 @@
 import { Node } from '../ast/nodes';
-import {  WriteFileFunction } from './context';
+import { WriteFileFunction } from './context';
 import { applyPrinterVisitors } from './visitors';
-import {MarkDownToLaTeXConfig} from "./config";
+import { MarkDownToLaTeXConfig } from './config';
 
 function prettifyLaTeX(text: string): string {
     text = text.replace(/\n{3,}/g, '\n\n');
