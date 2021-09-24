@@ -1,5 +1,5 @@
 import { getLatexApplicationLetter } from './latex';
-import { MarkDownToLaTeXConfig } from './config';
+import { LatexInfo } from './types';
 
 export type WriteFileFunction = (
     content: string,
@@ -8,7 +8,7 @@ export type WriteFileFunction = (
 ) => void;
 
 export interface Context {
-    config: MarkDownToLaTeXConfig;
+    config: LatexInfo;
     applications: {
         accessKeys: string[];
         keyToData: Record<

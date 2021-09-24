@@ -1,5 +1,5 @@
 import { Validator, ValidatorResult } from 'jsonschema';
-import { MarkDownToLaTeXConfig } from './printer/config';
+import { MarkDownToLaTeXConverter } from './printer/types';
 import * as path from 'path';
 import * as JSON5 from 'json5';
 import * as fs from 'fs';
@@ -14,10 +14,12 @@ export class ConfigReaderError extends Error {
     }
 }
 
-export function validateConfig(data: MarkDownToLaTeXConfig): ValidatorResult {
+export function validateConfig(
+    data: MarkDownToLaTeXConverter,
+): ValidatorResult {
     const schemaPath = path.resolve(
         __dirname,
-        '../../../mtasa-meta.schema.json',
+        '../md-to-latex-converter.schema.json',
     );
     const schemaContent = fs.readFileSync(schemaPath, 'utf8');
     const schema = JSON5.parse(schemaContent);
@@ -28,9 +30,9 @@ export function validateConfig(data: MarkDownToLaTeXConfig): ValidatorResult {
     });
 }
 
-export function readConfig(filepath: string): MarkDownToLaTeXConfig {
+export function readConfig(filepath: string): MarkDownToLaTeXConverter {
     const content = fs.readFileSync(filepath, 'utf8');
-    const config = yaml.load(content) as MarkDownToLaTeXConfig;
+    const config = yaml.load(content) as MarkDownToLaTeXConverter;
 
     const validationResult = validateConfig(config);
     if (validationResult.errors.length > 0) {

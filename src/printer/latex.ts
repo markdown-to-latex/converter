@@ -102,7 +102,7 @@ export function getLatexImage(
     removeSpace: boolean,
 ): string {
     return `
-\\setlength{\\intextsep}{3em}  % 3em
+\\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}${
         removeSpace ? '\n\\addtolength{\\belowcaptionskip}{-1em}' : ''
     }

@@ -1,0 +1,5 @@
+files:
+    - path: files/main.md
+      out: out/main.tex
+    - path: files/additional.md
+      out: out/another.tex

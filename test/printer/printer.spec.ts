@@ -98,7 +98,7 @@ def main():
         expect(result).not.toBeUndefined();
         expect(result).toEqual(`\\subtitle{Header}
 
-\\setlength{\\intextsep}{3em}  % 3em
+\\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
 \\addtolength{\\belowcaptionskip}{-1em}
 \\setlength{\\abovecaptionskip}{.5em}
@@ -126,7 +126,7 @@ def main():
     \\caption{Рисунок 2 -- Python Sample Code}
 \\end{figure}
 
-\\setlength{\\intextsep}{3em}  % 3em
+\\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
 \\setlength{\\abovecaptionskip}{.5em}
 

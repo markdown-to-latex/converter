@@ -1,7 +1,7 @@
 import { Node } from '../ast/nodes';
 import { WriteFileFunction } from './context';
 import { applyPrinterVisitors } from './visitors';
-import { MarkDownToLaTeXConfig } from './config';
+import { LatexInfo } from './types';
 
 function prettifyLaTeX(text: string): string {
     text = text.replace(/\n{3,}/g, '\n\n');
@@ -15,7 +15,7 @@ function prettifyLaTeX(text: string): string {
 export function printMarkdownAST(
     rootNode: Node,
     writeFile: WriteFileFunction,
-    config?: Partial<MarkDownToLaTeXConfig>,
+    config?: Partial<LatexInfo>,
 ): void {
     config = config ?? {};
 
