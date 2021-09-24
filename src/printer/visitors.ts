@@ -109,6 +109,7 @@ ${label}.\\,${node.text}`,
             context.table.label,
             printNodeList(node.header, context),
             printNodeList(node.rows, context),
+            node.header[0].children.length
         );
     },
     [NodeType.Blockquote]: (node, context) =>

@@ -122,12 +122,18 @@ export function getLatexTable(
     tableTitle: string,
     header: string,
     content: string,
+    colAmount: number,
 ): string {
+    let colsTemplate = `|`;
+    for (let i = 0; i < colAmount; i++) {
+        colsTemplate += 'c|';
+    }
+
     return `
 \\setlength{\\LTpre}{1.5em}
 \\setlength{\\LTpost}{1.5em}
 
-\\begin{longtable}[H]{|c|c|c|c|c|}
+\\begin{longtable}[H]{${colsTemplate}}
     \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
     \\caption{Таблица ${tableLabel} -- ${tableTitle}}
     \\\\\\hline
