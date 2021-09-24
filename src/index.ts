@@ -25,6 +25,9 @@ export function convertMarkdownFiles(rootDir: string): void {
         const filepath = fileInfo.path;
         const fullFilepath = path.join(rootDir, filepath);
 
+        const outDir = path.join(rootDir, path.dirname(fileInfo.out));
+        fs.mkdirSync(outDir, { recursive: true });
+
         const lexerResult = lexer(fs.readFileSync(fullFilepath, 'utf8'));
         const result = buildMarkdownAST(lexerResult, {
             filepath: path.join(rootDir, fileInfo.out),
