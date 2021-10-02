@@ -91,7 +91,7 @@ describe('with latex math', function () {
         expect(paragraph.type).toEqual(NodeType.Paragraph);
 
         const math = paragraph.children[1] as MathLatexNode;
-        expect(math.type).toEqual(NodeType.MathLatex);
+        expect(math.type).toEqual(NodeType.MathInlineLatex);
 
         expect(math.text).toEqual('a=b');
     });

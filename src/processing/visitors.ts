@@ -1,6 +1,7 @@
 import {
     getNodeLeftNeighbourLeaf,
     getNodeRightNeighbourLeaf,
+    MathInlineLatexNode,
     MathLatexNode,
     Node,
     NodeType,
@@ -76,10 +77,10 @@ const processingVisitors: {
             }
 
             replaceNode(node, {
-                type: NodeType.MathLatex,
+                type: NodeType.MathInlineLatex,
                 parent: node.parent,
                 text: node.text,
-            } as MathLatexNode);
+            } as MathInlineLatexNode);
         },
     },
     {
