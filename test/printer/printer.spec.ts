@@ -116,7 +116,7 @@ def main():
 \\setlength{\\abovecaptionskip}{-0.5em}
 
 \\begin{figure}[H]
-    \\fontsize{12}{12}\\selectfont
+    \\fontsize{\\codefontsize}{\\codefontsize}\\selectfont
     \\begin{minted}
     [baselinestretch=1.2]{python}
 def main():
@@ -168,7 +168,7 @@ Code in 1 и 2.
 \\setlength{\\abovecaptionskip}{-0.5em}
 
 \\begin{figure}[H]
-    \\fontsize{12}{12}\\selectfont
+    \\fontsize{\\codefontsize}{\\codefontsize}\\selectfont
     \\begin{minted}
     [baselinestretch=1.2]{python}
 def main():
@@ -183,7 +183,7 @@ def main():
 \\setlength{\\abovecaptionskip}{-0.5em}
 
 \\begin{figure}[H]
-    \\fontsize{12}{12}\\selectfont
+    \\fontsize{\\codefontsize}{\\codefontsize}\\selectfont
     \\begin{minted}
     [baselinestretch=1.2]{python}
 def hello_world():
@@ -212,7 +212,7 @@ Demonstrated in table
 \\setlength{\\LTpre}{1.5em}
 \\setlength{\\LTpost}{1.5em}
 
-\\begin{longtable}[H]{|c|c|c|c|c|}
+\\begin{longtable}[H]{|c|c|c|c|}
     \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
     \\caption{Таблица 1 -- Table with content}
     \\\\\\hline
@@ -288,9 +288,9 @@ See application В.
 
 \\text{}
 
-\\fontsize{12}{12}\\selectfont
+\\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
 \\inputminted[baselinestretch=1.2]{python}{template-full2.py}
-\\fontsize{14}{14}\\selectfont
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 
 \\pagebreak
 \\begin{landscape}
@@ -316,9 +316,9 @@ See application В.
 
 \\text{}
 
-\\fontsize{12}{12}\\selectfont
+\\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
 \\inputminted[baselinestretch=1.2]{python}{template-full.py}
-\\fontsize{14}{14}\\selectfont
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `);
     });
 

@@ -258,9 +258,9 @@ ${args[2]}
 
 \\text{}
 
-\\fontsize{12}{12}\\selectfont
+\\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
 \\inputminted[baselinestretch=1.2]{${args[3]}}{${args[2]}}
-\\fontsize{${context.config.defaultFontSize}}{${context.config.defaultFontSize}}\\selectfont
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `,
         });
         return '';

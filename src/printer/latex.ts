@@ -165,7 +165,7 @@ export function getLatexCode(
 \\setlength{\\abovecaptionskip}{-0.5em}
 
 \\begin{figure}[H]
-    \\fontsize{12}{12}\\selectfont
+    \\fontsize{\\codefontsize}{\\codefontsize}\\selectfont
     \\begin{minted}
     [baselinestretch=1.2]{${lang}}
 ${text}

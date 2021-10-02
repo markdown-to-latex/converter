@@ -23,12 +23,6 @@
             "type": "object",
             "description": "Information about Latex",
             "properties": {
-                "defaultFontSize": {
-                    "type": "number",
-                    "description": "Default font size",
-                    "default": 14,
-                    "minimum": 1
-                },
                 "useMonospaceFont": {
                     "type": "boolean",
                     "description": "Use \\texttt for code-spans",

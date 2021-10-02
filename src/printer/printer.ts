@@ -50,7 +50,6 @@ export function printMarkdownAST(
             keyToLabel: {},
         },
         config: {
-            defaultFontSize: config.defaultFontSize ?? 14,
             useMonospaceFont: config.useMonospaceFont ?? true,
         },
     });
