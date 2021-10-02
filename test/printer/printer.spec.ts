@@ -289,7 +289,7 @@ See application В.
 \\text{}
 
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=1.2]{python}{assets\\code\\template-full2.py}
+\\inputminted[baselinestretch=1.2]{python}{./assets/code/template-full2.py}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 
 \\pagebreak
@@ -317,7 +317,7 @@ See application В.
 \\text{}
 
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=1.2]{python}{assets\\code\\template-full.py}
+\\inputminted[baselinestretch=1.2]{python}{./assets/code/template-full.py}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `);
     });
@@ -394,5 +394,33 @@ A.\\,A.\\~Amogus. "Impostor\\~theorem" // Steam library, 2021
 !RK[nope]
 `)['filepath'];
         expect(result).toThrow(ContextError);
+    });
+
+    test('Inline math', () => {
+        const result = processingChain(`
+Text $\`a = b + \\sum_{i=0}^\\infty c_i\`$ ending.
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result)
+            .toEqual(`Text $\\displaystyle a = b + \\sum_{i=0}^\\infty c_i$ ending.
+`);
+    });
+
+    test('Text with percents', () => {
+        const result = processingChain(`
+Text with 10% number.
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`Text with 10\\% number.
+`);
+    });
+
+    test('Text with escapes ("<" sound be corrent also)', () => {
+        const result = processingChain(`
+Text with \\<assdasd.
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`Text with \\<assdasd.
+`);
     });
 });

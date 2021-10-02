@@ -7,6 +7,31 @@ export class LatexError extends Error {
     }
 }
 
+const escapeDeReplacements: Record<string, string> = {
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#39;': "'",
+};
+
+/**
+ * See https://github.com/markedjs/marked/blob/288f1cbe2f55881972c0f594ddb9910888986bee/src/helpers.js#L8
+ */
+function resolveTextDeReplacements(text: string): string {
+    for (const dereplacement of Object.keys(escapeDeReplacements)) {
+        text = text.replace(dereplacement, escapeDeReplacements[dereplacement]);
+    }
+
+    return text;
+}
+
+export function prepareTextForLatex(text: string): string {
+    text = resolveTextDeReplacements(text);
+    text = text.replace('%', '\\%');
+    return text;
+}
+
 const headerByDepth: ((text: string) => string)[] = [
     text => `\\subtitle{${text}}`,
     text => `\\section{${text}}`,
@@ -189,5 +214,5 @@ ${text}
 }
 
 export function getLatexInlineMath(text: string): string {
-    return `$\\displaystyle ${text}$`;
+    return `\\displaystyle ${text}`;
 }

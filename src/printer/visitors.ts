@@ -21,6 +21,7 @@ import {
     getLatexListItem,
     getLatexMath,
     getLatexTable,
+    prepareTextForLatex,
 } from './latex';
 
 type Visitor<T extends Node> = (node: T, context: Context) => string;
@@ -143,11 +144,11 @@ ${label}.\\,${node.text}`,
     [NodeType.Paragraph]: (node, context) =>
         printNodeList(node.children, context) + '\n',
     [NodeType.Def]: throwProcessingError,
-    [NodeType.Escape]: throwProcessingError,
+    [NodeType.Escape]: node => `\\${prepareTextForLatex(node.text)}`,
     [NodeType.Text]: (node, context) => {
         const children = node.children;
         if (children.length === 0) {
-            return node.text;
+            return prepareTextForLatex(node.text);
         }
 
         return printNodeList(children, context);
