@@ -423,4 +423,32 @@ Text with \\<assdasd.
         expect(result).toEqual(`Text with \\<assdasd.
 `);
     });
+
+    test('Tag <hr> should break the page', () => {
+        const result = processingChain(`
+The first page
+
+---------------------------------------
+
+The second page
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`The first page
+
+\\pagebreak
+The second page
+`);
+    });
+
+    test('Tag <br> should put additional break', () => {
+        const result = processingChain(`
+The first line  
+The second line
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`The first line
+
+The second line
+`);
+    });
 });
