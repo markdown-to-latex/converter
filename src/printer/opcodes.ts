@@ -254,12 +254,12 @@ ${args[2]}
 \\pagebreak
 \\subtitle{Приложение ${label}}
 
-\\section*{${args[1]}}
+\\section*{Листинг кода из файла ${args[2]}}
 
 \\text{}
 
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=1.2]{${args[3]}}{${args[2]}}
+\\inputminted[baselinestretch=1.2]{${args[3]}}{${args[1]}/${args[2]}}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `,
         });

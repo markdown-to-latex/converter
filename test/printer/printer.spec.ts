@@ -284,12 +284,12 @@ See application В.
 \\pagebreak
 \\subtitle{Приложение А}
 
-\\section*{./assets/code}
+\\section*{Листинг кода из файла template-full2.py}
 
 \\text{}
 
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=1.2]{python}{template-full2.py}
+\\inputminted[baselinestretch=1.2]{python}{assets\\code\\template-full2.py}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 
 \\pagebreak
@@ -312,12 +312,12 @@ See application В.
 \\pagebreak
 \\subtitle{Приложение В}
 
-\\section*{./assets/code}
+\\section*{Листинг кода из файла template-full.py}
 
 \\text{}
 
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=1.2]{python}{template-full.py}
+\\inputminted[baselinestretch=1.2]{python}{assets\\code\\template-full.py}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `);
     });
