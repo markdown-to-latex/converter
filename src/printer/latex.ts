@@ -182,7 +182,6 @@ export function getLatexTable(
 
 ${content}
 \\end{longtable}
-
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
 `;
 }

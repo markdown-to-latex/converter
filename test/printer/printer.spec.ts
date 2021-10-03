@@ -212,6 +212,7 @@ Demonstrated in table
         expect(result).not.toBeUndefined();
         expect(result).toEqual(`Demonstrated in table  
 
+\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
 \\setlength{\\LTpre}{1.5em}
 \\setlength{\\LTpost}{1.5em}
 
@@ -233,6 +234,7 @@ Demonstrated in table
 t & r & e & z\\\\ \\hline
 
 \\end{longtable}
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
 `);
     });
 
