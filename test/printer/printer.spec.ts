@@ -301,9 +301,9 @@ See application В.
     
     \\text{}
 
-    {\\centering
-        \\includegraphics[height=13.5cm]{./assets/img/circuit.png}
-    }
+    \\begin{center}
+    \\includegraphics[height=13.5cm]{./assets/img/circuit.png]
+    \\end{center}
 
     \\vfill
     \\raisebox{.6ex}{\\makebox[\\linewidth]{\\thepage}}

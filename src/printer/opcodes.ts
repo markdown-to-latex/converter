@@ -5,7 +5,7 @@ import {
     getOrCreatePictureLabel,
     getReferenceLabelByKey,
 } from './context';
-import { getNodeRightNeighbourLeaf, NodeType, OpCodeNode } from '../ast/nodes';
+import {getNodeRightNeighbourLeaf, NodeType, OpCodeNode} from '../ast/nodes';
 
 export function resolveOpCode(node: OpCodeNode, context: Context): string {
     const lazy = opCodeMap[node.opcode as OpCodeType];
@@ -207,10 +207,9 @@ ${args[2]}
 
 \\text{}
 
-{
-\\centering
+\\begin{center}
 \\includegraphics[width=16.9cm]{${args[2]}]
-}
+\\end{center}
 `,
         });
         return '';
@@ -232,9 +231,9 @@ ${args[2]}
     
     \\text{}
 
-    {\\centering
-        \\includegraphics[height=13.5cm]{${args[2]}}
-    }
+    \\begin{center}
+    \\includegraphics[height=13.5cm]{${args[2]}]
+    \\end{center}
 
     \\vfill
     \\raisebox{.6ex}{\\makebox[\\linewidth]{\\thepage}}
