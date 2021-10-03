@@ -164,6 +164,7 @@ export function getLatexTable(
     }
 
     return `
+\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
 \\setlength{\\LTpre}{1.5em}
 \\setlength{\\LTpost}{1.5em}
 
@@ -181,6 +182,8 @@ export function getLatexTable(
 
 ${content}
 \\end{longtable}
+
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
 `;
 }
 
