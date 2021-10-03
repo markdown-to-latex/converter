@@ -103,7 +103,7 @@ def main():
 
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
-\\addtolength{\\belowcaptionskip}{-1em}
+\\addtolength{\\belowcaptionskip}{-1.6em}
 \\setlength{\\abovecaptionskip}{.5em}
 
 \\begin{figure}[H]
@@ -115,7 +115,7 @@ def main():
 
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
-\\addtolength{\\belowcaptionskip}{-1em}
+\\addtolength{\\belowcaptionskip}{-1.6em}
 \\setlength{\\abovecaptionskip}{-0.5em}
 
 \\begin{figure}[H]
@@ -167,7 +167,7 @@ Code in 1 и 2.
 
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
-\\addtolength{\\belowcaptionskip}{-1em}
+\\addtolength{\\belowcaptionskip}{-1.6em}
 \\setlength{\\abovecaptionskip}{-0.5em}
 
 \\begin{figure}[H]
@@ -213,6 +213,8 @@ Demonstrated in table
         expect(result).toEqual(`Demonstrated in table  
 
 \\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
+\\setlength{\\belowcaptionskip}{0em}
+\\setlength{\\abovecaptionskip}{0em}
 \\setlength{\\LTpre}{1.5em}
 \\setlength{\\LTpost}{1.5em}
 
@@ -249,7 +251,7 @@ t & r & e & z\\\\ \\hline
         expect(result).not.toBeUndefined();
         expect(result).toEqual(`\\subtitle{Header}
 
-\\setlength{\\abovedisplayskip}{-1.3em}
+\\setlength{\\abovedisplayskip}{-.9em}
 \\setlength{\\belowdisplayskip}{0pt}
 \\setlength{\\abovedisplayshortskip}{0pt}
 \\setlength{\\belowdisplayshortskip}{0pt}
@@ -291,8 +293,7 @@ See application В.
 
 \\section*{Листинг кода из файла template-full2.py}
 
-\\text{}
-
+\\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
 \\inputminted[baselinestretch=1.2]{python}{./assets/code/template-full2.py}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
@@ -304,10 +305,9 @@ See application В.
 
     \\section*{Large scheme}
     
-    \\text{}
-
+    \\vspace{1em}
     \\begin{center}
-    \\includegraphics[height=13.5cm]{./assets/img/circuit.png]
+    \\includegraphics[height=13.8cm]{./assets/img/circuit.png}
     \\end{center}
 
     \\vfill
@@ -319,8 +319,7 @@ See application В.
 
 \\section*{Листинг кода из файла template-full.py}
 
-\\text{}
-
+\\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
 \\inputminted[baselinestretch=1.2]{python}{./assets/code/template-full.py}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
@@ -454,6 +453,75 @@ The second line
         expect(result).toEqual(`The first line
 
 The second line
+`);
+    });
+
+    test("Text ' dereplacement", () => {
+        const result = processingChain(`
+Otsu's method is a one-dimensional discrete analog of Fisher's 
+Discriminant Analysis, is related to Jenks optimization method.
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result)
+            .toEqual(`Otsu's method is a one-dimensional discrete analog of Fisher's 
+Discriminant Analysis, is related to Jenks optimization method.
+`);
+    });
+
+    test('Table and picture key', () => {
+        const result = processingChain(`
+Displayed in picture !PK[gray-square] and table !TK[table].
+
+!P[gray-square|5cm]
+![Gray square](./assets/img/example.png)
+
+!T[table|Table]
+        
+|Key    |Value |
+|-------|------|
+|Static number | 50 |
+|Random number | $$ \\showcaserandomnumber $$ |
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`Displayed in picture 1 and table 1.
+
+\\setlength{\\intextsep}{3em}
+\\setlength{\\belowcaptionskip}{-4ex}
+\\addtolength{\\belowcaptionskip}{-1.6em}
+\\setlength{\\abovecaptionskip}{.5em}
+
+\\begin{figure}[H]
+    \\centering
+    \\includegraphics[height=5cm]{./assets/img/example.png}
+    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\caption{Рисунок 1 -- Gray square}
+\\end{figure}
+
+\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
+\\setlength{\\belowcaptionskip}{0em}
+\\setlength{\\abovecaptionskip}{0em}
+\\setlength{\\LTpre}{1.5em}
+\\setlength{\\LTpost}{1.5em}
+
+\\begin{longtable}[H]{|c|c|}
+    \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
+    \\caption{Таблица 1 -- Table}
+    \\\\\\hline
+    Key & Value\\\\ \\hline
+
+    \\endfirsthead
+    \\caption{Продолжение таблицы 1} \\\\\\hline
+    Key & Value\\\\ \\hline
+
+    \\endhead
+    \\endfoot
+    \\endlastfoot
+
+Static number & 50\\\\ \\hline
+Random number &  \\showcaserandomnumber \\\\ \\hline
+
+\\end{longtable}
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
 `);
     });
 });

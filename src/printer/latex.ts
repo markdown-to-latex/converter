@@ -20,7 +20,8 @@ const escapeDeReplacements: Record<string, string> = {
  */
 function resolveTextDeReplacements(text: string): string {
     for (const dereplacement of Object.keys(escapeDeReplacements)) {
-        text = text.replace(dereplacement, escapeDeReplacements[dereplacement]);
+        const regexp = new RegExp(dereplacement, 'g');
+        text = text.replace(regexp, escapeDeReplacements[dereplacement]);
     }
 
     return text;
@@ -28,7 +29,7 @@ function resolveTextDeReplacements(text: string): string {
 
 export function prepareTextForLatex(text: string): string {
     text = resolveTextDeReplacements(text);
-    text = text.replace('%', '\\%');
+    text = text.replace(/%/g, '\\%');
     return text;
 }
 
@@ -138,7 +139,7 @@ export function getLatexImage(
     return `
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}${
-        removeSpace ? '\n\\addtolength{\\belowcaptionskip}{-1em}' : ''
+        removeSpace ? '\n\\addtolength{\\belowcaptionskip}{-1.6em}' : ''
     }
 \\setlength{\\abovecaptionskip}{.5em}
 
@@ -164,7 +165,10 @@ export function getLatexTable(
     }
 
     return `
+
 \\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
+\\setlength{\\belowcaptionskip}{0em}
+\\setlength{\\abovecaptionskip}{0em}
 \\setlength{\\LTpre}{1.5em}
 \\setlength{\\LTpost}{1.5em}
 
@@ -183,6 +187,7 @@ export function getLatexTable(
 ${content}
 \\end{longtable}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
+
 `;
 }
 
@@ -196,7 +201,7 @@ export function getLatexCode(
     return `
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}${
-        removeSpace ? '\n\\addtolength{\\belowcaptionskip}{-1em}' : ''
+        removeSpace ? '\n\\addtolength{\\belowcaptionskip}{-1.6em}' : ''
     }
 \\setlength{\\abovecaptionskip}{-0.5em}
 
@@ -214,7 +219,7 @@ ${text}
 
 export function getLatexMath(text: string): string {
     return `
-\\setlength{\\abovedisplayskip}{-1.3em}
+\\setlength{\\abovedisplayskip}{-.9em}
 \\setlength{\\belowdisplayskip}{0pt}
 \\setlength{\\abovedisplayshortskip}{0pt}
 \\setlength{\\belowdisplayshortskip}{0pt}

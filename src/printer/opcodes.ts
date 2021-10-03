@@ -3,6 +3,7 @@ import {
     Context,
     getApplicationLabelByKey,
     getOrCreatePictureLabel,
+    getOrCreateTableLabel,
     getReferenceLabelByKey,
 } from './context';
 import { getNodeRightNeighbourLeaf, NodeType, OpCodeNode } from '../ast/nodes';
@@ -159,7 +160,7 @@ const opCodeMap: {
         shouldHaveLength(node.type, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
 
-        return getOrCreatePictureLabel(context, args[0]);
+        return getOrCreateTableLabel(context, args[0]);
     },
     // Usage: !C[key|label]
     [OpCodeType.Code]: (args, node, context) => {
@@ -205,10 +206,9 @@ ${args[2]}
 
 \\section*{${args[1]}}
 
-\\text{}
-
+\\vspace{1em}
 \\begin{center}
-\\includegraphics[width=16.9cm]{${args[2]}]
+\\includegraphics[width=16.9cm]{${args[2]}}
 \\end{center}
 `,
         });
@@ -229,10 +229,9 @@ ${args[2]}
 
     \\section*{${args[1]}}
     
-    \\text{}
-
+    \\vspace{1em}
     \\begin{center}
-    \\includegraphics[height=13.5cm]{${args[2]}]
+    \\includegraphics[height=13.8cm]{${args[2]}}
     \\end{center}
 
     \\vfill
@@ -255,8 +254,7 @@ ${args[2]}
 
 \\section*{Листинг кода из файла ${args[2]}}
 
-\\text{}
-
+\\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
 \\inputminted[baselinestretch=1.2]{${args[3]}}{${args[1]}/${args[2]}}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
@@ -272,7 +270,7 @@ ${args[2]}
         return getApplicationLabelByKey(context, args[0]);
     },
     // Usage: !RR[key]
-    // Expected code before the Macros
+    // Expected code with language "ref" after the Macros
     [OpCodeType.ReferenceRaw]: (args, node, context) => {
         shouldHaveLength(node.type, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
