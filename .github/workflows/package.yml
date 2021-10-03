@@ -101,6 +101,6 @@ jobs:
             - name: Build project
               run: npm run build
             - name: Run publish
-              run: npm run publish
+              run: npm publish
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
