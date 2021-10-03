@@ -1,6 +1,7 @@
 import {
     applyProcessing,
     buildMarkdownAST,
+    initContext,
     lexer,
     printMarkdownAST,
 } from '../../src';
@@ -13,9 +14,11 @@ function processingChain(text: string): Record<string, string> {
     applyProcessing(result);
 
     const files: Record<string, string> = {};
-    printMarkdownAST(result, (content, fileName) => {
+    const context = initContext((content, fileName, context) => {
         files[fileName] = content;
     });
+
+    printMarkdownAST(result, context);
 
     return files;
 }

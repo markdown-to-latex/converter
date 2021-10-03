@@ -32,6 +32,15 @@ export function prepareTextForLatex(text: string): string {
     return text;
 }
 
+export function prettifyLaTeX(text: string): string {
+    text = text.replace(/\n{3,}/g, '\n\n');
+
+    // Remove unnecessary breaks in begin and end of the file
+    text = text.replace(/^\n+/g, '');
+    text = text.replace(/\n{2,}$/g, '\n');
+    return text;
+}
+
 const headerByDepth: ((text: string) => string)[] = [
     text => `\\subtitle{${text}}`,
     text => `\\section{${text}}`,

@@ -22,6 +22,7 @@ import {
     getLatexMath,
     getLatexTable,
     prepareTextForLatex,
+    prettifyLaTeX,
 } from './latex';
 
 type Visitor<T extends Node> = (node: T, context: Context) => string;
@@ -174,7 +175,8 @@ ${label}.\\,${node.text}`,
     [NodeType.Del]: throwProcessingError,
 
     [NodeType.File]: (node, context) => {
-        const content = printNodeList(node.children, context);
+        let content = printNodeList(node.children, context);
+        content = prettifyLaTeX(content);
         context.writeFile(content, node.path, context);
 
         return content;

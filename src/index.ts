@@ -4,13 +4,51 @@ import { applyProcessing } from './processing/process';
 import { printMarkdownAST } from './printer/printer';
 import * as fs from 'fs';
 import * as path from 'path';
-import { WriteFileFunction } from './printer/context';
+import { Context, WriteFileFunction } from './printer/context';
 import { readConfig } from './config';
+import { MarkDownToLaTeXConverter } from './printer/types';
 
 export { buildMarkdownAST, lexer, applyProcessing, printMarkdownAST };
 
+export function initContext(
+    writeFile: WriteFileFunction,
+    config?: Partial<MarkDownToLaTeXConverter>,
+): Context {
+    return {
+        writeFile,
+        code: {
+            key: '',
+            label: '',
+            lang: '',
+        },
+        applications: {
+            accessKeys: [],
+            keyToData: {},
+        },
+        picture: {
+            key: '',
+            height: '',
+            keyToLabel: {},
+            label: '',
+        },
+        references: {
+            key: '',
+            accessKeys: [],
+            keyToData: {},
+        },
+        table: {
+            key: '',
+            label: '',
+            keyToLabel: {},
+        },
+        config: {
+            useMonospaceFont: config?.latex?.useMonospaceFont ?? true,
+        },
+    };
+}
+
 export function convertMarkdownFiles(rootDir: string): void {
-    const writeFile: WriteFileFunction = function (content, filepath, context) {
+    const writeFile: WriteFileFunction = function (content, filepath) {
         fs.writeFileSync(filepath, content, 'utf8');
     };
 
@@ -20,6 +58,9 @@ export function convertMarkdownFiles(rootDir: string): void {
     }
 
     const config = readConfig(configFileName);
+    const context = initContext((content, fileName) => {
+        return writeFile(content, fileName, context);
+    }, config);
 
     for (const fileInfo of config.files) {
         const filepath = fileInfo.path;
@@ -35,6 +76,6 @@ export function convertMarkdownFiles(rootDir: string): void {
 
         applyProcessing(result);
 
-        printMarkdownAST(result, writeFile, config.latex);
+        printMarkdownAST(result, context);
     }
 }

@@ -5,7 +5,7 @@ import {
     getOrCreatePictureLabel,
     getReferenceLabelByKey,
 } from './context';
-import {getNodeRightNeighbourLeaf, NodeType, OpCodeNode} from '../ast/nodes';
+import { getNodeRightNeighbourLeaf, NodeType, OpCodeNode } from '../ast/nodes';
 
 export function resolveOpCode(node: OpCodeNode, context: Context): string {
     const lazy = opCodeMap[node.opcode as OpCodeType];
