@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["ES6"],
+        "module": "commonjs",
+        "rootDir": "..",
+        "outDir": "dist",
+        "noEmit": false,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "sourceMap": true,
+        "strict": true,
+        "skipLibCheck": true
+    },
+    "include": ["test/*"]
+}
