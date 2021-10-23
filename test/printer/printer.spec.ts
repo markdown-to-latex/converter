@@ -295,7 +295,7 @@ See application В.
 
 \\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=1.2]{python}{./assets/code/template-full2.py}
+\\inputminted[baselinestretch=\\applicationcodelineheight]{python}{./assets/code/template-full2.py}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 
 \\pagebreak
@@ -321,7 +321,7 @@ See application В.
 
 \\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=1.2]{python}{./assets/code/template-full.py}
+\\inputminted[baselinestretch=\\applicationcodelineheight]{python}{./assets/code/template-full.py}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `);
     });

@@ -256,7 +256,7 @@ ${args[2]}
 
 \\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=1.2]{${args[3]}}{${args[1]}/${args[2]}}
+\\inputminted[baselinestretch=\\applicationcodelineheight]{${args[3]}}{${args[1]}/${args[2]}}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `,
         });
