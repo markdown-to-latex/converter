@@ -20,6 +20,7 @@ export function initContext(
             key: '',
             label: '',
             lang: '',
+            cols: 1,
         },
         applications: {
             accessKeys: [],

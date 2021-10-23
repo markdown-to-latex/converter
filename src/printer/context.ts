@@ -44,6 +44,7 @@ export interface Context {
         key: string;
         label: string;
         lang: string;
+        cols: number;
     };
     writeFile: WriteFileFunction;
 }

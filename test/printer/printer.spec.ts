@@ -295,7 +295,9 @@ See application В.
 
 \\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
+
 \\inputminted[baselinestretch=\\applicationcodelineheight]{python}{./assets/code/template-full2.py}
+
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 
 \\pagebreak
@@ -321,7 +323,43 @@ See application В.
 
 \\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
+
 \\inputminted[baselinestretch=\\applicationcodelineheight]{python}{./assets/code/template-full.py}
+
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
+`);
+    });
+
+    test('with multiple columns', () => {
+        const result = processingChain(`
+!ACC[2]
+!AC[code-full|./assets/code|template-full.py|python]
+        
+# Header
+
+See application !AK[code-full].
+
+# Applications
+
+!LAA[]
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`\\subtitle{Header}
+
+See application А.
+
+\\subtitle{Applications}
+
+\\pagebreak
+\\subtitle{Приложение А}
+
+\\section*{Листинг кода из файла template-full.py}
+
+\\vspace{1em}
+\\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
+\\begin{multicols}{2}
+\\inputminted[baselinestretch=\\applicationcodelineheight]{python}{./assets/code/template-full.py}
+\\end{multicols}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `);
     });

@@ -28,6 +28,7 @@ export const enum OpCodeType {
     ApplicationPicture = 'AP',
     ApplicationPictureRotated = 'APR',
     ApplicationCode = 'AC',
+    ApplicationCodeColumns = 'ACC',
     ApplicationKey = 'AK',
     ReferenceRaw = 'RR',
     ReferenceKey = 'RK',
@@ -241,6 +242,14 @@ ${args[2]}
         });
         return '';
     },
+    // Usage: !ACC[columns]
+    [OpCodeType.ApplicationCodeColumns]: (args, node, context) => {
+        shouldHaveLength(node.type, args, 1);
+        shouldNotBeEmptyArguments(node.opcode, args);
+
+        context.code.cols = +args[0];
+        return '';
+    },
     // Usage: !AC[key|directory|file_name|language]
     [OpCodeType.ApplicationCode]: (args, node, context) => {
         shouldHaveLength(node.type, args, 4);
@@ -256,7 +265,11 @@ ${args[2]}
 
 \\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\inputminted[baselinestretch=\\applicationcodelineheight]{${args[3]}}{${args[1]}/${args[2]}}
+${context.code.cols !== 1 ? `\\begin{multicols}{${context.code.cols}}` : ''}
+\\inputminted[baselinestretch=\\applicationcodelineheight]{${args[3]}}{${
+                args[1]
+            }/${args[2]}}
+${context.code.cols !== 1 ? `\\end{multicols}` : ''}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
 `,
         });
