@@ -192,6 +192,6 @@ ${label}.\\,${node.text}`,
         return getLatexMath(node.text);
     },
     [NodeType.MathInlineLatex]: node => {
-        return getLatexInlineMath(node.text);
+        return getLatexInlineMath(prepareTextForLatex(node.text));
     },
 };

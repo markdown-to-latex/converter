@@ -506,6 +506,15 @@ Discriminant Analysis, is related to Jenks optimization method.
 `);
     });
 
+    test('Inline latex math dereplacement', () => {
+        const result = processingChain(`
+$\`a > b < c\`$
+`)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toEqual(`$\\displaystyle a > b < c$
+`);
+    });
+
     test('Table and picture key', () => {
         const result = processingChain(`
 Displayed in picture !PK[gray-square] and table !TK[table].
