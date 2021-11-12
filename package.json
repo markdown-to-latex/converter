@@ -47,7 +47,7 @@
     },
     "dependencies": {
         "js-yaml": "^4.1.0",
-        "marked": "^3.0.3",
+        "marked": "^4.0.1",
         "json5": "^2.2.0",
         "jsonschema": "^1.4.0"
     }
