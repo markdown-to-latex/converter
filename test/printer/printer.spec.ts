@@ -14,7 +14,7 @@ function processingChain(text: string): Record<string, string> {
     applyProcessing(result);
 
     const files: Record<string, string> = {};
-    const context = initContext((content, fileName, context) => {
+    const context = initContext((content, fileName) => {
         files[fileName] = content;
     });
 
@@ -398,7 +398,7 @@ H.\\,Y.\\~Ignat. "Reference\\~2" // Some Journal, 1867
         
 # Header
 
-Code from application !RK[ref-2] describes image from application !RK[ref-1].
+Code from reference !RK[ref-2] describes image from reference !RK[ref-1].
 
 # References
 
@@ -407,7 +407,7 @@ Code from application !RK[ref-2] describes image from application !RK[ref-1].
         expect(result).not.toBeUndefined();
         expect(result).toEqual(`\\subtitle{Header}
 
-Code from application 0 describes image from application 1.
+Code from reference 1 describes image from reference 2.
 
 \\subtitle{References}
 

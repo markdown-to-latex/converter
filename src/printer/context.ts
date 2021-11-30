@@ -124,7 +124,7 @@ export function getReferenceLabelByKey(context: Context, key: string): string {
 
     let index = context.references.accessKeys.indexOf(key);
     if (index === -1) {
-        index = context.references.accessKeys.length;
+        index = context.references.accessKeys.length + 1;
         context.references.accessKeys.push(key);
     }
 
