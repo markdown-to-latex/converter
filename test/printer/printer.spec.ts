@@ -411,9 +411,9 @@ Code from reference 1 describes image from reference 2.
 
 \\subtitle{References}
 
-0.\\,H.\\,Y.\\~Ignat. "Reference\\~2" // Some Journal, 1867
+1.\\,H.\\,Y.\\~Ignat. "Reference\\~2" // Some Journal, 1867
 
-1.\\,H.\\,Y.\\~Ignat. "Reference\\~1" // Some Journal, 1867
+2.\\,H.\\,Y.\\~Ignat. "Reference\\~1" // Some Journal, 1867
 `);
     });
 
