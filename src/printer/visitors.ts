@@ -7,12 +7,15 @@ import {
 } from '../ast/nodes';
 import { NodesByType } from '../processing/nodes';
 import {
+    addApplicationByKey,
     addReferenceByKey,
     Context,
+    createPictureLabel,
+    createTableLabel,
     getOrCreatePictureLabel,
     getOrCreateTableLabel,
 } from './context';
-import { resolveOpCode } from './opcodes';
+import { CodeLanguageTemporary, resolveOpCode } from './opcodes';
 import {
     getLatexCode,
     getLatexHeader,
@@ -83,11 +86,42 @@ const processingVisitors: {
 } = {
     [NodeType.Space]: () => '\n',
     [NodeType.Code]: (node, context) => {
-        if (node.lang === 'ref') {
-            addReferenceByKey(context, context.references.key, {
+        if (node.lang === CodeLanguageTemporary.REFERENCE) {
+            if (context.references.current === null) {
+                throw new ProcessingError(
+                    `Cannot process code with language ${CodeLanguageTemporary.REFERENCE}. No header OpCode !RR`,
+                );
+            }
+
+            addReferenceByKey(context, context.references.current.key, {
                 text: label => `
 ${label}.\\,${node.text}`,
             });
+
+            context.references.current = null;
+            return '';
+        }
+        if (node.lang === CodeLanguageTemporary.APPLICATION) {
+            if (context.applications.current === null) {
+                throw new ProcessingError(
+                    `Cannot process code with language ${CodeLanguageTemporary.REFERENCE}. No header OpCode !RR`,
+                );
+            }
+
+            const title = context.applications.current.title;
+            addApplicationByKey(context, context.applications.current.key, {
+                title: title,
+                text: label => `
+\\pagebreak
+\\subtitle{Приложение ${label}}
+
+\\section*{${title}}
+
+${node.text}
+`,
+            });
+
+            context.applications.current = null;
             return '';
         }
 
@@ -107,7 +141,7 @@ ${label}.\\,${node.text}`,
     },
     [NodeType.Table]: (node, context) => {
         return getLatexTable(
-            getOrCreateTableLabel(context, context.table.key),
+            createTableLabel(context, context.table.key),
             context.table.label,
             printNodeList(node.header, context),
             printNodeList(node.rows, context),
@@ -158,7 +192,7 @@ ${label}.\\,${node.text}`,
     [NodeType.Link]: throwProcessingError,
     [NodeType.Image]: (node, context) => {
         return getLatexImage(
-            getOrCreatePictureLabel(context, context.picture.key),
+            createPictureLabel(context, context.picture.key),
             node.text,
             context.picture.height,
             node.href,

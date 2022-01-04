@@ -23,6 +23,7 @@ export function initContext(
             cols: 1,
         },
         applications: {
+            current: null,
             accessKeys: [],
             keyToData: {},
         },
@@ -33,7 +34,7 @@ export function initContext(
             label: '',
         },
         references: {
-            key: '',
+            current: null,
             accessKeys: [],
             keyToData: {},
         },

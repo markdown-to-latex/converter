@@ -256,6 +256,7 @@ t & r & e & z\\\\ \\hline
 \\setlength{\\abovedisplayshortskip}{0pt}
 \\setlength{\\belowdisplayshortskip}{0pt}
 \\begin{align*}
+\\displaystyle
     a = b + c
 \\end{align*}    
 `);
@@ -517,7 +518,7 @@ $\`a > b < c\`$
 
     test('Table and picture key', () => {
         const result = processingChain(`
-Displayed in picture !PK[gray-square] and table !TK[table].
+Displayed in picture !PK[gray-square] (!PK[gray-square]) and table !TK[table].
 
 !P[gray-square|5cm]
 ![Gray square](./assets/img/example.png)
@@ -530,7 +531,7 @@ Displayed in picture !PK[gray-square] and table !TK[table].
 |Random number | $$ \\showcaserandomnumber $$ |
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`Displayed in picture 1 and table 1.
+        expect(result).toEqual(`Displayed in picture 1 (1) and table 1.
 
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}

@@ -1,4 +1,4 @@
-import { buildMarkdownAST } from '../../src/ast/build';
+import { buildMarkdownAST } from '../../src';
 import { lexer } from '../../src';
 import {
     HeadingNode,

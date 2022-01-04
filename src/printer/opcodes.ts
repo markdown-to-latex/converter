@@ -36,6 +36,11 @@ export const enum OpCodeType {
     ListAllReferences = 'LAR',
 }
 
+export const enum CodeLanguageTemporary {
+    APPLICATION = 'app',
+    REFERENCE = 'ref',
+}
+
 export class OpCodeError extends Error {
     constructor(m: string) {
         super(m);
@@ -176,22 +181,18 @@ const opCodeMap: {
     [OpCodeType.MinusSingle]: (args, node, context) => {
         return '\\minussingle\n';
     },
-    // Usage: !AR[key|title|text]
+    // Usage: !AR[key|title]
+    // Expected code with language "app" after the Macros
     [OpCodeType.ApplicationRaw]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 3);
+        shouldHaveLength(node.type, args, 2);
         shouldNotBeEmptyArguments(node.opcode, args);
+        shouldHaveNodeWithTypeAfter(node, [NodeType.Code], [NodeType.Space]);
 
-        context.applications.keyToData[args[0]] = {
+        context.applications.current = {
+            key: args[0],
             title: args[1],
-            text: label => `
-\\pagebreak
-\\subtitle{Приложение ${label}}
-
-\\section*{${args[1]}}
-
-${args[2]}
-`,
         };
+        // Next captured code with language `app` will be add to reference list
         return '';
     },
     // Usage: !AP[key|title|file_name]
@@ -289,7 +290,11 @@ ${context.code.cols !== 1 ? `\\end{multicols}` : ''}
         shouldNotBeEmptyArguments(node.opcode, args);
         shouldHaveNodeWithTypeAfter(node, [NodeType.Code], [NodeType.Space]);
 
-        context.references.key = args[0];
+        context.references.current = {
+            key: args[0],
+        };
+        // Next captured code with language `ref` will be add to reference list
+
         return '';
     },
     // Usage: !RK[key]
