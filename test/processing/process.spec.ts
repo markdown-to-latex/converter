@@ -1,6 +1,6 @@
 import { lexer } from '../../src';
-import { buildMarkdownAST } from '../../src/ast/build';
-import { applyProcessing } from '../../src/processing/process';
+import { buildMarkdownAST } from '../../src';
+import { applyProcessing } from '../../src';
 import {
     InlineLatexNode,
     MathLatexNode,
@@ -68,6 +68,20 @@ describe('with tokens', function () {
 });
 
 describe('with latex inline', function () {
+    test('latex inline code block', () => {
+        const lexerResult = lexer(
+            '```latex-inline \n' +
+                '\\title{Sample\nText}\\minussingle\n' +
+                '```',
+        );
+        const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
+        applyProcessing(result);
+
+        const inlineLatex = result.children[0] as InlineLatexNode;
+        expect(inlineLatex.type).toEqual(NodeType.CodeLatex);
+        expect(inlineLatex.text).toEqual('\\title{Sample\nText}\\minussingle');
+    });
+
     test('latex inline simple', () => {
         const lexerResult = lexer('$$ \\minussingle $$');
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });

@@ -1,5 +1,5 @@
 import * as nodes from '../ast/nodes';
-import { NodeType } from '../ast/nodes';
+import { CodeLatexNode, NodeType } from '../ast/nodes';
 
 const NodesByTypeMap = {
     [NodeType.Space]: {} as nodes.SpaceNode,
@@ -26,6 +26,7 @@ const NodesByTypeMap = {
     [NodeType.TableCell]: {} as nodes.TableCellNode,
     [NodeType.TableRow]: {} as nodes.TableRowNode,
     [NodeType.OpCode]: {} as nodes.OpCodeNode,
+    [NodeType.CodeLatex]: {} as nodes.CodeLatexNode,
     [NodeType.InlineLatex]: {} as nodes.InlineLatexNode,
     [NodeType.MathLatex]: {} as nodes.MathLatexNode,
     [NodeType.MathInlineLatex]: {} as nodes.MathInlineLatexNode,

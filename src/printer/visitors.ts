@@ -187,6 +187,7 @@ ${label}.\\,${node.text}`,
         return printNodeList(node.children, context, ' & ') + '\\\\ \\hline\n';
     },
     [NodeType.OpCode]: resolveOpCode,
+    [NodeType.CodeLatex]: node => node.text,
     [NodeType.InlineLatex]: node => node.text,
     [NodeType.MathLatex]: node => {
         return getLatexMath(node.text);

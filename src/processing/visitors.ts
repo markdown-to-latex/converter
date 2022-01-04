@@ -1,4 +1,5 @@
 import {
+    CodeLatexNode,
     getNodeLeftNeighbourLeaf,
     getNodeRightNeighbourLeaf,
     MathInlineLatexNode,
@@ -42,15 +43,19 @@ const processingVisitors: {
             captureOpCodes(node);
         },
         [NodeType.Code]: node => {
-            if (node.lang !== 'math') {
-                return;
+            if (node.lang === 'math') {
+                replaceNode(node, {
+                    type: NodeType.MathLatex,
+                    parent: node.parent,
+                    text: node.text,
+                } as MathLatexNode);
+            } else if (node.lang === 'latex-inline') {
+                replaceNode(node, {
+                    type: NodeType.CodeLatex,
+                    parent: node.parent,
+                    text: node.text,
+                } as CodeLatexNode);
             }
-
-            replaceNode(node, {
-                type: NodeType.MathLatex,
-                parent: node.parent,
-                text: node.text,
-            } as MathLatexNode);
         },
         [NodeType.CodeSpan]: node => {
             const [left, right] = [

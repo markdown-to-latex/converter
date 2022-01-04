@@ -224,6 +224,7 @@ export function getLatexMath(text: string): string {
 \\setlength{\\abovedisplayshortskip}{0pt}
 \\setlength{\\belowdisplayshortskip}{0pt}
 \\begin{align*}
+\\displaystyle
 ${text}
 \\end{align*}    
 `;

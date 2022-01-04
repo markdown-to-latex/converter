@@ -27,6 +27,7 @@ export const enum NodeType {
     TableRow = 'TableRow',
     OpCode = 'OpCode',
     InlineLatex = 'InlineLatex',
+    CodeLatex = 'CodeLatex',
     MathLatex = 'MathLatex',
     MathInlineLatex = 'MathInlineLatex',
 }
@@ -171,6 +172,10 @@ export interface OpCodeNode extends Node {
     type: NodeType.OpCode;
     opcode: string;
     arguments: string[];
+}
+
+export interface CodeLatexNode extends Node, NodeText {
+    type: NodeType.CodeLatex;
 }
 
 export interface InlineLatexNode extends Node, NodeText {
