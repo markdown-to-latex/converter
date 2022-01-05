@@ -18,6 +18,7 @@ import {
 import { CodeLanguageTemporary, resolveOpCode } from './opcodes';
 import {
     getLatexCode,
+    getLatexCodeSpan,
     getLatexHeader,
     getLatexImage,
     getLatexInlineMath,
@@ -146,6 +147,7 @@ ${node.text}
             printNodeList(node.header, context),
             printNodeList(node.rows, context),
             node.header[0].children.length,
+            isNodeBeforeBoxed(node),
         );
     },
     [NodeType.Blockquote]: (node, context) =>
@@ -204,7 +206,7 @@ ${node.text}
     [NodeType.Em]: throwProcessingError,
     [NodeType.Hr]: () => '\n\\pagebreak\n',
     [NodeType.CodeSpan]: (node, context) =>
-        context.config.useMonospaceFont ? `\\texttt{${node.text}}` : node.text,
+        getLatexCodeSpan(node.text, context.config),
     [NodeType.Br]: () => '\n\n',
     [NodeType.Del]: throwProcessingError,
 

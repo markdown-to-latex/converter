@@ -45,6 +45,8 @@ export function initContext(
         },
         config: {
             useMonospaceFont: config?.latex?.useMonospaceFont ?? true,
+            autoEscapeUnderscoresCode:
+                config?.latex?.autoEscapeUnderscoresCode ?? true,
         },
     };
 }

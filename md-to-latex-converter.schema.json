@@ -27,6 +27,11 @@
                     "type": "boolean",
                     "description": "Use \\texttt for code-spans",
                     "default": true
+                },
+                "autoEscapeUnderscoresCode": {
+                    "type": "boolean",
+                    "description": "Auto-escape underscores in an inlined code block",
+                    "default": true
                 }
             },
             "additionalProperties": false

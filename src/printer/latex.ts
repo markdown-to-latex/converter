@@ -1,3 +1,5 @@
+import { LatexInfo } from './types';
+
 export class LatexError extends Error {
     constructor(m: string) {
         super(m);
@@ -158,6 +160,7 @@ export function getLatexTable(
     header: string,
     content: string,
     colAmount: number,
+    removeSpace: boolean,
 ): string {
     let colsTemplate = `|`;
     for (let i = 0; i < colAmount; i++) {
@@ -169,8 +172,8 @@ export function getLatexTable(
 \\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
 \\setlength{\\belowcaptionskip}{0em}
 \\setlength{\\abovecaptionskip}{0em}
-\\setlength{\\LTpre}{1.5em}
-\\setlength{\\LTpost}{1.5em}
+\\setlength{\\LTpre}{2em}
+${removeSpace ? '\\setlength{\\LTpost}{0em}' : '\\setlength{\\LTpost}{2em}'}
 
 \\begin{longtable}[H]{${colsTemplate}}
     \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
@@ -232,4 +235,10 @@ ${text}
 
 export function getLatexInlineMath(text: string): string {
     return `\\displaystyle ${text}`;
+}
+
+export function getLatexCodeSpan(text: string, config: LatexInfo) {
+    text = config.autoEscapeUnderscoresCode ? text.replace(/_/g, '\\_') : text;
+
+    return config.useMonospaceFont ? `\\texttt{${text}}` : text;
 }

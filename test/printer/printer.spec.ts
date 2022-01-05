@@ -52,7 +52,7 @@ Text
     1. T
         - 600
         - 700
-    2. \`Code span\`
+    2. \`Code_span\`
 3. Z
 `)['filepath'];
         expect(result).not.toBeUndefined();
@@ -76,7 +76,7 @@ Text
 
 \\hspace{2.5cm}-\\,700
 
-\\hspace{1.25cm}2)\\,\\texttt{Code span}
+\\hspace{1.25cm}2)\\,\\texttt{Code\\_span}
 
 \\hspace{0cm}в)\\,Z
 `);
@@ -215,8 +215,8 @@ Demonstrated in table
 \\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
 \\setlength{\\belowcaptionskip}{0em}
 \\setlength{\\abovecaptionskip}{0em}
-\\setlength{\\LTpre}{1.5em}
-\\setlength{\\LTpost}{1.5em}
+\\setlength{\\LTpre}{2em}
+\\setlength{\\LTpost}{2em}
 
 \\begin{longtable}[H]{|c|c|c|c|}
     \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
@@ -548,8 +548,8 @@ Displayed in picture !PK[gray-square] (!PK[gray-square]) and table !TK[table].
 \\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
 \\setlength{\\belowcaptionskip}{0em}
 \\setlength{\\abovecaptionskip}{0em}
-\\setlength{\\LTpre}{1.5em}
-\\setlength{\\LTpost}{1.5em}
+\\setlength{\\LTpre}{2em}
+\\setlength{\\LTpost}{2em}
 
 \\begin{longtable}[H]{|c|c|}
     \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
@@ -570,6 +570,117 @@ Random number &  \\showcaserandomnumber \\\\ \\hline
 
 \\end{longtable}
 \\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
+`);
+    });
+});
+
+describe('latex picture after table (#52)', function () {
+    // See https://github.com/markdown-to-latex/converter/issues/52
+    test('Picture right after the table', () => {
+        const result = processingChain(
+            `!T[table|Table example]
+
+| Key           | Value                       |
+| ------------- | --------------------------- |
+| Static number | 50                          |
+
+!P[gray-square|5cm]
+![Gray square](./assets/img/example.png)`,
+        )['filepath'];
+
+        expect(result).not.toBeUndefined();
+        expect(result)
+            .toEqual(`\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
+\\setlength{\\belowcaptionskip}{0em}
+\\setlength{\\abovecaptionskip}{0em}
+\\setlength{\\LTpre}{2em}
+\\setlength{\\LTpost}{0em}
+
+\\begin{longtable}[H]{|c|c|}
+    \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
+    \\caption{Таблица 1 -- Table example}
+    \\\\\\hline
+    Key & Value\\\\ \\hline
+
+    \\endfirsthead
+    \\caption{Продолжение таблицы 1} \\\\\\hline
+    Key & Value\\\\ \\hline
+
+    \\endhead
+    \\endfoot
+    \\endlastfoot
+
+Static number & 50\\\\ \\hline
+
+\\end{longtable}
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
+
+\\setlength{\\intextsep}{3em}
+\\setlength{\\belowcaptionskip}{-4ex}
+\\setlength{\\abovecaptionskip}{.5em}
+
+\\begin{figure}[H]
+    \\centering
+    \\includegraphics[height=5cm]{./assets/img/example.png}
+    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\caption{Рисунок 1 -- Gray square}
+\\end{figure}
+`);
+    });
+
+    test('Table + text + picture', () => {
+        const result = processingChain(
+            `!T[table|Table example]
+
+| Key           | Value                       |
+| ------------- | --------------------------- |
+| Static number | 50                          |
+
+Sample text line
+
+!P[gray-square|5cm]
+![Gray square](./assets/img/example.png)`,
+        )['filepath'];
+
+        expect(result).not.toBeUndefined();
+        expect(result)
+            .toEqual(`\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
+\\setlength{\\belowcaptionskip}{0em}
+\\setlength{\\abovecaptionskip}{0em}
+\\setlength{\\LTpre}{2em}
+\\setlength{\\LTpost}{2em}
+
+\\begin{longtable}[H]{|c|c|}
+    \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
+    \\caption{Таблица 1 -- Table example}
+    \\\\\\hline
+    Key & Value\\\\ \\hline
+
+    \\endfirsthead
+    \\caption{Продолжение таблицы 1} \\\\\\hline
+    Key & Value\\\\ \\hline
+
+    \\endhead
+    \\endfoot
+    \\endlastfoot
+
+Static number & 50\\\\ \\hline
+
+\\end{longtable}
+\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
+
+Sample text line
+
+\\setlength{\\intextsep}{3em}
+\\setlength{\\belowcaptionskip}{-4ex}
+\\setlength{\\abovecaptionskip}{.5em}
+
+\\begin{figure}[H]
+    \\centering
+    \\includegraphics[height=5cm]{./assets/img/example.png}
+    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\caption{Рисунок 1 -- Gray square}
+\\end{figure}
 `);
     });
 });
