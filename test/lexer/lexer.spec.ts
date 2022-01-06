@@ -1,5 +1,5 @@
 import { lexer } from '../../src';
-import * as marked from 'marked';
+import { marked } from 'marked';
 
 describe('with no custom tokens (is not broken)', function () {
     test('simple text lexer', function () {

@@ -1,4 +1,4 @@
-import * as marked from 'marked';
+import { marked } from 'marked';
 import { Token, TokenByType } from './tokens';
 
 type Visitor<T extends Token> = (token: Readonly<T>) => Token | Token[];

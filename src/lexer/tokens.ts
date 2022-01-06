@@ -1,4 +1,4 @@
-import * as marked from 'marked';
+import { marked } from 'marked';
 
 export type Token = marked.Token;
 export type TokenListContainer = Token[] & {

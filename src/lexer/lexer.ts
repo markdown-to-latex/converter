@@ -1,5 +1,5 @@
 import { Token, TokenListContainer } from './tokens';
-import * as marked from 'marked';
+import { marked } from 'marked';
 import {
     processTokenChildren,
     processTokenIfVisitorExists,
