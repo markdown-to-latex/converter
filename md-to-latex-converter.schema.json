@@ -21,7 +21,7 @@
     "definitions": {
         "LatexInfo": {
             "type": "object",
-            "description": "Information about Latex",
+            "description": "Information about LaTeX",
             "properties": {
                 "useMonospaceFont": {
                     "type": "boolean",
@@ -32,6 +32,101 @@
                     "type": "boolean",
                     "description": "Auto-escape underscores in an inlined code block",
                     "default": true
+                },
+                "margin": {
+                    "$ref": "#/definitions/LatexMarginInfo"
+                }
+            },
+            "additionalProperties": false
+        },
+        "LatexMarginInfo": {
+            "type": "object",
+            "description": "Information about LaTeX margins",
+            "properties": {
+                "imageInnerTextSep": {
+                    "type": "string",
+                    "description": "Figure: Inner Text Separator",
+                    "default": "3em"
+                },
+                "imageBelowCaptionSkip": {
+                    "type": "string",
+                    "description": "Figure: Below Caption Skip",
+                    "default": "-4ex"
+                },
+                "imageRemovedBelowCaptionSkip": {
+                    "type": "string",
+                    "description": "Figure: Removed Below Caption Skip",
+                    "default": "-1.6em"
+                },
+                "imageAboveCaptionSkip": {
+                    "type": "string",
+                    "description": "Figure: Above Caption Skip",
+                    "default": "-0.5em"
+                },
+                "codeInnerTextSep": {
+                    "type": "string",
+                    "description": "Figure: Inner Text Separator",
+                    "default": "3em"
+                },
+                "codeBelowCaptionSkip": {
+                    "type": "string",
+                    "description": "Figure: Below Caption Skip",
+                    "default": "-4ex"
+                },
+                "codeRemovedBelowCaptionSkip": {
+                    "type": "string",
+                    "description": "Figure: Removed Below Caption Skip",
+                    "default": "-1.6em"
+                },
+                "codeAboveCaptionSkip": {
+                    "type": "string",
+                    "description": "Figure: Above Caption Skip",
+                    "default": "-0.5em"
+                },
+                "tableBelowCaptionSkip": {
+                    "type": "string",
+                    "description": "LongTable: Below Caption Skip",
+                    "default": "0em"
+                },
+                "tableAboveCaptionSkip": {
+                    "type": "string",
+                    "description": "LongTable: Above Caption Skip",
+                    "default": "0em"
+                },
+                "tablePre": {
+                    "type": "string",
+                    "description": "LongTable: Pre",
+                    "default": "2em"
+                },
+                "tablePost": {
+                    "type": "string",
+                    "description": "LongTable: Post",
+                    "default": "2em"
+                },
+                "tableRemovedPost": {
+                    "type": "string",
+                    "description": "LongTable: Removed Post Space",
+                    "default": "0em"
+                },
+                "mathAboveDisplaySkip": {
+                    "type": "string",
+                    "description": "Code: Above Display Skip",
+                    "default": "-0.9em"
+                },
+                "mathBelowDisplaySkip": {
+                    "type": "string",
+                    "description": "Code: Below Display Skip",
+                    "default": "0pt"
+                },
+                "mathAboveDisplayShortSkip": {
+                    "type": "string",
+                    "description": "Code: Above Display Short Skip",
+                    "default": "0pt"
+                },
+                "mathBelowDisplayShortSkip": {
+                    "type": "string",
+                    "description": "Code: Below Display Short Skip",
+                    "default": "0pt"
                 }
             },
             "additionalProperties": false

@@ -104,7 +104,7 @@ def main():
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
 \\addtolength{\\belowcaptionskip}{-1.6em}
-\\setlength{\\abovecaptionskip}{.5em}
+\\setlength{\\abovecaptionskip}{0.5em}
 
 \\begin{figure}[H]
     \\centering
@@ -131,7 +131,7 @@ def main():
 
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
-\\setlength{\\abovecaptionskip}{.5em}
+\\setlength{\\abovecaptionskip}{0.5em}
 
 \\begin{figure}[H]
     \\centering
@@ -251,7 +251,7 @@ t & r & e & z\\\\ \\hline
         expect(result).not.toBeUndefined();
         expect(result).toEqual(`\\subtitle{Header}
 
-\\setlength{\\abovedisplayskip}{-.9em}
+\\setlength{\\abovedisplayskip}{-0.9em}
 \\setlength{\\belowdisplayskip}{0pt}
 \\setlength{\\abovedisplayshortskip}{0pt}
 \\setlength{\\belowdisplayshortskip}{0pt}
@@ -536,7 +536,7 @@ Displayed in picture !PK[gray-square] (!PK[gray-square]) and table !TK[table].
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
 \\addtolength{\\belowcaptionskip}{-1.6em}
-\\setlength{\\abovecaptionskip}{.5em}
+\\setlength{\\abovecaptionskip}{0.5em}
 
 \\begin{figure}[H]
     \\centering
@@ -617,7 +617,7 @@ Static number & 50\\\\ \\hline
 
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
-\\setlength{\\abovecaptionskip}{.5em}
+\\setlength{\\abovecaptionskip}{0.5em}
 
 \\begin{figure}[H]
     \\centering
@@ -673,7 +673,7 @@ Sample text line
 
 \\setlength{\\intextsep}{3em}
 \\setlength{\\belowcaptionskip}{-4ex}
-\\setlength{\\abovecaptionskip}{.5em}
+\\setlength{\\abovecaptionskip}{0.5em}
 
 \\begin{figure}[H]
     \\centering

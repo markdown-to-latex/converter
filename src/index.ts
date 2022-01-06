@@ -1,7 +1,7 @@
 import { buildMarkdownAST } from './ast/build';
 import { lexer } from './lexer/lexer';
-import { applyProcessing } from './processing/process';
-import { printMarkdownAST } from './printer/printer';
+import { applyProcessing } from './processing';
+import { printMarkdownAST } from './printer';
 import * as fs from 'fs';
 import * as path from 'path';
 import { Context, WriteFileFunction } from './printer/context';
@@ -47,6 +47,42 @@ export function initContext(
             useMonospaceFont: config?.latex?.useMonospaceFont ?? true,
             autoEscapeUnderscoresCode:
                 config?.latex?.autoEscapeUnderscoresCode ?? true,
+            margin: {
+                imageInnerTextSep:
+                    config?.latex?.margin?.imageInnerTextSep ?? '3em',
+                imageBelowCaptionSkip:
+                    config?.latex?.margin?.imageBelowCaptionSkip ?? '-4ex',
+                imageRemovedBelowCaptionSkip:
+                    config?.latex?.margin?.imageRemovedBelowCaptionSkip ??
+                    '-1.6em',
+                imageAboveCaptionSkip:
+                    config?.latex?.margin?.imageAboveCaptionSkip ?? '0.5em',
+                codeInnerTextSep:
+                    config?.latex?.margin?.codeInnerTextSep ?? '3em',
+                codeBelowCaptionSkip:
+                    config?.latex?.margin?.codeBelowCaptionSkip ?? '-4ex',
+                codeRemovedBelowCaptionSkip:
+                    config?.latex?.margin?.codeRemovedBelowCaptionSkip ??
+                    '-1.6em',
+                codeAboveCaptionSkip:
+                    config?.latex?.margin?.codeAboveCaptionSkip ?? '-0.5em',
+                tableBelowCaptionSkip:
+                    config?.latex?.margin?.tableBelowCaptionSkip ?? '0em',
+                tableAboveCaptionSkip:
+                    config?.latex?.margin?.tableAboveCaptionSkip ?? '0em',
+                tablePre: config?.latex?.margin?.tablePre ?? '2em',
+                tablePost: config?.latex?.margin?.tablePost ?? '2em',
+                tableRemovedPost:
+                    config?.latex?.margin?.tableRemovedPost ?? '0em',
+                mathAboveDisplaySkip:
+                    config?.latex?.margin?.mathAboveDisplaySkip ?? '-0.9em',
+                mathBelowDisplaySkip:
+                    config?.latex?.margin?.mathBelowDisplaySkip ?? '0pt',
+                mathAboveDisplayShortSkip:
+                    config?.latex?.margin?.mathAboveDisplayShortSkip ?? '0pt',
+                mathBelowDisplayShortSkip:
+                    config?.latex?.margin?.mathBelowDisplayShortSkip ?? '0pt',
+            },
         },
     };
 }

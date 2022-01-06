@@ -63,7 +63,7 @@ describe('convertMarkdownFiles', function () {
 
         expect(content).toContain('\\section{Additional file}');
         expect(content).toContain('Formula:');
-        expect(content).toContain('\\setlength{\\abovedisplayskip}{-.9em}');
+        expect(content).toContain('\\setlength{\\abovedisplayskip}{-0.9em}');
         expect(content).toContain('\\setlength{\\belowdisplayskip}{0pt}');
         expect(content).toContain('\\setlength{\\abovedisplayshortskip}{0pt}');
         expect(content).toContain('\\setlength{\\belowdisplayshortskip}{0pt}');

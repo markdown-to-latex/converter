@@ -13,21 +13,19 @@ import {
     createPictureLabel,
     createTableLabel,
     getOrCreatePictureLabel,
-    getOrCreateTableLabel,
 } from './context';
 import { CodeLanguageTemporary, resolveOpCode } from './opcodes';
 import {
     getLatexCode,
     getLatexCodeSpan,
-    getLatexHeader,
     getLatexImage,
     getLatexInlineMath,
     getLatexListItem,
     getLatexMath,
     getLatexTable,
-    prepareTextForLatex,
-    prettifyLaTeX,
-} from './latex';
+} from './latex/transpile';
+
+import { getLatexHeader, prepareTextForLatex, prettifyLaTeX } from './latex';
 
 type Visitor<T extends Node> = (node: T, context: Context) => string;
 
@@ -127,11 +125,14 @@ ${node.text}
         }
 
         return getLatexCode(
-            getOrCreatePictureLabel(context, context.code.key),
-            context.code.label,
-            node.lang ?? '',
-            node.text,
-            isNodeBeforeBoxed(node),
+            {
+                codeLabel: getOrCreatePictureLabel(context, context.code.key),
+                codeTitle: context.code.label,
+                lang: node.lang ?? '',
+                text: node.text,
+                removeSpace: isNodeBeforeBoxed(node),
+            },
+            context.config,
         );
     },
     [NodeType.Heading]: (node, context) => {
@@ -142,12 +143,15 @@ ${node.text}
     },
     [NodeType.Table]: (node, context) => {
         return getLatexTable(
-            createTableLabel(context, context.table.key),
-            context.table.label,
-            printNodeList(node.header, context),
-            printNodeList(node.rows, context),
-            node.header[0].children.length,
-            isNodeBeforeBoxed(node),
+            {
+                tableLabel: createTableLabel(context, context.table.key),
+                tableTitle: context.table.label,
+                header: printNodeList(node.header, context),
+                content: printNodeList(node.rows, context),
+                colAmount: node.header[0].children.length,
+                removeSpace: isNodeBeforeBoxed(node),
+            },
+            context.config,
         );
     },
     [NodeType.Blockquote]: (node, context) =>
@@ -172,10 +176,13 @@ ${node.text}
         const index = findNodeData(node).index;
 
         return getLatexListItem(
-            printNodeList(node.children, context),
-            depth,
-            index,
-            parentList.ordered,
+            {
+                text: printNodeList(node.children, context),
+                depth: depth,
+                index: index,
+                isOrdered: parentList.ordered,
+            },
+            context.config,
         );
     },
     [NodeType.Paragraph]: (node, context) =>
@@ -194,11 +201,14 @@ ${node.text}
     [NodeType.Link]: throwProcessingError,
     [NodeType.Image]: (node, context) => {
         return getLatexImage(
-            createPictureLabel(context, context.picture.key),
-            node.text,
-            context.picture.height,
-            node.href,
-            isNodeBeforeBoxed(node),
+            {
+                pictureLabel: createPictureLabel(context, context.picture.key),
+                pictureTitle: node.text,
+                height: context.picture.height,
+                href: node.href,
+                removeSpace: isNodeBeforeBoxed(node),
+            },
+            context.config,
         );
     },
     [NodeType.Strong]: (node, context) =>
@@ -225,10 +235,13 @@ ${node.text}
     [NodeType.OpCode]: resolveOpCode,
     [NodeType.CodeLatex]: node => node.text,
     [NodeType.InlineLatex]: node => node.text,
-    [NodeType.MathLatex]: node => {
-        return getLatexMath(node.text);
+    [NodeType.MathLatex]: (node, context) => {
+        return getLatexMath(node.text, context.config);
     },
-    [NodeType.MathInlineLatex]: node => {
-        return getLatexInlineMath(prepareTextForLatex(node.text));
+    [NodeType.MathInlineLatex]: (node, context) => {
+        return getLatexInlineMath(
+            prepareTextForLatex(node.text),
+            context.config,
+        );
     },
 };
