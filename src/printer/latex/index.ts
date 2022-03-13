@@ -35,6 +35,7 @@ export function prepareTextForLatex(text: string): string {
     text = resolveTextDeReplacements(text);
     text = text.replace(/%/g, '\\%');
     text = text.replace(/&/g, '\\&');
+    text = text.replace(/#/g, '\\#');
     return text;
 }
 
