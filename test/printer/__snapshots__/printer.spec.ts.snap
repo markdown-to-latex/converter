@@ -238,16 +238,6 @@ Sample text line
 "
 `;
 
-exports[`latex picture after table (#52) bold and italic 1`] = `
-"\\\\textbf{Bold}: \\\\textit{testing}
-"
-`;
-
-exports[`latex picture after table (#52) url variants 1`] = `
-"\\\\underline{https://jestjs.io/docs/expect?test=asdas\\\\&awea#fgsgdg}
-"
-`;
-
 exports[`simple md to latex docs printer Code + Code 1`] = `
 "\\\\subtitle{Header}
 
