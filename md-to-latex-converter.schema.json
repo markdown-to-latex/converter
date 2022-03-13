@@ -37,7 +37,7 @@
                     "type": "string",
                     "description": "Auto-escape underscores in an inlined code block",
                     "enum": ["code", "default", "bold", "underline", "italic"],
-                    "default": true
+                    "default": "default"
                 },
                 "margin": {
                     "$ref": "#/definitions/LatexMarginInfo"
