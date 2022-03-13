@@ -27,9 +27,14 @@ function resolveTextDeReplacements(text: string): string {
     return text;
 }
 
+export function escapeUnderscoredText(text: string) {
+    return text.replace(/_/g, '\\_');
+}
+
 export function prepareTextForLatex(text: string): string {
     text = resolveTextDeReplacements(text);
     text = text.replace(/%/g, '\\%');
+    text = text.replace(/&/g, '\\&');
     return text;
 }
 

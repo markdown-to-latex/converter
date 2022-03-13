@@ -1,5 +1,5 @@
 import { LatexInfo } from '../types';
-import { getLatexOrderedListPoint } from './index';
+import { escapeUnderscoredText, getLatexOrderedListPoint } from './index';
 
 export interface LatexListItemInfo {
     text: string;
@@ -147,7 +147,32 @@ export function getLatexInlineMath(text: string, _: LatexInfo): string {
 }
 
 export function getLatexCodeSpan(text: string, config: LatexInfo) {
-    text = config.autoEscapeUnderscoresCode ? text.replace(/_/g, '\\_') : text;
+    text = config.autoEscapeUnderscoresCode
+        ? escapeUnderscoredText(text)
+        : text;
 
     return config.useMonospaceFont ? `\\texttt{${text}}` : text;
+}
+
+type LinkAsType = NonNullable<LatexInfo['useLinkAs']>;
+const linkTextWrapper: {
+    [Key in LinkAsType]: (text: string, config: LatexInfo) => string;
+} = {
+    bold: text => `\\textbf{${text}}`,
+    italic: text => `\\textit{${text}}`,
+    code: text => `\\texttt{${text}}`,
+    underline: text => `\\underline{${text}}`,
+    default: text => text,
+};
+
+export function getLatexLinkText(
+    text: string,
+    title: string,
+    config: LatexInfo,
+) {
+    text = config.autoEscapeUnderscoresCode
+        ? escapeUnderscoredText(text)
+        : text;
+
+    return linkTextWrapper[config.useLinkAs ?? 'default'](text, config);
 }

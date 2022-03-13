@@ -1,0 +1,440 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Applications with list 1`] = `
+"\\\\subtitle{Header}
+
+Code from application А describes image from application Б.
+
+See application В.
+
+\\\\subtitle{Applications}
+
+\\\\pagebreak
+\\\\subtitle{Приложение А}
+
+\\\\section*{Листинг кода из файла template-full2.py}
+
+\\\\vspace{1em}
+\\\\fontsize{\\\\applicationcodefontsize}{\\\\applicationcodefontsize}\\\\selectfont
+
+\\\\inputminted[baselinestretch=\\\\applicationcodelineheight]{python}{./assets/code/template-full2.py}
+
+\\\\fontsize{\\\\defaultfontsize}{\\\\defaultfontsize}\\\\selectfont
+
+\\\\pagebreak
+\\\\begin{landscape}
+    \\\\thispagestyle{empty}
+    \\\\subtitle{Приложение Б}
+
+    \\\\section*{Large scheme}
+    
+    \\\\vspace{1em}
+    \\\\begin{center}
+    \\\\includegraphics[height=13.8cm]{./assets/img/circuit.png}
+    \\\\end{center}
+
+    \\\\vfill
+    \\\\raisebox{.6ex}{\\\\makebox[\\\\linewidth]{\\\\thepage}}
+\\\\end{landscape}
+
+\\\\pagebreak
+\\\\subtitle{Приложение В}
+
+\\\\section*{Листинг кода из файла template-full.py}
+
+\\\\vspace{1em}
+\\\\fontsize{\\\\applicationcodefontsize}{\\\\applicationcodefontsize}\\\\selectfont
+
+\\\\inputminted[baselinestretch=\\\\applicationcodelineheight]{python}{./assets/code/template-full.py}
+
+\\\\fontsize{\\\\defaultfontsize}{\\\\defaultfontsize}\\\\selectfont
+"
+`;
+
+exports[`Applications with multiple columns 1`] = `
+"\\\\subtitle{Header}
+
+See application А.
+
+\\\\subtitle{Applications}
+
+\\\\pagebreak
+\\\\subtitle{Приложение А}
+
+\\\\section*{Листинг кода из файла template-full.py}
+
+\\\\vspace{1em}
+\\\\fontsize{\\\\applicationcodefontsize}{\\\\applicationcodefontsize}\\\\selectfont
+\\\\begin{multicols}{2}
+\\\\inputminted[baselinestretch=\\\\applicationcodelineheight]{python}{./assets/code/template-full.py}
+\\\\end{multicols}
+\\\\fontsize{\\\\defaultfontsize}{\\\\defaultfontsize}\\\\selectfont
+"
+`;
+
+exports[`References Inline latex math dereplacement 1`] = `
+"$\\\\displaystyle a > b < c$
+"
+`;
+
+exports[`References Table and picture key 1`] = `
+"Displayed in picture 1 (1) and table 1.
+
+\\\\setlength{\\\\intextsep}{3em}
+\\\\setlength{\\\\belowcaptionskip}{-4ex}
+\\\\addtolength{\\\\belowcaptionskip}{-1.6em}
+\\\\setlength{\\\\abovecaptionskip}{0.5em}
+
+\\\\begin{figure}[H]
+    \\\\centering
+    \\\\includegraphics[height=5cm]{./assets/img/example.png}
+    \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\\\caption{Рисунок 1 -- Gray square}
+\\\\end{figure}
+
+\\\\fontsize{\\\\tablefontsize}{\\\\tablefontsize}\\\\selectfont
+\\\\setlength{\\\\belowcaptionskip}{0em}
+\\\\setlength{\\\\abovecaptionskip}{0em}
+\\\\setlength{\\\\LTpre}{2em}
+\\\\setlength{\\\\LTpost}{2em}
+
+\\\\begin{longtable}[H]{|c|c|}
+    \\\\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
+    \\\\caption{Таблица 1 -- Table}
+    \\\\\\\\\\\\hline
+    Key & Value\\\\\\\\ \\\\hline
+
+    \\\\endfirsthead
+    \\\\caption{Продолжение таблицы 1} \\\\\\\\\\\\hline
+    Key & Value\\\\\\\\ \\\\hline
+
+    \\\\endhead
+    \\\\endfoot
+    \\\\endlastfoot
+
+Static number & 50\\\\\\\\ \\\\hline
+Random number &  \\\\showcaserandomnumber \\\\\\\\ \\\\hline
+
+\\\\end{longtable}
+\\\\fontsize{\\\\defaultfontsize}{\\\\defaultfontsize}\\\\selectfont\\\\setstretch{1.5}
+"
+`;
+
+exports[`References Tag <br> should put additional break 1`] = `
+"The first line
+
+The second line
+"
+`;
+
+exports[`References Tag <hr> should break the page 1`] = `
+"The first page
+
+\\\\pagebreak
+The second page
+"
+`;
+
+exports[`References Text with escapes ("<" sound be corrent also) 1`] = `
+"Text with \\\\<assdasd.
+"
+`;
+
+exports[`References Text with percents 1`] = `
+"Text with 10\\\\% number.
+"
+`;
+
+exports[`References with list 1`] = `
+"\\\\subtitle{Header}
+
+Code from reference 1 describes image from reference 2.
+
+\\\\subtitle{References}
+
+1.\\\\,H.\\\\,Y.\\\\~Ignat. \\"Reference\\\\~2\\" // Some Journal, 1867
+
+2.\\\\,H.\\\\,Y.\\\\~Ignat. \\"Reference\\\\~1\\" // Some Journal, 1867
+"
+`;
+
+exports[`latex picture after table (#52) Picture right after the table 1`] = `
+"\\\\fontsize{\\\\tablefontsize}{\\\\tablefontsize}\\\\selectfont
+\\\\setlength{\\\\belowcaptionskip}{0em}
+\\\\setlength{\\\\abovecaptionskip}{0em}
+\\\\setlength{\\\\LTpre}{2em}
+\\\\setlength{\\\\LTpost}{0em}
+
+\\\\begin{longtable}[H]{|c|c|}
+    \\\\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
+    \\\\caption{Таблица 1 -- Table example}
+    \\\\\\\\\\\\hline
+    Key & Value\\\\\\\\ \\\\hline
+
+    \\\\endfirsthead
+    \\\\caption{Продолжение таблицы 1} \\\\\\\\\\\\hline
+    Key & Value\\\\\\\\ \\\\hline
+
+    \\\\endhead
+    \\\\endfoot
+    \\\\endlastfoot
+
+Static number & 50\\\\\\\\ \\\\hline
+
+\\\\end{longtable}
+\\\\fontsize{\\\\defaultfontsize}{\\\\defaultfontsize}\\\\selectfont\\\\setstretch{1.5}
+
+\\\\setlength{\\\\intextsep}{3em}
+\\\\setlength{\\\\belowcaptionskip}{-4ex}
+\\\\setlength{\\\\abovecaptionskip}{0.5em}
+
+\\\\begin{figure}[H]
+    \\\\centering
+    \\\\includegraphics[height=5cm]{./assets/img/example.png}
+    \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\\\caption{Рисунок 1 -- Gray square}
+\\\\end{figure}
+"
+`;
+
+exports[`latex picture after table (#52) Table + text + picture 1`] = `
+"\\\\fontsize{\\\\tablefontsize}{\\\\tablefontsize}\\\\selectfont
+\\\\setlength{\\\\belowcaptionskip}{0em}
+\\\\setlength{\\\\abovecaptionskip}{0em}
+\\\\setlength{\\\\LTpre}{2em}
+\\\\setlength{\\\\LTpost}{2em}
+
+\\\\begin{longtable}[H]{|c|c|}
+    \\\\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
+    \\\\caption{Таблица 1 -- Table example}
+    \\\\\\\\\\\\hline
+    Key & Value\\\\\\\\ \\\\hline
+
+    \\\\endfirsthead
+    \\\\caption{Продолжение таблицы 1} \\\\\\\\\\\\hline
+    Key & Value\\\\\\\\ \\\\hline
+
+    \\\\endhead
+    \\\\endfoot
+    \\\\endlastfoot
+
+Static number & 50\\\\\\\\ \\\\hline
+
+\\\\end{longtable}
+\\\\fontsize{\\\\defaultfontsize}{\\\\defaultfontsize}\\\\selectfont\\\\setstretch{1.5}
+
+Sample text line
+
+\\\\setlength{\\\\intextsep}{3em}
+\\\\setlength{\\\\belowcaptionskip}{-4ex}
+\\\\setlength{\\\\abovecaptionskip}{0.5em}
+
+\\\\begin{figure}[H]
+    \\\\centering
+    \\\\includegraphics[height=5cm]{./assets/img/example.png}
+    \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\\\caption{Рисунок 1 -- Gray square}
+\\\\end{figure}
+"
+`;
+
+exports[`latex picture after table (#52) bold and italic 1`] = `
+"\\\\textbf{Bold}: \\\\textit{testing}
+"
+`;
+
+exports[`latex picture after table (#52) url variants 1`] = `
+"\\\\underline{https://jestjs.io/docs/expect?test=asdas\\\\&awea#fgsgdg}
+"
+`;
+
+exports[`simple md to latex docs printer Code + Code 1`] = `
+"\\\\subtitle{Header}
+
+Code in 1 и 2.
+
+\\\\setlength{\\\\intextsep}{3em}
+\\\\setlength{\\\\belowcaptionskip}{-4ex}
+\\\\addtolength{\\\\belowcaptionskip}{-1.6em}
+\\\\setlength{\\\\abovecaptionskip}{-0.5em}
+
+\\\\begin{figure}[H]
+    \\\\fontsize{\\\\codefontsize}{\\\\codefontsize}\\\\selectfont
+    \\\\begin{minted}
+    [baselinestretch=1.2]{python}
+def main():
+    print \\"Hello World\\"
+    \\\\end{minted}
+    \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
+    \\\\caption{Рисунок 1 -- Python Sample Code}
+\\\\end{figure}
+
+\\\\setlength{\\\\intextsep}{3em}
+\\\\setlength{\\\\belowcaptionskip}{-4ex}
+\\\\setlength{\\\\abovecaptionskip}{-0.5em}
+
+\\\\begin{figure}[H]
+    \\\\fontsize{\\\\codefontsize}{\\\\codefontsize}\\\\selectfont
+    \\\\begin{minted}
+    [baselinestretch=1.2]{python}
+def hello_world():
+    print \\"Hello World\\"
+    \\\\end{minted}
+    \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
+    \\\\caption{Рисунок 2 -- Python Sample Code 2}
+\\\\end{figure}
+"
+`;
+
+exports[`simple md to latex docs printer Header + Formula 1`] = `
+"\\\\subtitle{Header}
+
+\\\\setlength{\\\\abovedisplayskip}{-0.9em}
+\\\\setlength{\\\\belowdisplayskip}{0pt}
+\\\\setlength{\\\\abovedisplayshortskip}{0pt}
+\\\\setlength{\\\\belowdisplayshortskip}{0pt}
+\\\\begin{align*}
+\\\\displaystyle
+    a = b + c
+\\\\end{align*}    
+"
+`;
+
+exports[`simple md to latex docs printer Header + Image + Code + Image 1`] = `
+"\\\\subtitle{Header}
+
+\\\\setlength{\\\\intextsep}{3em}
+\\\\setlength{\\\\belowcaptionskip}{-4ex}
+\\\\addtolength{\\\\belowcaptionskip}{-1.6em}
+\\\\setlength{\\\\abovecaptionskip}{0.5em}
+
+\\\\begin{figure}[H]
+    \\\\centering
+    \\\\includegraphics[height=5cm]{./assets/img/dolphin.png}
+    \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\\\caption{Рисунок 1 -- Image name}
+\\\\end{figure}
+
+\\\\setlength{\\\\intextsep}{3em}
+\\\\setlength{\\\\belowcaptionskip}{-4ex}
+\\\\addtolength{\\\\belowcaptionskip}{-1.6em}
+\\\\setlength{\\\\abovecaptionskip}{-0.5em}
+
+\\\\begin{figure}[H]
+    \\\\fontsize{\\\\codefontsize}{\\\\codefontsize}\\\\selectfont
+    \\\\begin{minted}
+    [baselinestretch=1.2]{python}
+def main():
+    print \\"Hello World\\"
+    \\\\end{minted}
+    \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
+    \\\\caption{Рисунок 2 -- Python Sample Code}
+\\\\end{figure}
+
+\\\\setlength{\\\\intextsep}{3em}
+\\\\setlength{\\\\belowcaptionskip}{-4ex}
+\\\\setlength{\\\\abovecaptionskip}{0.5em}
+
+\\\\begin{figure}[H]
+    \\\\centering
+    \\\\includegraphics[height=7cm]{./assets/img/dolphin.png}
+    \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
+    \\\\caption{Рисунок 3 -- Image name 2}
+\\\\end{figure}
+"
+`;
+
+exports[`simple md to latex docs printer Paragraph 1`] = `
+"\\\\subtitle{Header}
+
+Text
+"
+`;
+
+exports[`simple md to latex docs printer Subheader + List + Code Span 1`] = `
+"\\\\subtitle{Header}
+
+\\\\hspace{0cm}-\\\\,A
+
+\\\\hspace{0cm}-\\\\,B
+
+\\\\hspace{0cm}-\\\\,C
+
+\\\\section{Subheader}
+
+\\\\hspace{0cm}а)\\\\,X
+
+\\\\hspace{0cm}б)\\\\,Y
+
+\\\\hspace{1.25cm}1)\\\\,T
+
+\\\\hspace{2.5cm}-\\\\,600
+
+\\\\hspace{2.5cm}-\\\\,700
+
+\\\\hspace{1.25cm}2)\\\\,\\\\texttt{Code\\\\_span}
+
+\\\\hspace{0cm}в)\\\\,Z
+"
+`;
+
+exports[`simple md to latex docs printer Table 1`] = `
+"Demonstrated in table  
+
+\\\\fontsize{\\\\tablefontsize}{\\\\tablefontsize}\\\\selectfont
+\\\\setlength{\\\\belowcaptionskip}{0em}
+\\\\setlength{\\\\abovecaptionskip}{0em}
+\\\\setlength{\\\\LTpre}{2em}
+\\\\setlength{\\\\LTpost}{2em}
+
+\\\\begin{longtable}[H]{|c|c|c|c|}
+    \\\\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
+    \\\\caption{Таблица 1 -- Table with content}
+    \\\\\\\\\\\\hline
+    a & b & c & d\\\\\\\\ \\\\hline
+
+    \\\\endfirsthead
+    \\\\caption{Продолжение таблицы 1} \\\\\\\\\\\\hline
+    a & b & c & d\\\\\\\\ \\\\hline
+
+    \\\\endhead
+    \\\\endfoot
+    \\\\endlastfoot
+
+1 & 2 & 3 & 4\\\\\\\\ \\\\hline
+t & r & e & z\\\\\\\\ \\\\hline
+
+\\\\end{longtable}
+\\\\fontsize{\\\\defaultfontsize}{\\\\defaultfontsize}\\\\selectfont\\\\setstretch{1.5}
+"
+`;
+
+exports[`simple md to latex docs printer bold and italic 1`] = `
+"\\\\textbf{Bold}: \\\\textit{testing}
+"
+`;
+
+exports[`url variants Bold url 1`] = `
+"\\\\textbf{https://example.com/index\\\\_page.html?asd=asdasd\\\\&gege=gegege#header}
+"
+`;
+
+exports[`url variants Default url 1`] = `
+"\\\\underline{https://example.com/index\\\\_page.html?asd=asdasd\\\\&gege=gegege#header}
+"
+`;
+
+exports[`url variants Italic url 1`] = `
+"\\\\textit{https://example.com/index\\\\_page.html?asd=asdasd\\\\&gege=gegege#header}
+"
+`;
+
+exports[`url variants No escape & code url 1`] = `
+"\\\\texttt{https://example.com/index_page.html?asd=asdasd\\\\&asdasd=gege#header}
+"
+`;
+
+exports[`url variants Underlined url 1`] = `
+"\\\\underline{https://example.com/index\\\\_page.html?asd=asdasd\\\\&gege=gegege#header}
+"
+`;

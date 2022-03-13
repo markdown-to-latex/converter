@@ -47,6 +47,7 @@ export function initContext(
             useMonospaceFont: config?.latex?.useMonospaceFont ?? true,
             autoEscapeUnderscoresCode:
                 config?.latex?.autoEscapeUnderscoresCode ?? true,
+            useLinkAs: config?.latex?.useLinkAs ?? 'underline',
             margin: {
                 imageInnerTextSep:
                     config?.latex?.margin?.imageInnerTextSep ?? '3em',

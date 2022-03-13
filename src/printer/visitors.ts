@@ -20,6 +20,7 @@ import {
     getLatexCodeSpan,
     getLatexImage,
     getLatexInlineMath,
+    getLatexLinkText,
     getLatexListItem,
     getLatexMath,
     getLatexTable,
@@ -198,7 +199,12 @@ ${node.text}
         return printNodeList(children, context);
     },
     [NodeType.Html]: throwProcessingError,
-    [NodeType.Link]: throwProcessingError,
+    [NodeType.Link]: (node, context) =>
+        getLatexLinkText(
+            printNodeList(node.children, context),
+            node.title,
+            context.config,
+        ),
     [NodeType.Image]: (node, context) => {
         return getLatexImage(
             {
@@ -213,7 +219,8 @@ ${node.text}
     },
     [NodeType.Strong]: (node, context) =>
         `\\textbf{${printNodeList(node.children, context)}}`,
-    [NodeType.Em]: throwProcessingError,
+    [NodeType.Em]: (node, context) =>
+        `\\textit{${printNodeList(node.children, context)}}`,
     [NodeType.Hr]: () => '\n\\pagebreak\n',
     [NodeType.CodeSpan]: (node, context) =>
         getLatexCodeSpan(node.text, context.config),

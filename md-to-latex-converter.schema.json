@@ -33,6 +33,12 @@
                     "description": "Auto-escape underscores in an inlined code block",
                     "default": true
                 },
+                "useLinkAs": {
+                    "type": "string",
+                    "description": "Auto-escape underscores in an inlined code block",
+                    "enum": ["code", "default", "bold", "underline", "italic"],
+                    "default": true
+                },
                 "margin": {
                     "$ref": "#/definitions/LatexMarginInfo"
                 }

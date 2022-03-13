@@ -7,8 +7,12 @@ import {
 } from '../../src';
 import { OpCodeError } from '../../src/printer/opcodes';
 import { ContextError } from '../../src/printer/context';
+import { MarkDownToLaTeXConverter } from '../../src/printer/types';
 
-function processingChain(text: string): Record<string, string> {
+function processingChain(
+    text: string,
+    config?: Partial<MarkDownToLaTeXConverter>,
+): Record<string, string> {
     const lexerResult = lexer(text);
     const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
     applyProcessing(result);
@@ -16,7 +20,7 @@ function processingChain(text: string): Record<string, string> {
     const files: Record<string, string> = {};
     const context = initContext((content, fileName) => {
         files[fileName] = content;
-    });
+    }, config);
 
     printMarkdownAST(result, context);
 
@@ -31,10 +35,7 @@ describe('simple md to latex docs printer', () => {
 Text
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`\\subtitle{Header}
-
-Text
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Subheader + List + Code Span', () => {
@@ -56,30 +57,7 @@ Text
 3. Z
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`\\subtitle{Header}
-
-\\hspace{0cm}-\\,A
-
-\\hspace{0cm}-\\,B
-
-\\hspace{0cm}-\\,C
-
-\\section{Subheader}
-
-\\hspace{0cm}а)\\,X
-
-\\hspace{0cm}б)\\,Y
-
-\\hspace{1.25cm}1)\\,T
-
-\\hspace{2.5cm}-\\,600
-
-\\hspace{2.5cm}-\\,700
-
-\\hspace{1.25cm}2)\\,\\texttt{Code\\_span}
-
-\\hspace{0cm}в)\\,Z
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Header + Image + Code + Image', () => {
@@ -99,47 +77,7 @@ def main():
 ![Image name 2](./assets/img/dolphin.png)
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`\\subtitle{Header}
-
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-\\addtolength{\\belowcaptionskip}{-1.6em}
-\\setlength{\\abovecaptionskip}{0.5em}
-
-\\begin{figure}[H]
-    \\centering
-    \\includegraphics[height=5cm]{./assets/img/dolphin.png}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
-    \\caption{Рисунок 1 -- Image name}
-\\end{figure}
-
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-\\addtolength{\\belowcaptionskip}{-1.6em}
-\\setlength{\\abovecaptionskip}{-0.5em}
-
-\\begin{figure}[H]
-    \\fontsize{\\codefontsize}{\\codefontsize}\\selectfont
-    \\begin{minted}
-    [baselinestretch=1.2]{python}
-def main():
-    print "Hello World"
-    \\end{minted}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
-    \\caption{Рисунок 2 -- Python Sample Code}
-\\end{figure}
-
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-\\setlength{\\abovecaptionskip}{0.5em}
-
-\\begin{figure}[H]
-    \\centering
-    \\includegraphics[height=7cm]{./assets/img/dolphin.png}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
-    \\caption{Рисунок 3 -- Image name 2}
-\\end{figure}
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Code + Code', () => {
@@ -161,41 +99,7 @@ def hello_world():
 \`\`\`
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`\\subtitle{Header}
-
-Code in 1 и 2.
-
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-\\addtolength{\\belowcaptionskip}{-1.6em}
-\\setlength{\\abovecaptionskip}{-0.5em}
-
-\\begin{figure}[H]
-    \\fontsize{\\codefontsize}{\\codefontsize}\\selectfont
-    \\begin{minted}
-    [baselinestretch=1.2]{python}
-def main():
-    print "Hello World"
-    \\end{minted}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
-    \\caption{Рисунок 1 -- Python Sample Code}
-\\end{figure}
-
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-\\setlength{\\abovecaptionskip}{-0.5em}
-
-\\begin{figure}[H]
-    \\fontsize{\\codefontsize}{\\codefontsize}\\selectfont
-    \\begin{minted}
-    [baselinestretch=1.2]{python}
-def hello_world():
-    print "Hello World"
-    \\end{minted}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
-    \\caption{Рисунок 2 -- Python Sample Code 2}
-\\end{figure}
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Table', () => {
@@ -210,34 +114,7 @@ Demonstrated in table
 |t|r|e|z|
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`Demonstrated in table  
-
-\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
-\\setlength{\\belowcaptionskip}{0em}
-\\setlength{\\abovecaptionskip}{0em}
-\\setlength{\\LTpre}{2em}
-\\setlength{\\LTpost}{2em}
-
-\\begin{longtable}[H]{|c|c|c|c|}
-    \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
-    \\caption{Таблица 1 -- Table with content}
-    \\\\\\hline
-    a & b & c & d\\\\ \\hline
-
-    \\endfirsthead
-    \\caption{Продолжение таблицы 1} \\\\\\hline
-    a & b & c & d\\\\ \\hline
-
-    \\endhead
-    \\endfoot
-    \\endlastfoot
-
-1 & 2 & 3 & 4\\\\ \\hline
-t & r & e & z\\\\ \\hline
-
-\\end{longtable}
-\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Header + Formula', () => {
@@ -249,17 +126,14 @@ t & r & e & z\\\\ \\hline
 \`\`\`
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`\\subtitle{Header}
+        expect(result).toMatchSnapshot();
+    });
 
-\\setlength{\\abovedisplayskip}{-0.9em}
-\\setlength{\\belowdisplayskip}{0pt}
-\\setlength{\\abovedisplayshortskip}{0pt}
-\\setlength{\\belowdisplayshortskip}{0pt}
-\\begin{align*}
-\\displaystyle
-    a = b + c
-\\end{align*}    
-`);
+    test('bold and italic', () => {
+        const result = processingChain(`**Bold**: *testing*`)['filepath'];
+
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
     });
 });
 
@@ -281,54 +155,7 @@ See application !AK[code-full].
 !LAA[]
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`\\subtitle{Header}
-
-Code from application А describes image from application Б.
-
-See application В.
-
-\\subtitle{Applications}
-
-\\pagebreak
-\\subtitle{Приложение А}
-
-\\section*{Листинг кода из файла template-full2.py}
-
-\\vspace{1em}
-\\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-
-\\inputminted[baselinestretch=\\applicationcodelineheight]{python}{./assets/code/template-full2.py}
-
-\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
-
-\\pagebreak
-\\begin{landscape}
-    \\thispagestyle{empty}
-    \\subtitle{Приложение Б}
-
-    \\section*{Large scheme}
-    
-    \\vspace{1em}
-    \\begin{center}
-    \\includegraphics[height=13.8cm]{./assets/img/circuit.png}
-    \\end{center}
-
-    \\vfill
-    \\raisebox{.6ex}{\\makebox[\\linewidth]{\\thepage}}
-\\end{landscape}
-
-\\pagebreak
-\\subtitle{Приложение В}
-
-\\section*{Листинг кода из файла template-full.py}
-
-\\vspace{1em}
-\\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-
-\\inputminted[baselinestretch=\\applicationcodelineheight]{python}{./assets/code/template-full.py}
-
-\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('with multiple columns', () => {
@@ -345,24 +172,7 @@ See application !AK[code-full].
 !LAA[]
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`\\subtitle{Header}
-
-See application А.
-
-\\subtitle{Applications}
-
-\\pagebreak
-\\subtitle{Приложение А}
-
-\\section*{Листинг кода из файла template-full.py}
-
-\\vspace{1em}
-\\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
-\\begin{multicols}{2}
-\\inputminted[baselinestretch=\\applicationcodelineheight]{python}{./assets/code/template-full.py}
-\\end{multicols}
-\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Unused application, should throw error', () => {
@@ -406,16 +216,7 @@ Code from reference !RK[ref-2] describes image from reference !RK[ref-1].
 !LAR[]
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`\\subtitle{Header}
-
-Code from reference 1 describes image from reference 2.
-
-\\subtitle{References}
-
-1.\\,H.\\,Y.\\~Ignat. "Reference\\~2" // Some Journal, 1867
-
-2.\\,H.\\,Y.\\~Ignat. "Reference\\~1" // Some Journal, 1867
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Unused reference, should throw error', () => {
@@ -454,8 +255,7 @@ Text $\`a = b + \\sum_{i=0}^\\infty c_i\`$ ending.
 Text with 10% number.
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`Text with 10\\% number.
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Text with escapes ("<" sound be corrent also)', () => {
@@ -463,8 +263,7 @@ Text with 10% number.
 Text with \\<assdasd.
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`Text with \\<assdasd.
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Tag <hr> should break the page', () => {
@@ -476,11 +275,7 @@ The first page
 The second page
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`The first page
-
-\\pagebreak
-The second page
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Tag <br> should put additional break', () => {
@@ -489,10 +284,7 @@ The first line
 The second line
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`The first line
-
-The second line
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test("Text ' dereplacement", () => {
@@ -512,8 +304,7 @@ Discriminant Analysis, is related to Jenks optimization method.
 $\`a > b < c\`$
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`$\\displaystyle a > b < c$
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Table and picture key', () => {
@@ -531,46 +322,7 @@ Displayed in picture !PK[gray-square] (!PK[gray-square]) and table !TK[table].
 |Random number | $$ \\showcaserandomnumber $$ |
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result).toEqual(`Displayed in picture 1 (1) and table 1.
-
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-\\addtolength{\\belowcaptionskip}{-1.6em}
-\\setlength{\\abovecaptionskip}{0.5em}
-
-\\begin{figure}[H]
-    \\centering
-    \\includegraphics[height=5cm]{./assets/img/example.png}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
-    \\caption{Рисунок 1 -- Gray square}
-\\end{figure}
-
-\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
-\\setlength{\\belowcaptionskip}{0em}
-\\setlength{\\abovecaptionskip}{0em}
-\\setlength{\\LTpre}{2em}
-\\setlength{\\LTpost}{2em}
-
-\\begin{longtable}[H]{|c|c|}
-    \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
-    \\caption{Таблица 1 -- Table}
-    \\\\\\hline
-    Key & Value\\\\ \\hline
-
-    \\endfirsthead
-    \\caption{Продолжение таблицы 1} \\\\\\hline
-    Key & Value\\\\ \\hline
-
-    \\endhead
-    \\endfoot
-    \\endlastfoot
-
-Static number & 50\\\\ \\hline
-Random number &  \\showcaserandomnumber \\\\ \\hline
-
-\\end{longtable}
-\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
-`);
+        expect(result).toMatchSnapshot();
     });
 });
 
@@ -589,43 +341,7 @@ describe('latex picture after table (#52)', function () {
         )['filepath'];
 
         expect(result).not.toBeUndefined();
-        expect(result)
-            .toEqual(`\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
-\\setlength{\\belowcaptionskip}{0em}
-\\setlength{\\abovecaptionskip}{0em}
-\\setlength{\\LTpre}{2em}
-\\setlength{\\LTpost}{0em}
-
-\\begin{longtable}[H]{|c|c|}
-    \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
-    \\caption{Таблица 1 -- Table example}
-    \\\\\\hline
-    Key & Value\\\\ \\hline
-
-    \\endfirsthead
-    \\caption{Продолжение таблицы 1} \\\\\\hline
-    Key & Value\\\\ \\hline
-
-    \\endhead
-    \\endfoot
-    \\endlastfoot
-
-Static number & 50\\\\ \\hline
-
-\\end{longtable}
-\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
-
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-\\setlength{\\abovecaptionskip}{0.5em}
-
-\\begin{figure}[H]
-    \\centering
-    \\includegraphics[height=5cm]{./assets/img/example.png}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
-    \\caption{Рисунок 1 -- Gray square}
-\\end{figure}
-`);
+        expect(result).toMatchSnapshot();
     });
 
     test('Table + text + picture', () => {
@@ -643,44 +359,69 @@ Sample text line
         )['filepath'];
 
         expect(result).not.toBeUndefined();
-        expect(result)
-            .toEqual(`\\fontsize{\\tablefontsize}{\\tablefontsize}\\selectfont
-\\setlength{\\belowcaptionskip}{0em}
-\\setlength{\\abovecaptionskip}{0em}
-\\setlength{\\LTpre}{2em}
-\\setlength{\\LTpost}{2em}
+        expect(result).toMatchSnapshot();
+    });
+});
 
-\\begin{longtable}[H]{|c|c|}
-    \\captionsetup{justification=justified,indention=0cm,labelformat=empty, margin={2pt, 0cm},font={stretch=1.5}}
-    \\caption{Таблица 1 -- Table example}
-    \\\\\\hline
-    Key & Value\\\\ \\hline
+describe('url variants', () => {
+    test('Default url', () => {
+        const result = processingChain(
+            'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
+        )['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
 
-    \\endfirsthead
-    \\caption{Продолжение таблицы 1} \\\\\\hline
-    Key & Value\\\\ \\hline
+    test('Bold url', () => {
+        const result = processingChain(
+            'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
+            {
+                latex: {
+                    useLinkAs: 'bold',
+                },
+            },
+        )['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
 
-    \\endhead
-    \\endfoot
-    \\endlastfoot
+    test('Italic url', () => {
+        const result = processingChain(
+            'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
+            {
+                latex: {
+                    useLinkAs: 'italic',
+                },
+            },
+        )['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
 
-Static number & 50\\\\ \\hline
+    test('Underlined url', () => {
+        const result = processingChain(
+            'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
+            {
+                latex: {
+                    useLinkAs: 'underline',
+                },
+            },
+        )['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
 
-\\end{longtable}
-\\fontsize{\\defaultfontsize}{\\defaultfontsize}\\selectfont\\setstretch{1.5}
-
-Sample text line
-
-\\setlength{\\intextsep}{3em}
-\\setlength{\\belowcaptionskip}{-4ex}
-\\setlength{\\abovecaptionskip}{0.5em}
-
-\\begin{figure}[H]
-    \\centering
-    \\includegraphics[height=5cm]{./assets/img/example.png}
-    \\captionsetup{justification=centering,indention=0cm,labelformat=empty,margin={0pt,0cm},font={stretch=1.5}}
-    \\caption{Рисунок 1 -- Gray square}
-\\end{figure}
-`);
+    test('No escape & code url', () => {
+        const result = processingChain(
+            'https://example.com/index_page.html?asd=asdasd&asdasd=gege#header',
+            {
+                latex: {
+                    useLinkAs: 'code',
+                    autoEscapeUnderscoresCode: false,
+                },
+            },
+        )['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
     });
 });
