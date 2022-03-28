@@ -7,26 +7,6 @@ export class LatexError extends Error {
     }
 }
 
-const escapeDeReplacements: Record<string, string> = {
-    '&amp;': '&',
-    '&lt;': '<',
-    '&gt;': '>',
-    '&quot;': '"',
-    '&#39;': "'",
-};
-
-/**
- * See https://github.com/markedjs/marked/blob/288f1cbe2f55881972c0f594ddb9910888986bee/src/helpers.js#L8
- */
-function resolveTextDeReplacements(text: string): string {
-    for (const dereplacement of Object.keys(escapeDeReplacements)) {
-        const regexp = new RegExp(dereplacement, 'g');
-        text = text.replace(regexp, escapeDeReplacements[dereplacement]);
-    }
-
-    return text;
-}
-
 export function escapeUnderscoredText(text: string) {
     return text.replace(/_/g, '\\_');
 }
