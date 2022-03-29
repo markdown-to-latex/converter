@@ -1,3 +1,7 @@
+## `extension`
+
+Wrappers on default classes, adds additional functionality
+
 ## `lexer`
 
 Is being used for the raw pre-processing text into tokens.

@@ -1,5 +1,5 @@
 import { getLatexApplicationLetter } from './latex';
-import { LatexInfo, MarkDownToLaTeXConverter } from "./types";
+import {LatexEscapeData, LatexInfo, MarkDownToLaTeXConverter} from "./types";
 
 export type WriteFileFunction = (
     content: string,
@@ -18,6 +18,7 @@ export type RequiredProperty<T> = {
 
 export type ContextConfig = RequiredProperty<Omit<MarkDownToLaTeXConverter, 'files'>>;
 export type LatexInfoStrict = RequiredProperty<LatexInfo>;
+export type LatexEscapeDataStrict = RequiredProperty<LatexEscapeData>;
 
 export interface Context {
     config: ContextConfig;

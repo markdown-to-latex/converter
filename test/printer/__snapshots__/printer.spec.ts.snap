@@ -420,7 +420,7 @@ exports[`url variants Italic url 1`] = `
 `;
 
 exports[`url variants No escape & code url 1`] = `
-"\\\\texttt{https://example.com/index_page.html?asd=asdasd\\\\&asdasd=gege\\\\#header}
+"\\\\texttt{https://example.com/index_page.html?asd=asdasd&asdasd=gege#header}
 "
 `;
 

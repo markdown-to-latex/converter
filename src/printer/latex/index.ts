@@ -1,3 +1,8 @@
+import { Context } from '../context';
+import { NodeType } from '../../ast/nodes';
+import { Escaper } from './escaper';
+import { StringE } from '../../extension/string';
+
 export class LatexError extends Error {
     constructor(m: string) {
         super(m);
@@ -7,25 +12,31 @@ export class LatexError extends Error {
     }
 }
 
-export function escapeUnderscoredText(text: string) {
-    return text.replace(/_/g, '\\_');
-}
+export class LatexString extends StringE {
+    public context: Context;
 
-export function prepareTextForLatex(text: string): string {
-    text = resolveTextDeReplacements(text);
-    text = text.replace(/%/g, '\\%');
-    text = text.replace(/&/g, '\\&');
-    text = text.replace(/#/g, '\\#');
-    return text;
-}
+    public constructor(value: string | StringE, context: Context) {
+        super(value);
+        this.context = context;
+    }
 
-export function prettifyLaTeX(text: string): string {
-    text = text.replace(/\n{3,}/g, '\n\n');
+    public prepare(nodeType: NodeType): LatexString {
+        // TODO: move escaper into the context
 
-    // Remove unnecessary breaks in begin and end of the file
-    text = text.replace(/^\n+/g, '');
-    text = text.replace(/\n{2,}$/g, '\n');
-    return text;
+        const stringE = this.resolveDeReplacements();
+        const latexString = stringE
+            .applyEscaper(
+                Escaper.fromContext(this.context).prepare({
+                    nodeType: nodeType,
+                }),
+            )
+            .toLatexString(this.context);
+        return latexString;
+    }
+
+    public get se(): StringE {
+        return this;
+    }
 }
 
 const headerByDepth: ((text: string) => string)[] = [
@@ -43,6 +54,7 @@ export function getLatexHeader(text: string, depth: number): string {
     return lazyResult(text) + '\n\n';
 }
 
+// TODO: localization
 const applicationLetters = [
     'А',
     'Б',

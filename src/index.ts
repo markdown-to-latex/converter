@@ -5,15 +5,14 @@ import { printMarkdownAST } from './printer';
 import * as fs from 'fs';
 import * as path from 'path';
 import {
-  Context,
-  ContextConfig, LatexInfoStrict,
-  RequiredProperty,
-  WriteFileFunction
-} from "./printer/context";
+    Context,
+    ContextConfig,
+    LatexEscapeDataStrict,
+    LatexInfoStrict,
+    WriteFileFunction,
+} from './printer/context';
 import { readConfig } from './config';
 import {
-    LatexEscapeData,
-    LatexInfo,
     MarkDownToLaTeXConverter,
 } from './printer/types';
 
@@ -51,16 +50,18 @@ const defaultConfig: ContextConfig = {
     },
 };
 
-const defaultEscapes: LatexEscapeData[] = [
+const defaultEscapes: LatexEscapeDataStrict[] = [
     {
-        chars: ['%', '$'],
+        chars: ['%', '_', '#', '&',],
         inText: true,
         inCodeSpan: true,
+        replacer: '\\$1',
     },
     {
-        chars: ['_', '#', '&'],
+        chars: ['\\$'],
         inText: false,
         inCodeSpan: true,
+        replacer: '\\$1',
     },
 ];
 
@@ -180,14 +181,14 @@ export function initContext(
 
 export function getConfigLatexEscapes(
     latexInfo: LatexInfoStrict,
-): LatexEscapeData[] {
+): LatexEscapeDataStrict[] {
     return [
         ...latexInfo.extendAutoEscapes,
         ...(latexInfo.defaultAutoEscapes ? defaultEscapes : []),
     ];
 }
 
-export function getContextEscapes(ctx: Context): LatexEscapeData[] {
+export function getContextEscapes(ctx: Context): LatexEscapeDataStrict[] {
     return getConfigLatexEscapes(ctx.config.latex);
 }
 

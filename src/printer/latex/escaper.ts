@@ -2,6 +2,7 @@ import { LatexEscapeData, LatexInfo } from '../types';
 import { Context, RequiredProperty } from '../context';
 import { getConfigLatexEscapes, getContextEscapes } from '../../index';
 import { NodeType } from '../../ast/nodes';
+import {StringE} from "../../extension/string";
 
 type EscaperNodeType = 'text' | 'codeSpan';
 
@@ -10,10 +11,16 @@ interface EscaperDataType {
 }
 
 export class Escaper {
-    public escapes: LatexEscapeData[];
+    public escapes: RequiredProperty<LatexEscapeData>[];
 
-    public constructor(escapes: LatexEscapeData[]) {
+    public constructor(escapes: RequiredProperty<LatexEscapeData>[]) {
         this.escapes = escapes;
+    }
+
+    public static fromContext(
+        ctx: Context,
+    ): Escaper {
+        return new this(getConfigLatexEscapes(ctx.config.latex));
     }
 
     public static fromConfigLatex(
@@ -58,9 +65,10 @@ export class EscaperReady {
         this.data = data;
     }
 
-    public apply(text: string): string {
+    public apply(text: StringE | string): StringE {
+        text = StringE.from(text);
         for (const data of this.data) {
-            text = text.replace(data.regexp, data.replacer);
+            text = text.replaceE(data.regexp, data.replacer);
         }
         return text;
     }

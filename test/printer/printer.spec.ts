@@ -417,7 +417,7 @@ describe('url variants', () => {
             {
                 latex: {
                     useLinkAs: 'code',
-                    autoEscapeUnderscoresCode: false,
+                    defaultAutoEscapes: false,
                 },
             },
         )['filepath'];

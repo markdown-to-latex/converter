@@ -1,5 +1,4 @@
-import { LatexInfo } from '../types';
-import { escapeUnderscoredText, getLatexOrderedListPoint } from './index';
+import {getLatexOrderedListPoint, LatexString} from './index';
 import { Escaper } from './escaper';
 import { LatexInfoStrict } from '../context';
 import { NodeType } from '../../ast/nodes';
@@ -11,7 +10,7 @@ export interface LatexListItemInfo {
     isOrdered: boolean;
 }
 
-export function getLatexListItem(data: LatexListItemInfo, _: LatexInfo) {
+export function getLatexListItem(data: LatexListItemInfo, _: LatexInfoStrict) {
     const point = data.isOrdered
         ? getLatexOrderedListPoint(data.depth, data.index) + ')'
         : '-';
@@ -29,7 +28,10 @@ export interface LatexImageInfo {
     removeSpace: boolean;
 }
 
-export function getLatexImage(info: LatexImageInfo, config: LatexInfo): string {
+export function getLatexImage(
+    info: LatexImageInfo,
+    config: LatexInfoStrict,
+): string {
     return `
 \\setlength{\\intextsep}{${config.margin!.imageInnerTextSep}}
 \\setlength{\\belowcaptionskip}{${config.margin!.imageBelowCaptionSkip}}${
@@ -59,7 +61,10 @@ export interface LatexTableInfo {
     removeSpace: boolean;
 }
 
-export function getLatexTable(info: LatexTableInfo, config: LatexInfo): string {
+export function getLatexTable(
+    info: LatexTableInfo,
+    config: LatexInfoStrict,
+): string {
     let colsTemplate = `|`;
     for (let i = 0; i < info.colAmount; i++) {
         colsTemplate += 'c|';
@@ -104,7 +109,10 @@ export interface LatexCodeInfo {
     removeSpace: boolean;
 }
 
-export function getLatexCode(info: LatexCodeInfo, config: LatexInfo): string {
+export function getLatexCode(
+    info: LatexCodeInfo,
+    config: LatexInfoStrict,
+): string {
     return `
 \\setlength{\\intextsep}{${config.margin!.codeInnerTextSep}}
 \\setlength{\\belowcaptionskip}{${config.margin!.codeBelowCaptionSkip}}${
@@ -128,7 +136,7 @@ ${info.text}
 `;
 }
 
-export function getLatexMath(text: string, config: LatexInfo): string {
+export function getLatexMath(text: string, config: LatexInfoStrict): string {
     return `
 \\setlength{\\abovedisplayskip}{${config.margin!.mathAboveDisplaySkip}}
 \\setlength{\\belowdisplayskip}{${config.margin!.mathBelowDisplaySkip}}
@@ -145,23 +153,25 @@ ${text}
 `;
 }
 
-export function getLatexInlineMath(text: string, _: LatexInfo): string {
+export function getLatexInlineMath(text: string, _: LatexInfoStrict): string {
     return `\\displaystyle ${text}`;
 }
 
 export function getLatexCodeSpan(text: string, config: LatexInfoStrict) {
+    // TODO: store escaper in context
+
     text = Escaper.fromConfigLatex(config)
         .prepare({
             nodeType: NodeType.CodeSpan,
         })
-        .apply(text);
+        .apply(text).s;
 
     return config.useMonospaceFont ? `\\texttt{${text}}` : text;
 }
 
-type LinkAsType = NonNullable<LatexInfo['useLinkAs']>;
+type LinkAsType = NonNullable<LatexInfoStrict['useLinkAs']>;
 const linkTextWrapper: {
-    [Key in LinkAsType]: (text: string, config: LatexInfo) => string;
+    [Key in LinkAsType]: (text: string, config: LatexInfoStrict) => string;
 } = {
     bold: text => `\\textbf{${text}}`,
     italic: text => `\\textit{${text}}`,
@@ -173,11 +183,7 @@ const linkTextWrapper: {
 export function getLatexLinkText(
     text: string,
     title: string,
-    config: LatexInfo,
+    config: LatexInfoStrict,
 ) {
-    text = config.autoEscapeUnderscoresCode
-        ? escapeUnderscoredText(text)
-        : text;
-
     return linkTextWrapper[config.useLinkAs ?? 'default'](text, config);
 }

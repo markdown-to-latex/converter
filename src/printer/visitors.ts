@@ -26,13 +26,14 @@ import {
     getLatexTable,
 } from './latex/transpile';
 
-import { getLatexHeader, prepareTextForLatex, prettifyLaTeX } from './latex';
+import { getLatexHeader, LatexString } from './latex';
 
 type Visitor<T extends Node> = (node: T, context: Context) => string;
 
 export function applyPrinterVisitors(node: Node, context: Context): string {
     const visitor = processingVisitors[node.type] as Visitor<Node>;
-    return visitor(node, context);
+    const s = visitor(node, context);
+    return s;
 }
 
 export function printNodeList(
@@ -133,7 +134,7 @@ ${node.text}
                 text: node.text,
                 removeSpace: isNodeBeforeBoxed(node),
             },
-            context.config,
+            context.config.latex,
         );
     },
     [NodeType.Heading]: (node, context) => {
@@ -152,7 +153,7 @@ ${node.text}
                 colAmount: node.header[0].children.length,
                 removeSpace: isNodeBeforeBoxed(node),
             },
-            context.config,
+            context.config.latex,
         );
     },
     [NodeType.Blockquote]: (node, context) =>
@@ -183,17 +184,19 @@ ${node.text}
                 index: index,
                 isOrdered: parentList.ordered,
             },
-            context.config,
+            context.config.latex,
         );
     },
     [NodeType.Paragraph]: (node, context) =>
         printNodeList(node.children, context) + '\n',
     [NodeType.Def]: throwProcessingError,
-    [NodeType.Escape]: node => `\\${prepareTextForLatex(node.text)}`,
+    [NodeType.Escape]: (node, context) =>
+        `\\${new LatexString(node.text, context).prepare(NodeType.Escape).s}`,
     [NodeType.Text]: (node, context) => {
         const children = node.children;
         if (children.length === 0) {
-            return prepareTextForLatex(node.text);
+            const latexString = new LatexString(node.text, context).prepare(NodeType.Text);
+            return latexString.s;
         }
 
         return printNodeList(children, context);
@@ -203,7 +206,7 @@ ${node.text}
         getLatexLinkText(
             printNodeList(node.children, context),
             node.title,
-            context.config,
+            context.config.latex,
         ),
     [NodeType.Image]: (node, context) => {
         return getLatexImage(
@@ -214,7 +217,7 @@ ${node.text}
                 href: node.href,
                 removeSpace: isNodeBeforeBoxed(node),
             },
-            context.config,
+            context.config.latex,
         );
     },
     [NodeType.Strong]: (node, context) =>
@@ -223,16 +226,18 @@ ${node.text}
         `\\textit{${printNodeList(node.children, context)}}`,
     [NodeType.Hr]: () => '\n\\pagebreak\n',
     [NodeType.CodeSpan]: (node, context) =>
-        getLatexCodeSpan(node.text, context.config),
+        getLatexCodeSpan(node.text, context.config.latex),
     [NodeType.Br]: () => '\n\n',
     [NodeType.Del]: throwProcessingError,
 
     [NodeType.File]: (node, context) => {
-        let content = printNodeList(node.children, context);
-        content = prettifyLaTeX(content);
-        context.writeFile(content, node.path, context);
+        const content = new LatexString(
+            printNodeList(node.children, context),
+            context,
+        ).removeUnnecessaryLineBreaks();
+        context.writeFile(content.s, node.path, context);
 
-        return content;
+        return content.s;
     },
     [NodeType.TableCell]: (node, context) =>
         printNodeList(node.children, context),
@@ -243,12 +248,12 @@ ${node.text}
     [NodeType.CodeLatex]: node => node.text,
     [NodeType.InlineLatex]: node => node.text,
     [NodeType.MathLatex]: (node, context) => {
-        return getLatexMath(node.text, context.config);
+        return getLatexMath(node.text, context.config.latex);
     },
     [NodeType.MathInlineLatex]: (node, context) => {
         return getLatexInlineMath(
-            prepareTextForLatex(node.text),
-            context.config,
+            new LatexString(node.text, context).resolveDeReplacements().s,
+            context.config.latex,
         );
     },
 };
