@@ -14,7 +14,7 @@ function processingChain(
     config?: Partial<MarkDownToLaTeXConverter>,
 ): Record<string, string> {
     const lexerResult = lexer(text);
-    const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' })
+    const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
 
     const files: Record<string, string> = {};
     const context = initContext((content, fileName) => {
