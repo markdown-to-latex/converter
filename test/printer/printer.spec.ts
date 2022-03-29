@@ -14,13 +14,14 @@ function processingChain(
     config?: Partial<MarkDownToLaTeXConverter>,
 ): Record<string, string> {
     const lexerResult = lexer(text);
-    const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
-    applyProcessing(result);
+    const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' })
 
     const files: Record<string, string> = {};
     const context = initContext((content, fileName) => {
         files[fileName] = content;
     }, config);
+
+    applyProcessing(result, context);
 
     printMarkdownAST(result, context);
 
@@ -64,16 +65,16 @@ Text
         const result = processingChain(`
 # Header
 
-!P[img-1|5cm]
+!P[img-1!5cm]
 ![Image name](./assets/img/dolphin.png)
 
-!C[code-1|Python Sample Code]
+!C[code-1!Python Sample Code]
 \`\`\`python
 def main():
     print "Hello World"
 \`\`\`
 
-!P[img-2|7cm]
+!P[img-2!7cm]
 ![Image name 2](./assets/img/dolphin.png)
 `)['filepath'];
         expect(result).not.toBeUndefined();
@@ -86,13 +87,13 @@ def main():
 
 Code in !PK[code-1] и !PK[code-2].
 
-!C[code-1|Python Sample Code]
+!C[code-1!Python Sample Code]
 \`\`\`python
 def main():
     print "Hello World"
 \`\`\`
 
-!C[code-2|Python Sample Code 2]
+!C[code-2!Python Sample Code 2]
 \`\`\`python
 def hello_world():
     print "Hello World"
@@ -106,7 +107,7 @@ def hello_world():
         const result = processingChain(`
 Demonstrated in table  
 
-!T[table|Table with content]
+!T[table!Table with content]
 
 |a|b|c|d|
 |---|---|---|---|
@@ -140,9 +141,9 @@ Demonstrated in table
 describe('Applications', () => {
     test('with list', () => {
         const result = processingChain(`
-!AC[code-full|./assets/code|template-full.py|python]
-!AC[code-full2|./assets/code|template-full2.py|python]
-!APR[picture-large|Large scheme|./assets/img/circuit.png]
+!AC[code-full!./assets/code!template-full.py!python]
+!AC[code-full2!./assets/code!template-full2.py!python]
+!APR[picture-large!Large scheme!./assets/img/circuit.png]
         
 # Header
 
@@ -161,7 +162,7 @@ See application !AK[code-full].
     test('with multiple columns', () => {
         const result = processingChain(`
 !ACC[2]
-!AC[code-full|./assets/code|template-full.py|python]
+!AC[code-full!./assets/code!template-full.py!python]
         
 # Header
 
@@ -178,7 +179,7 @@ See application !AK[code-full].
     test('Unused application, should throw error', () => {
         const result = () =>
             processingChain(`
-!AC[code-full|./assets/code|template-full.py|python]
+!AC[code-full!./assets/code!template-full.py!python]
 
 !LAA[]
 `)['filepath'];
@@ -311,10 +312,10 @@ $\`a > b < c\`$
         const result = processingChain(`
 Displayed in picture !PK[gray-square] (!PK[gray-square]) and table !TK[table].
 
-!P[gray-square|5cm]
+!P[gray-square!5cm]
 ![Gray square](./assets/img/example.png)
 
-!T[table|Table]
+!T[table!Table]
         
 |Key    |Value |
 |-------|------|
@@ -330,13 +331,13 @@ describe('latex picture after table (#52)', function () {
     // See https://github.com/markdown-to-latex/converter/issues/52
     test('Picture right after the table', () => {
         const result = processingChain(
-            `!T[table|Table example]
+            `!T[table!Table example]
 
 | Key           | Value                       |
 | ------------- | --------------------------- |
 | Static number | 50                          |
 
-!P[gray-square|5cm]
+!P[gray-square!5cm]
 ![Gray square](./assets/img/example.png)`,
         )['filepath'];
 
@@ -346,7 +347,7 @@ describe('latex picture after table (#52)', function () {
 
     test('Table + text + picture', () => {
         const result = processingChain(
-            `!T[table|Table example]
+            `!T[table!Table example]
 
 | Key           | Value                       |
 | ------------- | --------------------------- |
@@ -354,7 +355,7 @@ describe('latex picture after table (#52)', function () {
 
 Sample text line
 
-!P[gray-square|5cm]
+!P[gray-square!5cm]
 ![Gray square](./assets/img/example.png)`,
         )['filepath'];
 

@@ -1,8 +1,12 @@
 import { InlineLatexNode, NodeType, OpCodeNode, TextNode } from '../ast/nodes';
+import { Context } from '../printer/context';
 
-const regexpOpCode: RegExp = new RegExp(/!([A-Z0-9]+)\[([^\]]*)]\n?/g);
+export function captureOpCodes(node: TextNode, context: Context): void {
+    const regexpOpCode: RegExp = new RegExp(
+        context.config.opCode.starter + '([A-Z0-9]+)\\[([^\\]]*)\\]\\n?',
+        'g',
+    );
 
-export function captureOpCodes(node: TextNode): void {
     const searchIterator = node.text.matchAll(regexpOpCode);
     let item = searchIterator.next();
     if (item.done) {
@@ -12,7 +16,10 @@ export function captureOpCodes(node: TextNode): void {
     let endIndex = 0;
     while (!item.done) {
         const opcode = item.value[1];
-        const args = item.value[2] !== '' ? item.value[2].split('|') : [];
+        const args =
+            item.value[2] !== ''
+                ? item.value[2].split(context.config.opCode.delimiter)
+                : [];
 
         const contentEndIndex = item.value.index!;
         const newEndIndex = contentEndIndex + item.value[0].length;

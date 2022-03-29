@@ -3,8 +3,9 @@ import {
     applyProcessingVisitorIfExists,
     getProcessingStages,
 } from './visitors';
+import { Context } from '../printer/context';
 
-function traverseAST(root: Node, stage: number) {
+function traverseAST(root: Node, context: Context, stage: number) {
     const nodeQueue: Node[] = [];
     nodeQueue.push(root);
 
@@ -13,7 +14,7 @@ function traverseAST(root: Node, stage: number) {
         const node = nodeQueue.pop()!;
 
         // Apply visitor if exists
-        applyProcessingVisitorIfExists(node, stage);
+        applyProcessingVisitorIfExists(node, context, stage);
 
         nodeQueue.push(
             ...getNodeAllChildren(
@@ -23,9 +24,9 @@ function traverseAST(root: Node, stage: number) {
     }
 }
 
-export function applyProcessing(root: Node) {
+export function applyProcessing(root: Node, context: Context) {
     const stages = getProcessingStages();
     for (let i = 0; i < stages; i++) {
-        traverseAST(root, i);
+        traverseAST(root, context, i);
     }
 }

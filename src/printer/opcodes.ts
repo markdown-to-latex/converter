@@ -128,7 +128,7 @@ const opCodeMap: {
 } = {
     // Usage: !P[key|height]
     [OpCodeType.Picture]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 2);
+        shouldHaveLength(node.opcode, args, 2);
         shouldNotBeEmptyArguments(node.opcode, args);
         shouldHaveNodeWithTypeAfter(
             node,
@@ -140,13 +140,15 @@ const opCodeMap: {
         context.picture.height = args[1];
         return '';
     },
+
     // Usage: !PK[key]
     [OpCodeType.PictureKey]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 1);
+        shouldHaveLength(node.opcode, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         return getOrCreatePictureLabel(context, args[0]);
     },
+
     // Usage: !T[key|label]
     [OpCodeType.Table]: (args, node, context) => {
         shouldHaveLength(node.opcode, args, 2);
@@ -161,30 +163,34 @@ const opCodeMap: {
         context.table.label = args[1];
         return '';
     },
+
     // Usage: !TK[key]
     [OpCodeType.TableKey]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 1);
+        shouldHaveLength(node.opcode, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         return getOrCreateTableLabel(context, args[0]);
     },
+
     // Usage: !C[key|label]
     [OpCodeType.Code]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 2);
+        shouldHaveLength(node.opcode, args, 2);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         context.code.key = args[0];
         context.code.label = args[1];
         return '';
     },
+
     // Usage: !MS[]
     [OpCodeType.MinusSingle]: (args, node, context) => {
         return '\\minussingle\n';
     },
+
     // Usage: !AR[key|title]
     // Expected code with language "app" after the Macros
     [OpCodeType.ApplicationRaw]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 2);
+        shouldHaveLength(node.opcode, args, 2);
         shouldNotBeEmptyArguments(node.opcode, args);
         shouldHaveNodeWithTypeAfter(node, [NodeType.Code], [NodeType.Space]);
 
@@ -195,9 +201,10 @@ const opCodeMap: {
         // Next captured code with language `app` will be add to reference list
         return '';
     },
+
     // Usage: !AP[key|title|file_name]
     [OpCodeType.ApplicationPicture]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 3);
+        shouldHaveLength(node.opcode, args, 3);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         addApplicationByKey(context, args[0], {
@@ -216,9 +223,10 @@ const opCodeMap: {
         });
         return '';
     },
+
     // Usage: !APR[key|title|file_name]
     [OpCodeType.ApplicationPictureRotated]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 3);
+        shouldHaveLength(node.opcode, args, 3);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         addApplicationByKey(context, args[0], {
@@ -243,17 +251,19 @@ const opCodeMap: {
         });
         return '';
     },
+
     // Usage: !ACC[columns]
     [OpCodeType.ApplicationCodeColumns]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 1);
+        shouldHaveLength(node.opcode, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         context.code.cols = +args[0];
         return '';
     },
+
     // Usage: !AC[key|directory|file_name|language]
     [OpCodeType.ApplicationCode]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 4);
+        shouldHaveLength(node.opcode, args, 4);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         addApplicationByKey(context, args[0], {
@@ -276,17 +286,29 @@ ${context.code.cols !== 1 ? `\\end{multicols}` : ''}
         });
         return '';
     },
+
     // Usage: !AK[key]
     [OpCodeType.ApplicationKey]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 1);
+        shouldHaveLength(node.opcode, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         return getApplicationLabelByKey(context, args[0]);
     },
+
     // Usage: !RR[key]
     // Expected code with language "ref" after the Macros
     [OpCodeType.ReferenceRaw]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 1);
+        /**
+         * TODO: make in functional style
+         *
+         * new MyWrapper((args, asd,asd) => {})
+         *         .shouldHaveLength(....)
+         *         .shouldNotBeEmptyArguments(....)
+         *         .shouldHaveNodeWithTypeAfter(...)
+         *         .raw()
+         */
+
+        shouldHaveLength(node.opcode, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
         shouldHaveNodeWithTypeAfter(node, [NodeType.Code], [NodeType.Space]);
 
@@ -297,16 +319,18 @@ ${context.code.cols !== 1 ? `\\end{multicols}` : ''}
 
         return '';
     },
+
     // Usage: !RK[key]
     [OpCodeType.ReferenceKey]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 1);
+        shouldHaveLength(node.opcode, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         return getReferenceLabelByKey(context, args[0]);
     },
+
     // Usage: !LAA[]
     [OpCodeType.ListAllApplications]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 0);
+        shouldHaveLength(node.opcode, args, 0);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         const keys = context.applications.accessKeys;
@@ -317,9 +341,10 @@ ${context.code.cols !== 1 ? `\\end{multicols}` : ''}
             .map(key => data[key].text(getApplicationLabelByKey(context, key)))
             .join('\n\n');
     },
+
     // Usage: !LAR[]
     [OpCodeType.ListAllReferences]: (args, node, context) => {
-        shouldHaveLength(node.type, args, 0);
+        shouldHaveLength(node.opcode, args, 0);
         shouldNotBeEmptyArguments(node.opcode, args);
 
         const keys = context.references.accessKeys;

@@ -12,9 +12,7 @@ import {
     WriteFileFunction,
 } from './printer/context';
 import { readConfig } from './config';
-import {
-    MarkDownToLaTeXConverter,
-} from './printer/types';
+import { MarkDownToLaTeXConverter } from './printer/types';
 
 export { buildMarkdownAST, lexer, applyProcessing, printMarkdownAST };
 
@@ -52,16 +50,25 @@ const defaultConfig: ContextConfig = {
 
 const defaultEscapes: LatexEscapeDataStrict[] = [
     {
-        chars: ['%', '_', '#', '&',],
+        chars: ['%', '_', '#', '&'],
         inText: true,
         inCodeSpan: true,
+        inLink: true,
         replacer: '\\$1',
     },
     {
         chars: ['\\$'],
         inText: false,
         inCodeSpan: true,
+        inLink: true,
         replacer: '\\$1',
+    },
+    {
+        chars: ['"'],
+        inText: true,
+        inCodeSpan: true,
+        inLink: false,
+        replacer: '$1{}',
     },
 ];
 
@@ -110,6 +117,7 @@ export function initContext(
                         chars: d.chars,
                         inText: d.inText ?? true,
                         inCodeSpan: d.inCodeSpan ?? true,
+                        inLink: d.inLink ?? true,
                         replacer: d.replacer ?? '\\$1',
                     })) ?? defaultConfig.latex.extendAutoEscapes,
                 defaultAutoEscapes:
@@ -219,7 +227,7 @@ export function convertMarkdownFiles(rootDir: string): void {
             filepath: path.join(rootDir, fileInfo.out),
         });
 
-        applyProcessing(result);
+        applyProcessing(result, context);
 
         printMarkdownAST(result, context);
     }

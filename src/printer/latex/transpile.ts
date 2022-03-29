@@ -1,4 +1,4 @@
-import {getLatexOrderedListPoint, LatexString} from './index';
+import { getLatexOrderedListPoint, LatexString } from './index';
 import { Escaper } from './escaper';
 import { LatexInfoStrict } from '../context';
 import { NodeType } from '../../ast/nodes';

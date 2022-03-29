@@ -2,6 +2,6 @@
 
 Image here
 
-!P[img|4cm]
+!P[img!4cm]
 
 ![Image](./nothing)

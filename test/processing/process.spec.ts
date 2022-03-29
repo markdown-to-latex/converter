@@ -1,4 +1,4 @@
-import { lexer } from '../../src';
+import { initContext, lexer } from '../../src';
 import { buildMarkdownAST } from '../../src';
 import { applyProcessing } from '../../src';
 import {
@@ -13,9 +13,15 @@ import {
 
 describe('with tokens', function () {
     test('opcode', function () {
-        const lexerResult = lexer(`Line **1**\n!PK[test|1|2|3]\nLine 2`);
+        const lexerResult = lexer(`Line **1**\n!PK[test!1!2!3]\nLine 2`);
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
-        applyProcessing(result);
+
+        const files: Record<string, string> = {};
+        const context = initContext((content, fileName) => {
+            files[fileName] = content;
+        }, {});
+
+        applyProcessing(result, context);
 
         expect(result.children).toHaveLength(1);
         expect(result.children[0].type).toEqual(NodeType.Paragraph);
@@ -34,7 +40,13 @@ describe('with tokens', function () {
     test('empty opcode', function () {
         const lexerResult = lexer(`!A[]`);
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
-        applyProcessing(result);
+
+        const files: Record<string, string> = {};
+        const context = initContext((content, fileName) => {
+            files[fileName] = content;
+        }, {});
+
+        applyProcessing(result, context);
 
         expect(result.children).toHaveLength(1);
         expect(result.children[0].type).toEqual(NodeType.Paragraph);
@@ -51,7 +63,13 @@ describe('with tokens', function () {
     test('opcode in the table', function () {
         const lexerResult = lexer(`|a|b|\n|---|---|\n|d !A[] d|h !B[1] y|`);
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
-        applyProcessing(result);
+
+        const files: Record<string, string> = {};
+        const context = initContext((content, fileName) => {
+            files[fileName] = content;
+        }, {});
+
+        applyProcessing(result, context);
 
         expect(result.children).toHaveLength(1);
         const table = result.children[0] as TableNode;
@@ -75,7 +93,13 @@ describe('with latex inline', function () {
                 '```',
         );
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
-        applyProcessing(result);
+
+        const files: Record<string, string> = {};
+        const context = initContext((content, fileName) => {
+            files[fileName] = content;
+        }, {});
+
+        applyProcessing(result, context);
 
         const inlineLatex = result.children[0] as InlineLatexNode;
         expect(inlineLatex.type).toEqual(NodeType.CodeLatex);
@@ -85,7 +109,13 @@ describe('with latex inline', function () {
     test('latex inline simple', () => {
         const lexerResult = lexer('$$ \\minussingle $$');
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
-        applyProcessing(result);
+
+        const files: Record<string, string> = {};
+        const context = initContext((content, fileName) => {
+            files[fileName] = content;
+        }, {});
+
+        applyProcessing(result, context);
 
         const inlineLatex = (
             (result.children[0] as ParagraphNode).children[0] as TextNode
@@ -99,7 +129,13 @@ describe('with latex math', function () {
     test('as code span', () => {
         const lexerResult = lexer('b $`a=b`$ a');
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
-        applyProcessing(result);
+
+        const files: Record<string, string> = {};
+        const context = initContext((content, fileName) => {
+            files[fileName] = content;
+        }, {});
+
+        applyProcessing(result, context);
 
         const paragraph = result.children[0] as ParagraphNode;
         expect(paragraph.type).toEqual(NodeType.Paragraph);
@@ -113,7 +149,13 @@ describe('with latex math', function () {
     test('as code', () => {
         const lexerResult = lexer('b\n```math\ny=x^2\n```');
         const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
-        applyProcessing(result);
+
+        const files: Record<string, string> = {};
+        const context = initContext((content, fileName) => {
+            files[fileName] = content;
+        }, {});
+
+        applyProcessing(result, context);
 
         const paragraph = result.children[0] as ParagraphNode;
         expect(paragraph.type).toEqual(NodeType.Paragraph);

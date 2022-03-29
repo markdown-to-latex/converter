@@ -2,7 +2,7 @@ import { LatexEscapeData, LatexInfo } from '../types';
 import { Context, RequiredProperty } from '../context';
 import { getConfigLatexEscapes, getContextEscapes } from '../../index';
 import { NodeType } from '../../ast/nodes';
-import {StringE} from "../../extension/string";
+import { StringE } from '../../extension/string';
 
 type EscaperNodeType = 'text' | 'codeSpan';
 
@@ -17,9 +17,7 @@ export class Escaper {
         this.escapes = escapes;
     }
 
-    public static fromContext(
-        ctx: Context,
-    ): Escaper {
+    public static fromContext(ctx: Context): Escaper {
         return new this(getConfigLatexEscapes(ctx.config.latex));
     }
 

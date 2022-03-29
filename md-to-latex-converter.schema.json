@@ -4,6 +4,9 @@
     "description": "MarkDOwn To LaTeX Converter Configuration Schema",
     "type": "object",
     "properties": {
+        "$schema": {
+            "type": "string"
+        },
         "latex": {
             "$ref": "#/definitions/LatexInfo"
         },
@@ -84,7 +87,12 @@
                 },
                 "inCodeSpan": {
                     "type": "boolean",
-                    "description": "Escape words in code span. Inherited from inText",
+                    "description": "Escape words in code span",
+                    "default": true
+                },
+                "inLink": {
+                    "type": "boolean",
+                    "description": "Escape words inside a link",
                     "default": true
                 }
             },

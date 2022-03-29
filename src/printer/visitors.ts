@@ -32,8 +32,7 @@ type Visitor<T extends Node> = (node: T, context: Context) => string;
 
 export function applyPrinterVisitors(node: Node, context: Context): string {
     const visitor = processingVisitors[node.type] as Visitor<Node>;
-    const s = visitor(node, context);
-    return s;
+    return visitor(node, context);
 }
 
 export function printNodeList(
@@ -195,7 +194,9 @@ ${node.text}
     [NodeType.Text]: (node, context) => {
         const children = node.children;
         if (children.length === 0) {
-            const latexString = new LatexString(node.text, context).prepare(NodeType.Text);
+            const latexString = new LatexString(node.text, context).prepare(
+                NodeType.Text,
+            );
             return latexString.s;
         }
 

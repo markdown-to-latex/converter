@@ -1,5 +1,5 @@
 import { getLatexApplicationLetter } from './latex';
-import {LatexEscapeData, LatexInfo, MarkDownToLaTeXConverter} from "./types";
+import { LatexEscapeData, LatexInfo, MarkDownToLaTeXConverter } from './types';
 
 export type WriteFileFunction = (
     content: string,
@@ -16,7 +16,9 @@ export type RequiredProperty<T> = {
     [P in keyof T]-?: RequiredProperty<NonNullable<T[P]>>;
 };
 
-export type ContextConfig = RequiredProperty<Omit<MarkDownToLaTeXConverter, 'files'>>;
+export type ContextConfig = RequiredProperty<
+    Omit<Omit<MarkDownToLaTeXConverter, 'files'>, '$schema'>
+>;
 export type LatexInfoStrict = RequiredProperty<LatexInfo>;
 export type LatexEscapeDataStrict = RequiredProperty<LatexEscapeData>;
 

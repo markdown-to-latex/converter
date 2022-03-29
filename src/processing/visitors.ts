@@ -11,10 +11,15 @@ import {
 } from '../ast/nodes';
 import { NodesByType } from './nodes';
 import { captureLatexInline, captureOpCodes } from './capture';
+import { Context } from '../printer/context';
 
-type Visitor<T extends Node> = (node: T) => void;
+type Visitor<T extends Node> = (node: T, context: Context) => void;
 
-export function applyProcessingVisitorIfExists(node: Node, stage: number) {
+export function applyProcessingVisitorIfExists(
+    node: Node,
+    context: Context,
+    stage: number,
+) {
     const atStage = processingVisitors[stage];
 
     const visitor = atStage[node.type] as Visitor<Node>;
@@ -22,7 +27,7 @@ export function applyProcessingVisitorIfExists(node: Node, stage: number) {
         return;
     }
 
-    visitor(node);
+    visitor(node, context);
 }
 
 export function getProcessingStages(): number {
@@ -35,12 +40,12 @@ const processingVisitors: {
     [Key in keyof NodesByType]?: Visitor<NodesByType[Key]>;
 }[] = [
     {
-        [NodeType.Text]: node => {
+        [NodeType.Text]: (node, context) => {
             if (node.children.length !== 0) {
                 return;
             }
 
-            captureOpCodes(node);
+            captureOpCodes(node, context);
         },
         [NodeType.Code]: node => {
             if (node.lang === 'math') {
