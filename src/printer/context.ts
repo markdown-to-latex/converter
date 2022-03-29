@@ -1,5 +1,5 @@
 import { getLatexApplicationLetter } from './latex';
-import { LatexInfo } from './types';
+import { LatexInfo, MarkDownToLaTeXConverter } from "./types";
 
 export type WriteFileFunction = (
     content: string,
@@ -12,8 +12,15 @@ export interface ContextKeyToLabelValue {
     label: string;
 }
 
+export type RequiredProperty<T> = {
+    [P in keyof T]-?: RequiredProperty<NonNullable<T[P]>>;
+};
+
+export type ContextConfig = RequiredProperty<Omit<MarkDownToLaTeXConverter, 'files'>>;
+export type LatexInfoStrict = RequiredProperty<LatexInfo>;
+
 export interface Context {
-    config: LatexInfo;
+    config: ContextConfig;
     applications: {
         current: {
             title: string;

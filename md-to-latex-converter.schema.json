@@ -1,11 +1,14 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$schema": "https://json-schema.org/draft-07/schema",
     "title": "MarkDown To LaTeX Converter",
     "description": "MarkDOwn To LaTeX Converter Configuration Schema",
     "type": "object",
     "properties": {
         "latex": {
             "$ref": "#/definitions/LatexInfo"
+        },
+        "opCode": {
+            "$ref": "#/definitions/OpCodeData"
         },
         "files": {
             "type": "array",
@@ -28,10 +31,18 @@
                     "description": "Use \\texttt for code-spans",
                     "default": true
                 },
-                "autoEscapeUnderscoresCode": {
+                "defaultAutoEscapes": {
                     "type": "boolean",
-                    "description": "Auto-escape underscores in an inlined code block",
+                    "description": "Auto-escape default characters (%, #, $, _)",
                     "default": true
+                },
+                "extendAutoEscapes": {
+                    "type": "array",
+                    "description": "Words to escape",
+                    "items": {
+                        "$ref": "#/definitions/LatexEscapeData"
+                    },
+                    "default": []
                 },
                 "useLinkAs": {
                     "type": "string",
@@ -43,7 +54,42 @@
                     "$ref": "#/definitions/LatexMarginInfo"
                 }
             },
+            "required": [],
             "additionalProperties": false
+        },
+        "LatexEscapeData": {
+            "type": "object",
+            "description": "Word (that must be escaped) data",
+            "properties": {
+                "chars": {
+                    "type": "array",
+                    "description": "List of words to escape. Replacing is being done case insensitively",
+                    "items": {
+                        "type": "string",
+                        "description": "Word to escape. Replacing is being done case insensitively",
+                        "minLength": 1
+                    },
+                    "minItems": 1
+                },
+                "replacer": {
+                    "type": "string",
+                    "description": "Replacer RegExp string",
+                    "examples": ["\\$1", "\\something{$1}"],
+                    "default": "\\$1"
+                },
+                "inText": {
+                    "type": "boolean",
+                    "description": "Escape words in plain text",
+                    "default": true
+                },
+                "inCodeSpan": {
+                    "type": "boolean",
+                    "description": "Escape words in code span. Inherited from inText",
+                    "default": true
+                }
+            },
+            "additionalProperties": false,
+            "required": ["chars"]
         },
         "LatexMarginInfo": {
             "type": "object",
@@ -135,7 +181,26 @@
                     "default": "0pt"
                 }
             },
+            "required": [],
             "additionalProperties": false
+        },
+        "OpCodeData": {
+            "type": "object",
+            "description": "OpCode properties",
+            "properties": {
+                "starter": {
+                    "type": "string",
+                    "description": "Start word for OpCode",
+                    "default": "!",
+                    "minLength": 1
+                },
+                "delimiter": {
+                    "type": "string",
+                    "description": "Start word for OpCode",
+                    "default": "!",
+                    "minLength": 1
+                }
+            }
         },
         "FileInfo": {
             "type": "object",

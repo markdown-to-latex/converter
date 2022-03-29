@@ -4,11 +4,65 @@ import { applyProcessing } from './processing';
 import { printMarkdownAST } from './printer';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Context, WriteFileFunction } from './printer/context';
+import {
+  Context,
+  ContextConfig, LatexInfoStrict,
+  RequiredProperty,
+  WriteFileFunction
+} from "./printer/context";
 import { readConfig } from './config';
-import { MarkDownToLaTeXConverter } from './printer/types';
+import {
+    LatexEscapeData,
+    LatexInfo,
+    MarkDownToLaTeXConverter,
+} from './printer/types';
 
 export { buildMarkdownAST, lexer, applyProcessing, printMarkdownAST };
+
+const defaultConfig: ContextConfig = {
+    latex: {
+        useMonospaceFont: true,
+        useLinkAs: 'underline',
+        extendAutoEscapes: [],
+        defaultAutoEscapes: true,
+        margin: {
+            imageInnerTextSep: '3em',
+            imageBelowCaptionSkip: '-4ex',
+            imageRemovedBelowCaptionSkip: '-1.6em',
+            imageAboveCaptionSkip: '0.5em',
+            codeInnerTextSep: '3em',
+            codeBelowCaptionSkip: '-4ex',
+            codeRemovedBelowCaptionSkip: '-1.6em',
+            codeAboveCaptionSkip: '-0.5em',
+            tableBelowCaptionSkip: '0em',
+            tableAboveCaptionSkip: '0em',
+            tablePre: '2em',
+            tablePost: '2em',
+            tableRemovedPost: '0em',
+            mathAboveDisplaySkip: '-0.9em',
+            mathBelowDisplaySkip: '0pt',
+            mathAboveDisplayShortSkip: '0pt',
+            mathBelowDisplayShortSkip: '0pt',
+        },
+    },
+    opCode: {
+        starter: '!',
+        delimiter: '!',
+    },
+};
+
+const defaultEscapes: LatexEscapeData[] = [
+    {
+        chars: ['%', '$'],
+        inText: true,
+        inCodeSpan: true,
+    },
+    {
+        chars: ['_', '#', '&'],
+        inText: false,
+        inCodeSpan: true,
+    },
+];
 
 export function initContext(
     writeFile: WriteFileFunction,
@@ -44,48 +98,97 @@ export function initContext(
             keyToLabel: {},
         },
         config: {
-            useMonospaceFont: config?.latex?.useMonospaceFont ?? true,
-            autoEscapeUnderscoresCode:
-                config?.latex?.autoEscapeUnderscoresCode ?? true,
-            useLinkAs: config?.latex?.useLinkAs ?? 'underline',
-            margin: {
-                imageInnerTextSep:
-                    config?.latex?.margin?.imageInnerTextSep ?? '3em',
-                imageBelowCaptionSkip:
-                    config?.latex?.margin?.imageBelowCaptionSkip ?? '-4ex',
-                imageRemovedBelowCaptionSkip:
-                    config?.latex?.margin?.imageRemovedBelowCaptionSkip ??
-                    '-1.6em',
-                imageAboveCaptionSkip:
-                    config?.latex?.margin?.imageAboveCaptionSkip ?? '0.5em',
-                codeInnerTextSep:
-                    config?.latex?.margin?.codeInnerTextSep ?? '3em',
-                codeBelowCaptionSkip:
-                    config?.latex?.margin?.codeBelowCaptionSkip ?? '-4ex',
-                codeRemovedBelowCaptionSkip:
-                    config?.latex?.margin?.codeRemovedBelowCaptionSkip ??
-                    '-1.6em',
-                codeAboveCaptionSkip:
-                    config?.latex?.margin?.codeAboveCaptionSkip ?? '-0.5em',
-                tableBelowCaptionSkip:
-                    config?.latex?.margin?.tableBelowCaptionSkip ?? '0em',
-                tableAboveCaptionSkip:
-                    config?.latex?.margin?.tableAboveCaptionSkip ?? '0em',
-                tablePre: config?.latex?.margin?.tablePre ?? '2em',
-                tablePost: config?.latex?.margin?.tablePost ?? '2em',
-                tableRemovedPost:
-                    config?.latex?.margin?.tableRemovedPost ?? '0em',
-                mathAboveDisplaySkip:
-                    config?.latex?.margin?.mathAboveDisplaySkip ?? '-0.9em',
-                mathBelowDisplaySkip:
-                    config?.latex?.margin?.mathBelowDisplaySkip ?? '0pt',
-                mathAboveDisplayShortSkip:
-                    config?.latex?.margin?.mathAboveDisplayShortSkip ?? '0pt',
-                mathBelowDisplayShortSkip:
-                    config?.latex?.margin?.mathBelowDisplayShortSkip ?? '0pt',
+            latex: {
+                useMonospaceFont:
+                    config?.latex?.useMonospaceFont ??
+                    defaultConfig.latex.useMonospaceFont,
+                useLinkAs:
+                    config?.latex?.useLinkAs ?? defaultConfig.latex.useLinkAs,
+                extendAutoEscapes:
+                    config?.latex?.extendAutoEscapes?.map(d => ({
+                        chars: d.chars,
+                        inText: d.inText ?? true,
+                        inCodeSpan: d.inCodeSpan ?? true,
+                        replacer: d.replacer ?? '\\$1',
+                    })) ?? defaultConfig.latex.extendAutoEscapes,
+                defaultAutoEscapes:
+                    config?.latex?.defaultAutoEscapes ??
+                    defaultConfig.latex.defaultAutoEscapes,
+                margin: {
+                    imageInnerTextSep:
+                        config?.latex?.margin?.imageInnerTextSep ??
+                        defaultConfig.latex.margin.imageInnerTextSep,
+                    imageBelowCaptionSkip:
+                        config?.latex?.margin?.imageBelowCaptionSkip ??
+                        defaultConfig.latex.margin.imageBelowCaptionSkip,
+                    imageRemovedBelowCaptionSkip:
+                        config?.latex?.margin?.imageRemovedBelowCaptionSkip ??
+                        defaultConfig.latex.margin.imageRemovedBelowCaptionSkip,
+                    imageAboveCaptionSkip:
+                        config?.latex?.margin?.imageAboveCaptionSkip ??
+                        defaultConfig.latex.margin.imageAboveCaptionSkip,
+                    codeInnerTextSep:
+                        config?.latex?.margin?.codeInnerTextSep ??
+                        defaultConfig.latex.margin.codeInnerTextSep,
+                    codeBelowCaptionSkip:
+                        config?.latex?.margin?.codeBelowCaptionSkip ??
+                        defaultConfig.latex.margin.codeBelowCaptionSkip,
+                    codeRemovedBelowCaptionSkip:
+                        config?.latex?.margin?.codeRemovedBelowCaptionSkip ??
+                        defaultConfig.latex.margin.codeRemovedBelowCaptionSkip,
+                    codeAboveCaptionSkip:
+                        config?.latex?.margin?.codeAboveCaptionSkip ??
+                        defaultConfig.latex.margin.codeAboveCaptionSkip,
+                    tableBelowCaptionSkip:
+                        config?.latex?.margin?.tableBelowCaptionSkip ??
+                        defaultConfig.latex.margin.tableBelowCaptionSkip,
+                    tableAboveCaptionSkip:
+                        config?.latex?.margin?.tableAboveCaptionSkip ??
+                        defaultConfig.latex.margin.tableAboveCaptionSkip,
+                    tablePre:
+                        config?.latex?.margin?.tablePre ??
+                        defaultConfig.latex.margin.tablePre,
+                    tablePost:
+                        config?.latex?.margin?.tablePost ??
+                        defaultConfig.latex.margin.tablePost,
+                    tableRemovedPost:
+                        config?.latex?.margin?.tableRemovedPost ??
+                        defaultConfig.latex.margin.tableRemovedPost,
+                    mathAboveDisplaySkip:
+                        config?.latex?.margin?.mathAboveDisplaySkip ??
+                        defaultConfig.latex.margin.mathAboveDisplaySkip,
+                    mathBelowDisplaySkip:
+                        config?.latex?.margin?.mathBelowDisplaySkip ??
+                        defaultConfig.latex.margin.mathBelowDisplaySkip,
+                    mathAboveDisplayShortSkip:
+                        config?.latex?.margin?.mathAboveDisplayShortSkip ??
+                        defaultConfig.latex.margin.mathAboveDisplayShortSkip,
+                    mathBelowDisplayShortSkip:
+                        config?.latex?.margin?.mathBelowDisplayShortSkip ??
+                        defaultConfig.latex.margin.mathBelowDisplayShortSkip,
+                },
+            },
+            opCode: {
+                starter:
+                    config?.opCode?.starter ?? defaultConfig.opCode.starter,
+                delimiter:
+                    config?.opCode?.delimiter ?? defaultConfig.opCode.delimiter,
             },
         },
     };
+}
+
+export function getConfigLatexEscapes(
+    latexInfo: LatexInfoStrict,
+): LatexEscapeData[] {
+    return [
+        ...latexInfo.extendAutoEscapes,
+        ...(latexInfo.defaultAutoEscapes ? defaultEscapes : []),
+    ];
+}
+
+export function getContextEscapes(ctx: Context): LatexEscapeData[] {
+    return getConfigLatexEscapes(ctx.config.latex);
 }
 
 export function convertMarkdownFiles(rootDir: string): void {
