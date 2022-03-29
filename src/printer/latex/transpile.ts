@@ -1,5 +1,8 @@
 import { LatexInfo } from '../types';
 import { escapeUnderscoredText, getLatexOrderedListPoint } from './index';
+import { Escaper } from './escaper';
+import { LatexInfoStrict } from '../context';
+import { NodeType } from '../../ast/nodes';
 
 export interface LatexListItemInfo {
     text: string;
@@ -146,10 +149,12 @@ export function getLatexInlineMath(text: string, _: LatexInfo): string {
     return `\\displaystyle ${text}`;
 }
 
-export function getLatexCodeSpan(text: string, config: LatexInfo) {
-    text = config.autoEscapeUnderscoresCode
-        ? escapeUnderscoredText(text)
-        : text;
+export function getLatexCodeSpan(text: string, config: LatexInfoStrict) {
+    text = Escaper.fromConfigLatex(config)
+        .prepare({
+            nodeType: NodeType.CodeSpan,
+        })
+        .apply(text);
 
     return config.useMonospaceFont ? `\\texttt{${text}}` : text;
 }
