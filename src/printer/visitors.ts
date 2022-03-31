@@ -86,10 +86,10 @@ const processingVisitors: {
 } = {
     [NodeType.Space]: () => '\n',
     [NodeType.Code]: (node, context) => {
-        if (node.lang === CodeLanguageTemporary.REFERENCE) {
+        if (node.lang === CodeLanguageTemporary.Reference) {
             if (context.references.current === null) {
                 throw new ProcessingError(
-                    `Cannot process code with language ${CodeLanguageTemporary.REFERENCE}. No header OpCode !RR`,
+                    `Cannot process code with language ${CodeLanguageTemporary.Reference}. No header OpCode !RR`,
                 );
             }
 
@@ -101,10 +101,10 @@ ${label}.\\,${node.text}`,
             context.references.current = null;
             return '';
         }
-        if (node.lang === CodeLanguageTemporary.APPLICATION) {
+        if (node.lang === CodeLanguageTemporary.Application) {
             if (context.applications.current === null) {
                 throw new ProcessingError(
-                    `Cannot process code with language ${CodeLanguageTemporary.REFERENCE}. No header OpCode !RR`,
+                    `Cannot process code with language ${CodeLanguageTemporary.Reference}. No header OpCode !RR`,
                 );
             }
 
@@ -206,6 +206,7 @@ ${node.text}
     [NodeType.Link]: (node, context) =>
         getLatexLinkText(
             printNodeList(node.children, context),
+            new LatexString(node.href, context).prepare(NodeType.Link).s,
             node.title,
             context.config.latex,
         ),

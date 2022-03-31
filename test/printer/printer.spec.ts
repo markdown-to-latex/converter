@@ -426,3 +426,17 @@ describe('url variants', () => {
         expect(result).toMatchSnapshot();
     });
 });
+
+describe('Escapes', () => {
+    test('Default escapes', () => {
+        const result = processingChain(`
+# Header
+
+[Link name](https://testing.url/com?some=thing&wtf#xdxdxd)
+
+The "definition" increased by 1% (more text more text).
+    `)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
+});

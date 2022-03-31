@@ -38,6 +38,8 @@ export class Escaper {
                     (() => {
                         if (data.nodeType == 'CodeSpan') {
                             return d => d.inCodeSpan;
+                        } else if (data.nodeType == 'Link') {
+                            return d => d.inLink;
                         } else {
                             return d => d.inText;
                         }

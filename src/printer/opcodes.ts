@@ -37,8 +37,8 @@ export const enum OpCodeType {
 }
 
 export const enum CodeLanguageTemporary {
-    APPLICATION = 'app',
-    REFERENCE = 'ref',
+    Application = 'app',
+    Reference = 'ref',
 }
 
 export class OpCodeError extends Error {

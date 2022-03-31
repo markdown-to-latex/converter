@@ -48,6 +48,11 @@ const defaultConfig: ContextConfig = {
     },
 };
 
+/**
+ * Default escapes applied to the LaTeX
+ *
+ * @see https://tex.stackexchange.com/a/34586
+ */
 const defaultEscapes: LatexEscapeDataStrict[] = [
     {
         chars: ['%', '_', '#', '&'],
@@ -67,7 +72,7 @@ const defaultEscapes: LatexEscapeDataStrict[] = [
         chars: ['"'],
         inText: true,
         inCodeSpan: true,
-        inLink: false,
+        inLink: true,
         replacer: '$1{}',
     },
 ];

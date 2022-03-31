@@ -182,8 +182,9 @@ const linkTextWrapper: {
 
 export function getLatexLinkText(
     text: string,
+    link: string,
     title: string,
     config: LatexInfoStrict,
 ) {
-    return linkTextWrapper[config.useLinkAs ?? 'default'](text, config);
+    return linkTextWrapper[config.useLinkAs ?? 'default'](link, config);
 }

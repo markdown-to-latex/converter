@@ -72,6 +72,16 @@ See application А.
 "
 `;
 
+exports[`Escapes Default escapes 1`] = `
+"\\\\subtitle{Header}
+
+\\\\underline{https://testing.url/com?some=thing\\\\&wtf\\\\#xdxdxd}
+
+The \\"{}definition\\"{} increased by 1\\\\% (more text more text).
+    
+"
+`;
+
 exports[`References Inline latex math dereplacement 1`] = `
 "$\\\\displaystyle a > b < c$
 "
