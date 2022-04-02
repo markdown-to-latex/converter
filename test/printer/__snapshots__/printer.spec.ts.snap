@@ -72,6 +72,16 @@ See application А.
 "
 `;
 
+exports[`CodeSpan Monospace 1`] = `
+"CodeSpan \\\\texttt{text \\\\& text}.
+"
+`;
+
+exports[`CodeSpan Quote 1`] = `
+"CodeSpan <<text \\\\& text>>.
+"
+`;
+
 exports[`Escapes Default escapes 1`] = `
 "\\\\subtitle{Header}
 
@@ -79,6 +89,11 @@ exports[`Escapes Default escapes 1`] = `
 
 The \\"{}definition\\"{} increased by 1\\\\% (more text more text).
     
+"
+`;
+
+exports[`References CodeSpan dereplacement 1`] = `
+"\\\\texttt{\\"{}sample \\\\& text\\"{}}
 "
 `;
 
@@ -142,6 +157,12 @@ exports[`References Tag <hr> should break the page 1`] = `
 
 \\\\pagebreak
 The second page
+"
+`;
+
+exports[`References Text ' dereplacement 1`] = `
+"Otsu's method is a one-dimensional discrete analog of Fisher's 
+Discriminant Analysis, is related to Jenks optimization method.
 "
 `;
 
@@ -283,6 +304,12 @@ def hello_world():
     \\\\captionsetup{justification=centering,indention=0cm,labelformat=empty, margin={0pt, 0cm},font={stretch=1.5}}
     \\\\caption{Рисунок 2 -- Python Sample Code 2}
 \\\\end{figure}
+"
+`;
+
+exports[`simple md to latex docs printer Del node 1`] = `
+"Test~node \\\\textit{what} hell~yeah we~ll.
+        
 "
 `;
 

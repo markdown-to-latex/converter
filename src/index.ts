@@ -18,7 +18,7 @@ export { buildMarkdownAST, lexer, applyProcessing, printMarkdownAST };
 
 const defaultConfig: ContextConfig = {
     latex: {
-        useMonospaceFont: true,
+        useCodeSpanAs: 'monospace',
         useLinkAs: 'underline',
         extendAutoEscapes: [],
         defaultAutoEscapes: true,
@@ -69,6 +69,27 @@ const defaultEscapes: LatexEscapeDataStrict[] = [
         replacer: '\\$1',
     },
     {
+        chars: ['{', '}'],
+        inText: false,
+        inCodeSpan: true,
+        inLink: false,
+        replacer: '\\$1',
+    },
+    {
+        chars: ['~'],
+        inText: false,
+        inCodeSpan: true,
+        inLink: false,
+        replacer: '\\textasciitilde',
+    },
+    {
+        chars: ['\\^'],
+        inText: false,
+        inCodeSpan: true,
+        inLink: false,
+        replacer: '\\textasciicircum',
+    },
+    {
         chars: ['"'],
         inText: true,
         inCodeSpan: true,
@@ -112,9 +133,9 @@ export function initContext(
         },
         config: {
             latex: {
-                useMonospaceFont:
-                    config?.latex?.useMonospaceFont ??
-                    defaultConfig.latex.useMonospaceFont,
+                useCodeSpanAs:
+                    config?.latex?.useCodeSpanAs ??
+                    defaultConfig.latex.useCodeSpanAs,
                 useLinkAs:
                     config?.latex?.useLinkAs ?? defaultConfig.latex.useLinkAs,
                 extendAutoEscapes:

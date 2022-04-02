@@ -29,11 +29,6 @@
             "type": "object",
             "description": "Information about LaTeX",
             "properties": {
-                "useMonospaceFont": {
-                    "type": "boolean",
-                    "description": "Use \\texttt for code-spans",
-                    "default": true
-                },
                 "defaultAutoEscapes": {
                     "type": "boolean",
                     "description": "Auto-escape default characters (%, #, $, _)",
@@ -49,9 +44,15 @@
                 },
                 "useLinkAs": {
                     "type": "string",
-                    "description": "Auto-escape underscores in an inlined code block",
+                    "description": "How to interpret markdown Link?",
                     "enum": ["code", "default", "bold", "underline", "italic"],
                     "default": "default"
+                },
+                "useCodeSpanAs": {
+                    "type": "string",
+                    "description": "How to interpret markdown CodeSpan?",
+                    "enum": ["monospace", "quotes"],
+                    "default": "quotes"
                 },
                 "margin": {
                     "$ref": "#/definitions/LatexMarginInfo"

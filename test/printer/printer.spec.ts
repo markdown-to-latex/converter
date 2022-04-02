@@ -81,6 +81,14 @@ def main():
         expect(result).toMatchSnapshot();
     });
 
+    test('Del node', () => {
+        const result = processingChain(`
+Test~node *what* hell~yeah we~ll.
+        `)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
+
     test('Code + Code', () => {
         const result = processingChain(`
 # Header
@@ -294,10 +302,13 @@ Otsu's method is a one-dimensional discrete analog of Fisher's
 Discriminant Analysis, is related to Jenks optimization method.
 `)['filepath'];
         expect(result).not.toBeUndefined();
-        expect(result)
-            .toEqual(`Otsu's method is a one-dimensional discrete analog of Fisher's 
-Discriminant Analysis, is related to Jenks optimization method.
-`);
+        expect(result).toMatchSnapshot();
+    });
+
+    test('CodeSpan dereplacement', () => {
+        const result = processingChain('`"sample & text"`')['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
     });
 
     test('Inline latex math dereplacement', () => {
@@ -436,6 +447,24 @@ describe('Escapes', () => {
 
 The "definition" increased by 1% (more text more text).
     `)['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
+});
+
+describe('CodeSpan', () => {
+    test('Monospace', () => {
+        const result = processingChain('CodeSpan `text & text`.')['filepath'];
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
+
+    test('Quote', () => {
+        const result = processingChain('CodeSpan `text & text`.', {
+            latex: {
+                useCodeSpanAs: 'quotes',
+            },
+        })['filepath'];
         expect(result).not.toBeUndefined();
         expect(result).toMatchSnapshot();
     });

@@ -230,8 +230,9 @@ ${node.text}
     [NodeType.CodeSpan]: (node, context) =>
         getLatexCodeSpan(node.text, context.config.latex),
     [NodeType.Br]: () => '\n\n',
-    [NodeType.Del]: throwProcessingError,
-
+    [NodeType.Del]: (node, context) => {
+        return '~' + printNodeList(node.children, context) + '~';
+    },
     [NodeType.File]: (node, context) => {
         const content = new LatexString(
             printNodeList(node.children, context),

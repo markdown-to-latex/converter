@@ -2,6 +2,7 @@ import { getLatexOrderedListPoint, LatexString } from './index';
 import { Escaper } from './escaper';
 import { LatexInfoStrict } from '../context';
 import { NodeType } from '../../ast/nodes';
+import { StringE } from '../../extension/string';
 
 export interface LatexListItemInfo {
     text: string;
@@ -160,13 +161,17 @@ export function getLatexInlineMath(text: string, _: LatexInfoStrict): string {
 export function getLatexCodeSpan(text: string, config: LatexInfoStrict) {
     // TODO: store escaper in context
 
-    text = Escaper.fromConfigLatex(config)
-        .prepare({
+    text = new StringE(text).resolveDeReplacements().applyEscaper(
+        Escaper.fromConfigLatex(config).prepare({
             nodeType: NodeType.CodeSpan,
-        })
-        .apply(text).s;
+        }),
+    ).s;
 
-    return config.useMonospaceFont ? `\\texttt{${text}}` : text;
+    if (config.useCodeSpanAs === 'quotes') {
+        return `<<${text}>>`;
+    }
+
+    return `\\texttt{${text}}`;
 }
 
 type LinkAsType = NonNullable<LatexInfoStrict['useLinkAs']>;
