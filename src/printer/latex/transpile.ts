@@ -115,6 +115,7 @@ export function getLatexCode(
     config: LatexInfoStrict,
 ): string {
     return `
+
 \\setlength{\\intextsep}{${config.margin!.codeInnerTextSep}}
 \\setlength{\\belowcaptionskip}{${config.margin!.codeBelowCaptionSkip}}${
         info.removeSpace
@@ -139,6 +140,7 @@ ${info.text}
 
 export function getLatexMath(text: string, config: LatexInfoStrict): string {
     return `
+
 \\setlength{\\abovedisplayskip}{${config.margin!.mathAboveDisplaySkip}}
 \\setlength{\\belowdisplayskip}{${config.margin!.mathBelowDisplaySkip}}
 \\setlength{\\abovedisplayshortskip}{${

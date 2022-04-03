@@ -144,6 +144,26 @@ Demonstrated in table
         expect(result).not.toBeUndefined();
         expect(result).toMatchSnapshot();
     });
+
+    test('ListItem + Br + Text must have 2 line breaks', () => {
+        const result = processingChain(`1. Item  
+New Line
+
+2. New Item`)['filepath'];
+
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
+
+    test('ListItem + MathLatex must have 2 line breaks', () => {
+        const result = processingChain(`1. Text  
+\`\`\`math
+Some text here
+\`\`\``)['filepath'];
+
+        expect(result).not.toBeUndefined();
+        expect(result).toMatchSnapshot();
+    });
 });
 
 describe('Applications', () => {
