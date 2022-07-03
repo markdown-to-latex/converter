@@ -381,7 +381,7 @@ New Line
 `;
 
 exports[`simple md to latex docs printer ListItem + MathLatex must have 2 line breaks 1`] = `
-"\\\\hspace{0cm}а)\\\\,Text  
+"\\\\hspace{0cm}а)\\\\,Text
 
 \\\\setlength{\\\\abovedisplayskip}{-0.9em}
 \\\\setlength{\\\\belowdisplayskip}{0pt}
@@ -460,7 +460,7 @@ t & r & e & z\\\\\\\\ \\\\hline
 `;
 
 exports[`simple md to latex docs printer Text + MathLatex must have 2 line breaks 1`] = `
-"\\\\hspace{0cm}а)\\\\,Text  
+"\\\\hspace{0cm}а)\\\\,Text
 
 \\\\setlength{\\\\abovedisplayskip}{-0.9em}
 \\\\setlength{\\\\belowdisplayskip}{0pt}
