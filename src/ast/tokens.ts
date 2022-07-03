@@ -1,4 +1,4 @@
-import * as nodes from './nodes';
+import * as nodes from './node';
 import { Token, TokenTypes } from '../lexer/tokens';
 
 const NodeByTokenTypeArray = {

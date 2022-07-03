@@ -1,3 +1,7 @@
+export const enum RawNodeType {
+    Raw = 'Raw',
+}
+
 export const enum NodeType {
     // From marked
     Space = 'Space',
@@ -39,9 +43,79 @@ export const enum NodeTableAlign {
     Center = 'Center',
 }
 
+export interface TextPosition {
+    line: number;
+    column: number;
+}
+
+export interface StartEndTextPosition {
+    start: TextPosition;
+    end: TextPosition;
+}
+
+export function textPositionToString(pos: TextPosition) {
+    return `${pos.line}:${pos.column}`;
+}
+
+export function textPositionEq(
+    left: TextPosition,
+    right: TextPosition,
+): boolean {
+    return left.line === right.line && left.column == right.column;
+}
+
+export function textPositionG(
+    left: TextPosition,
+    right: TextPosition,
+): boolean {
+    return (
+        left.line > right.line ||
+        (left.line == right.line && left.column > right.column)
+    );
+}
+
+export function textPositionGEq(
+    left: TextPosition,
+    right: TextPosition,
+): boolean {
+    return textPositionEq(left, right) || textPositionG(left, right);
+}
+
+export function copyTextPosition(pos: TextPosition): TextPosition {
+    return { ...pos };
+}
+
+export function createStartEndPos(
+    startLine: number,
+    startCol: number,
+    endLine: number,
+    endCol: number,
+): StartEndTextPosition {
+    return {
+        start: {
+            line: startLine,
+            column: startCol,
+        },
+        end: {
+            line: endLine,
+            column: endCol,
+        },
+    };
+}
+
+export function copyStartEndPos(
+    pos: StartEndTextPosition,
+): StartEndTextPosition {
+    return {
+        start: copyTextPosition(pos.start),
+        end: copyTextPosition(pos.end),
+    };
+}
+
 export interface Node {
-    type: NodeType;
+    type: NodeType | RawNodeType;
     parent: Node | null;
+    pos: StartEndTextPosition;
 }
 
 export interface NodeChildren {
@@ -54,6 +128,10 @@ export interface NodeText {
 
 export interface NodeHref {
     href: string;
+}
+
+export interface RawNode extends Node, NodeText {
+    type: RawNodeType.Raw;
 }
 
 export interface SpaceNode extends Node {
@@ -188,130 +266,4 @@ export interface MathLatexNode extends Node, NodeText {
 
 export interface MathInlineLatexNode extends Node, NodeText {
     type: NodeType.MathInlineLatex;
-}
-
-const nodeListProps = ['children', 'rows', 'header'] as const;
-
-type NodeWithAnyChildren = {
-    [ListKey in typeof nodeListProps[number]]?: Node[];
-};
-
-export interface NodeParentData {
-    node: Node;
-    index: number;
-    container: Node[];
-}
-
-export function* traverseNodeChildren(
-    originalNode: Readonly<Node>,
-): Generator<NodeParentData, void, never> {
-    const parent = originalNode as NodeWithAnyChildren;
-
-    for (const prop of nodeListProps) {
-        const toProcess = parent[prop];
-        if (!Array.isArray(toProcess)) {
-            continue;
-        }
-
-        for (let i = 0; i < toProcess.length; i++) {
-            let child = toProcess[i];
-            yield {
-                node: child,
-                index: i,
-                container: toProcess,
-            };
-        }
-    }
-}
-
-export function getNodeAllChildren(originalNode: Readonly<Node>): Node[] {
-    const node = originalNode as NodeWithAnyChildren;
-
-    return Array.from(traverseNodeChildren(originalNode)).map(
-        data => data.node,
-    );
-}
-
-// TODO: also look at children
-export function getNodeLeftNeighbourLeaf(node: Node): Node | null {
-    const parent = node.parent;
-    if (parent === null) {
-        return null;
-    }
-
-    for (const data of Array.from(traverseNodeChildren(parent))) {
-        if (data.node !== node) {
-            continue;
-        }
-
-        if (data.index === 0) {
-            return getNodeLeftNeighbourLeaf(parent);
-        }
-        let left = data.container[data.index - 1] as NodeWithAnyChildren & Node;
-
-        while (
-            left &&
-            left.children !== undefined &&
-            left.children.length !== 0
-        ) {
-            const child = left.children[left.children.length - 1];
-            left = child as NodeWithAnyChildren & Node;
-        }
-
-        return left;
-    }
-
-    return getNodeLeftNeighbourLeaf(parent);
-}
-
-export function getNodeRightNeighbourLeaf(node: Node): Node | null {
-    const parent = node.parent;
-    if (parent === null) {
-        return null;
-    }
-
-    for (const data of Array.from(traverseNodeChildren(parent))) {
-        if (data.node !== node) {
-            continue;
-        }
-
-        if (data.index === data.container.length - 1) {
-            return getNodeRightNeighbourLeaf(parent);
-        }
-        let right = data.container[data.index + 1] as NodeWithAnyChildren &
-            Node;
-
-        while (
-            right &&
-            right.children !== undefined &&
-            right.children.length !== 0
-        ) {
-            const child = right.children[0];
-            right = child as NodeWithAnyChildren & Node;
-        }
-
-        return right;
-    }
-
-    return getNodeRightNeighbourLeaf(parent);
-}
-
-export function findNodeData(node: Node): NodeParentData {
-    const parent = node.parent;
-    if (parent === null) {
-        throw new Error('Cannot find node data for a root node');
-    }
-
-    for (const data of Array.from(traverseNodeChildren(parent))) {
-        if (data.node === node) {
-            return data;
-        }
-    }
-
-    throw new Error('Cannot find node data for a root node');
-}
-
-export function replaceNode(node: Node, newNode: Node): void {
-    const data = findNodeData(node);
-    data.container[data.index] = newNode;
 }

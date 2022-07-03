@@ -8,7 +8,7 @@ import {
     NodeType,
     replaceNode,
     TextNode,
-} from '../ast/nodes';
+} from '../ast/node';
 import { NodesByType } from './nodes';
 import { captureLatexInline, captureOpCodes } from './capture';
 import { Context } from '../printer/context';

@@ -1,6 +1,7 @@
 import { EscaperReady } from '../printer/latex/escaper';
 import { Context } from '../printer/context';
 import { LatexString } from '../printer/latex';
+import { TextPosition } from '../ast/node';
 
 export class StringE {
     /**
@@ -15,7 +16,7 @@ export class StringE {
         '&lt;': '<',
         '&gt;': '>',
         '&quot;': '"',
-        '&#39;': "'",
+        '&#39;': '\'',
     };
     protected _string: string;
 
@@ -50,6 +51,14 @@ export class StringE {
      */
     public get trimmed(): StringE {
         return this.trimE();
+    }
+
+    /**
+     * [default method field proxy]
+     * @see String.length
+     */
+    public get length(): number {
+        return this._string.length;
     }
 
     /**
@@ -244,5 +253,43 @@ export class StringE {
 
     public toLatexString(context: Context): LatexString {
         return new LatexString(this, context);
+    }
+
+    private __linesRegexp: RegExp = new RegExp(/\r?\n/g);
+
+    public get lines(): StringE[] {
+        return this.splitE(this.__linesRegexp);
+    }
+
+    public slicePosition(
+        basePos: Readonly<TextPosition>,
+        startPos: Readonly<TextPosition>,
+        endPos: Readonly<TextPosition>,
+    ): StringE {
+        const startPosOffset: TextPosition = {
+            line: startPos.line - basePos.line,
+            column: startPos.column,
+        };
+        const endPosOffset: TextPosition = {
+            line: endPos.line - basePos.line,
+            column: endPos.column,
+        };
+
+        // TODO: cache lines
+        const lines = this.lines.slice(startPosOffset.line, endPosOffset.line);
+        if (lines.length === 0) {
+            return StringE.from('');
+        }
+        if (startPosOffset.line === endPosOffset.line) {
+            return lines[0].sliceE(startPosOffset.column, endPosOffset.column);
+        }
+
+        lines[0] = lines[0].sliceE(startPosOffset.column);
+        lines[lines.length - 1] = lines[lines.length - 1].sliceE(
+            0,
+            endPosOffset.column,
+        );
+
+        return StringE.from(lines.map(s => s.s).join('\n'));
     }
 }

@@ -1,5 +1,5 @@
 import { Token, TokenByType } from '../lexer/tokens';
-import { Node, NodeTableAlign, NodeType } from './nodes';
+import { Node, NodeTableAlign, NodeType } from './node';
 import { NodeByTokenType } from './tokens';
 
 export function astProcessTokenList(tokens: readonly Token[]): Node[] {
