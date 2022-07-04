@@ -6,7 +6,7 @@ import {
     getOrCreateTableLabel,
     getReferenceLabelByKey,
 } from './context';
-import { getNodeRightNeighbourLeaf, NodeType, OpCodeNode } from '../ast/nodes';
+import { getNodeRightNeighbourLeaf, NodeType, OpCodeNode, RawNodeType } from '../ast/node';
 
 export function resolveOpCode(node: OpCodeNode, context: Context): string {
     const lazy = opCodeMap[node.opcode as OpCodeType];
@@ -92,8 +92,8 @@ function compareKeyArrayAndMap(
 
 function shouldHaveNodeWithTypeAfter(
     node: OpCodeNode,
-    expected: NodeType[],
-    blacklisted: NodeType[],
+    expected: (NodeType | RawNodeType)[],
+    blacklisted: (NodeType | RawNodeType)[],
 ): void {
     let right = getNodeRightNeighbourLeaf(node);
 

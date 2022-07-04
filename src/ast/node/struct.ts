@@ -48,6 +48,9 @@ export interface TextPosition {
     column: number;
 }
 
+/**
+ * Defines text position in the original file
+ */
 export interface StartEndTextPosition {
     start: TextPosition;
     end: TextPosition;
@@ -116,6 +119,7 @@ export interface Node {
     type: NodeType | RawNodeType;
     parent: Node | null;
     pos: StartEndTextPosition;
+
 }
 
 export interface NodeChildren {

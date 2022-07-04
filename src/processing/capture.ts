@@ -1,4 +1,4 @@
-import { InlineLatexNode, NodeType, OpCodeNode, TextNode } from '../ast/nodes';
+import { createStartEndPos, InlineLatexNode, NodeType, OpCodeNode, TextNode } from '../ast/node';
 import { Context } from '../printer/context';
 
 export function captureOpCodes(node: TextNode, context: Context): void {
@@ -26,6 +26,7 @@ export function captureOpCodes(node: TextNode, context: Context): void {
         if (endIndex !== contentEndIndex) {
             const content = node.text.slice(endIndex, contentEndIndex);
             node.children.push({
+                pos: createStartEndPos(0,0,0,0,),
                 type: NodeType.Text,
                 parent: node,
                 text: content,
@@ -34,6 +35,7 @@ export function captureOpCodes(node: TextNode, context: Context): void {
         }
 
         node.children.push({
+            pos: createStartEndPos(0,0,0,0,),
             type: NodeType.OpCode,
             parent: node,
             opcode: opcode,
@@ -47,6 +49,7 @@ export function captureOpCodes(node: TextNode, context: Context): void {
     if (endIndex < node.text.length) {
         const content = node.text.slice(endIndex);
         node.children.push({
+            pos: createStartEndPos(0,0,0,0,),
             type: NodeType.Text,
             parent: node,
             text: content,
@@ -73,6 +76,7 @@ export function captureLatexInline(node: TextNode): void {
         if (endIndex !== contentEndIndex) {
             const content = node.text.slice(endIndex, contentEndIndex);
             node.children.push({
+                pos: createStartEndPos(0,0,0,0,),
                 type: NodeType.Text,
                 parent: node,
                 text: content,
@@ -81,6 +85,7 @@ export function captureLatexInline(node: TextNode): void {
         }
 
         node.children.push({
+            pos: createStartEndPos(0,0,0,0,),
             type: NodeType.InlineLatex,
             parent: node,
             text: inline,
@@ -93,6 +98,7 @@ export function captureLatexInline(node: TextNode): void {
     if (endIndex < node.text.length) {
         const content = node.text.slice(endIndex);
         node.children.push({
+            pos: createStartEndPos(0,0,0,0,),
             type: NodeType.Text,
             parent: node,
             text: content,

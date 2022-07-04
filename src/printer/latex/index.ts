@@ -1,16 +1,8 @@
 import { Context } from '../context';
-import { NodeType } from '../../ast/nodes';
+import { NodeType } from '../../ast/node';
 import { Escaper } from './escaper';
 import { StringE } from '../../extension/string';
-
-export class LatexError extends Error {
-    constructor(m: string) {
-        super(m);
-
-        // Set the prototype explicitly.
-        Object.setPrototypeOf(this, LatexError.prototype);
-    }
-}
+import { LatexError } from './error';
 
 export class LatexString extends StringE {
     public context: Context;
@@ -24,14 +16,14 @@ export class LatexString extends StringE {
         // TODO: move escaper into the context
 
         const stringE = this.resolveDeReplacements();
-        const latexString = stringE
-            .applyEscaper(
+        return new LatexString(
+            stringE.applyEscaper(
                 Escaper.fromContext(this.context).prepare({
                     nodeType: nodeType,
                 }),
-            )
-            .toLatexString(this.context);
-        return latexString;
+            ),
+            this.context,
+        );
     }
 
     public get se(): StringE {

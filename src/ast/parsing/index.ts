@@ -10,7 +10,7 @@ import {
 import path from 'path';
 import { StringE } from '../../extension/string';
 
-function fullContentPos(content: string | StringE): StartEndTextPosition {
+export function fullContentPos(content: string | StringE): StartEndTextPosition {
     const contentE = StringE.from(content);
 
     const lines = contentE.splitE(/\r?\n/);
@@ -18,7 +18,7 @@ function fullContentPos(content: string | StringE): StartEndTextPosition {
         1,
         1,
         lines.length,
-        lines[lines.length - 1].length,
+        lines[lines.length - 1].length + 1,
     );
 }
 
@@ -33,7 +33,7 @@ function parseFile(content: string, filePath: string) {
     const fileNode: FileNode = {
         type: NodeType.File,
         parent: null,
-        children: [parseNode(contentNode)],
+        children: [/*parseNode(contentNode)*/],
         pos: fullContentPos(content),
         path: path.resolve(filePath),
     };

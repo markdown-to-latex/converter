@@ -1,7 +1,10 @@
 import * as node from '../node';
 import {
+    CodeNode,
     copyTextPosition,
+    createStartEndPos,
     Node,
+    NodeType,
     RawNode,
     RawNodeE,
     RawNodeType,
@@ -9,42 +12,47 @@ import {
     textPositionG,
     textPositionGEq,
 } from '../node';
-import { DiagnoseErrorType, DiagnoseList, diagnoseListHasSeverity, DiagnoseSeverity } from '../../diagnose';
+import {
+    DiagnoseErrorType,
+    DiagnoseList,
+    diagnoseListHasSeverity,
+    DiagnoseSeverity,
+} from '../../diagnose';
 
 export const enum LexemeType {
-    Space,
-    Paragraph,
-    Heading,
-    Text,
+    // Space,
+    // Paragraph,
+    // Heading,
+    // Text,
     Code,
 }
 
 const parserPriorities: LexemeType[] = [
     LexemeType.Code,
-    LexemeType.Heading,
-    LexemeType.Paragraph,
-    LexemeType.Text,
-    LexemeType.Space,
+    // LexemeType.Heading,
+    // LexemeType.Paragraph,
+    // LexemeType.Text,
+    // LexemeType.Space,
 ];
 
 interface LexemeTypeToNodeType {
     [LexemeType.Code]: node.CodeNode;
-    [LexemeType.Heading]: node.HeadingNode;
-    [LexemeType.Paragraph]: node.ParagraphNode;
-    [LexemeType.Text]: node.TextNode;
-    [LexemeType.Space]: node.SpaceNode;
+    // [LexemeType.Heading]: node.HeadingNode;
+    // [LexemeType.Paragraph]: node.ParagraphNode;
+    // [LexemeType.Text]: node.TextNode;
+    // [LexemeType.Space]: node.SpaceNode;
 }
 
-class FatalError extends Error {}
+class FatalError extends Error {
+}
 
-export function applyVisitors(nodes: Readonly<Node[]>): Node[] {
-    let allDiags: DiagnoseList = []
+export function applyVisitors(nodes: Readonly<Node[]>): [Node[], DiagnoseList] {
+    let allDiags: DiagnoseList = [];
 
     let newNodes = [...nodes];
     try {
         for (const type of parserPriorities) {
-
-            newNodes.flatMap(node => {
+            newNodes = newNodes.flatMap(node => {
                 if (node.type !== RawNodeType.Raw) {
                     return [node];
                 }
@@ -60,15 +68,20 @@ export function applyVisitors(nodes: Readonly<Node[]>): Node[] {
             });
         }
     } catch (e) {
-        if (e instanceof  FatalError) {
-            // TODO
+        if (e instanceof FatalError) {
+            return [[], allDiags];
+        } else {
+            throw e;
         }
     }
 
-    return newNodes;
+    return [newNodes, allDiags];
 }
 
-function applyParser(node: RawNode, type: LexemeType): [Node[], DiagnoseList] {
+function applyParser(
+    node: Readonly<RawNode>,
+    type: LexemeType,
+): [Node[], DiagnoseList] {
     const nodeE = new RawNodeE(node);
 
     const diags: DiagnoseList = [];
@@ -102,12 +115,12 @@ function applyParser(node: RawNode, type: LexemeType): [Node[], DiagnoseList] {
             type: RawNodeType.Raw,
             pos: {
                 start: copyTextPosition(position),
-                end: copyTextPosition(node.pos.start),
+                end: copyTextPosition(node.pos.end),
             },
             text: nodeE.text.slicePosition(
                 nodeE.n.pos.start,
                 position,
-                node.pos.start,
+                node.pos.end,
             ).s,
             parent: nodeE.n.parent,
         } as RawNode);
@@ -124,7 +137,6 @@ function applyParser(node: RawNode, type: LexemeType): [Node[], DiagnoseList] {
         });
     }
 
-
     return [newNodes, diags];
 }
 
@@ -137,26 +149,43 @@ const parsers: {
 
         const codeLexemes = lines
             .map((v, i) => ({
-                line: i,
+                offLine: i,
+                absLine: node.n.pos.start.line + i,
                 match: v.s.match(/\s*`{3,}/),
             }))
             .filter(v => v.match?.length);
         if (codeLexemes.length % 2 !== 0) {
-            let lastLexeme = codeLexemes[codeLexemes.length - 1];
-            let absLine = node.pos.start.line + lastLexeme.line;
+            const lastLexeme = codeLexemes[codeLexemes.length - 1];
+            const absLine = lastLexeme.absLine;
             throw new Error(
                 `Unable to find closing quotes for block code. ` +
                 `Began at ${absLine} at file TODO`,
             );
         }
 
+        const codeNodes: CodeNode[] = [];
         for (let i = 0; i < codeLexemes.length; i += 2) {
-            let startLexeme = codeLexemes[i];
-            let endLexeme = codeLexemes[i + 1];
+            const startLexeme = codeLexemes[i];
+            const endLexeme = codeLexemes[i + 1];
 
-            lines.slice(startLexeme.line + 1, endLexeme.line - 1).join('\n');
+            const text = lines
+                .slice(startLexeme.offLine + 1, endLexeme.offLine)
+                .join('\n');
+            codeNodes.push({
+                type: NodeType.Code,
+                pos: createStartEndPos(
+                    startLexeme.absLine,
+                    1,
+                    endLexeme.absLine,
+                    lines[endLexeme.offLine].length,
+                ),
+                text: text,
+                parent: node.n.parent,
+                lang: null,
+                codeBlockStyle: null,
+            });
         }
 
-        return [];
+        return codeNodes;
     },
 };

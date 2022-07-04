@@ -1,6 +1,4 @@
 import { EscaperReady } from '../printer/latex/escaper';
-import { Context } from '../printer/context';
-import { LatexString } from '../printer/latex';
 import { TextPosition } from '../ast/node';
 
 export class StringE {
@@ -196,6 +194,10 @@ export class StringE {
         return new StringE(this._string.repeat(count));
     }
 
+    public toString(): string {
+        return this._string;
+    }
+
     /**
      * Remove replacements made by `marked`
      *
@@ -251,10 +253,6 @@ export class StringE {
             .replaceE(/\n{2,}$/g, '\n');
     }
 
-    public toLatexString(context: Context): LatexString {
-        return new LatexString(this, context);
-    }
-
     private __linesRegexp: RegExp = new RegExp(/\r?\n/g);
 
     public get lines(): StringE[] {
@@ -276,18 +274,18 @@ export class StringE {
         };
 
         // TODO: cache lines
-        const lines = this.lines.slice(startPosOffset.line, endPosOffset.line);
+        const lines = this.lines.slice(startPosOffset.line, endPosOffset.line + 1);
         if (lines.length === 0) {
             return StringE.from('');
         }
         if (startPosOffset.line === endPosOffset.line) {
-            return lines[0].sliceE(startPosOffset.column, endPosOffset.column);
+            return lines[0].sliceE(startPosOffset.column - 1, endPosOffset.column - 1);
         }
 
-        lines[0] = lines[0].sliceE(startPosOffset.column);
+        lines[0] = lines[0].sliceE(startPosOffset.column - 1);
         lines[lines.length - 1] = lines[lines.length - 1].sliceE(
             0,
-            endPosOffset.column,
+            endPosOffset.column - 1,
         );
 
         return StringE.from(lines.map(s => s.s).join('\n'));

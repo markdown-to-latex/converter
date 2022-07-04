@@ -22,7 +22,7 @@ export function applyProcessingVisitorIfExists(
 ) {
     const atStage = processingVisitors[stage];
 
-    const visitor = atStage[node.type] as Visitor<Node>;
+    const visitor = atStage[node.type as keyof NodesByType] as Visitor<Node>;
     if (visitor === undefined) {
         return;
     }

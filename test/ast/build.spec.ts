@@ -8,7 +8,7 @@ import {
     NodeType,
     ParagraphNode,
     TextNode,
-} from '../../src/ast/nodes';
+} from '../../src/ast/node';
 
 describe('build ast', () => {
     test('simple nodes', () => {

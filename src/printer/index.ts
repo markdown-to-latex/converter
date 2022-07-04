@@ -1,4 +1,4 @@
-import { Node } from '../ast/nodes';
+import { Node } from '../ast/node';
 import { Context } from './context';
 import { applyPrinterVisitors } from './visitors';
 

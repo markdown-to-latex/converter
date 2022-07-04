@@ -1,5 +1,5 @@
-import * as nodes from '../ast/nodes';
-import { CodeLatexNode, NodeType } from '../ast/nodes';
+import * as nodes from '../ast/node';
+import { CodeLatexNode, NodeType } from '../ast/node';
 
 const NodesByTypeMap = {
     [NodeType.Space]: {} as nodes.SpaceNode,

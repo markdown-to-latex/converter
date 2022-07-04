@@ -1,7 +1,7 @@
 import { getLatexOrderedListPoint, LatexString } from './index';
 import { Escaper } from './escaper';
 import { LatexInfoStrict } from '../context';
-import { NodeType } from '../../ast/nodes';
+import { NodeType } from '../../ast/node';
 import { StringE } from '../../extension/string';
 
 export interface LatexListItemInfo {

@@ -1,4 +1,4 @@
-import { getNodeAllChildren, Node } from '../ast/nodes';
+import { getNodeAllChildren, Node } from '../ast/node';
 import {
     applyProcessingVisitorIfExists,
     getProcessingStages,

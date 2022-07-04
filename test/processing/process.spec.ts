@@ -9,7 +9,7 @@ import {
     ParagraphNode,
     TableNode,
     TextNode,
-} from '../../src/ast/nodes';
+} from '../../src/ast/node';
 
 describe('with tokens', function () {
     test('opcode', function () {
