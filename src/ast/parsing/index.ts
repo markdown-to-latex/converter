@@ -1,5 +1,5 @@
 import {
-    createStartEndPos,
+    createStartEndTextPos,
     FileNode,
     NodeE,
     NodeType,
@@ -10,11 +10,13 @@ import {
 import path from 'path';
 import { StringE } from '../../extension/string';
 
-export function fullContentPos(content: string | StringE): StartEndTextPosition {
+export function fullContentPos(
+    content: string | StringE,
+): StartEndTextPosition {
     const contentE = StringE.from(content);
 
     const lines = contentE.splitE(/\r?\n/);
-    return createStartEndPos(
+    return createStartEndTextPos(
         1,
         1,
         lines.length,
@@ -27,14 +29,23 @@ function parseFile(content: string, filePath: string) {
         type: RawNodeType.Raw,
         parent: null,
         text: content,
-        pos: fullContentPos(content),
+        pos: {
+            start: 0,
+            end: content.length,
+        },
     };
 
     const fileNode: FileNode = {
         type: NodeType.File,
         parent: null,
-        children: [/*parseNode(contentNode)*/],
-        pos: fullContentPos(content),
+        children: [
+            /*parseNode(contentNode)*/
+        ],
+        pos: {
+            start: 0,
+            end: content.length,
+        },
+        raw: content,
         path: path.resolve(filePath),
     };
 

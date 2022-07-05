@@ -42,7 +42,7 @@ export class NodeE<T extends Node = Node> {
         return this.node;
     }
 
-    public* traverse(): Generator<NodeEParentData, void, never> {
+    public *traverse(): Generator<NodeEParentData, void, never> {
         for (const value of Array.from(traverseNodeChildren(this.node))) {
             yield {
                 ...value,
@@ -111,7 +111,6 @@ export class NodeE<T extends Node = Node> {
     ): DiagnoseInfo {
         return nodeToDiagnose(this.node, severity, errorType, message);
     }
-
 }
 
 export class RawNodeE extends NodeE<RawNode> {

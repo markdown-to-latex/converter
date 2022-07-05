@@ -1,16 +1,13 @@
 import * as node from '../node';
 import {
     CodeNode,
-    copyTextPosition,
-    createStartEndPos,
+    createStartEndTextPos,
     Node,
     NodeType,
+    positionToTextPosition,
     RawNode,
     RawNodeE,
     RawNodeType,
-    TextPosition,
-    textPositionG,
-    textPositionGEq,
 } from '../node';
 import {
     DiagnoseErrorType,
@@ -43,8 +40,7 @@ interface LexemeTypeToNodeType {
     // [LexemeType.Space]: node.SpaceNode;
 }
 
-class FatalError extends Error {
-}
+class FatalError extends Error {}
 
 export function applyVisitors(nodes: Readonly<Node[]>): [Node[], DiagnoseList] {
     let allDiags: DiagnoseList = [];
@@ -86,51 +82,55 @@ function applyParser(
 
     const diags: DiagnoseList = [];
     const newNodes: Node[] = [];
-    let position: TextPosition = copyTextPosition(node.pos.start);
+    let position = node.pos.start;
 
     const parsed = parsers[type](nodeE);
     for (const node of parsed) {
-        if (!textPositionGEq(position, node.pos.start)) {
+        if (position < node.pos.start) {
             newNodes.push({
                 type: RawNodeType.Raw,
                 pos: {
-                    start: copyTextPosition(position),
-                    end: copyTextPosition(node.pos.start),
+                    start: position,
+                    end: node.pos.start,
                 },
-                text: nodeE.text.slicePosition(
-                    nodeE.n.pos.start,
-                    position,
-                    node.pos.start,
-                ).s,
+                text: nodeE.n.text.slice(position, node.pos.start),
                 parent: nodeE.n.parent,
             } as RawNode);
         }
 
         newNodes.push(node);
-        position = copyTextPosition(node.pos.end);
+        position = node.pos.end;
     }
 
-    if (!textPositionGEq(position, node.pos.end)) {
+    if (position < node.pos.end) {
         newNodes.push({
             type: RawNodeType.Raw,
             pos: {
-                start: copyTextPosition(position),
-                end: copyTextPosition(node.pos.end),
+                start: position,
+                end: node.pos.end,
             },
-            text: nodeE.text.slicePosition(
-                nodeE.n.pos.start,
-                position,
-                node.pos.end,
-            ).s,
+            text: nodeE.n.text.slice(position, node.pos.start),
             parent: nodeE.n.parent,
         } as RawNode);
-    } else if (textPositionG(position, node.pos.end)) {
+    } else if (position > node.pos.end) {
         diags.push({
             errorType: DiagnoseErrorType.ApplyParserError,
             severity: DiagnoseSeverity.Fatal,
             pos: {
-                start: node.pos.end,
-                end: position,
+                start: {
+                    absolute: node.pos.end,
+                    ...positionToTextPosition(
+                        nodeE.parentFile?.raw ?? '',
+                        node.pos.end,
+                    ),
+                },
+                end: {
+                    absolute: position,
+                    ...positionToTextPosition(
+                        nodeE.parentFile?.raw ?? '',
+                        position,
+                    ),
+                },
             },
             message: 'Parser position overflow',
             filePath: nodeE.parentFile?.path ?? 'null',
@@ -145,21 +145,20 @@ const parsers: {
     [key in LexemeType]: Visitor<LexemeTypeToNodeType[key]>;
 } = {
     [LexemeType.Code]: node => {
-        const lines = node.text.lines;
+        const lines = node.text.getLinesWithTextPositions(node.n.pos.start);
 
         const codeLexemes = lines
             .map((v, i) => ({
+                ...v,
                 offLine: i,
-                absLine: node.n.pos.start.line + i,
-                match: v.s.match(/\s*`{3,}/),
+                match: v.str.match(/\s*`{3,}/),
             }))
             .filter(v => v.match?.length);
         if (codeLexemes.length % 2 !== 0) {
             const lastLexeme = codeLexemes[codeLexemes.length - 1];
-            const absLine = lastLexeme.absLine;
             throw new Error(
                 `Unable to find closing quotes for block code. ` +
-                `Began at ${absLine} at file TODO`,
+                    `Began at post ${lastLexeme.pos} at file TODO`,
             );
         }
 
@@ -171,14 +170,13 @@ const parsers: {
             const text = lines
                 .slice(startLexeme.offLine + 1, endLexeme.offLine)
                 .join('\n');
+
             codeNodes.push({
                 type: NodeType.Code,
-                pos: createStartEndPos(
-                    startLexeme.absLine,
-                    1,
-                    endLexeme.absLine,
-                    lines[endLexeme.offLine].length,
-                ),
+                pos: {
+                    start: startLexeme.pos,
+                    end: endLexeme.pos + endLexeme.str.length + 1,
+                },
                 text: text,
                 parent: node.n.parent,
                 lang: null,

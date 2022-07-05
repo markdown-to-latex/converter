@@ -63,7 +63,7 @@ export function getNodeLeftNeighbourLeaf(node: Node): Node | null {
             left &&
             left.children !== undefined &&
             left.children.length !== 0
-            ) {
+        ) {
             const child = left.children[left.children.length - 1];
             left = child as NodeWithAnyChildren & Node;
         }
@@ -95,7 +95,7 @@ export function getNodeRightNeighbourLeaf(node: Node): Node | null {
             right &&
             right.children !== undefined &&
             right.children.length !== 0
-            ) {
+        ) {
             const child = right.children[0];
             right = child as NodeWithAnyChildren & Node;
         }

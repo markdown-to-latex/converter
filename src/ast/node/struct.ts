@@ -1,3 +1,5 @@
+import { StartEndPosition } from './position';
+
 export const enum RawNodeType {
     Raw = 'Raw',
 }
@@ -43,83 +45,12 @@ export const enum NodeTableAlign {
     Center = 'Center',
 }
 
-export interface TextPosition {
-    line: number;
-    column: number;
-}
-
-/**
- * Defines text position in the original file
- */
-export interface StartEndTextPosition {
-    start: TextPosition;
-    end: TextPosition;
-}
-
-export function textPositionToString(pos: TextPosition) {
-    return `${pos.line}:${pos.column}`;
-}
-
-export function textPositionEq(
-    left: TextPosition,
-    right: TextPosition,
-): boolean {
-    return left.line === right.line && left.column == right.column;
-}
-
-export function textPositionG(
-    left: TextPosition,
-    right: TextPosition,
-): boolean {
-    return (
-        left.line > right.line ||
-        (left.line == right.line && left.column > right.column)
-    );
-}
-
-export function textPositionGEq(
-    left: TextPosition,
-    right: TextPosition,
-): boolean {
-    return textPositionEq(left, right) || textPositionG(left, right);
-}
-
-export function copyTextPosition(pos: TextPosition): TextPosition {
-    return { ...pos };
-}
-
-export function createStartEndPos(
-    startLine: number,
-    startCol: number,
-    endLine: number,
-    endCol: number,
-): StartEndTextPosition {
-    return {
-        start: {
-            line: startLine,
-            column: startCol,
-        },
-        end: {
-            line: endLine,
-            column: endCol,
-        },
-    };
-}
-
-export function copyStartEndPos(
-    pos: StartEndTextPosition,
-): StartEndTextPosition {
-    return {
-        start: copyTextPosition(pos.start),
-        end: copyTextPosition(pos.end),
-    };
-}
+export type StartEndNumberPosition = StartEndPosition<number>;
 
 export interface Node {
     type: NodeType | RawNodeType;
     parent: Node | null;
-    pos: StartEndTextPosition;
-
+    pos: StartEndNumberPosition;
 }
 
 export interface NodeChildren {
@@ -239,6 +170,7 @@ export interface DelNode extends Node, NodeChildren {
 export interface FileNode extends Node, NodeChildren {
     type: NodeType.File;
     path: string;
+    raw: string;
 }
 
 export interface TableCellNode extends Node, NodeChildren {

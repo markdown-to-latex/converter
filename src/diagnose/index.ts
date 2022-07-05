@@ -1,11 +1,12 @@
+import { copyStartEndPos, getNodeParentFile, Node } from '../ast/node';
+import path from 'path';
 import {
-    copyStartEndPos,
-    getNodeParentFile,
-    Node, StartEndTextPosition,
+    positionToTextPosition,
+    StartEndPosition,
+    StartEndTextPosition,
     TextPosition,
     textPositionToString,
-} from '../ast/node';
-import path from 'path';
+} from '../ast/node/position';
 
 export enum DiagnoseSeverity {
     Fatal = 'FATAL', // The app cannot continue
@@ -41,10 +42,16 @@ export enum DiagnoseErrorType {
     OtherError,
 }
 
+export interface DiagnosePosition extends TextPosition {
+    absolute: number;
+}
+
+export type DiagnoseStartEndPosition = StartEndPosition<DiagnosePosition>;
+
 export interface DiagnoseInfo {
     severity: DiagnoseSeverity;
     errorType: DiagnoseErrorType;
-    pos: StartEndTextPosition;
+    pos: DiagnoseStartEndPosition;
     filePath: string;
     message?: string;
 }
@@ -55,7 +62,8 @@ export function diagnoseToString(diag: DiagnoseInfo) {
     let message = diag.message ? `: ${diag.message}` : '';
     return (
         `${diag.errorType} MD${diag.errorType}${message} ` +
-        `at ${textPositionToString(diag.pos.start)} in ${diag.filePath}`
+        `at ${textPositionToString(diag.pos.start)} - ` +
+        `${textPositionToString(diag.pos.end)} in ${diag.filePath}`
     );
 }
 
@@ -70,7 +78,22 @@ export function nodeToDiagnose(
         severity,
         message,
         filePath: getNodeParentFile(node)?.path ?? 'null',
-        pos: copyStartEndPos(node.pos),
+        pos: {
+            start: {
+                absolute: node.pos.start,
+                ...positionToTextPosition(
+                    getNodeParentFile(node)?.raw ?? '',
+                    node.pos.start,
+                ),
+            },
+            end: {
+                absolute: node.pos.end,
+                ...positionToTextPosition(
+                    getNodeParentFile(node)?.raw ?? '',
+                    node.pos.end,
+                ),
+            },
+        },
     };
 }
 

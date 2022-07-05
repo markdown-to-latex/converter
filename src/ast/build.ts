@@ -1,4 +1,10 @@
-import { createStartEndPos, FileNode, getNodeAllChildren, Node, NodeType } from './node';
+import {
+    createStartEndTextPos,
+    FileNode,
+    getNodeAllChildren,
+    Node,
+    NodeType,
+} from './node';
 import { TokenListContainer } from '../lexer/tokens';
 import { astProcessTokenList } from './visitors';
 
@@ -45,7 +51,11 @@ export function buildMarkdownAST(
         parent: null,
         children: astProcessTokenList(tokens),
         path: options.filepath ?? '__not-specified__',
-        pos: createStartEndPos(0,0,0,0,),
+        raw: '',
+        pos: {
+            start: 0,
+            end: 9999,
+        },
     };
     updateASTParents(ast);
 

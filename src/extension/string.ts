@@ -1,5 +1,10 @@
 import { EscaperReady } from '../printer/latex/escaper';
-import { TextPosition } from '../ast/node';
+import { LINE_SPLIT_REGEXP } from './regexp';
+import {
+    positionToTextPosition,
+    splitLinesWithTextPositions,
+    TextPosition,
+} from '../ast/node';
 
 export class StringE {
     /**
@@ -14,7 +19,7 @@ export class StringE {
         '&lt;': '<',
         '&gt;': '>',
         '&quot;': '"',
-        '&#39;': '\'',
+        '&#39;': "'",
     };
     protected _string: string;
 
@@ -253,41 +258,19 @@ export class StringE {
             .replaceE(/\n{2,}$/g, '\n');
     }
 
-    private __linesRegexp: RegExp = new RegExp(/\r?\n/g);
-
     public get lines(): StringE[] {
-        return this.splitE(this.__linesRegexp);
+        return this.splitE(LINE_SPLIT_REGEXP);
     }
 
-    public slicePosition(
-        basePos: Readonly<TextPosition>,
-        startPos: Readonly<TextPosition>,
-        endPos: Readonly<TextPosition>,
-    ): StringE {
-        const startPosOffset: TextPosition = {
-            line: startPos.line - basePos.line,
-            column: startPos.column,
-        };
-        const endPosOffset: TextPosition = {
-            line: endPos.line - basePos.line,
-            column: endPos.column,
-        };
+    public get linesWithTextPositions() {
+        return splitLinesWithTextPositions(this.s);
+    }
 
-        // TODO: cache lines
-        const lines = this.lines.slice(startPosOffset.line, endPosOffset.line + 1);
-        if (lines.length === 0) {
-            return StringE.from('');
-        }
-        if (startPosOffset.line === endPosOffset.line) {
-            return lines[0].sliceE(startPosOffset.column - 1, endPosOffset.column - 1);
-        }
+    public getLinesWithTextPositions(base: number = 0) {
+        return splitLinesWithTextPositions(this.s, base);
+    }
 
-        lines[0] = lines[0].sliceE(startPosOffset.column - 1);
-        lines[lines.length - 1] = lines[lines.length - 1].sliceE(
-            0,
-            endPosOffset.column - 1,
-        );
-
-        return StringE.from(lines.map(s => s.s).join('\n'));
+    public toTextPosition(position: number): TextPosition {
+        return positionToTextPosition(this.s, position);
     }
 }

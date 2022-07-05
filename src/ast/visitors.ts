@@ -1,5 +1,5 @@
 import { Token, TokenByType } from '../lexer/tokens';
-import { createStartEndPos, Node, NodeTableAlign, NodeType } from './node';
+import { createStartEndTextPos, Node, NodeTableAlign, NodeType } from './node';
 import { NodeByTokenType } from './tokens';
 
 export function astProcessTokenList(tokens: readonly Token[]): Node[] {
@@ -27,19 +27,28 @@ const astProcessingVisitors: {
     [key in keyof TokenByType]: Visitor<TokenByType[key], NodeByTokenType[key]>;
 } = {
     br: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Br,
         parent: null,
     }),
     paragraph: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Paragraph,
         parent: null,
         pre: token.pre,
         children: astProcessTokenList(token.tokens),
     }),
     text: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Text,
         parent: null,
         text: token.text,
@@ -47,13 +56,19 @@ const astProcessingVisitors: {
             token.tokens !== undefined ? astProcessTokenList(token.tokens) : [],
     }),
     codespan: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.CodeSpan,
         parent: null,
         text: token.text,
     }),
     code: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Code,
         parent: null,
         text: token.text,
@@ -61,7 +76,10 @@ const astProcessingVisitors: {
         codeBlockStyle: token.codeBlockStyle ?? null,
     }),
     def: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Def,
         parent: null,
         tag: token.tag,
@@ -69,54 +87,81 @@ const astProcessingVisitors: {
         title: token.title,
     }),
     em: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Em,
         parent: null,
         children: astProcessTokenList(token.tokens),
     }),
     blockquote: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Blockquote,
         parent: null,
         children: astProcessTokenList(token.tokens),
     }),
     del: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Del,
         parent: null,
         children: astProcessTokenList(token.tokens),
     }),
     hr: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Hr,
         parent: null,
     }),
     escape: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Escape,
         parent: null,
         text: token.text,
     }),
     space: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Space,
         parent: null,
     }),
     strong: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Strong,
         parent: null,
         children: astProcessTokenList(token.tokens),
     }),
     html: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Html,
         parent: null,
         text: token.text,
         pre: token.pre,
     }),
     image: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Image,
         parent: null,
         title: token.title ?? '',
@@ -124,14 +169,20 @@ const astProcessingVisitors: {
         href: token.href,
     }),
     heading: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Heading,
         parent: null,
         depth: token.depth,
         children: astProcessTokenList(token.tokens),
     }),
     link: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Link,
         parent: null,
         href: token.href,
@@ -139,7 +190,10 @@ const astProcessingVisitors: {
         children: astProcessTokenList(token.tokens),
     }),
     list_item: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.ListItem,
         parent: null,
         task: token.task,
@@ -148,7 +202,10 @@ const astProcessingVisitors: {
         children: astProcessTokenList(token.tokens),
     }),
     list: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.List,
         parent: null,
         ordered: token.ordered,
@@ -157,7 +214,10 @@ const astProcessingVisitors: {
         children: astProcessTokenList(token.items),
     }),
     table: token => ({
-        pos: createStartEndPos(0, 0, 0, 0),
+        pos: {
+            start: 0,
+            end: 0,
+        },
         type: NodeType.Table,
         parent: null,
         align: token.align.map(
@@ -171,11 +231,17 @@ const astProcessingVisitors: {
         ),
         header: [
             {
-                pos: createStartEndPos(0, 0, 0, 0),
+                pos: {
+                    start: 0,
+                    end: 0,
+                },
                 type: NodeType.TableRow,
                 parent: null,
                 children: token.header.map(cell => ({
-                    pos: createStartEndPos(0, 0, 0, 0),
+                    pos: {
+                        start: 0,
+                        end: 0,
+                    },
                     type: NodeType.TableCell,
                     parent: null,
                     children: astProcessTokenList(cell.tokens),
@@ -183,11 +249,17 @@ const astProcessingVisitors: {
             },
         ],
         rows: token.rows.map(cellList => ({
-            pos: createStartEndPos(0, 0, 0, 0),
+            pos: {
+                start: 0,
+                end: 0,
+            },
             type: NodeType.TableRow,
             parent: null,
             children: cellList.map(cell => ({
-                pos: createStartEndPos(0, 0, 0, 0),
+                pos: {
+                    start: 0,
+                    end: 0,
+                },
                 type: NodeType.TableCell,
                 parent: null,
                 children: astProcessTokenList(cell.tokens),

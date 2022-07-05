@@ -31,7 +31,9 @@ import { getLatexHeader, LatexString } from './latex';
 type Visitor<T extends Node> = (node: T, context: Context) => string;
 
 export function applyPrinterVisitors(node: Node, context: Context): string {
-    const visitor = processingVisitors[node.type as keyof NodesByType] as Visitor<Node>;
+    const visitor = processingVisitors[
+        node.type as keyof NodesByType
+    ] as Visitor<Node>;
     return visitor(node, context);
 }
 
@@ -65,8 +67,10 @@ function isNodeBeforeBoxed(node: Node): boolean {
 
     while (
         right !== null &&
-        [NodeType.Space, NodeType.OpCode].indexOf(right.type as keyof NodesByType) !== -1
-        ) {
+        [NodeType.Space, NodeType.OpCode].indexOf(
+            right.type as keyof NodesByType,
+        ) !== -1
+    ) {
         right = getNodeRightNeighbourLeaf(right);
     }
     if (right === null) {
@@ -74,8 +78,9 @@ function isNodeBeforeBoxed(node: Node): boolean {
     }
 
     return (
-        [NodeType.Code, NodeType.Table, NodeType.Image].indexOf(right.type as keyof NodesByType) !==
-        -1
+        [NodeType.Code, NodeType.Table, NodeType.Image].indexOf(
+            right.type as keyof NodesByType,
+        ) !== -1
     );
 }
 

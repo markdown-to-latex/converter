@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`code block lexer check Complex raw node 1`] = `
+Array [
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 47,
+            "start": 0,
+          },
+          "text": "Sample text
+\`\`\`
+Code block
+\`\`\`
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 47,
+        "start": 0,
+      },
+      "raw": "Sample text
+\`\`\`
+Code block
+\`\`\`
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 11,
+      "start": 0,
+    },
+    "text": "Sample text",
+    "type": "Raw",
+  },
+  Object {
+    "codeBlockStyle": null,
+    "lang": null,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 47,
+            "start": 0,
+          },
+          "text": "Sample text
+\`\`\`
+Code block
+\`\`\`
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 47,
+        "start": 0,
+      },
+      "raw": "Sample text
+\`\`\`
+Code block
+\`\`\`
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 30,
+      "start": 11,
+    },
+    "text": "[object Object]",
+    "type": "Code",
+  },
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 47,
+            "start": 0,
+          },
+          "text": "Sample text
+\`\`\`
+Code block
+\`\`\`
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 47,
+        "start": 0,
+      },
+      "raw": "Sample text
+\`\`\`
+Code block
+\`\`\`
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 47,
+      "start": 30,
+    },
+    "text": "",
+    "type": "Raw",
+  },
+]
+`;
