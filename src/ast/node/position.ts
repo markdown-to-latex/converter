@@ -86,7 +86,12 @@ export function splitLinesWithTextPositions(
 }[] {
     return text.split('\n').map((str, i, lines) => ({
         str: str.replace(/\r$/, ''),
-        pos: base + lines.slice(0, i).join('\n').length,
+        pos:
+            base +
+            lines
+                .slice(0, i)
+                .map(s => `${s}\n`)
+                .join('').length,
     }));
 }
 

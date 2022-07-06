@@ -1,4 +1,5 @@
 import {
+    CodeNode,
     FileNode,
     NodeType,
     RawNode,
@@ -44,6 +45,15 @@ New sample text
 `);
         const [result, diagnose] = applyVisitors([rawNode]);
         expect(diagnose).toHaveLength(0);
+
+        let node = result[1] as CodeNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Code);
+        expect(node.text).toEqual('Code block');
+        expect(rawNode.text.slice(node.pos.start, node.pos.end)).toEqual(
+            '```\nCode block\n```',
+        );
+
         expect(result).toMatchSnapshot();
     });
 });

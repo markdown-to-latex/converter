@@ -35,10 +35,11 @@ New sample text
       "type": "File",
     },
     "pos": Object {
-      "end": 11,
+      "end": 12,
       "start": 0,
     },
-    "text": "Sample text",
+    "text": "Sample text
+",
     "type": "Raw",
   },
   Object {
@@ -77,9 +78,9 @@ New sample text
     },
     "pos": Object {
       "end": 30,
-      "start": 11,
+      "start": 12,
     },
-    "text": "[object Object]",
+    "text": "Code block",
     "type": "Code",
   },
   Object {

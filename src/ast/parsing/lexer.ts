@@ -40,7 +40,8 @@ interface LexemeTypeToNodeType {
     // [LexemeType.Space]: node.SpaceNode;
 }
 
-class FatalError extends Error {}
+class FatalError extends Error {
+}
 
 export function applyVisitors(nodes: Readonly<Node[]>): [Node[], DiagnoseList] {
     let allDiags: DiagnoseList = [];
@@ -158,7 +159,7 @@ const parsers: {
             const lastLexeme = codeLexemes[codeLexemes.length - 1];
             throw new Error(
                 `Unable to find closing quotes for block code. ` +
-                    `Began at post ${lastLexeme.pos} at file TODO`,
+                `Began at post ${lastLexeme.pos} at file TODO`,
             );
         }
 
@@ -168,6 +169,7 @@ const parsers: {
             const endLexeme = codeLexemes[i + 1];
 
             const text = lines
+                .map(v => v.str)
                 .slice(startLexeme.offLine + 1, endLexeme.offLine)
                 .join('\n');
 
@@ -175,7 +177,7 @@ const parsers: {
                 type: NodeType.Code,
                 pos: {
                     start: startLexeme.pos,
-                    end: endLexeme.pos + endLexeme.str.length + 1,
+                    end: endLexeme.pos + endLexeme.str.length,
                 },
                 text: text,
                 parent: node.n.parent,

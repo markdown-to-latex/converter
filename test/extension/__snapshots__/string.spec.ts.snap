@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StringE getLinesWithThextPositions With custom base 1`] = `
+Array [
+  Object {
+    "pos": 15,
+    "str": "Line 1",
+  },
+  Object {
+    "pos": 22,
+    "str": "Line 2",
+  },
+  Object {
+    "pos": 30,
+    "str": " Line asdas 3 ",
+  },
+  Object {
+    "pos": 45,
+    "str": "Line 4",
+  },
+]
+`;
