@@ -152,7 +152,7 @@ const parsers: {
             .map((v, i) => ({
                 ...v,
                 offLine: i,
-                match: v.str.match(/\s*`{3,}/),
+                match: v.str.match(/(\s*)`{3,}([\w\d]*)/),
             }))
             .filter(v => v.match?.length);
         if (codeLexemes.length % 2 !== 0) {
