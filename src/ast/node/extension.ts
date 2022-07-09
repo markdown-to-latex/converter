@@ -112,13 +112,3 @@ export class NodeE<T extends Node = Node> {
         return nodeToDiagnose(this.node, severity, errorType, message);
     }
 }
-
-export class RawNodeE extends NodeE<RawNode> {
-    constructor(node: RawNode) {
-        super(node);
-    }
-
-    get text(): StringE {
-        return StringE.from(this.node.text);
-    }
-}

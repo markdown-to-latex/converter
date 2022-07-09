@@ -1,7 +1,9 @@
-import { StartEndPosition } from './position';
+import {StartEndPosition} from './position';
+import {Token} from "../parsing/tokenizer";
 
 export const enum RawNodeType {
     Raw = 'Raw',
+    Tokens = 'Tokens'
 }
 
 export const enum NodeType {
@@ -67,6 +69,11 @@ export interface NodeHref {
 
 export interface RawNode extends Node, NodeText {
     type: RawNodeType.Raw;
+}
+
+export interface TokensNode extends Node, NodeText {
+    type: RawNodeType.Tokens;
+    tokens: Token[];
 }
 
 export interface SpaceNode extends Node {

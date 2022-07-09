@@ -43,17 +43,43 @@ Code block
 \`\`\`
 New sample text
 `);
-        const [result, diagnose] = applyVisitors([rawNode]);
-        expect(diagnose).toHaveLength(0);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
 
-        let node = result[1] as CodeNode;
+        let node = nodes[1] as CodeNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.text).toEqual('Code block');
         expect(rawNode.text.slice(node.pos.start, node.pos.end)).toEqual(
             '```\nCode block\n```',
         );
+        expect(node.parent).toEqual(rawNode.parent);
 
-        expect(result).toMatchSnapshot();
+        expect(nodes).toMatchSnapshot();
+    });
+    test('With language', () => {
+        const rawNode = rawNodeTemplate(`Sample text
+\`\`\`test-language  
+Code block
+\`\`\`
+New sample text
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[1] as CodeNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Code);
+        expect(node.lang).toEqual('test-language');
+    });
+
+    test('Error raw node', () => {
+        const rawNode = rawNodeTemplate(`Sample text
+\`\`\`
+Code block
+New sample text
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(1);
+        expect(diagnostic).toMatchSnapshot();
     });
 });

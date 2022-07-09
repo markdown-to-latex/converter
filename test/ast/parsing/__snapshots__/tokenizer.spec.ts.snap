@@ -1,0 +1,266 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tokenize Joined Tokens 1`] = `
+Object {
+  "basePos": 0,
+  "text": "![message,](simple-text2-#)",
+  "tokens": Array [
+    Object {
+      "pos": 0,
+      "text": "!",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 1,
+      "text": "[",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 2,
+      "text": "message",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 9,
+      "text": ",",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 10,
+      "text": "]",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 11,
+      "text": "(",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 12,
+      "text": "simple",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 18,
+      "text": "-",
+      "type": "JoinableSpecial",
+    },
+    Object {
+      "pos": 19,
+      "text": "text2",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 24,
+      "text": "-#",
+      "type": "JoinableSpecial",
+    },
+    Object {
+      "pos": 26,
+      "text": ")",
+      "type": "SeparatedSpecial",
+    },
+  ],
+}
+`;
+
+exports[`tokenize Multiline 1`] = `
+Object {
+  "basePos": 0,
+  "text": "Line 1
+Line 2 [] 
+  Line{$$ 3  
+Line4.",
+  "tokens": Array [
+    Object {
+      "pos": 0,
+      "text": "Line",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 4,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 5,
+      "text": "1",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 6,
+      "text": "
+",
+      "type": "Delimiter",
+    },
+    Object {
+      "pos": 7,
+      "text": "Line",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 11,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 12,
+      "text": "2",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 13,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 14,
+      "text": "[",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 15,
+      "text": "]",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 16,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 17,
+      "text": "
+",
+      "type": "Delimiter",
+    },
+    Object {
+      "pos": 18,
+      "text": "  ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 20,
+      "text": "Line",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 24,
+      "text": "{",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 25,
+      "text": "$$",
+      "type": "JoinableSpecial",
+    },
+    Object {
+      "pos": 27,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 28,
+      "text": "3",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 29,
+      "text": "  ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 31,
+      "text": "
+",
+      "type": "Delimiter",
+    },
+    Object {
+      "pos": 32,
+      "text": "Line4",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 37,
+      "text": ".",
+      "type": "SeparatedSpecial",
+    },
+  ],
+}
+`;
+
+exports[`tokenize simple text 1`] = `
+Object {
+  "basePos": 0,
+  "text": "Simple text with words and423 numbers;
+",
+  "tokens": Array [
+    Object {
+      "pos": 0,
+      "text": "Simple",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 6,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 7,
+      "text": "text",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 11,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 12,
+      "text": "with",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 16,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 17,
+      "text": "words",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 22,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 23,
+      "text": "and423",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 29,
+      "text": " ",
+      "type": "Spacer",
+    },
+    Object {
+      "pos": 30,
+      "text": "numbers",
+      "type": "Letter",
+    },
+    Object {
+      "pos": 37,
+      "text": ";",
+      "type": "SeparatedSpecial",
+    },
+    Object {
+      "pos": 38,
+      "text": "
+",
+      "type": "Delimiter",
+    },
+  ],
+}
+`;

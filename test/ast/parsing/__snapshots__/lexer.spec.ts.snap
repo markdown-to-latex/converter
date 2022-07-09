@@ -3,6 +3,7 @@
 exports[`code block lexer check Complex raw node 1`] = `
 Array [
   Object {
+    "children": Array [],
     "parent": Object {
       "children": Array [
         Object {
@@ -40,7 +41,7 @@ New sample text
     },
     "text": "Sample text
 ",
-    "type": "Raw",
+    "type": "Text",
   },
   Object {
     "codeBlockStyle": null,
@@ -84,6 +85,7 @@ New sample text
     "type": "Code",
   },
   Object {
+    "children": Array [],
     "parent": Object {
       "children": Array [
         Object {
@@ -119,8 +121,33 @@ New sample text
       "end": 47,
       "start": 30,
     },
-    "text": "",
-    "type": "Raw",
+    "text": "
+New sample text
+",
+    "type": "Text",
+  },
+]
+`;
+
+exports[`code block lexer check Error raw node 1`] = `
+Array [
+  Object {
+    "errorType": 0,
+    "filePath": "test.md",
+    "message": "Unable to find closing quotes for block code",
+    "pos": Object {
+      "end": Object {
+        "absolute": 15,
+        "column": 4,
+        "line": 2,
+      },
+      "start": Object {
+        "absolute": 12,
+        "column": 1,
+        "line": 2,
+      },
+    },
+    "severity": "ERROR",
   },
 ]
 `;
