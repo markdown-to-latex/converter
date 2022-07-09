@@ -1,6 +1,6 @@
 import {
-    CodeNode,
-    FileNode,
+    CodeNode, CodeSpanNode,
+    FileNode, LinkNode,
     NodeType,
     RawNode,
     RawNodeType,
@@ -83,3 +83,30 @@ New sample text
         expect(diagnostic).toMatchSnapshot();
     });
 });
+
+describe('link check', () => {
+    test('Simple Link in text', () => {
+        const rawNode = rawNodeTemplate('Hello [ti t le](li-nk) text');
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[1] as LinkNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Link);
+
+        expect(nodes).toMatchSnapshot();
+    })
+
+    test('Link with inner md in text', () => {
+        const rawNode = rawNodeTemplate('Hello [ti \n`co][de` le](li-nk) text');
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[1] as LinkNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Link);
+        let codeSpan = node.children[1] as CodeSpanNode;
+        expect(codeSpan).not.toBeUndefined();
+        expect(codeSpan.type).toEqual(NodeType.CodeSpan);
+
+        expect(nodes).toMatchSnapshot();
+    })
+})

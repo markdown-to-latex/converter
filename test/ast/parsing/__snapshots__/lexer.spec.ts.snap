@@ -151,3 +151,243 @@ Array [
   },
 ]
 `;
+
+exports[`link check Link with inner md in text 1`] = `
+Array [
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 35,
+            "start": 0,
+          },
+          "text": "Hello [ti 
+\`co][de\` le](li-nk) text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 35,
+        "start": 0,
+      },
+      "raw": "Hello [ti 
+\`co][de\` le](li-nk) text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 6,
+      "start": 0,
+    },
+    "text": "Hello ",
+    "type": "Text",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 11,
+          "start": 7,
+        },
+        "text": "ti 
+",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 19,
+          "start": 11,
+        },
+        "text": "co][de",
+        "type": "CodeSpan",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 22,
+          "start": 19,
+        },
+        "text": " le",
+        "type": "Text",
+      },
+    ],
+    "href": "li-nk",
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 35,
+            "start": 0,
+          },
+          "text": "Hello [ti 
+\`co][de\` le](li-nk) text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 35,
+        "start": 0,
+      },
+      "raw": "Hello [ti 
+\`co][de\` le](li-nk) text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 30,
+      "start": 6,
+    },
+    "title": "",
+    "type": "Link",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 35,
+            "start": 0,
+          },
+          "text": "Hello [ti 
+\`co][de\` le](li-nk) text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 35,
+        "start": 0,
+      },
+      "raw": "Hello [ti 
+\`co][de\` le](li-nk) text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 35,
+      "start": 30,
+    },
+    "text": " text",
+    "type": "Text",
+  },
+]
+`;
+
+exports[`link check Simple Link in text 1`] = `
+Array [
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 27,
+            "start": 0,
+          },
+          "text": "Hello [ti t le](li-nk) text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 27,
+        "start": 0,
+      },
+      "raw": "Hello [ti t le](li-nk) text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 6,
+      "start": 0,
+    },
+    "text": "Hello ",
+    "type": "Text",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 14,
+          "start": 7,
+        },
+        "text": "ti t le",
+        "type": "Text",
+      },
+    ],
+    "href": "li-nk",
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 27,
+            "start": 0,
+          },
+          "text": "Hello [ti t le](li-nk) text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 27,
+        "start": 0,
+      },
+      "raw": "Hello [ti t le](li-nk) text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 22,
+      "start": 6,
+    },
+    "title": "",
+    "type": "Link",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 27,
+            "start": 0,
+          },
+          "text": "Hello [ti t le](li-nk) text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 27,
+        "start": 0,
+      },
+      "raw": "Hello [ti t le](li-nk) text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 27,
+      "start": 22,
+    },
+    "text": " text",
+    "type": "Text",
+  },
+]
+`;

@@ -1,10 +1,22 @@
-import {TokenByTypeParserResult, TokenParser, TokenPredicate,} from '../struct';
-import {TokenType} from '../../tokenizer';
-import {CodeNode, NodeType, TokensNode} from '../../../node';
-import {findTokenOrNull, findTokenOrNullBackward, tokenToDiagnose,} from '../index';
-import {DiagnoseSeverity} from '../../../../diagnose';
+import {
+    TokenByTypeParserResult,
+    TokenParser,
+    TokenPredicate,
+} from '../struct';
+import { TokenType } from '../../tokenizer';
+import { CodeNode, NodeType, TokensNode } from '../../../node';
+import {
+    findTokenOrNull,
+    findTokenOrNullBackward,
+    tokenToDiagnose,
+    unexpectedEof,
+} from '../index';
+import { DiagnoseSeverity } from '../../../../diagnose';
 
 export const isCode: TokenPredicate = function (token, index, node) {
+    if (token.type !== TokenType.JoinableSpecial) {
+        return false;
+    }
     if (!token.text.startsWith('```')) {
         return false;
     }
@@ -18,20 +30,6 @@ export const isCode: TokenPredicate = function (token, index, node) {
 
     return true;
 };
-
-function unexpectedEof(
-    tokens: TokensNode,
-    index: number,
-    message: string,
-): TokenByTypeParserResult {
-    return {
-        nodes: [],
-        index: tokens.tokens.length,
-        diagnostic: [
-            tokenToDiagnose(tokens, index, message, DiagnoseSeverity.Error),
-        ],
-    };
-}
 
 export const parseCode: TokenParser = function (tokens, index) {
     const token = tokens.tokens[index];
@@ -55,7 +53,13 @@ export const parseCode: TokenParser = function (tokens, index) {
     let languageName: string | null = null;
     for (let i = index + 1; i < lineBreakResult.index; ++i) {
         const token = tokens.tokens[i];
-        if ([TokenType.Letter, TokenType.SeparatedSpecial, TokenType.JoinableSpecial].indexOf(token.type) === -1) {
+        if (
+            [
+                TokenType.Letter,
+                TokenType.SeparatedSpecial,
+                TokenType.JoinableSpecial,
+            ].indexOf(token.type) === -1
+        ) {
             break;
         }
 
@@ -86,7 +90,7 @@ export const parseCode: TokenParser = function (tokens, index) {
             tokens,
             index,
             'Unable to find end closing quotes for block code ' +
-            '(internal error)',
+                '(internal error)',
         );
     }
 

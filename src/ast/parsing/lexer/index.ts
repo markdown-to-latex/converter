@@ -1,6 +1,5 @@
 import * as node from '../../node';
 import {
-    CodeNode,
     getNodeParentFile,
     Node,
     NodeE,
@@ -19,9 +18,11 @@ import {
     DiagnoseSeverity,
 } from '../../../diagnose';
 import {Token, tokenize, tokensToNode, TokenType} from '../tokenizer';
-import {TokenByTypeParserResult, TokenParser, TokenPredicate} from "./struct";
-import {isCode, parseCode} from "./node/code";
-import {TokenByType} from "../../../lexer/tokens";
+import {TokenByTypeParserResult, TokenParser, TokenPredicate} from './struct';
+import {parseCode} from './node/code';
+import {isParagraphBreak, parseSoftBreak} from "./node/paragraph";
+import {parseCodeSpan} from "./node/codeSpan";
+import {parseLink} from "./node/link";
 
 export const enum LexemeType {
     // Space,
@@ -59,15 +60,15 @@ export function applyVisitors(nodes: Readonly<Node[]>): ApplyVisitorsResult {
     const visitorsResult: ApplyVisitorsResult = {
         nodes: [...nodes],
         diagnostic: [],
-    }
+    };
 
     try {
         for (const type of parserPriorities) {
             visitorsResult.nodes = visitorsResult.nodes.flatMap(node => {
                 if (node.type === RawNodeType.Raw) {
-                    const parent = node.parent
+                    const parent = node.parent;
                     node = tokensToNode(tokenize((node as RawNode).text, 0));
-                    node.parent = parent
+                    node.parent = parent;
                 }
 
                 if (node.type !== RawNodeType.Tokens) {
@@ -209,6 +210,106 @@ export function findTokenOrNullBackward(
     return null;
 }
 
+const brackets: Record<string, string> = {
+    '[': ']', // Label
+    '{': '}', // Reserved
+    '(': ')', // Argument
+    '***': '***', // Italic + bold
+    '**': '**', // Bold
+    '*': '*', // Italic
+    '__': '__', // Underscore
+    '~~': '~~', // Through-Line
+    '`': '`', // Code Span
+    '$`': '`$', // Formula Span
+};
+
+const bracketsBackward: Record<string, string> = Object.fromEntries(Object.entries(brackets).map(([k, v]) => [v, k]))
+
+const exclusiveBrackets = ['`', '$`'];
+
+export function findTokenClosingBracket(
+    tokens: TokensNode,
+    index: number,
+    greedy: boolean = false, /* Capture self-closing bracket only */
+): FindTokenResult | null {
+    const openToken = tokens.tokens[index];
+    const closeBracket = brackets[openToken.text] ?? openToken.text;
+
+    const bracketsCounter: Record<string, number> = Object.fromEntries(Object.keys(brackets).map(k => [k, 0]))
+
+    for (let i = index + 1; i < tokens.tokens.length; ++i) {
+        const token = tokens.tokens[i];
+        if (isParagraphBreak(token, i, tokens)) {
+            return null;    // break breaks the brackets
+        }
+
+        if (token.type !== TokenType.JoinableSpecial && token.type !== TokenType.SeparatedSpecial) {
+            continue;
+        }
+
+        if (greedy) {
+            if (token.text === closeBracket) {
+                return {
+                    token: token,
+                    index: i,
+                }
+            }
+        } else {
+            if (
+                Object.values(bracketsCounter).reduce(
+                    (prev, current) => prev + current,
+                    0,
+                ) === 0
+            ) {
+                if (token.text === closeBracket) {
+                    return {
+                        token: token,
+                        index: i,
+                    }
+                }
+            }
+
+            const exclusiveBracket = exclusiveBrackets.map(v => [v, bracketsCounter[v]] as const).find(v => v[1]) ?? null;
+            if (exclusiveBracket) {
+                const exclusiveOpenBracket = exclusiveBracket[0];
+                const exclusiveCloseBracket = brackets[exclusiveOpenBracket];
+                if (token.text == exclusiveCloseBracket) {
+                    bracketsCounter[exclusiveOpenBracket] -= 1;
+                }
+            } else {
+                // Count all inner brackets
+                if (token.text in brackets) {
+                    bracketsCounter[token.text] += 1;
+                } else if (token.text in bracketsBackward) {
+                    bracketsCounter[bracketsBackward[token.text]] -= 1;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+export function isOpenLabelBracket(tokens: TokensNode, index: number): boolean {
+    const token = tokens.tokens[index];
+
+    if (token.type !== TokenType.JoinableSpecial && token.type !== TokenType.SeparatedSpecial) {
+        return false;
+    }
+
+    return token.text == '[';
+}
+
+export function isOpenArgumentBracket(tokens: TokensNode, index: number): boolean {
+    const token = tokens.tokens[index];
+
+    if (token.type !== TokenType.JoinableSpecial && token.type !== TokenType.SeparatedSpecial) {
+        return false;
+    }
+
+    return token.text == '(';
+}
+
 interface ParseTokensNodeResult {
     nodes: Node[];
     diagnostic: DiagnoseList;
@@ -242,7 +343,9 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
         }
 
         // Nothing
-        const lastNode = parsingResult.nodes.length ? parsingResult.nodes[parsingResult.nodes.length - 1] : null;
+        const lastNode = parsingResult.nodes.length
+            ? parsingResult.nodes[parsingResult.nodes.length - 1]
+            : null;
         if (lastNode?.type === NodeType.Text) {
             lastNode.pos.end = token.pos + token.text.length;
             (lastNode as TextNode).text += token.text;
@@ -256,7 +359,7 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
                     end: token.pos + token.text.length,
                 },
                 children: [],
-            } as TextNode)
+            } as TextNode);
         }
         ++i;
     }
@@ -264,7 +367,10 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
     return parsingResult;
 }
 
-function parseTokensNodeByType(tokens: TokensNode, index: number): TokenByTypeParserResult | null {
+function parseTokensNodeByType(
+    tokens: TokensNode,
+    index: number,
+): TokenByTypeParserResult | null {
     const token = tokens.tokens[index];
 
     for (const parser of parsersByType[token.type]) {
@@ -278,15 +384,13 @@ function parseTokensNodeByType(tokens: TokensNode, index: number): TokenByTypePa
 }
 
 const parsersByType: Record<TokenType, TokenParser[]> = {
-    [TokenType.JoinableSpecial]: [
-        parseCode,
-    ],
-    [TokenType.SeparatedSpecial]: [],
-    [TokenType.Delimiter]: [],
+    [TokenType.JoinableSpecial]: [parseCode, parseCodeSpan],
+    [TokenType.SeparatedSpecial]: [parseLink],
+    [TokenType.Delimiter]: [parseSoftBreak],
     [TokenType.Spacer]: [],
     [TokenType.Letter]: [],
     [TokenType.Other]: [],
-}
+};
 
 export function tokenToDiagnose(
     tokens: TokensNode,
@@ -314,5 +418,19 @@ export function tokenToDiagnose(
                 ),
             },
         },
+    };
+}
+
+export function unexpectedEof(
+    tokens: TokensNode,
+    index: number,
+    message: string,
+): TokenByTypeParserResult {
+    return {
+        nodes: [],
+        index: tokens.tokens.length,
+        diagnostic: [
+            tokenToDiagnose(tokens, index, message, DiagnoseSeverity.Error),
+        ],
     };
 }

@@ -103,7 +103,8 @@ export function positionToTextPosition(
 
     const index: number | null = (() => {
         for (let i = 0; i < lines.length; ++i) {
-            if (lines[i].pos > position) {
+            const line = lines[i];
+            if (line.pos <= position && position < line.pos + line.str.length) {
                 return i;
             }
         }
@@ -118,16 +119,10 @@ export function positionToTextPosition(
         };
     }
 
-    if (index === 0) {
-        return {
-            line: 1,
-            column: 1,
-        };
-    }
-
     return {
-        line: index,
-        column: position - lines[index - 1].pos + 1,
+        // line and column starts from 1
+        line: index + 1,
+        column: (position - lines[index].pos) + 1,
     };
 }
 
