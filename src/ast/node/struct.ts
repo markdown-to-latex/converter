@@ -1,9 +1,9 @@
-import {StartEndPosition} from './position';
-import {Token} from "../parsing/tokenizer";
+import { StartEndPosition } from './position';
+import { Token } from '../parsing/tokenizer';
 
 export const enum RawNodeType {
     Raw = 'Raw',
-    Tokens = 'Tokens'
+    Tokens = 'Tokens',
 }
 
 export const enum NodeType {
@@ -192,7 +192,9 @@ export interface TableRowNode extends Node, NodeChildren {
 export interface OpCodeNode extends Node {
     type: NodeType.OpCode;
     opcode: string;
-    arguments: string[];
+    label: string | null;
+    posArgs: Node[][];
+    keyArgs: Record<string, Node[]>;
 }
 
 export interface CodeLatexNode extends Node, NodeText {

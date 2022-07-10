@@ -34,7 +34,7 @@ describe('with tokens', function () {
 
         const opCode = innerText.children[1] as OpCodeNode;
         expect(opCode.opcode).toEqual('PK');
-        expect(opCode.arguments).toEqual(['test', '1', '2', '3']);
+        expect(opCode.posArgs).toEqual(['test', '1', '2', '3']);
     });
 
     test('empty opcode', function () {
@@ -57,7 +57,7 @@ describe('with tokens', function () {
         expect(opCode.parent!.type).toEqual(NodeType.Text);
         expect(opCode.type).toEqual(NodeType.OpCode);
         expect(opCode.opcode).toEqual('A');
-        expect(opCode.arguments).toEqual([]);
+        expect(opCode.posArgs).toEqual([]);
     });
 
     test('opcode in the table', function () {
@@ -81,7 +81,7 @@ describe('with tokens', function () {
         const opCode = tableCellText.children[1] as OpCodeNode;
         expect(opCode.type).toEqual(NodeType.OpCode);
         expect(opCode.opcode).toEqual('B');
-        expect(opCode.arguments).toEqual(['1']);
+        expect(opCode.posArgs).toEqual(['1']);
     });
 });
 

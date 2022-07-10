@@ -36,11 +36,10 @@ New sample text
       "type": "File",
     },
     "pos": Object {
-      "end": 12,
+      "end": 11,
       "start": 0,
     },
-    "text": "Sample text
-",
+    "text": "Sample text",
     "type": "Text",
   },
   Object {
@@ -118,12 +117,10 @@ New sample text
       "type": "File",
     },
     "pos": Object {
-      "end": 47,
-      "start": 30,
+      "end": 46,
+      "start": 31,
     },
-    "text": "
-New sample text
-",
+    "text": "New sample text",
     "type": "Text",
   },
 ]
@@ -138,8 +135,8 @@ Array [
     "pos": Object {
       "end": Object {
         "absolute": 15,
-        "column": 4,
-        "line": 2,
+        "column": 1,
+        "line": 5,
       },
       "start": Object {
         "absolute": 12,
@@ -192,11 +189,10 @@ Array [
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 11,
+          "end": 10,
           "start": 7,
         },
-        "text": "ti 
-",
+        "text": "ti ",
         "type": "Text",
       },
       Object {
@@ -388,6 +384,514 @@ Array [
     },
     "text": " text",
     "type": "Text",
+  },
+]
+`;
+
+exports[`macros parsing Brackets mismatch 1`] = `
+Array [
+  Object {
+    "keyArgs": Object {},
+    "label": "(@key ",
+    "opcode": "Macro",
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 40,
+            "start": 0,
+          },
+          "text": "!Macro[(@key ]value)(@key another value)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 40,
+        "start": 0,
+      },
+      "raw": "!Macro[(@key ]value)(@key another value)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 14,
+      "start": 0,
+    },
+    "posArgs": Array [],
+    "type": "OpCode",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 40,
+            "start": 0,
+          },
+          "text": "!Macro[(@key ]value)(@key another value)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 40,
+        "start": 0,
+      },
+      "raw": "!Macro[(@key ]value)(@key another value)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 40,
+      "start": 14,
+    },
+    "text": "value)(@key another value)",
+    "type": "Text",
+  },
+]
+`;
+
+exports[`macros parsing Complex macros with name, label, pos and key args 1`] = `
+Array [
+  Object {
+    "keyArgs": Object {
+      "keyArgName": Array [
+        Object {
+          "children": Array [],
+          "parent": [Circular],
+          "pos": Object {
+            "end": 62,
+            "start": 55,
+          },
+          "text": "argName",
+          "type": "Text",
+        },
+      ],
+    },
+    "label": "label-text",
+    "opcode": "Macro",
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 63,
+            "start": 0,
+          },
+          "text": "!Macro[label-text](pos arg 1)(\`pos arg\` 2)(@keyArgName argName)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 63,
+        "start": 0,
+      },
+      "raw": "!Macro[label-text](pos arg 1)(\`pos arg\` 2)(@keyArgName argName)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 63,
+      "start": 0,
+    },
+    "posArgs": Array [
+      Array [
+        Object {
+          "children": Array [],
+          "parent": [Circular],
+          "pos": Object {
+            "end": 28,
+            "start": 19,
+          },
+          "text": "pos arg 1",
+          "type": "Text",
+        },
+      ],
+      Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 39,
+            "start": 30,
+          },
+          "text": "pos arg",
+          "type": "CodeSpan",
+        },
+        Object {
+          "children": Array [],
+          "parent": [Circular],
+          "pos": Object {
+            "end": 41,
+            "start": 39,
+          },
+          "text": " 2",
+          "type": "Text",
+        },
+      ],
+    ],
+    "type": "OpCode",
+  },
+]
+`;
+
+exports[`macros parsing Key is defined wrongly 1`] = `
+Array [
+  Object {
+    "keyArgs": Object {},
+    "label": null,
+    "opcode": "Macro",
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 15,
+            "start": 0,
+          },
+          "text": "!Macro(@key)(@)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 15,
+        "start": 0,
+      },
+      "raw": "!Macro(@key)(@)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 15,
+      "start": 0,
+    },
+    "posArgs": Array [
+      Array [
+        Object {
+          "children": Array [],
+          "parent": [Circular],
+          "pos": Object {
+            "end": 11,
+            "start": 7,
+          },
+          "text": "@key",
+          "type": "Text",
+        },
+      ],
+      Array [
+        Object {
+          "children": Array [],
+          "parent": [Circular],
+          "pos": Object {
+            "end": 14,
+            "start": 13,
+          },
+          "text": "@",
+          "type": "Text",
+        },
+      ],
+    ],
+    "type": "OpCode",
+  },
+]
+`;
+
+exports[`table parsing Simple table 1`] = `
+Array [
+  Object {
+    "align": Array [],
+    "header": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 11,
+                  "start": 1,
+                },
+                "text": " Column 1 ",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 11,
+              "start": 1,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 22,
+                  "start": 12,
+                },
+                "text": " Column 2 ",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 22,
+              "start": 12,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 0,
+        },
+        "type": "TableRow",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 99,
+            "start": 0,
+          },
+          "text": "| Column 1 | Column 2 |
+| -------- | -------- |
+| Value **1** | Value \`2\` |
+|Value [with](link) | |",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 99,
+        "start": 0,
+      },
+      "raw": "| Column 1 | Column 2 |
+| -------- | -------- |
+| Value **1** | Value \`2\` |
+|Value [with](link) | |",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 99,
+      "start": 0,
+    },
+    "rows": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 35,
+                  "start": 25,
+                },
+                "text": " -------- ",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 35,
+              "start": 25,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 46,
+                  "start": 36,
+                },
+                "text": " -------- ",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 46,
+              "start": 36,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 47,
+          "start": 24,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 62,
+                  "start": 49,
+                },
+                "text": " Value **1** ",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 62,
+              "start": 49,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 70,
+                  "start": 63,
+                },
+                "text": " Value ",
+                "type": "Text",
+              },
+              Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 73,
+                  "start": 70,
+                },
+                "text": "2",
+                "type": "CodeSpan",
+              },
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 74,
+                  "start": 73,
+                },
+                "text": " ",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 74,
+              "start": 63,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 75,
+          "start": 48,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 83,
+                  "start": 77,
+                },
+                "text": "Value ",
+                "type": "Text",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 88,
+                      "start": 84,
+                    },
+                    "text": "with",
+                    "type": "Text",
+                  },
+                ],
+                "href": "link",
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 95,
+                  "start": 83,
+                },
+                "title": "",
+                "type": "Link",
+              },
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 96,
+                  "start": 95,
+                },
+                "text": " ",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 96,
+              "start": 77,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 98,
+                  "start": 97,
+                },
+                "text": " ",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 98,
+              "start": 97,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 99,
+          "start": 76,
+        },
+        "type": "TableRow",
+      },
+    ],
+    "type": "Table",
   },
 ]
 `;

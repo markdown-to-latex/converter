@@ -19,7 +19,7 @@ export function resolveOpCode(node: OpCodeNode, context: Context): string {
         throw new OpCodeError(`Unknown OpCode "${node.opcode}"`);
     }
 
-    return lazy(node.arguments, node, context);
+    return lazy(node.posArgs, node, context);
 }
 
 export const enum OpCodeType {

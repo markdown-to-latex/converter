@@ -3,7 +3,7 @@ import {
     applyVisitors,
     findTokenClosingBracket,
     isOpenArgumentBracket,
-    isOpenLabelBracket,
+    isOpenLabelBracket, sliceTokenText,
     unexpectedEof
 } from "../index";
 import {LinkNode, NodeType, RawNodeType, TokensNode} from "../../../node";
@@ -52,7 +52,7 @@ export const parseLink: TokenParser = function (tokens, index) {
             start: childNodePosStart,
             end: childNodePosEnd,
         },
-        text: tokens.text.slice(childNodePosStart - tokens.pos.start, childNodePosEnd - tokens.pos.end),
+        text: sliceTokenText(tokens, index + 1, closingBracketResult.index - 1),
     }
 
     const linkNode: LinkNode = {

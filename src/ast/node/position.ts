@@ -115,7 +115,7 @@ export function positionToTextPosition(
     if (index === null) {
         return {
             line: lines.length,
-            column: lines[lines.length - 1].str.length,
+            column: lines[lines.length - 1].str.length + 1,
         };
     }
 

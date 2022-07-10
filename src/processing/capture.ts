@@ -51,7 +51,7 @@ export function captureOpCodes(node: TextNode, context: Context): void {
             type: NodeType.OpCode,
             parent: node,
             opcode: opcode,
-            arguments: args,
+            posArgs: args,
         } as OpCodeNode);
 
         endIndex = newEndIndex;
