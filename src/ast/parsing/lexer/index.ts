@@ -17,14 +17,15 @@ import {
     diagnoseListHasSeverity,
     DiagnoseSeverity,
 } from '../../../diagnose';
-import { Token, tokenize, tokensToNode, TokenType } from '../tokenizer';
-import { TokenByTypeParserResult, TokenParser, TokenPredicate } from './struct';
-import { parseCode } from './node/code';
-import { isParagraphBreak, parseSoftBreak } from './node/paragraph';
-import { parseCodeSpan } from './node/codeSpan';
-import { parseLink } from './node/link';
-import { parseMacro } from './node/macros';
+import {Token, tokenize, tokensToNode, TokenType} from '../tokenizer';
+import {TokenByTypeParserResult, TokenParser, TokenPredicate} from './struct';
+import {parseCode} from './node/code';
+import {isParagraphBreak, parseSoftBreak} from './node/paragraph';
+import {parseCodeSpan} from './node/codeSpan';
+import {parseLink} from './node/link';
+import {parseMacro} from './node/macros';
 import {parseTable} from "./node/table";
+import {parseList} from "./node/list";
 
 export const enum LexemeType {
     // Space,
@@ -50,7 +51,8 @@ interface LexemeTypeToNodeType {
     // [LexemeType.Space]: node.SpaceNode;
 }
 
-class FatalError extends Error {}
+class FatalError extends Error {
+}
 
 interface ApplyVisitorsResult {
     nodes: Node[];
@@ -271,7 +273,7 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
         diagnostic: [],
     };
 
-    for (let i = 0; i < tokens.tokens.length /*manual*/; ) {
+    for (let i = 0; i < tokens.tokens.length /*manual*/;) {
         const token = tokens.tokens[i];
 
         const result = parseTokensNodeByType(tokens, i);
@@ -338,8 +340,8 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
     [TokenType.JoinableSpecial]: [parseCode, parseCodeSpan],
     [TokenType.SeparatedSpecial]: [parseLink, parseMacro, parseTable],
     [TokenType.Delimiter]: [parseSoftBreak],
-    [TokenType.Spacer]: [],
-    [TokenType.Letter]: [],
+    [TokenType.Spacer]: [parseList,],
+    [TokenType.Letter]: [parseList,],
     [TokenType.Other]: [],
 };
 
@@ -392,7 +394,7 @@ export function sliceTokenText(
     toIndex: number,
 ): string {
     const tokenStart = tokens.tokens[fromIndex];
-    const tokenEnd = tokens.tokens[toIndex];
+    const tokenEnd = tokens.tokens[toIndex - 1];
 
     return tokens.text.slice(
         tokenStart.pos - tokens.pos.start,

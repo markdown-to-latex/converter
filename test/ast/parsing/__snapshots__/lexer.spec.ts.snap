@@ -1,5 +1,239 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`List parsing List with  1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 9,
+              "start": 2,
+            },
+            "text": " Text 1",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 9,
+          "start": 0,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 18,
+              "start": 12,
+            },
+            "text": " Text ",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 21,
+              "start": 18,
+            },
+            "text": "2",
+            "type": "CodeSpan",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 21,
+          "start": 10,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 35,
+              "start": 24,
+            },
+            "text": " **Text** 3",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 35,
+          "start": 22,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": true,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 35,
+            "start": 0,
+          },
+          "text": "1. Text 1
+2. Text \`2\`
+3. **Text** 3",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 35,
+        "start": 0,
+      },
+      "raw": "1. Text 1
+2. Text \`2\`
+3. **Text** 3",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 35,
+      "start": 0,
+    },
+    "start": 1,
+    "type": "List",
+  },
+]
+`;
+
+exports[`List parsing Simple ordered list 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 9,
+              "start": 2,
+            },
+            "text": " Text 1",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 9,
+          "start": 0,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 18,
+              "start": 12,
+            },
+            "text": " Text ",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 21,
+              "start": 18,
+            },
+            "text": "2",
+            "type": "CodeSpan",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 21,
+          "start": 10,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 35,
+              "start": 24,
+            },
+            "text": " **Text** 3",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 35,
+          "start": 22,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": true,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 35,
+            "start": 0,
+          },
+          "text": "1. Text 1
+2. Text \`2\`
+3. **Text** 3",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 35,
+        "start": 0,
+      },
+      "raw": "1. Text 1
+2. Text \`2\`
+3. **Text** 3",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 35,
+      "start": 0,
+    },
+    "start": 1,
+    "type": "List",
+  },
+]
+`;
+
 exports[`code block lexer check Complex raw node 1`] = `
 Array [
   Object {

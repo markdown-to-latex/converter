@@ -52,7 +52,7 @@ export const parseLink: TokenParser = function (tokens, index) {
             start: childNodePosStart,
             end: childNodePosEnd,
         },
-        text: sliceTokenText(tokens, index + 1, closingBracketResult.index - 1),
+        text: sliceTokenText(tokens, index + 1, closingBracketResult.index),
     }
 
     const linkNode: LinkNode = {

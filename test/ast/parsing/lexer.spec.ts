@@ -1,6 +1,6 @@
 import {
     CodeNode, CodeSpanNode,
-    FileNode, LinkNode,
+    FileNode, LinkNode, ListNode,
     NodeType, OpCodeNode,
     RawNode,
     RawNodeType, TableNode,
@@ -166,6 +166,54 @@ describe('table parsing', () => {
         let node = nodes[0] as TableNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Table);
+
+        expect(nodes).toMatchSnapshot();
+    })
+})
+
+describe('List parsing', () => {
+    test('Simple ordered list', () => {
+        const rawNode = rawNodeTemplate(`1. Text 1
+2. Text \`2\`
+3. **Text** 3`)
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as ListNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.List);
+
+        expect(nodes).toMatchSnapshot();
+    })
+
+    test('List with multiline items', () => {
+        const rawNode = rawNodeTemplate(`1. Text 1
+Additional text 1
+2. Text \`2\`
+3. **Text** 3
+   Additional text 3`)
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as ListNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.List);
+
+        expect(nodes).toMatchSnapshot();
+    })
+
+    test('List with list', () => {
+        const rawNode = rawNodeTemplate(`3. Text 1
+Additional text 1
+    * Item
+    * Next Item
+        - One more item \`:)\`
+    * Conclusion
+4. Text \`2\`
+5. **Text** 3`)
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as ListNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.List);
 
         expect(nodes).toMatchSnapshot();
     })
