@@ -2,6 +2,10 @@ import {TokenParser, TokenPredicate} from "../struct";
 import {TokenType} from "../../tokenizer";
 import {NodeType, TextNode} from "../../../node";
 
+export const isPrevTokenDelimiter: TokenPredicate = function (token, index, node) {
+    return index === 0 || node.tokens[index - 1].type === TokenType.Delimiter;
+}
+
 export const isParagraphBreak: TokenPredicate = function (token, index, node) {
     if (token.type !== TokenType.Delimiter) {
         return false;

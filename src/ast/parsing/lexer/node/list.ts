@@ -3,6 +3,7 @@ import {Token, TokenType} from "../../tokenizer";
 import {ListItemNode, ListNode, NodeType, RawNodeType, TokensNode} from "../../../node";
 import {applyVisitors, findTokenOrNull, sliceTokenText} from "../index";
 import {DiagnoseList} from "../../../../diagnose";
+import {isPrevTokenDelimiter} from "./paragraph";
 
 export interface IsListItemResult {
     result: boolean;
@@ -155,7 +156,7 @@ function parseListItem(tokens: TokensNode, index: number): ParseListItemResult |
 }
 
 export const parseList: TokenParser = function (tokens, index) {
-    if (index !== 0 && tokens.tokens[index-1].type !== TokenType.Delimiter) {
+    if (!isPrevTokenDelimiter(tokens.tokens[index], index, tokens)) {
         return null;
     }
 

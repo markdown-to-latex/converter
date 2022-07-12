@@ -3,8 +3,13 @@ import {TokenType} from "../../tokenizer";
 import {applyVisitors, findTokenOrNull, sliceTokenText} from "../index";
 import {NodeType, RawNodeType, TableCellNode, TableNode, TableRowNode, TokensNode} from "../../../node";
 import {DiagnoseList} from "../../../../diagnose";
+import {isPrevTokenDelimiter} from "./paragraph";
 
 export const isTableLine: TokenPredicate = function (token, index, node) {
+    if (!isPrevTokenDelimiter(node.tokens[index], index, node)) {
+        return false;
+    }
+
     if (!(token.type === TokenType.SeparatedSpecial && token.text === '|')) {
         return false
     }

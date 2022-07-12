@@ -12,8 +12,13 @@ import {
     unexpectedEof,
 } from '../index';
 import { DiagnoseSeverity } from '../../../../diagnose';
+import {isPrevTokenDelimiter} from "./paragraph";
 
 export const isCode: TokenPredicate = function (token, index, node) {
+    if (!isPrevTokenDelimiter(node.tokens[index], index, node)) {
+        return false;
+    }
+
     if (token.type !== TokenType.JoinableSpecial) {
         return false;
     }
