@@ -95,7 +95,7 @@ function parseListItem(tokens: TokensNode, index: number): ParseListItemResult |
     // Start parsing from the next line
 
     const delimiter = findTokenOrNull(tokens, sliceStart, n => n.type === TokenType.Delimiter);
-    let lineDelimiterIndex = delimiter ? delimiter.index : tokens.tokens.length;
+    let lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length
 
     while (lineDelimiterIndex < tokens.tokens.length) {
         const prevIndex = lineDelimiterIndex + 1;
@@ -112,7 +112,7 @@ function parseListItem(tokens: TokensNode, index: number): ParseListItemResult |
         }
 
         const delimiter = findTokenOrNull(tokens, lineDelimiterIndex + 1, n => n.type === TokenType.Delimiter);
-        lineDelimiterIndex = delimiter ? delimiter.index : tokens.tokens.length;
+        lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
     }
 
     const sliceEnd = lineDelimiterIndex;
@@ -155,6 +155,10 @@ function parseListItem(tokens: TokensNode, index: number): ParseListItemResult |
 }
 
 export const parseList: TokenParser = function (tokens, index) {
+    if (index !== 0 && tokens.tokens[index-1].type !== TokenType.Delimiter) {
+        return null;
+    }
+
     const diagnostic: DiagnoseList = [];
     const listItems: ListItemNode[] = [];
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`List parsing List with  1`] = `
+exports[`List parsing List with list 1`] = `
 Array [
   Object {
     "children": Array [
@@ -10,17 +10,140 @@ Array [
             "children": Array [],
             "parent": [Circular],
             "pos": Object {
-              "end": 9,
+              "end": 28,
               "start": 2,
             },
-            "text": " Text 1",
+            "text": " Text 1 Additional text 1 ",
             "type": "Text",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 38,
+                      "start": 34,
+                    },
+                    "text": "Item",
+                    "type": "Text",
+                  },
+                ],
+                "loose": false,
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 38,
+                  "start": 28,
+                },
+                "task": false,
+                "type": "ListItem",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 55,
+                      "start": 45,
+                    },
+                    "text": "Next Item ",
+                    "type": "Text",
+                  },
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [
+                          Object {
+                            "children": Array [],
+                            "parent": [Circular],
+                            "pos": Object {
+                              "end": 79,
+                              "start": 65,
+                            },
+                            "text": "One more item ",
+                            "type": "Text",
+                          },
+                          Object {
+                            "parent": [Circular],
+                            "pos": Object {
+                              "end": 83,
+                              "start": 79,
+                            },
+                            "text": ":)",
+                            "type": "CodeSpan",
+                          },
+                        ],
+                        "loose": false,
+                        "parent": [Circular],
+                        "pos": Object {
+                          "end": 83,
+                          "start": 55,
+                        },
+                        "task": false,
+                        "type": "ListItem",
+                      },
+                    ],
+                    "loose": false,
+                    "ordered": false,
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 83,
+                      "start": 55,
+                    },
+                    "start": 0,
+                    "type": "List",
+                  },
+                ],
+                "loose": false,
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 83,
+                  "start": 39,
+                },
+                "task": false,
+                "type": "ListItem",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 100,
+                      "start": 90,
+                    },
+                    "text": "Conclusion",
+                    "type": "Text",
+                  },
+                ],
+                "loose": false,
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 100,
+                  "start": 84,
+                },
+                "task": false,
+                "type": "ListItem",
+              },
+            ],
+            "loose": false,
+            "ordered": false,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 100,
+              "start": 28,
+            },
+            "start": 0,
+            "type": "List",
           },
         ],
         "loose": false,
         "parent": [Circular],
         "pos": Object {
-          "end": 9,
+          "end": 100,
           "start": 0,
         },
         "task": false,
@@ -32,8 +155,8 @@ Array [
             "children": Array [],
             "parent": [Circular],
             "pos": Object {
-              "end": 18,
-              "start": 12,
+              "end": 109,
+              "start": 103,
             },
             "text": " Text ",
             "type": "Text",
@@ -41,8 +164,8 @@ Array [
           Object {
             "parent": [Circular],
             "pos": Object {
-              "end": 21,
-              "start": 18,
+              "end": 112,
+              "start": 109,
             },
             "text": "2",
             "type": "CodeSpan",
@@ -51,8 +174,8 @@ Array [
         "loose": false,
         "parent": [Circular],
         "pos": Object {
-          "end": 21,
-          "start": 10,
+          "end": 112,
+          "start": 101,
         },
         "task": false,
         "type": "ListItem",
@@ -63,8 +186,8 @@ Array [
             "children": Array [],
             "parent": [Circular],
             "pos": Object {
-              "end": 35,
-              "start": 24,
+              "end": 126,
+              "start": 115,
             },
             "text": " **Text** 3",
             "type": "Text",
@@ -73,8 +196,8 @@ Array [
         "loose": false,
         "parent": [Circular],
         "pos": Object {
-          "end": 35,
-          "start": 22,
+          "end": 126,
+          "start": 113,
         },
         "task": false,
         "type": "ListItem",
@@ -87,28 +210,159 @@ Array [
         Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 35,
+            "end": 126,
             "start": 0,
           },
-          "text": "1. Text 1
-2. Text \`2\`
-3. **Text** 3",
+          "text": "3. Text 1
+Additional text 1
+    * Item
+    * Next Item
+        - One more item \`:)\`
+    * Conclusion
+4. Text \`2\`
+5. **Text** 3",
           "type": "Raw",
         },
       ],
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 35,
+        "end": 126,
         "start": 0,
       },
-      "raw": "1. Text 1
-2. Text \`2\`
-3. **Text** 3",
+      "raw": "3. Text 1
+Additional text 1
+    * Item
+    * Next Item
+        - One more item \`:)\`
+    * Conclusion
+4. Text \`2\`
+5. **Text** 3",
       "type": "File",
     },
     "pos": Object {
-      "end": 35,
+      "end": 126,
+      "start": 0,
+    },
+    "start": 3,
+    "type": "List",
+  },
+]
+`;
+
+exports[`List parsing List with multiline items 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 27,
+              "start": 2,
+            },
+            "text": " Text 1 Additional text 1",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 27,
+          "start": 0,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 36,
+              "start": 30,
+            },
+            "text": " Text ",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 39,
+              "start": 36,
+            },
+            "text": "2",
+            "type": "CodeSpan",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 39,
+          "start": 28,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 74,
+              "start": 42,
+            },
+            "text": " **Text** 3    Additional text 3",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 74,
+          "start": 40,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": true,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 74,
+            "start": 0,
+          },
+          "text": "1. Text 1
+Additional text 1
+2. Text \`2\`
+3. **Text** 3
+   Additional text 3",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 74,
+        "start": 0,
+      },
+      "raw": "1. Text 1
+Additional text 1
+2. Text \`2\`
+3. **Text** 3
+   Additional text 3",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 74,
       "start": 0,
     },
     "start": 1,

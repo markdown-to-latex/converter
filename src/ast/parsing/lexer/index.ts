@@ -2,7 +2,8 @@ import * as node from '../../node';
 import {
     getNodeParentFile,
     Node,
-    NodeE,
+    NodeChildren,
+    NodeText,
     NodeType,
     positionToTextPosition,
     RawNode,
@@ -17,15 +18,16 @@ import {
     diagnoseListHasSeverity,
     DiagnoseSeverity,
 } from '../../../diagnose';
-import {Token, tokenize, tokensToNode, TokenType} from '../tokenizer';
-import {TokenByTypeParserResult, TokenParser, TokenPredicate} from './struct';
-import {parseCode} from './node/code';
-import {isParagraphBreak, parseSoftBreak} from './node/paragraph';
-import {parseCodeSpan} from './node/codeSpan';
-import {parseLink} from './node/link';
-import {parseMacro} from './node/macros';
-import {parseTable} from "./node/table";
-import {parseList} from "./node/list";
+import { Token, tokenize, tokensToNode, TokenType } from '../tokenizer';
+import { TokenByTypeParserResult, TokenParser, TokenPredicate } from './struct';
+import { parseCode } from './node/code';
+import { isParagraphBreak, parseSoftBreak } from './node/paragraph';
+import { parseCodeSpan } from './node/codeSpan';
+import { parseLink } from './node/link';
+import { parseMacro } from './node/macros';
+import { parseTable } from './node/table';
+import { parseList } from './node/list';
+import { parseHeading } from './node/heading';
 
 export const enum LexemeType {
     // Space,
@@ -51,8 +53,7 @@ interface LexemeTypeToNodeType {
     // [LexemeType.Space]: node.SpaceNode;
 }
 
-class FatalError extends Error {
-}
+class FatalError extends Error {}
 
 interface ApplyVisitorsResult {
     nodes: Node[];
@@ -273,7 +274,7 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
         diagnostic: [],
     };
 
-    for (let i = 0; i < tokens.tokens.length /*manual*/;) {
+    for (let i = 0; i < tokens.tokens.length /*manual*/; ) {
         const token = tokens.tokens[i];
 
         const result = parseTokensNodeByType(tokens, i);
@@ -294,30 +295,63 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
             continue;
         }
 
-        // Nothing
-        const lastNode = parsingResult.nodes.length
-            ? parsingResult.nodes[parsingResult.nodes.length - 1]
-            : null;
-        if (lastNode?.type === NodeType.Text) {
-            // TODO: separate node joiner
-            lastNode.pos.end = token.pos + token.text.length;
-            (lastNode as TextNode).text += token.text;
-        } else {
-            parsingResult.nodes.push({
-                type: NodeType.Text,
-                parent: tokens.parent,
-                text: token.text,
-                pos: {
-                    start: token.pos,
-                    end: token.pos + token.text.length,
-                },
-                children: [],
-            } as TextNode);
-        }
+        parsingResult.nodes.push({
+            type: NodeType.Text,
+            parent: tokens.parent,
+            text: token.text,
+            pos: {
+                start: token.pos,
+                end: token.pos + token.text.length,
+            },
+            children: [],
+        } as TextNode);
         ++i;
     }
 
+    nodeJoiner(parsingResult.nodes);
     return parsingResult;
+}
+
+function nodeJoiner(nodes: Node[]): void {
+    let index = 1;
+    while (index < nodes.length) {
+        const currentNode = nodes[index];
+        const prevNode = nodes[index - 1];
+
+        if (
+            currentNode.type === prevNode.type &&
+            currentNode.type === NodeType.Text
+        ) {
+            // Contains 'text' field => is a NodeText
+            const currentNodeText = currentNode as Node & NodeText;
+            const prevNodeText = prevNode as Node & NodeText;
+
+            prevNodeText.pos.end = currentNodeText.pos.end;
+            prevNodeText.text += currentNodeText.text;
+
+            nodes.splice(index, 1);
+            continue;
+        }
+
+        if (
+            currentNode.type === prevNode.type &&
+            currentNode.type === NodeType.Blockquote
+        ) {
+            // Contains 'text' field => is a NodeText
+            const currentNodeChildren = currentNode as Node & NodeChildren;
+            const prevNodeChildren = prevNode as Node & NodeChildren;
+
+            prevNodeChildren.pos.end = currentNodeChildren.pos.end;
+            prevNodeChildren.children.push(...currentNodeChildren.children);
+            currentNodeChildren.children.forEach(
+                n => (n.parent = prevNodeChildren),
+            );
+
+            nodes.splice(index, 1);
+        }
+
+        ++index;
+    }
 }
 
 function parseTokensNodeByType(
@@ -337,11 +371,11 @@ function parseTokensNodeByType(
 }
 
 const parsersByType: Record<TokenType, TokenParser[]> = {
-    [TokenType.JoinableSpecial]: [parseCode, parseCodeSpan],
+    [TokenType.JoinableSpecial]: [parseCodeSpan, parseHeading, parseCode],
     [TokenType.SeparatedSpecial]: [parseLink, parseMacro, parseTable],
     [TokenType.Delimiter]: [parseSoftBreak],
-    [TokenType.Spacer]: [parseList,],
-    [TokenType.Letter]: [parseList,],
+    [TokenType.Spacer]: [parseList],
+    [TokenType.Letter]: [parseList],
     [TokenType.Other]: [],
 };
 

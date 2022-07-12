@@ -10,7 +10,7 @@ export const isTableLine: TokenPredicate = function (token, index, node) {
     }
 
     const delimiter = findTokenOrNull(node, index, n => n.type === TokenType.Delimiter);
-    const lineEndTokenIndex = delimiter ? delimiter.index - 1 : node.tokens.length - 1;
+    const lineEndTokenIndex = (delimiter?.index ?? node.tokens.length) - 1;
     if (lineEndTokenIndex === index) {
         return false;
     }
@@ -98,7 +98,7 @@ export const parseTable: TokenParser = function (tokens, index) {
         delimiter = findTokenOrNull(tokens, lineDelimiterIndex + 1, n => n.type === TokenType.Delimiter);
 
         const prevIndex = lineDelimiterIndex + 1;
-        lineDelimiterIndex = delimiter ? delimiter.index : tokens.tokens.length;
+        lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
 
         const lineResult = parseTableLine(tokens, prevIndex, lineDelimiterIndex - 1);
         diagnostic.push(...lineResult.diagnostic);
