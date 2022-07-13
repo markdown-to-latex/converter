@@ -18,7 +18,7 @@ export const isHeading: TokenPredicate = function (token, index, node) {
         return false;
     }
 
-    return node.tokens[index + 1]?.type !== TokenType.Spacer && node.tokens[index + 2] !== undefined;
+    return node.tokens[index + 1]?.type === TokenType.Spacer && node.tokens[index + 2] !== undefined;
 };
 
 export const parseHeading: TokenParser = function (tokens, index) {
@@ -33,7 +33,7 @@ export const parseHeading: TokenParser = function (tokens, index) {
     const delimiter = findTokenOrNull(tokens, startIndex, n => n.type === TokenType.Delimiter);
     const lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
 
-    const endToken = tokens.tokens[lineDelimiterIndex];
+    const endToken = tokens.tokens[lineDelimiterIndex - 1];
     const headingNode: HeadingNode = {
         type: NodeType.Heading,
         parent: tokens.parent,
@@ -65,7 +65,7 @@ export const parseHeading: TokenParser = function (tokens, index) {
 
     return {
         nodes: [headingNode],
-        index: lineDelimiterIndex,
+        index: lineDelimiterIndex + 1,
         diagnostic: diagnostic
     }
 };

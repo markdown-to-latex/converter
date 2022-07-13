@@ -1,5 +1,389 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Blockquote parsing Multi-level blockquote parsing 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 8,
+          "start": 2,
+        },
+        "text": "Line 1",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 11,
+        },
+        "text": "Line 2",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 26,
+          "start": 20,
+        },
+        "text": "Line 3",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 31,
+            "start": 0,
+          },
+          "text": "> Line 1
+> Line 2
+> Line 3
+Text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 31,
+        "start": 0,
+      },
+      "raw": "> Line 1
+> Line 2
+> Line 3
+Text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 27,
+      "start": 0,
+    },
+    "type": "Blockquote",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 31,
+            "start": 0,
+          },
+          "text": "> Line 1
+> Line 2
+> Line 3
+Text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 31,
+        "start": 0,
+      },
+      "raw": "> Line 1
+> Line 2
+> Line 3
+Text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 31,
+      "start": 27,
+    },
+    "text": "Text",
+    "type": "Text",
+  },
+]
+`;
+
+exports[`Heading parsing Header with text parsing 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 2,
+        },
+        "text": "Header 1",
+        "type": "Text",
+      },
+    ],
+    "depth": 1,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 16,
+            "start": 0,
+          },
+          "text": "# Header 1
+
+Text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 16,
+        "start": 0,
+      },
+      "raw": "# Header 1
+
+Text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 10,
+      "start": 0,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 16,
+            "start": 0,
+          },
+          "text": "# Header 1
+
+Text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 16,
+        "start": 0,
+      },
+      "raw": "# Header 1
+
+Text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 16,
+      "start": 12,
+    },
+    "text": "Text",
+    "type": "Text",
+  },
+]
+`;
+
+exports[`Heading parsing Multi-level heading parsing 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 2,
+        },
+        "text": "Header 1",
+        "type": "Text",
+      },
+    ],
+    "depth": 1,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 49,
+            "start": 0,
+          },
+          "text": "# Header 1
+## Header 2
+### Header 3
+#### Header 4",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 49,
+        "start": 0,
+      },
+      "raw": "# Header 1
+## Header 2
+### Header 3
+#### Header 4",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 10,
+      "start": 0,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 22,
+          "start": 14,
+        },
+        "text": "Header 2",
+        "type": "Text",
+      },
+    ],
+    "depth": 2,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 49,
+            "start": 0,
+          },
+          "text": "# Header 1
+## Header 2
+### Header 3
+#### Header 4",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 49,
+        "start": 0,
+      },
+      "raw": "# Header 1
+## Header 2
+### Header 3
+#### Header 4",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 22,
+      "start": 11,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 35,
+          "start": 27,
+        },
+        "text": "Header 3",
+        "type": "Text",
+      },
+    ],
+    "depth": 3,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 49,
+            "start": 0,
+          },
+          "text": "# Header 1
+## Header 2
+### Header 3
+#### Header 4",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 49,
+        "start": 0,
+      },
+      "raw": "# Header 1
+## Header 2
+### Header 3
+#### Header 4",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 35,
+      "start": 23,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 49,
+          "start": 41,
+        },
+        "text": "Header 4",
+        "type": "Text",
+      },
+    ],
+    "depth": 4,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 49,
+            "start": 0,
+          },
+          "text": "# Header 1
+## Header 2
+### Header 3
+#### Header 4",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 49,
+        "start": 0,
+      },
+      "raw": "# Header 1
+## Header 2
+### Header 3
+#### Header 4",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 49,
+      "start": 36,
+    },
+    "type": "Heading",
+  },
+]
+`;
+
 exports[`List parsing List with list 1`] = `
 Array [
   Object {

@@ -1,6 +1,6 @@
 import {
     CodeNode, CodeSpanNode,
-    FileNode, LinkNode, ListNode,
+    FileNode, HeadingNode, LinkNode, ListNode,
     NodeType, OpCodeNode,
     RawNode,
     RawNodeType, TableNode,
@@ -217,7 +217,63 @@ Additional text 1
 
         expect(nodes).toMatchSnapshot();
     })
+
+    test('List with text after', () => {
+        const rawNode = rawNodeTemplate(`3. Text 1
+    
+Text`)
+
+        // TODO: wrong
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(2);
+        expect(nodes[0].type).toEqual(NodeType.List);
+        expect(nodes[1].type).toEqual(NodeType.Text);
+
+        expect(nodes).toMatchSnapshot();
+    })
 })
 
-// TODO: Heading test
-// TODO: Blockquote test
+describe('Heading parsing', () => {
+    test('Multi-level heading parsing', () => {
+        const rawNode = rawNodeTemplate(`# Header 1
+## Header \`2\`
+### Header 3
+#### Header 4`)
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        for (const absNode of nodes) {
+            let node = absNode as HeadingNode;
+            expect(node).not.toBeUndefined();
+            expect(node.type).toEqual(NodeType.Heading);
+        }
+
+        expect(nodes).toMatchSnapshot();
+    })
+
+    test('Header with text parsing', () => {
+        const rawNode = rawNodeTemplate(`# Header 1
+
+Text`)
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+
+        expect(nodes).toMatchSnapshot();
+    })
+})
+
+describe('Blockquote parsing', () => {
+    test('Multi-level blockquote parsing', () => {
+        const rawNode = rawNodeTemplate(`> Line 1
+> Line 2
+> Line 3
+Text`)
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(2);
+        expect(nodes[0].type).toEqual(NodeType.Blockquote);
+        expect(nodes[1].type).toEqual(NodeType.Text);
+
+        expect(nodes).toMatchSnapshot();
+    })
+})

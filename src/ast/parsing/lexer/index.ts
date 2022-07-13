@@ -28,6 +28,7 @@ import { parseMacro } from './node/macros';
 import { parseTable } from './node/table';
 import { parseList } from './node/list';
 import { parseHeading } from './node/heading';
+import {parseBlockquote} from "./node/blockquote";
 
 export const enum LexemeType {
     // Space,
@@ -348,6 +349,7 @@ function nodeJoiner(nodes: Node[]): void {
             );
 
             nodes.splice(index, 1);
+            continue;
         }
 
         ++index;
@@ -372,7 +374,7 @@ function parseTokensNodeByType(
 
 const parsersByType: Record<TokenType, TokenParser[]> = {
     [TokenType.JoinableSpecial]: [parseCodeSpan, parseHeading, parseCode],
-    [TokenType.SeparatedSpecial]: [parseLink, parseMacro, parseTable],
+    [TokenType.SeparatedSpecial]: [parseLink, parseMacro, parseTable, parseBlockquote],
     [TokenType.Delimiter]: [parseSoftBreak],
     [TokenType.Spacer]: [parseList],
     [TokenType.Letter]: [parseList],

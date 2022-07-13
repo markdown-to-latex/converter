@@ -11,7 +11,7 @@ export const isParagraphBreak: TokenPredicate = function (token, index, node) {
         return false;
     }
 
-    return node.tokens[index + 1]?.type === TokenType.Delimiter;
+    return token.text.length >= 2;
 };
 
 export const isSoftBreak: TokenPredicate = function (token, index, node) {
@@ -19,7 +19,7 @@ export const isSoftBreak: TokenPredicate = function (token, index, node) {
         return false;
     }
 
-    return node.tokens[index + 1]?.type !== TokenType.Delimiter;
+    return token.text.length == 1;
 }
 
 /**

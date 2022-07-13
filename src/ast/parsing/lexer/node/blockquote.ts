@@ -17,7 +17,7 @@ export const isBlockquote: TokenPredicate = function (token, index, node) {
         return false;
     }
 
-    return node.tokens[index + 1]?.type !== TokenType.Spacer && node.tokens[index + 2] !== undefined;
+    return node.tokens[index + 1]?.type === TokenType.Spacer && node.tokens[index + 2] !== undefined;
 };
 
 export const parseBlockquote: TokenParser = function (tokens, index) {
@@ -63,7 +63,7 @@ export const parseBlockquote: TokenParser = function (tokens, index) {
 
     return {
         nodes: [blockquoteNode],
-        index: lineDelimiterIndex,
+        index: lineDelimiterIndex + 1,
         diagnostic: diagnostic
     }
 };
