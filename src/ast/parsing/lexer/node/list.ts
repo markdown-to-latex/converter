@@ -1,37 +1,37 @@
-import {TokenParser} from "../struct";
-import {Token, TokenType} from "../../tokenizer";
-import {ListItemNode, ListNode, NodeType, RawNodeType, TokensNode} from "../../../node";
-import {applyVisitors, findTokenOrNull, sliceTokenText} from "../index";
-import {DiagnoseList} from "../../../../diagnose";
-import {isPrevTokenDelimiter} from "./paragraph";
+import { TokenParser } from "../struct";
+import { Token, TokenType } from "../../tokenizer";
+import { ListItemNode, ListNode, NodeType, RawNodeType, TokensNode } from "../../../node";
+import { applyVisitors, findTokenOrNull, sliceTokenText } from "../index";
+import { DiagnoseList } from "../../../../diagnose";
+import { isPrevTokenDelimiter } from "./paragraph";
 
 export interface IsListItemResult {
     result: boolean;
     indent: number;
 }
 
-const UNORDERED_LIST_DOTS = ['*', '-', '+'];
-const ORDERED_LIST_DOTS = ['.', ')'];
+const UNORDERED_LIST_DOTS = ["*", "-", "+"];
+const ORDERED_LIST_DOTS = [".", ")"];
 
 export function isOrderedListItem(token: Token, index: number, node: TokensNode): IsListItemResult {
     let indent: number = 0;
     if (token?.type === TokenType.Spacer) {
-        indent = token.text.length
-        index += 1
+        indent = token.text.length;
+        index += 1;
         token = node.tokens[index];
     }
 
     if (token?.type !== TokenType.Letter) {
         return {
             result: false,
-            indent: 0,
+            indent: 0
         };
     }
 
     token = node.tokens[index + 1];
     return {
         result: token?.type === TokenType.SeparatedSpecial && ORDERED_LIST_DOTS.indexOf(token?.text) !== -1,
-        indent: indent,
+        indent: indent
     };
 }
 
@@ -39,14 +39,14 @@ export function isOrderedListItem(token: Token, index: number, node: TokensNode)
 export function isUnorderedListItem(token: Token, index: number, node: TokensNode): IsListItemResult {
     let indent: number = 0;
     if (token?.type === TokenType.Spacer) {
-        indent = token.text.length
-        index += 1
+        indent = token.text.length;
+        index += 1;
         token = node.tokens[index];
     }
 
     return {
         result: UNORDERED_LIST_DOTS.indexOf(token?.text) !== -1,
-        indent: indent,
+        indent: indent
     };
 }
 
@@ -61,18 +61,18 @@ interface ParseListItemResult {
 
 function parseListItem(tokens: TokensNode, index: number): ParseListItemResult | null {
     const beginIndex = index;
-    const diagnostic: DiagnoseList = []
+    const diagnostic: DiagnoseList = [];
     let token = tokens.tokens[index];
 
     let spacers: number = 0;
     if (token.type === TokenType.Spacer) {
         spacers = token.text.length;
 
-        index += 1
+        index += 1;
         token = tokens.tokens[index];
     }
 
-    let initValue: string = ''
+    let initValue: string = "";
     let ordered: boolean;
 
     if (token?.type !== TokenType.Letter) {
@@ -91,20 +91,20 @@ function parseListItem(tokens: TokensNode, index: number): ParseListItemResult |
         }
     }
 
-    const sliceStart = index + 2;
+    const sliceStart = ordered ? index + 3 : index + 2;
 
     // Start parsing from the next line
 
-    const delimiter = findTokenOrNull(tokens, sliceStart, n => n.type === TokenType.Delimiter);
-    let lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length
+    let delimiter = findTokenOrNull(tokens, sliceStart, n => n.type === TokenType.Delimiter);
+    let lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
 
     while (lineDelimiterIndex < tokens.tokens.length) {
         const prevIndex = lineDelimiterIndex + 1;
-
-        const startToken = tokens.tokens[prevIndex];
-        if (startToken?.type === TokenType.Delimiter) {
+        if (delimiter && delimiter.token.text.length > 1) {
             break;  // Found \n\n
         }
+
+        const startToken = tokens.tokens[prevIndex];
 
         const asOrderedListItem = isOrderedListItem(startToken, prevIndex, tokens);
         const asUnorderedListItem = isUnorderedListItem(startToken, prevIndex, tokens);
@@ -112,12 +112,12 @@ function parseListItem(tokens: TokensNode, index: number): ParseListItemResult |
             break; // Found same or parent list item
         }
 
-        const delimiter = findTokenOrNull(tokens, lineDelimiterIndex + 1, n => n.type === TokenType.Delimiter);
+        delimiter = findTokenOrNull(tokens, lineDelimiterIndex + 1, n => n.type === TokenType.Delimiter);
         lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
     }
 
     const sliceEnd = lineDelimiterIndex;
-    const endToken = tokens.tokens[sliceEnd - 1]
+    const endToken = tokens.tokens[sliceEnd - 1];
 
     const listItemNode: ListItemNode = {
         type: NodeType.ListItem,
@@ -128,34 +128,34 @@ function parseListItem(tokens: TokensNode, index: number): ParseListItemResult |
             end: endToken.pos + endToken.text.length
         },
         loose: false,
-        task: false,
-    }
+        task: false
+    };
 
     const tokensNode: TokensNode = {
         type: RawNodeType.Tokens,
         tokens: tokens.tokens.slice(sliceStart, sliceEnd),
         pos: {
             start: tokens.tokens[sliceStart].pos,
-            end: endToken.pos + endToken.text.length,
+            end: endToken.pos + endToken.text.length
         },
         parent: listItemNode,
-        text: sliceTokenText(tokens, sliceStart, sliceEnd),
-    }
+        text: sliceTokenText(tokens, sliceStart, sliceEnd)
+    };
     const visitorsResult = applyVisitors([tokensNode]);
-    diagnostic.push(...visitorsResult.diagnostic)
+    diagnostic.push(...visitorsResult.diagnostic);
 
-    listItemNode.children = visitorsResult.nodes
+    listItemNode.children = visitorsResult.nodes;
 
     return {
         item: listItemNode,
         index: sliceEnd + 1,
         diagnostic: diagnostic,
         itemText: initValue,
-        ordered: ordered,
+        ordered: ordered
     };
 }
 
-export const parseList: TokenParser = function (tokens, index) {
+export const parseList: TokenParser = function(tokens, index) {
     if (!isPrevTokenDelimiter(tokens.tokens[index], index, tokens)) {
         return null;
     }
@@ -174,7 +174,7 @@ export const parseList: TokenParser = function (tokens, index) {
         if (!result.item) {
             break;
         }
-        listItems.push(result.item)
+        listItems.push(result.item);
 
         ordered ??= result.ordered;
         initText ??= result.itemText;
@@ -182,7 +182,7 @@ export const parseList: TokenParser = function (tokens, index) {
         if (result.index >= tokens.tokens.length) {
             break;
         }
-        result = parseListItem(tokens, nextIndex)
+        result = parseListItem(tokens, nextIndex);
     }
 
     if (listItems.length === 0) {
@@ -194,18 +194,18 @@ export const parseList: TokenParser = function (tokens, index) {
         parent: tokens.parent,
         pos: {
             start: listItems[0].pos.start,
-            end: listItems[listItems.length - 1].pos.end,
+            end: listItems[listItems.length - 1].pos.end
         },
         children: listItems,
         loose: false,       /* TODO: no? */
-        start: +(initText ?? '1'),
-        ordered: ordered ?? false,
-    }
+        start: +(initText ?? "1"),
+        ordered: ordered ?? false
+    };
     listItems.forEach(n => n.parent = listNode);
 
     return {
         nodes: [listNode],
         diagnostic: diagnostic,
-        index: nextIndex,
+        index: nextIndex
     };
-}
+};

@@ -21,14 +21,18 @@ import {
 import { Token, tokenize, tokensToNode, TokenType } from '../tokenizer';
 import { TokenByTypeParserResult, TokenParser, TokenPredicate } from './struct';
 import { parseCode } from './node/code';
-import { isParagraphBreak, parseSoftBreak } from './node/paragraph';
+import {
+    isParagraphBreak,
+    parseParagraphBreak,
+    parseSoftBreak,
+} from './node/paragraph';
 import { parseCodeSpan } from './node/codeSpan';
 import { parseLink } from './node/link';
 import { parseMacro } from './node/macros';
 import { parseTable } from './node/table';
 import { parseList } from './node/list';
 import { parseHeading } from './node/heading';
-import {parseBlockquote} from "./node/blockquote";
+import { parseBlockquote } from './node/blockquote';
 
 export const enum LexemeType {
     // Space,
@@ -264,6 +268,35 @@ export function isOpenArgumentBracket(
     return token.text == '(';
 }
 
+interface TrimWithPositionsResult {
+    result: string;
+    leftTrim: number;
+    rightTrim: number;
+}
+
+export function trimSingleWithPositions(str: string): TrimWithPositionsResult {
+    const originalLen = str.length;
+    const leftLen = originalLen - str.trimStart().length;
+    const rightLen = originalLen - str.trimEnd().length;
+
+    if (originalLen <= leftLen + rightLen) {
+        return {
+            result: ' ',
+            leftTrim: originalLen - 1,
+            rightTrim: 0,
+        };
+    }
+
+    return {
+        result: str.slice(
+            leftLen > 0 ? leftLen - 1 : 0,
+            rightLen > 0 ? originalLen - rightLen + 1 : originalLen,
+        ),
+        leftTrim: leftLen > 0 ? leftLen - 1 : 0,
+        rightTrim: rightLen > 0 ? rightLen - 1 : 0,
+    };
+}
+
 interface ParseTokensNodeResult {
     nodes: Node[];
     diagnostic: DiagnoseList;
@@ -310,14 +343,56 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
     }
 
     nodeJoiner(parsingResult.nodes);
+    // parsingResult.nodes = parsingResult.nodes.map(n => {
+    //     if (n.type === NodeType.Text) {
+    //         const trimmed = trimSingleWithPositions((n as TextNode).text);
+    //         return {
+    //             type: NodeType.Text,
+    //             text: trimmed.result,
+    //             parent: n.parent,
+    //             pos: {
+    //                 start: n.pos.start + trimmed.leftTrim,
+    //                 end: n.pos.end - trimmed.rightTrim,
+    //             },
+    //             children: (n as TextNode).children,
+    //         } as TextNode;
+    //     }
+    //     return n;
+    // });
+    parsingResult.nodes = parsingResult.nodes.filter(
+        n => n.type !== RawNodeType.ParagraphBreak,
+    );
     return parsingResult;
 }
 
 function nodeJoiner(nodes: Node[]): void {
+    const breaks: (NodeType | RawNodeType)[] = [
+        RawNodeType.SoftBreak,
+        RawNodeType.ParagraphBreak,
+    ];
+    if (breaks.indexOf(nodes[0]?.type) !== -1) {
+        nodes = nodes.splice(0, 1);
+    }
+
     let index = 1;
     while (index < nodes.length) {
         const currentNode = nodes[index];
         const prevNode = nodes[index - 1];
+
+        if (currentNode.type === RawNodeType.SoftBreak) {
+            if (
+                prevNode.type === NodeType.Text &&
+                nodes[index + 1]?.type === NodeType.Text
+            ) {
+                const prevNodeText = prevNode as Node & NodeText;
+
+                prevNodeText.pos.end = currentNode.pos.end;
+                prevNodeText.text += ' ';
+            }
+
+            nodes.splice(index, 1);
+            continue;
+        }
 
         if (
             currentNode.type === prevNode.type &&
@@ -374,8 +449,13 @@ function parseTokensNodeByType(
 
 const parsersByType: Record<TokenType, TokenParser[]> = {
     [TokenType.JoinableSpecial]: [parseCodeSpan, parseHeading, parseCode],
-    [TokenType.SeparatedSpecial]: [parseLink, parseMacro, parseTable, parseBlockquote],
-    [TokenType.Delimiter]: [parseSoftBreak],
+    [TokenType.SeparatedSpecial]: [
+        parseLink,
+        parseMacro,
+        parseTable,
+        parseBlockquote,
+    ],
+    [TokenType.Delimiter]: [parseSoftBreak, parseParagraphBreak],
     [TokenType.Spacer]: [parseList],
     [TokenType.Letter]: [parseList],
     [TokenType.Other]: [],

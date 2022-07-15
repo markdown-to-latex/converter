@@ -212,11 +212,11 @@ Array [
         Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 49,
+            "end": 51,
             "start": 0,
           },
           "text": "# Header 1
-## Header 2
+## Header \`2\`
 ### Header 3
 #### Header 4",
           "type": "Raw",
@@ -225,11 +225,11 @@ Array [
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 49,
+        "end": 51,
         "start": 0,
       },
       "raw": "# Header 1
-## Header 2
+## Header \`2\`
 ### Header 3
 #### Header 4",
       "type": "File",
@@ -246,11 +246,20 @@ Array [
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 22,
+          "end": 21,
           "start": 14,
         },
-        "text": "Header 2",
+        "text": "Header ",
         "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 24,
+          "start": 21,
+        },
+        "text": "2",
+        "type": "CodeSpan",
       },
     ],
     "depth": 2,
@@ -259,11 +268,11 @@ Array [
         Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 49,
+            "end": 51,
             "start": 0,
           },
           "text": "# Header 1
-## Header 2
+## Header \`2\`
 ### Header 3
 #### Header 4",
           "type": "Raw",
@@ -272,17 +281,17 @@ Array [
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 49,
+        "end": 51,
         "start": 0,
       },
       "raw": "# Header 1
-## Header 2
+## Header \`2\`
 ### Header 3
 #### Header 4",
       "type": "File",
     },
     "pos": Object {
-      "end": 22,
+      "end": 24,
       "start": 11,
     },
     "type": "Heading",
@@ -293,8 +302,8 @@ Array [
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 35,
-          "start": 27,
+          "end": 37,
+          "start": 29,
         },
         "text": "Header 3",
         "type": "Text",
@@ -306,11 +315,11 @@ Array [
         Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 49,
+            "end": 51,
             "start": 0,
           },
           "text": "# Header 1
-## Header 2
+## Header \`2\`
 ### Header 3
 #### Header 4",
           "type": "Raw",
@@ -319,18 +328,18 @@ Array [
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 49,
+        "end": 51,
         "start": 0,
       },
       "raw": "# Header 1
-## Header 2
+## Header \`2\`
 ### Header 3
 #### Header 4",
       "type": "File",
     },
     "pos": Object {
-      "end": 35,
-      "start": 23,
+      "end": 37,
+      "start": 25,
     },
     "type": "Heading",
   },
@@ -340,8 +349,8 @@ Array [
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 49,
-          "start": 41,
+          "end": 51,
+          "start": 43,
         },
         "text": "Header 4",
         "type": "Text",
@@ -353,11 +362,11 @@ Array [
         Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 49,
+            "end": 51,
             "start": 0,
           },
           "text": "# Header 1
-## Header 2
+## Header \`2\`
 ### Header 3
 #### Header 4",
           "type": "Raw",
@@ -366,18 +375,18 @@ Array [
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 49,
+        "end": 51,
         "start": 0,
       },
       "raw": "# Header 1
-## Header 2
+## Header \`2\`
 ### Header 3
 #### Header 4",
       "type": "File",
     },
     "pos": Object {
-      "end": 49,
-      "start": 36,
+      "end": 51,
+      "start": 38,
     },
     "type": "Heading",
   },
@@ -394,10 +403,10 @@ Array [
             "children": Array [],
             "parent": [Circular],
             "pos": Object {
-              "end": 28,
-              "start": 2,
+              "end": 27,
+              "start": 3,
             },
-            "text": " Text 1 Additional text 1 ",
+            "text": "Text 1 Additional text 1",
             "type": "Text",
           },
           Object {
@@ -430,10 +439,10 @@ Array [
                     "children": Array [],
                     "parent": [Circular],
                     "pos": Object {
-                      "end": 55,
+                      "end": 54,
                       "start": 45,
                     },
-                    "text": "Next Item ",
+                    "text": "Next Item",
                     "type": "Text",
                   },
                   Object {
@@ -540,9 +549,9 @@ Array [
             "parent": [Circular],
             "pos": Object {
               "end": 109,
-              "start": 103,
+              "start": 104,
             },
-            "text": " Text ",
+            "text": "Text ",
             "type": "Text",
           },
           Object {
@@ -571,9 +580,9 @@ Array [
             "parent": [Circular],
             "pos": Object {
               "end": 126,
-              "start": 115,
+              "start": 116,
             },
-            "text": " **Text** 3",
+            "text": "**Text** 3",
             "type": "Text",
           },
         ],
@@ -645,9 +654,9 @@ Array [
             "parent": [Circular],
             "pos": Object {
               "end": 27,
-              "start": 2,
+              "start": 3,
             },
-            "text": " Text 1 Additional text 1",
+            "text": "Text 1 Additional text 1",
             "type": "Text",
           },
         ],
@@ -667,9 +676,9 @@ Array [
             "parent": [Circular],
             "pos": Object {
               "end": 36,
-              "start": 30,
+              "start": 31,
             },
-            "text": " Text ",
+            "text": "Text ",
             "type": "Text",
           },
           Object {
@@ -698,9 +707,9 @@ Array [
             "parent": [Circular],
             "pos": Object {
               "end": 74,
-              "start": 42,
+              "start": 43,
             },
-            "text": " **Text** 3    Additional text 3",
+            "text": "**Text** 3    Additional text 3",
             "type": "Text",
           },
         ],
@@ -755,6 +764,104 @@ Additional text 1
 ]
 `;
 
+exports[`List parsing List with text after 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 9,
+              "start": 3,
+            },
+            "text": "Text 1",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 9,
+          "start": 0,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": true,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 15,
+            "start": 0,
+          },
+          "text": "3. Text 1
+
+Text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 15,
+        "start": 0,
+      },
+      "raw": "3. Text 1
+
+Text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 9,
+      "start": 0,
+    },
+    "start": 3,
+    "type": "List",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 15,
+            "start": 0,
+          },
+          "text": "3. Text 1
+
+Text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 15,
+        "start": 0,
+      },
+      "raw": "3. Text 1
+
+Text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 15,
+      "start": 11,
+    },
+    "text": "Text",
+    "type": "Text",
+  },
+]
+`;
+
 exports[`List parsing Simple ordered list 1`] = `
 Array [
   Object {
@@ -766,9 +873,9 @@ Array [
             "parent": [Circular],
             "pos": Object {
               "end": 9,
-              "start": 2,
+              "start": 3,
             },
-            "text": " Text 1",
+            "text": "Text 1",
             "type": "Text",
           },
         ],
@@ -788,9 +895,9 @@ Array [
             "parent": [Circular],
             "pos": Object {
               "end": 18,
-              "start": 12,
+              "start": 13,
             },
-            "text": " Text ",
+            "text": "Text ",
             "type": "Text",
           },
           Object {
@@ -819,9 +926,9 @@ Array [
             "parent": [Circular],
             "pos": Object {
               "end": 35,
-              "start": 24,
+              "start": 25,
             },
-            "text": " **Text** 3",
+            "text": "**Text** 3",
             "type": "Text",
           },
         ],

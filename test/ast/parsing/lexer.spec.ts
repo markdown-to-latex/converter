@@ -220,7 +220,7 @@ Additional text 1
 
     test('List with text after', () => {
         const rawNode = rawNodeTemplate(`3. Text 1
-    
+
 Text`)
 
         // TODO: wrong

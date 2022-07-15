@@ -1,50 +1,53 @@
-import { StartEndPosition } from './position';
-import { Token } from '../parsing/tokenizer';
+import { StartEndPosition } from "./position";
+import { Token } from "../parsing/tokenizer";
 
 export const enum RawNodeType {
-    Raw = 'Raw',
-    Tokens = 'Tokens',
+    Raw = "Raw",
+    Tokens = "Tokens",
+    SoftBreak = "SoftBreak", // One \n
+    ParagraphBreak = "ParagraphBreak", // Multiple \n
+    TextBreak = "TextBreak", // Two spaces and one \n
 }
 
 export const enum NodeType {
     // From marked
-    Space = 'Space',
-    Code = 'Code',
-    Heading = 'Heading',
-    Table = 'Table',
-    Blockquote = 'Blockquote',
-    List = 'List',
-    ListItem = 'ListItem',
-    Paragraph = 'Paragraph',
-    Html = 'HTML',
-    Def = 'Def',
-    Escape = 'Escape',
-    Text = 'Text',
-    Link = 'Link',
-    Image = 'Image',
-    Strong = 'Strong',
-    Em = 'Em',
-    Hr = 'Hr',
-    CodeSpan = 'CodeSpan',
-    Br = 'Br',
-    Del = 'Del',
+    Space = "Space",
+    Code = "Code",
+    Heading = "Heading",
+    Table = "Table",
+    Blockquote = "Blockquote",
+    List = "List",
+    ListItem = "ListItem",
+    Paragraph = "Paragraph",
+    Html = "HTML",
+    Def = "Def",
+    Escape = "Escape",
+    Text = "Text",
+    Link = "Link",
+    Image = "Image",
+    Strong = "Strong",
+    Em = "Em",
+    Hr = "Hr",
+    CodeSpan = "CodeSpan",
+    Br = "Br",
+    Del = "Del",
 
     // Custom
-    File = 'File',
-    TableCell = 'TableCell',
-    TableRow = 'TableRow',
-    OpCode = 'OpCode',
-    InlineLatex = 'InlineLatex',
-    CodeLatex = 'CodeLatex',
-    MathLatex = 'MathLatex',
-    MathInlineLatex = 'MathInlineLatex',
+    File = "File",
+    TableCell = "TableCell",
+    TableRow = "TableRow",
+    OpCode = "OpCode",
+    InlineLatex = "InlineLatex",
+    CodeLatex = "CodeLatex",
+    MathLatex = "MathLatex",
+    MathInlineLatex = "MathInlineLatex",
 }
 
 export const enum NodeTableAlign {
-    Default = 'Default',
-    Left = 'Left',
-    Right = 'Right',
-    Center = 'Center',
+    Default = "Default",
+    Left = "Left",
+    Right = "Right",
+    Center = "Center",
 }
 
 export type StartEndNumberPosition = StartEndPosition<number>;
@@ -76,13 +79,25 @@ export interface TokensNode extends Node, NodeText {
     tokens: Token[];
 }
 
+export interface SoftBreakNode extends Node {
+    type: RawNodeType.SoftBreak;
+}
+
+export interface ParagraphBreakNode extends Node {
+    type: RawNodeType.ParagraphBreak;
+}
+
+export interface TextBreakNode extends Node {
+    type: RawNodeType.TextBreak;
+}
+
 export interface SpaceNode extends Node {
     type: NodeType.Space;
 }
 
 export interface CodeNode extends Node, NodeText {
     type: NodeType.Code;
-    codeBlockStyle: 'indented' | null;
+    codeBlockStyle: "indented" | null;
     lang: string | null;
 }
 
@@ -105,7 +120,7 @@ export interface BlockquoteNode extends Node, NodeChildren {
 export interface ListNode extends Node, NodeChildren {
     type: NodeType.List;
     ordered: boolean;
-    start: number | '';
+    start: number | "";
     loose: boolean;
 }
 
