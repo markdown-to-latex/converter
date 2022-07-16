@@ -277,3 +277,42 @@ Text`)
         expect(nodes).toMatchSnapshot();
     })
 })
+
+describe('Image parsing', () => {
+    test('Markdown-like image', () => {
+        const rawNode = rawNodeTemplate(
+            '![image-label](../../image.png)'
+        )
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        expect(nodes[0].type).toEqual(NodeType.Image);
+
+        expect(nodes).toMatchSnapshot();
+    })
+
+    test('Extended image', () => {
+        const rawNode = rawNodeTemplate(`![image-label](../../image.png)(
+    Image Name
+)(
+    14cm
+)`)
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        expect(nodes[0].type).toEqual(NodeType.Image);
+
+        expect(nodes).toMatchSnapshot();
+    })
+
+    test('Image args error', () => {
+        const rawNode = rawNodeTemplate(`![image-label](../../image.png)(
+    Image Name
+)(@name 
+    Another name
+)`)
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(1);
+        expect(diagnostic).toMatchSnapshot();
+    })
+})

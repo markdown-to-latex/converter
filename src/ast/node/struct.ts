@@ -26,7 +26,7 @@ export const enum NodeType {
     Link = "Link",
     Image = "Image",
     Strong = "Strong",
-    Em = "Em",
+    Em = "Em",      // italic
     Hr = "Hr",
     CodeSpan = "CodeSpan",
     Br = "Br",
@@ -162,7 +162,9 @@ export interface LinkNode extends Node, NodeHref, NodeChildren {
 
 export interface ImageNode extends Node, NodeHref, NodeText {
     type: NodeType.Image;
-    title: string;
+    name?: Node[];
+    width?: string;
+    height?: string;
 }
 
 export interface StrongNode extends Node, NodeChildren {

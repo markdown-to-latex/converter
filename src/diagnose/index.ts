@@ -1,4 +1,4 @@
-import { copyStartEndPos, getNodeParentFile, Node } from '../ast/node';
+import {copyStartEndPos, getNodeParentFile, Node} from '../ast/node';
 import path from 'path';
 import {
     positionToTextPosition,
@@ -38,7 +38,7 @@ export function isSeverityGEq(left: DiagnoseSeverity, right: DiagnoseSeverity) {
 
 export enum DiagnoseErrorType {
     ApplyParserError,
-
+    InternalError,
     OtherError,
 }
 
@@ -91,6 +91,74 @@ export function nodeToDiagnose(
                 ...positionToTextPosition(
                     getNodeParentFile(node)?.raw ?? '',
                     node.pos.end,
+                ),
+            },
+        },
+    };
+}
+
+export function nodesToDiagnose(
+    nodes: Node[],
+    severity: DiagnoseSeverity,
+    errorType: DiagnoseErrorType,
+    message?: string,
+): DiagnoseInfo {
+    if (nodes.length === 0) {
+        return {
+            errorType: DiagnoseErrorType.InternalError,
+            severity: DiagnoseSeverity.Fatal,
+            message: 'No nodes passed into nodesToDiagnose',
+            filePath: 'null',
+            pos: {
+                start: {
+                    absolute: 0,
+                    ...positionToTextPosition(
+                        '',
+                        0,
+                    ),
+                },
+                end: {
+                    absolute: 0,
+                    ...positionToTextPosition(
+                        '',
+                        0,
+                    ),
+                },
+            },
+        }
+    }
+
+    if (nodes.length === 1) {
+        return nodeToDiagnose(
+            nodes[0],
+            severity,
+            errorType,
+            message
+        );
+    }
+
+    const firstNode = nodes[0];
+    const lastNode = nodes[nodes.length - 1]
+
+    const file = getNodeParentFile(firstNode);
+    return {
+        errorType,
+        severity,
+        message,
+        filePath: file?.path ?? 'null',
+        pos: {
+            start: {
+                absolute: firstNode.pos.start,
+                ...positionToTextPosition(
+                    file?.raw ?? '',
+                    firstNode.pos.start,
+                ),
+            },
+            end: {
+                absolute: lastNode.pos.end,
+                ...positionToTextPosition(
+                    file?.raw ?? '',
+                    lastNode.pos.end,
                 ),
             },
         },

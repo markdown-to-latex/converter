@@ -1,8 +1,19 @@
-import {TokenParser, TokenPredicate} from '../struct';
-import {Token, TokenType} from '../../tokenizer';
-import {Node, NodeType, OpCodeNode, RawNodeType, TokensNode,} from '../../../node';
-import {applyVisitors, findTokenClosingBracket, sliceTokenText, tokenToDiagnose,} from '../index';
-import {DiagnoseList, DiagnoseSeverity} from '../../../../diagnose';
+import { TokenParser, TokenPredicate } from '../struct';
+import { Token, TokenType } from '../../tokenizer';
+import {
+    Node,
+    NodeType,
+    OpCodeNode,
+    RawNodeType,
+    TokensNode,
+} from '../../../node';
+import {
+    applyVisitors,
+    findTokenClosingBracket,
+    sliceTokenText,
+    tokenToDiagnose,
+} from '../index';
+import { DiagnoseList, DiagnoseSeverity } from '../../../../diagnose';
 
 export const isMacro: TokenPredicate = function (token, index, node) {
     if (!(token.type === TokenType.SeparatedSpecial && token.text === '!')) {
@@ -21,13 +32,16 @@ export const isMacro: TokenPredicate = function (token, index, node) {
     );
 };
 
-interface GetMacroLabelResult {
+export interface GetMacroLabelResult {
     index: number;
     label: string | null;
     diagnostic: DiagnoseList;
 }
 
-function getMacroLabel(tokens: TokensNode, index: number): GetMacroLabelResult {
+export function getMacroLabel(
+    tokens: TokensNode,
+    index: number,
+): GetMacroLabelResult {
     const token = tokens.tokens[index];
 
     if (token.text !== '[') {
@@ -68,14 +82,17 @@ function getMacroLabel(tokens: TokensNode, index: number): GetMacroLabelResult {
     };
 }
 
-interface GetMacroArgsResult {
+export interface GetMacroArgsResult {
     index: number;
     posArgs: TokensNode[];
     keyArgs: Record<string, TokensNode>;
     diagnostic: DiagnoseList;
 }
 
-function getMacroArgs(tokens: TokensNode, index: number): GetMacroArgsResult {
+export function getMacroArgs(
+    tokens: TokensNode,
+    index: number,
+): GetMacroArgsResult {
     const posArgs: TokensNode[] = [];
     const keyArgs: Record<string, TokensNode> = {};
 
@@ -87,7 +104,7 @@ function getMacroArgs(tokens: TokensNode, index: number): GetMacroArgsResult {
     while (
         argsToken?.type === TokenType.SeparatedSpecial &&
         argsToken.text === '('
-        ) {
+    ) {
         const endTokenResult = findTokenClosingBracket(tokens, argsIndex);
         if (!endTokenResult) {
             return {
@@ -120,12 +137,14 @@ function getMacroArgs(tokens: TokensNode, index: number): GetMacroArgsResult {
         const endToken = tokens.tokens[endTokenResult.index];
         if (keyToken) {
             if (keyToken.text in keyArgs) {
-                diagnostic.push(tokenToDiagnose(
-                    tokens,
-                    keyTokenIndex,
-                    `Key ${keyToken.text} already specified`,
-                    DiagnoseSeverity.Error
-                ))
+                diagnostic.push(
+                    tokenToDiagnose(
+                        tokens,
+                        keyTokenIndex,
+                        `Key ${keyToken.text} already specified`,
+                        DiagnoseSeverity.Error,
+                    ),
+                );
             }
 
             keyArgs[keyToken.text] = {
@@ -146,6 +165,17 @@ function getMacroArgs(tokens: TokensNode, index: number): GetMacroArgsResult {
                 },
             };
         } else {
+            if (Object.keys(keyArgs).length !== 0) {
+                diagnostic.push(
+                    tokenToDiagnose(
+                        tokens,
+                        argsIndex + 1,
+                        'Positional argument has been specified after key argument',
+                        DiagnoseSeverity.Error,
+                    ),
+                );
+            }
+
             posArgs.push({
                 type: RawNodeType.Tokens,
                 parent: null,

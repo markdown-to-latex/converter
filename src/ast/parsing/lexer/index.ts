@@ -18,21 +18,22 @@ import {
     diagnoseListHasSeverity,
     DiagnoseSeverity,
 } from '../../../diagnose';
-import { Token, tokenize, tokensToNode, TokenType } from '../tokenizer';
-import { TokenByTypeParserResult, TokenParser, TokenPredicate } from './struct';
-import { parseCode } from './node/code';
+import {Token, tokenize, tokensToNode, TokenType} from '../tokenizer';
+import {TokenByTypeParserResult, TokenParser, TokenPredicate} from './struct';
+import {parseCode} from './node/code';
 import {
     isParagraphBreak,
     parseParagraphBreak,
     parseSoftBreak,
 } from './node/paragraph';
-import { parseCodeSpan } from './node/codeSpan';
-import { parseLink } from './node/link';
-import { parseMacro } from './node/macros';
-import { parseTable } from './node/table';
-import { parseList } from './node/list';
-import { parseHeading } from './node/heading';
-import { parseBlockquote } from './node/blockquote';
+import {parseCodeSpan} from './node/codeSpan';
+import {parseLink} from './node/link';
+import {parseMacro} from './node/macros';
+import {parseTable} from './node/table';
+import {parseList} from './node/list';
+import {parseHeading} from './node/heading';
+import {parseBlockquote} from './node/blockquote';
+import {parseImage} from "./node/image";
 
 export const enum LexemeType {
     // Space,
@@ -58,7 +59,8 @@ interface LexemeTypeToNodeType {
     // [LexemeType.Space]: node.SpaceNode;
 }
 
-class FatalError extends Error {}
+class FatalError extends Error {
+}
 
 interface ApplyVisitorsResult {
     nodes: Node[];
@@ -308,7 +310,7 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
         diagnostic: [],
     };
 
-    for (let i = 0; i < tokens.tokens.length /*manual*/; ) {
+    for (let i = 0; i < tokens.tokens.length /*manual*/;) {
         const token = tokens.tokens[i];
 
         const result = parseTokensNodeByType(tokens, i);
@@ -371,7 +373,17 @@ function nodeJoiner(nodes: Node[]): void {
         RawNodeType.ParagraphBreak,
     ];
     if (breaks.indexOf(nodes[0]?.type) !== -1) {
-        nodes = nodes.splice(0, 1);
+        nodes.splice(0, 1);
+    }
+
+    while (nodes.length) {
+        const textNode = nodes[0] as TextNode;
+
+        if (nodes[0].type !== NodeType.Text || textNode.text.trim().length !== 0) {
+            break;
+        }
+
+        nodes.splice(0, 1)
     }
 
     let index = 1;
@@ -452,6 +464,7 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
     [TokenType.SeparatedSpecial]: [
         parseLink,
         parseMacro,
+        parseImage,
         parseTable,
         parseBlockquote,
     ],
@@ -510,7 +523,7 @@ export function sliceTokenText(
     toIndex: number,
 ): string {
     const tokenStart = tokens.tokens[fromIndex];
-    const tokenEnd = tokens.tokens[toIndex - 1];
+    const tokenEnd = tokens.tokens[toIndex];
 
     return tokens.text.slice(
         tokenStart.pos - tokens.pos.start,

@@ -393,6 +393,120 @@ Array [
 ]
 `;
 
+exports[`Image parsing Extended image 1`] = `
+Array [
+  Object {
+    "href": "../../image.png",
+    "name": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 47,
+          "start": 37,
+        },
+        "text": "Image Name",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 61,
+            "start": 0,
+          },
+          "text": "![image-label](../../image.png)(
+    Image Name
+)(
+    14cm
+)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 61,
+        "start": 0,
+      },
+      "raw": "![image-label](../../image.png)(
+    Image Name
+)(
+    14cm
+)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 61,
+      "start": 0,
+    },
+    "text": "image-label",
+    "type": "Image",
+    "width": "14cm",
+  },
+]
+`;
+
+exports[`Image parsing Image args error 1`] = `
+Array [
+  Object {
+    "errorType": 0,
+    "filePath": "null",
+    "message": "Unexpected key image argument name",
+    "pos": Object {
+      "end": Object {
+        "absolute": 73,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 61,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+]
+`;
+
+exports[`Image parsing Markdown-like image 1`] = `
+Array [
+  Object {
+    "href": "../../image.png",
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 31,
+            "start": 0,
+          },
+          "text": "![image-label](../../image.png)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 31,
+        "start": 0,
+      },
+      "raw": "![image-label](../../image.png)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 31,
+      "start": 0,
+    },
+    "text": "image-label",
+    "type": "Image",
+  },
+]
+`;
+
 exports[`List parsing List with list 1`] = `
 Array [
   Object {

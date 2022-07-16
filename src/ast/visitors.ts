@@ -164,7 +164,7 @@ const astProcessingVisitors: {
         },
         type: NodeType.Image,
         parent: null,
-        title: token.title ?? '',
+        label: token.title ?? '',
         text: token.text,
         href: token.href,
     }),
