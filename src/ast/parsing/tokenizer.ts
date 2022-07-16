@@ -1,7 +1,7 @@
 /**
  * Used for selecting certain tokens
  */
-import {RawNodeType, TokensNode} from '../node';
+import { RawNodeType, TokensNode } from '../node';
 
 export interface Token {
     text: string;
@@ -27,9 +27,8 @@ export const enum TokenType {
 const JOINABLE_TOKEN_TYPES: TokenType[] = [
     TokenType.Spacer,
     TokenType.Letter,
-    TokenType.JoinableSpecial,
     TokenType.Delimiter,
-]
+];
 
 const SPACER_REGEXP = new RegExp(/[ \t\r]/);
 const SEPARATED_SPECIAL_REGEXP = new RegExp(
@@ -101,7 +100,20 @@ export function tokenize(text: string, basePos: number = 0): TokenizeResult {
         }
 
         const type = getCharType(c);
-        if (type === currentToken.type && JOINABLE_TOKEN_TYPES.indexOf(type) !== -1) {
+        const currentTokenEndChar =
+            currentToken.text[currentToken.text.length - 1];
+        const joinables = ['$', '`'];
+        if (
+            type === currentToken.type &&
+            JOINABLE_TOKEN_TYPES.indexOf(type) !== -1
+        ) {
+            currentToken.text += c;
+        } else if (
+            type === TokenType.JoinableSpecial &&
+            (currentTokenEndChar === c ||
+                (joinables.indexOf(currentTokenEndChar) !== -1 &&
+                    joinables.indexOf(c) !== -1))
+        ) {
             currentToken.text += c;
         } else {
             tokens.push(currentToken);
@@ -110,7 +122,7 @@ export function tokenize(text: string, basePos: number = 0): TokenizeResult {
     }
 
     if (currentToken) {
-        tokens.push(currentToken)
+        tokens.push(currentToken);
     }
 
     return {
@@ -121,14 +133,18 @@ export function tokenize(text: string, basePos: number = 0): TokenizeResult {
 }
 
 export function tokensToNode(tokens: TokenizeResult): TokensNode {
-    let lastToken: Token | null = tokens.tokens.length ? tokens.tokens[tokens.tokens.length - 1] : null;
+    let lastToken: Token | null = tokens.tokens.length
+        ? tokens.tokens[tokens.tokens.length - 1]
+        : null;
     return {
         type: RawNodeType.Tokens,
         text: tokens.text,
         tokens: tokens.tokens,
         pos: {
             start: tokens.basePos,
-            end: lastToken ? lastToken.pos + lastToken.text.length : tokens.basePos
+            end: lastToken
+                ? lastToken.pos + lastToken.text.length
+                : tokens.basePos,
         },
         parent: null,
     };

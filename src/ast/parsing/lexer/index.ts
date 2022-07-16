@@ -1,4 +1,4 @@
-import * as node from '../../node';
+import * as node from "../../node";
 import {
     getNodeParentFile,
     Node,
@@ -9,31 +9,34 @@ import {
     RawNode,
     RawNodeType,
     TextNode,
-    TokensNode,
-} from '../../node';
+    TokensNode
+} from "../../node";
 import {
     DiagnoseErrorType,
     DiagnoseInfo,
     DiagnoseList,
     diagnoseListHasSeverity,
-    DiagnoseSeverity,
-} from '../../../diagnose';
-import {Token, tokenize, tokensToNode, TokenType} from '../tokenizer';
-import {TokenByTypeParserResult, TokenParser, TokenPredicate} from './struct';
-import {parseCode} from './node/code';
+    DiagnoseSeverity
+} from "../../../diagnose";
+import { Token, tokenize, tokensToNode, TokenType } from "../tokenizer";
+import { TokenByTypeParserResult, TokenParser, TokenPredicate } from "./struct";
+import { parseCode } from "./node/code";
 import {
     isParagraphBreak,
     parseParagraphBreak,
-    parseSoftBreak,
-} from './node/paragraph';
-import {parseCodeSpan} from './node/codeSpan';
-import {parseLink} from './node/link';
-import {parseMacro} from './node/macros';
-import {parseTable} from './node/table';
-import {parseList} from './node/list';
-import {parseHeading} from './node/heading';
-import {parseBlockquote} from './node/blockquote';
-import {parseImage} from "./node/image";
+    parseSoftBreak
+} from "./node/paragraph";
+import { parseCodeSpan } from "./node/codeSpan";
+import { parseLink } from "./node/link";
+import { parseMacro } from "./node/macros";
+import { parseTable } from "./node/table";
+import { parseList } from "./node/list";
+import { parseHeading } from "./node/heading";
+import { parseBlockquote } from "./node/blockquote";
+import { parseImage } from "./node/image";
+import { parseHr } from "./node/hr";
+import { parseEm } from "./node/em";
+import { parseStrongWithOptionalEm } from "./node/strong";
 
 export const enum LexemeType {
     // Space,
@@ -44,7 +47,7 @@ export const enum LexemeType {
 }
 
 const parserPriorities: LexemeType[] = [
-    LexemeType.Code,
+    LexemeType.Code
     // LexemeType.Heading,
     // LexemeType.Paragraph,
     // LexemeType.Text,
@@ -70,7 +73,7 @@ interface ApplyVisitorsResult {
 export function applyVisitors(nodes: Readonly<Node[]>): ApplyVisitorsResult {
     const visitorsResult: ApplyVisitorsResult = {
         nodes: [...nodes],
-        diagnostic: [],
+        diagnostic: []
     };
 
     try {
@@ -92,7 +95,7 @@ export function applyVisitors(nodes: Readonly<Node[]>): ApplyVisitorsResult {
                 if (
                     diagnoseListHasSeverity(
                         result.diagnostic,
-                        DiagnoseSeverity.Fatal,
+                        DiagnoseSeverity.Fatal
                     )
                 ) {
                     throw new FatalError();
@@ -120,14 +123,14 @@ interface FindTokenResult {
 export function findTokenOrNull(
     tokens: TokensNode,
     fromIndex: number,
-    predicate: TokenPredicate,
+    predicate: TokenPredicate
 ): FindTokenResult | null {
     for (let i = fromIndex; i < tokens.tokens.length; ++i) {
         const token = tokens.tokens[i];
         if (predicate(token, i, tokens)) {
             return {
                 token,
-                index: i,
+                index: i
             };
         }
     }
@@ -137,14 +140,14 @@ export function findTokenOrNull(
 export function findTokenOrNullBackward(
     tokens: TokensNode,
     fromIndex: number,
-    predicate: TokenPredicate,
+    predicate: TokenPredicate
 ): FindTokenResult | null {
     for (let i = fromIndex; i >= 0; --i) {
         const token = tokens.tokens[i];
         if (predicate(token, i, tokens)) {
             return {
                 token,
-                index: i,
+                index: i
             };
         }
     }
@@ -152,34 +155,29 @@ export function findTokenOrNullBackward(
 }
 
 const brackets: Record<string, string> = {
-    '[': ']', // Label
-    '{': '}', // Reserved
-    '(': ')', // Argument
-    '***': '***', // Italic + bold
-    '**': '**', // Bold
-    '*': '*', // Italic
-    __: '__', // Underscore
-    '~~': '~~', // Through-Line
-    '`': '`', // Code Span
-    '$`': '`$', // Formula Span
+    "[": "]", // Label
+    "{": "}", // Reserved
+    "(": ")", // Argument
+    "`": "`", // Code Span
+    "$`": "`$" // Formula Span
 };
 
 const bracketsBackward: Record<string, string> = Object.fromEntries(
-    Object.entries(brackets).map(([k, v]) => [v, k]),
+    Object.entries(brackets).map(([k, v]) => [v, k])
 );
 
-const exclusiveBrackets = ['`', '$`'];
+const exclusiveBrackets = ["`", "$`"];
 
 export function findTokenClosingBracket(
     tokens: TokensNode,
     index: number,
-    greedy: boolean = false /* Capture self-closing bracket only */,
+    greedy: boolean = false /* Capture self-closing bracket only */
 ): FindTokenResult | null {
     const openToken = tokens.tokens[index];
     const closeBracket = brackets[openToken.text] ?? openToken.text;
 
     const bracketsCounter: Record<string, number> = Object.fromEntries(
-        Object.keys(brackets).map(k => [k, 0]),
+        Object.keys(brackets).map(k => [k, 0])
     );
 
     for (let i = index + 1; i < tokens.tokens.length; ++i) {
@@ -199,20 +197,20 @@ export function findTokenClosingBracket(
             if (token.text === closeBracket) {
                 return {
                     token: token,
-                    index: i,
+                    index: i
                 };
             }
         } else {
             if (
                 Object.values(bracketsCounter).reduce(
                     (prev, current) => prev + current,
-                    0,
+                    0
                 ) === 0
             ) {
                 if (token.text === closeBracket) {
                     return {
                         token: token,
-                        index: i,
+                        index: i
                     };
                 }
             }
@@ -251,12 +249,12 @@ export function isOpenLabelBracket(tokens: TokensNode, index: number): boolean {
         return false;
     }
 
-    return token.text == '[';
+    return token.text == "[";
 }
 
 export function isOpenArgumentBracket(
     tokens: TokensNode,
-    index: number,
+    index: number
 ): boolean {
     const token = tokens.tokens[index];
 
@@ -267,7 +265,7 @@ export function isOpenArgumentBracket(
         return false;
     }
 
-    return token.text == '(';
+    return token.text == "(";
 }
 
 interface TrimWithPositionsResult {
@@ -283,19 +281,19 @@ export function trimSingleWithPositions(str: string): TrimWithPositionsResult {
 
     if (originalLen <= leftLen + rightLen) {
         return {
-            result: ' ',
+            result: " ",
             leftTrim: originalLen - 1,
-            rightTrim: 0,
+            rightTrim: 0
         };
     }
 
     return {
         result: str.slice(
             leftLen > 0 ? leftLen - 1 : 0,
-            rightLen > 0 ? originalLen - rightLen + 1 : originalLen,
+            rightLen > 0 ? originalLen - rightLen + 1 : originalLen
         ),
         leftTrim: leftLen > 0 ? leftLen - 1 : 0,
-        rightTrim: rightLen > 0 ? rightLen - 1 : 0,
+        rightTrim: rightLen > 0 ? rightLen - 1 : 0
     };
 }
 
@@ -307,7 +305,7 @@ interface ParseTokensNodeResult {
 export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
     const parsingResult: ParseTokensNodeResult = {
         nodes: [],
-        diagnostic: [],
+        diagnostic: []
     };
 
     for (let i = 0; i < tokens.tokens.length /*manual*/;) {
@@ -322,7 +320,7 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
             if (
                 diagnoseListHasSeverity(
                     result.diagnostic,
-                    DiagnoseSeverity.Fatal,
+                    DiagnoseSeverity.Fatal
                 )
             ) {
                 return parsingResult;
@@ -337,9 +335,9 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
             text: token.text,
             pos: {
                 start: token.pos,
-                end: token.pos + token.text.length,
+                end: token.pos + token.text.length
             },
-            children: [],
+            children: []
         } as TextNode);
         ++i;
     }
@@ -362,7 +360,7 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
     //     return n;
     // });
     parsingResult.nodes = parsingResult.nodes.filter(
-        n => n.type !== RawNodeType.ParagraphBreak,
+        n => n.type !== RawNodeType.ParagraphBreak
     );
     return parsingResult;
 }
@@ -370,20 +368,36 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
 function nodeJoiner(nodes: Node[]): void {
     const breaks: (NodeType | RawNodeType)[] = [
         RawNodeType.SoftBreak,
-        RawNodeType.ParagraphBreak,
+        RawNodeType.ParagraphBreak
     ];
     if (breaks.indexOf(nodes[0]?.type) !== -1) {
         nodes.splice(0, 1);
     }
 
+    // TODO: Trim nodes
     while (nodes.length) {
         const textNode = nodes[0] as TextNode;
 
-        if (nodes[0].type !== NodeType.Text || textNode.text.trim().length !== 0) {
+        if (
+            textNode.type !== NodeType.Text ||
+            textNode.text.trim().length !== 0
+        ) {
             break;
         }
 
-        nodes.splice(0, 1)
+        nodes.splice(0, 1);
+    }
+    while (nodes.length) {
+        const textNode = nodes[nodes.length - 1] as TextNode;
+
+        if (
+            textNode.type !== NodeType.Text ||
+            textNode.text.trim().length !== 0
+        ) {
+            break;
+        }
+
+        nodes.splice(nodes.length - 1, 1);
     }
 
     let index = 1;
@@ -399,7 +413,7 @@ function nodeJoiner(nodes: Node[]): void {
                 const prevNodeText = prevNode as Node & NodeText;
 
                 prevNodeText.pos.end = currentNode.pos.end;
-                prevNodeText.text += ' ';
+                prevNodeText.text += " ";
             }
 
             nodes.splice(index, 1);
@@ -432,7 +446,7 @@ function nodeJoiner(nodes: Node[]): void {
             prevNodeChildren.pos.end = currentNodeChildren.pos.end;
             prevNodeChildren.children.push(...currentNodeChildren.children);
             currentNodeChildren.children.forEach(
-                n => (n.parent = prevNodeChildren),
+                n => (n.parent = prevNodeChildren)
             );
 
             nodes.splice(index, 1);
@@ -445,7 +459,7 @@ function nodeJoiner(nodes: Node[]): void {
 
 function parseTokensNodeByType(
     tokens: TokensNode,
-    index: number,
+    index: number
 ): TokenByTypeParserResult | null {
     const token = tokens.tokens[index];
 
@@ -460,73 +474,80 @@ function parseTokensNodeByType(
 }
 
 const parsersByType: Record<TokenType, TokenParser[]> = {
-    [TokenType.JoinableSpecial]: [parseCodeSpan, parseHeading, parseCode],
+    [TokenType.JoinableSpecial]: [
+        parseCodeSpan,
+        parseStrongWithOptionalEm,
+        parseEm,
+        parseHeading,
+        parseHr,
+        parseCode
+    ],
     [TokenType.SeparatedSpecial]: [
         parseLink,
         parseMacro,
         parseImage,
         parseTable,
-        parseBlockquote,
+        parseBlockquote
     ],
     [TokenType.Delimiter]: [parseSoftBreak, parseParagraphBreak],
     [TokenType.Spacer]: [parseList],
     [TokenType.Letter]: [parseList],
-    [TokenType.Other]: [],
+    [TokenType.Other]: []
 };
 
 export function tokenToDiagnose(
     tokens: TokensNode,
     index: number,
     message: string,
-    severity: DiagnoseSeverity = DiagnoseSeverity.Fatal,
+    severity: DiagnoseSeverity = DiagnoseSeverity.Fatal
 ): DiagnoseInfo {
     const token = tokens.tokens[index];
     const nodeParentFile = getNodeParentFile(tokens);
     return {
         message: message,
         severity: severity,
-        filePath: nodeParentFile?.path ?? 'null',
+        filePath: nodeParentFile?.path ?? "null",
         errorType: DiagnoseErrorType.ApplyParserError,
         pos: {
             start: {
                 absolute: token.pos,
-                ...positionToTextPosition(nodeParentFile?.raw ?? '', token.pos),
+                ...positionToTextPosition(nodeParentFile?.raw ?? "", token.pos)
             },
             end: {
                 absolute: token.pos + token.text.length,
                 ...positionToTextPosition(
-                    nodeParentFile?.raw ?? '',
-                    token.pos + token.text.length,
-                ),
-            },
-        },
+                    nodeParentFile?.raw ?? "",
+                    token.pos + token.text.length
+                )
+            }
+        }
     };
 }
 
 export function unexpectedEof(
     tokens: TokensNode,
     index: number,
-    message: string,
+    message: string
 ): TokenByTypeParserResult {
     return {
         nodes: [],
         index: tokens.tokens.length,
         diagnostic: [
-            tokenToDiagnose(tokens, index, message, DiagnoseSeverity.Error),
-        ],
+            tokenToDiagnose(tokens, index, message, DiagnoseSeverity.Error)
+        ]
     };
 }
 
 export function sliceTokenText(
     tokens: TokensNode,
     fromIndex: number,
-    toIndex: number,
+    toIndex: number
 ): string {
     const tokenStart = tokens.tokens[fromIndex];
-    const tokenEnd = tokens.tokens[toIndex];
+    const tokenEnd: Token | null = tokens.tokens[toIndex];
 
     return tokens.text.slice(
         tokenStart.pos - tokens.pos.start,
-        tokenEnd.pos - tokens.pos.end,
+        tokenEnd ? tokenEnd.pos - tokens.pos.end : tokens.pos.end
     );
 }

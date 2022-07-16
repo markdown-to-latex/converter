@@ -64,6 +64,6 @@ export const parseBlockquote: TokenParser = function (tokens, index) {
     return {
         nodes: [blockquoteNode],
         index: lineDelimiterIndex + 1,
-        diagnostic: diagnostic
+        diagnostic
     }
 };

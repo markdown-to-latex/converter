@@ -15,7 +15,7 @@ import { DiagnoseSeverity } from '../../../../diagnose';
 import {isPrevTokenDelimiter} from "./paragraph";
 
 export const isCode: TokenPredicate = function (token, index, node) {
-    if (!isPrevTokenDelimiter(node.tokens[index], index, node)) {
+    if (!isPrevTokenDelimiter(token, index, node)) {
         return false;
     }
 
