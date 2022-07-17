@@ -1,11 +1,11 @@
-import {TokenParser, TokenPredicate} from "../struct";
-import {TokenType} from "../../tokenizer";
-import {findTokenOrNull} from "../index";
-import {CommentNode, NodeType} from "../../../node";
+import { TokenParser, TokenPredicate } from '../struct';
+import { TokenType } from '../../tokenizer';
+import { findTokenOrNull } from '../index';
+import { CommentNode, NodeType } from '../../../node';
 
 export const isComment: TokenPredicate = function (token, index, node) {
     return token.type === TokenType.JoinableSpecial && token.text === '//';
-}
+};
 
 export const parseComment: TokenParser = function (tokens, index) {
     const token = tokens.tokens[index];
@@ -13,7 +13,11 @@ export const parseComment: TokenParser = function (tokens, index) {
         return null;
     }
 
-    const delimiter = findTokenOrNull(tokens, index, n => n.type === TokenType.Delimiter);
+    const delimiter = findTokenOrNull(
+        tokens,
+        index,
+        n => n.type === TokenType.Delimiter,
+    );
     const lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
 
     const endToken = tokens.tokens[lineDelimiterIndex];
@@ -24,11 +28,11 @@ export const parseComment: TokenParser = function (tokens, index) {
             start: token.pos,
             end: endToken.pos + endToken.text.length,
         },
-    }
+    };
 
     return {
         nodes: [commentNode],
         index: lineDelimiterIndex + 1,
         diagnostic: [],
-    }
-}
+    };
+};

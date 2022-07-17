@@ -1,18 +1,26 @@
-import { TokenParser, TokenPredicate } from "../struct";
-import { TokenType } from "../../tokenizer";
+import { TokenParser, TokenPredicate } from '../struct';
+import { TokenType } from '../../tokenizer';
 import {
     applyVisitors,
     findTokenClosingBracket,
-    sliceTokenText
-} from "../index";
-import { EmNode, NodeType, RawNodeType, StrongNode, TokensNode } from "../../../node";
-import { DiagnoseList } from "../../../../diagnose";
+    sliceTokenText,
+} from '../index';
+import {
+    EmNode,
+    NodeType,
+    RawNodeType,
+    StrongNode,
+    TokensNode,
+} from '../../../node';
+import { DiagnoseList } from '../../../../diagnose';
 
-export const isStrong: TokenPredicate = function(token, index, node) {
-    return token.type === TokenType.JoinableSpecial && token.text.startsWith("**");
+export const isStrong: TokenPredicate = function (token, index, node) {
+    return (
+        token.type === TokenType.JoinableSpecial && token.text.startsWith('**')
+    );
 };
 
-export const parseStrongWithOptionalEm: TokenParser = function(tokens, index) {
+export const parseStrongWithOptionalEm: TokenParser = function (tokens, index) {
     const token = tokens.tokens[index];
 
     if (!isStrong(token, index, tokens)) {
@@ -30,8 +38,8 @@ export const parseStrongWithOptionalEm: TokenParser = function(tokens, index) {
         children: [],
         pos: {
             start: token.pos,
-            end: bracketResult.token.pos + bracketResult.token.text.length
-        }
+            end: bracketResult.token.pos + bracketResult.token.text.length,
+        },
     };
 
     const tokensNode: TokensNode = {
@@ -41,8 +49,8 @@ export const parseStrongWithOptionalEm: TokenParser = function(tokens, index) {
         parent: strongNode,
         pos: {
             start: token.pos,
-            end: bracketResult.token.pos + bracketResult.token.text.length
-        }
+            end: bracketResult.token.pos + bracketResult.token.text.length,
+        },
     };
 
     const diagnostic: DiagnoseList = [];
@@ -59,20 +67,20 @@ export const parseStrongWithOptionalEm: TokenParser = function(tokens, index) {
             children: [...visitorsResult.nodes],
             pos: {
                 start: token.pos,
-                end: bracketResult.token.pos + bracketResult.token.text.length
-            }
+                end: bracketResult.token.pos + bracketResult.token.text.length,
+            },
         };
         strongNode.children = [emNode];
-        visitorsResult.nodes.forEach(n => n.parent = emNode);
+        visitorsResult.nodes.forEach(n => (n.parent = emNode));
     } else {
         // pattern '**'
         strongNode.children = [...visitorsResult.nodes];
-        visitorsResult.nodes.forEach(n => n.parent = strongNode);
+        visitorsResult.nodes.forEach(n => (n.parent = strongNode));
     }
 
     return {
         nodes: [strongNode],
         index: bracketResult.index + 1,
-        diagnostic
+        diagnostic,
     };
 };

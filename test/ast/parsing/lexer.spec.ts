@@ -12,8 +12,8 @@ import {
     RawNodeType,
     TableNode,
 } from '../../../src/ast/node';
-import {fullContentPos} from '../../../src/ast/parsing';
-import {applyVisitors} from '../../../src/ast/parsing/lexer';
+import { fullContentPos } from '../../../src/ast/parsing';
+import { applyVisitors } from '../../../src/ast/parsing/lexer';
 
 function rawNodeTemplate(content: string): RawNode {
     const fileNode: FileNode = {
@@ -50,7 +50,7 @@ Code block
 \`\`\`
 New sample text
 `);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
 
         let node = nodes[1] as CodeNode;
@@ -71,7 +71,7 @@ Code block
 \`\`\`
 New sample text
 `);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[1] as CodeNode;
         expect(node).not.toBeUndefined();
@@ -85,7 +85,7 @@ New sample text
 Code block
 New sample text
 `);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(1);
         expect(diagnostic).toMatchSnapshot();
     });
@@ -94,7 +94,7 @@ New sample text
 describe('link check', () => {
     test('Simple Link in text', () => {
         const rawNode = rawNodeTemplate('Hello [ti t le](li-nk) text');
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
@@ -105,7 +105,7 @@ describe('link check', () => {
 
     test('Link with inner md in text', () => {
         const rawNode = rawNodeTemplate('Hello [ti \n`co][de` le](li-nk) text');
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
@@ -124,7 +124,7 @@ describe('macros parsing', () => {
         const rawNode = rawNodeTemplate(
             '!Macro[label-text](pos arg 1)(`pos arg` 2)(@keyArgName argName)',
         );
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
@@ -135,7 +135,7 @@ describe('macros parsing', () => {
 
     test('Key is defined wrongly', () => {
         const rawNode = rawNodeTemplate('!Macro(@key)(@)');
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
@@ -148,7 +148,7 @@ describe('macros parsing', () => {
         const rawNode = rawNodeTemplate(
             '!Macro(@key value)(@key another value)',
         );
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(1);
 
         const errText = rawNode.text.slice(
@@ -162,7 +162,7 @@ describe('macros parsing', () => {
         const rawNode = rawNodeTemplate(
             '!Macro[(@key ]value)(@key another value)',
         );
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
@@ -178,7 +178,7 @@ describe('table parsing', () => {
 | -------- | -------- |
 | Value **1** | Value \`2\` |
 |Value [with](link) | |`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as TableNode;
         expect(node).not.toBeUndefined();
@@ -193,7 +193,7 @@ describe('List parsing', () => {
         const rawNode = rawNodeTemplate(`1. Text 1
 2. Text \`2\`
 3. **Text** 3`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ListNode;
         expect(node).not.toBeUndefined();
@@ -208,7 +208,7 @@ Additional text 1
 2. Text \`2\`
 3. **Text** 3
    Additional text 3`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ListNode;
         expect(node).not.toBeUndefined();
@@ -226,7 +226,7 @@ Additional text 1
     * Conclusion
 4. Text \`2\`
 5. **Text** 3`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ListNode;
         expect(node).not.toBeUndefined();
@@ -241,7 +241,7 @@ Additional text 1
 Text`);
 
         // TODO: wrong
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(2);
         expect(nodes[0].type).toEqual(NodeType.List);
@@ -259,7 +259,7 @@ describe('Heading parsing', () => {
 ## Header \`2\`
 ### Header 3
 #### Header 4`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         for (const absNode of nodes) {
             let node = absNode as HeadingNode;
@@ -274,7 +274,7 @@ describe('Heading parsing', () => {
         const rawNode = rawNodeTemplate(`# Header 1
 
 Text`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
 
         expect(nodes).toMatchSnapshot();
@@ -287,7 +287,7 @@ describe('Blockquote parsing', () => {
 > Line 2
 > Line 3
 Text`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(2);
         expect(nodes[0].type).toEqual(NodeType.Blockquote);
@@ -304,7 +304,7 @@ describe('Hr parsing', function () {
         const rawNode = rawNodeTemplate(`
 -----
 `);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(1);
         expect(nodes[0].type).toEqual(NodeType.Hr);
@@ -318,7 +318,7 @@ Text 1
 -----
 Text 2
 `);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(3);
         expect(nodes[0].type).toEqual(NodeType.Paragraph);
@@ -332,7 +332,7 @@ Text 2
 describe('Image parsing', () => {
     test('Markdown-like image', () => {
         const rawNode = rawNodeTemplate('![image-label](../../image.png)');
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         const paragraphNode = nodes[0] as ParagraphNode;
         expect(paragraphNode.children).toHaveLength(1);
@@ -347,7 +347,7 @@ describe('Image parsing', () => {
 )(
     14cm
 )`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         const paragraphNode = nodes[0] as ParagraphNode;
         expect(paragraphNode.children).toHaveLength(1);
@@ -362,7 +362,7 @@ describe('Image parsing', () => {
 )(@name 
     Another name
 )`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(1);
         expect(diagnostic).toMatchSnapshot();
     });
@@ -371,7 +371,7 @@ describe('Image parsing', () => {
 describe('Em parsing', () => {
     test('Em in text', () => {
         const rawNode = rawNodeTemplate(`Text with *em text*-text`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         const paragraphNode = nodes[0] as ParagraphNode;
         expect(paragraphNode.children).toHaveLength(3);
@@ -384,7 +384,7 @@ describe('Em parsing', () => {
 
     test('Em in text with sub-node', () => {
         const rawNode = rawNodeTemplate(`Text with *em\`code\` text*-text`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         const paragraphNode = nodes[0] as ParagraphNode;
         expect(paragraphNode.children).toHaveLength(3);
@@ -399,7 +399,7 @@ describe('Em parsing', () => {
 describe('Strong parsing', () => {
     test('Simple strong', () => {
         const rawNode = rawNodeTemplate(`Text with **strong text**-text`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         const paragraphNode = nodes[0] as ParagraphNode;
         expect(paragraphNode.children).toHaveLength(3);
@@ -414,7 +414,7 @@ describe('Strong parsing', () => {
         const rawNode = rawNodeTemplate(
             `Text *em **strong** text* with **strong *em* text**-text`,
         );
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         const paragraphNode = nodes[0] as ParagraphNode;
         expect(paragraphNode.children).toHaveLength(5);
@@ -443,7 +443,7 @@ item 1
 
 ## Not a paragraph 2
 text`);
-        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(7);
         expect(nodes[0].type).toEqual(NodeType.Heading);

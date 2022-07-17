@@ -31,9 +31,7 @@ const JOINABLE_TOKEN_TYPES: TokenType[] = [
 ];
 
 const SPACER_REGEXP = new RegExp(/[ \t\r]/);
-const SEPARATED_SPECIAL_REGEXP = new RegExp(
-    /[\[\]{}~!@%^&()=+\\,.<>;:'"|№?]/,
-);
+const SEPARATED_SPECIAL_REGEXP = new RegExp(/[\[\]{}~!@%^&()=+\\,.<>;:'"|№?]/);
 const JOINABLE_SPECIAL_REGEXP = new RegExp(/[`#$*\-_\/]/);
 const NUMBER_REGEXP = new RegExp(/\d/);
 

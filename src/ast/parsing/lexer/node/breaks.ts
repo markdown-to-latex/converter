@@ -1,8 +1,18 @@
-import {TokenParser, TokenPredicate} from "../struct";
-import {TokenType} from "../../tokenizer";
-import {BrNode, NodeType, ParagraphBreakNode, RawNodeType, SoftBreakNode} from "../../../node";
+import { TokenParser, TokenPredicate } from '../struct';
+import { TokenType } from '../../tokenizer';
+import {
+    BrNode,
+    NodeType,
+    ParagraphBreakNode,
+    RawNodeType,
+    SoftBreakNode,
+} from '../../../node';
 
-export const isPrevTokenDelimiter: TokenPredicate = function (token, index, node) {
+export const isPrevTokenDelimiter: TokenPredicate = function (
+    token,
+    index,
+    node,
+) {
     return index === 0 || node.tokens[index - 1].type === TokenType.Delimiter;
 };
 
@@ -27,7 +37,10 @@ export const isTextBreak: TokenPredicate = function (token, index, node) {
         return false;
     }
 
-    return node.tokens[index + 1]?.type === TokenType.Delimiter && node.tokens[index + 1]?.text.length === 1;
+    return (
+        node.tokens[index + 1]?.type === TokenType.Delimiter &&
+        node.tokens[index + 1]?.text.length === 1
+    );
 };
 
 /**
@@ -45,14 +58,14 @@ export const parseSoftBreak: TokenParser = function (tokens, index) {
         parent: tokens.parent,
         pos: {
             start: token.pos,
-            end: token.pos + token.text.length
-        }
+            end: token.pos + token.text.length,
+        },
     };
 
     return {
         nodes: [textNode],
         index: index + 1,
-        diagnostic: []
+        diagnostic: [],
     };
 };
 
@@ -71,14 +84,14 @@ export const parseParagraphBreak: TokenParser = function (tokens, index) {
         parent: tokens.parent,
         pos: {
             start: token.pos,
-            end: token.pos + token.text.length
-        }
+            end: token.pos + token.text.length,
+        },
     };
 
     return {
         nodes: [textNode],
         index: index + 1,
-        diagnostic: []
+        diagnostic: [],
     };
 };
 
@@ -97,13 +110,13 @@ export const parseTextBreak: TokenParser = function (tokens, index) {
         parent: tokens.parent,
         pos: {
             start: token.pos,
-            end: token.pos + token.text.length
-        }
+            end: token.pos + token.text.length,
+        },
     };
 
     return {
         nodes: [textNode],
         index: index + 1,
-        diagnostic: []
+        diagnostic: [],
     };
 };

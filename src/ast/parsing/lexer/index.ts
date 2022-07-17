@@ -18,30 +18,29 @@ import {
     diagnoseListHasSeverity,
     DiagnoseSeverity,
 } from '../../../diagnose';
-import {Token, tokenize, tokensToNode, TokenType} from '../tokenizer';
-import {TokenByTypeParserResult, TokenParser, TokenPredicate} from './struct';
-import {parseCode} from './node/code';
+import { Token, tokenize, tokensToNode, TokenType } from '../tokenizer';
+import { TokenByTypeParserResult, TokenParser, TokenPredicate } from './struct';
+import { parseCode } from './node/code';
 import {
     isParagraphBreak,
     parseParagraphBreak,
     parseSoftBreak,
     parseTextBreak,
 } from './node/breaks';
-import {parseCodeSpan} from './node/codeSpan';
-import {parseLink} from './node/link';
-import {parseMacro} from './node/macros';
-import {parseTable} from './node/table';
-import {parseList} from './node/list';
-import {parseHeading} from './node/heading';
-import {parseBlockquote} from './node/blockquote';
-import {parseImage} from './node/image';
-import {parseHr} from './node/hr';
-import {parseEm} from './node/em';
-import {parseStrongWithOptionalEm} from './node/strong';
-import {parseComment} from './node/comment';
+import { parseCodeSpan } from './node/codeSpan';
+import { parseLink } from './node/link';
+import { parseMacro } from './node/macros';
+import { parseTable } from './node/table';
+import { parseList } from './node/list';
+import { parseHeading } from './node/heading';
+import { parseBlockquote } from './node/blockquote';
+import { parseImage } from './node/image';
+import { parseHr } from './node/hr';
+import { parseEm } from './node/em';
+import { parseStrongWithOptionalEm } from './node/strong';
+import { parseComment } from './node/comment';
 
-class FatalError extends Error {
-}
+class FatalError extends Error {}
 
 interface ApplyVisitorsResult {
     nodes: Node[];
@@ -284,7 +283,7 @@ export function parseTokensNode(tokens: TokensNode): ParseTokensNodeResult {
         diagnostic: [],
     };
 
-    for (let i = 0; i < tokens.tokens.length /*manual*/;) {
+    for (let i = 0; i < tokens.tokens.length /*manual*/; ) {
         const token = tokens.tokens[i];
 
         const result = parseTokensNodeByType(tokens, i);

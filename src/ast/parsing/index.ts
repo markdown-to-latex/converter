@@ -9,7 +9,7 @@ import {
 } from '../node';
 import path from 'path';
 import { StringE } from '../../extension/string';
-import {tokenize, tokensToNode} from "./tokenizer";
+import { tokenize, tokensToNode } from './tokenizer';
 
 export function fullContentPos(
     content: string | StringE,
@@ -39,9 +39,7 @@ function parseFile(content: string, filePath: string) {
     const fileNode: FileNode = {
         type: NodeType.File,
         parent: null,
-        children: [
-            contentNode
-        ],
+        children: [contentNode],
         pos: {
             start: 0,
             end: content.length,

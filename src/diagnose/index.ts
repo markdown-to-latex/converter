@@ -1,4 +1,4 @@
-import {copyStartEndPos, getNodeParentFile, Node} from '../ast/node';
+import { copyStartEndPos, getNodeParentFile, Node } from '../ast/node';
 import path from 'path';
 import {
     positionToTextPosition,
@@ -112,33 +112,22 @@ export function nodesToDiagnose(
             pos: {
                 start: {
                     absolute: 0,
-                    ...positionToTextPosition(
-                        '',
-                        0,
-                    ),
+                    ...positionToTextPosition('', 0),
                 },
                 end: {
                     absolute: 0,
-                    ...positionToTextPosition(
-                        '',
-                        0,
-                    ),
+                    ...positionToTextPosition('', 0),
                 },
             },
-        }
+        };
     }
 
     if (nodes.length === 1) {
-        return nodeToDiagnose(
-            nodes[0],
-            severity,
-            errorType,
-            message
-        );
+        return nodeToDiagnose(nodes[0], severity, errorType, message);
     }
 
     const firstNode = nodes[0];
-    const lastNode = nodes[nodes.length - 1]
+    const lastNode = nodes[nodes.length - 1];
 
     const file = getNodeParentFile(firstNode);
     return {
@@ -149,17 +138,11 @@ export function nodesToDiagnose(
         pos: {
             start: {
                 absolute: firstNode.pos.start,
-                ...positionToTextPosition(
-                    file?.raw ?? '',
-                    firstNode.pos.start,
-                ),
+                ...positionToTextPosition(file?.raw ?? '', firstNode.pos.start),
             },
             end: {
                 absolute: lastNode.pos.end,
-                ...positionToTextPosition(
-                    file?.raw ?? '',
-                    lastNode.pos.end,
-                ),
+                ...positionToTextPosition(file?.raw ?? '', lastNode.pos.end),
             },
         },
     };

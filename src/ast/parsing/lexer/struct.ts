@@ -1,9 +1,12 @@
-import {Token} from "../tokenizer";
-import {Node, TokensNode} from "../../node";
-import {DiagnoseList} from "../../../diagnose";
+import { Token } from '../tokenizer';
+import { Node, TokensNode } from '../../node';
+import { DiagnoseList } from '../../../diagnose';
 
-export type TokenPredicate = (token: Token, index: number, node: TokensNode) => boolean;
-
+export type TokenPredicate = (
+    token: Token,
+    index: number,
+    node: TokensNode,
+) => boolean;
 
 export interface TokenByTypeParserResult {
     nodes: Node[];
@@ -15,4 +18,3 @@ export type TokenParser = (
     tokens: TokensNode,
     index: number,
 ) => TokenByTypeParserResult | null;
-

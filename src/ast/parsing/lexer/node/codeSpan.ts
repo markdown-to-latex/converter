@@ -1,8 +1,13 @@
-import {TokenParser, TokenPredicate,} from '../struct';
-import {TokenType} from '../../tokenizer';
-import {CodeNode, CodeSpanNode, NodeType} from '../../../node';
-import {findTokenClosingBracket, findTokenOrNull, findTokenOrNullBackward, unexpectedEof,} from '../index';
-import {isParagraphBreak} from "./breaks";
+import { TokenParser, TokenPredicate } from '../struct';
+import { TokenType } from '../../tokenizer';
+import { CodeNode, CodeSpanNode, NodeType } from '../../../node';
+import {
+    findTokenClosingBracket,
+    findTokenOrNull,
+    findTokenOrNullBackward,
+    unexpectedEof,
+} from '../index';
+import { isParagraphBreak } from './breaks';
 
 export const isCodeSpan: TokenPredicate = function (token, index, node) {
     if (token.type !== TokenType.JoinableSpecial) {
@@ -18,11 +23,7 @@ export const parseCodeSpan: TokenParser = function (tokens, index) {
         return null;
     }
 
-    const endTokenResult = findTokenClosingBracket(
-        tokens,
-        index,
-        true,
-    );
+    const endTokenResult = findTokenClosingBracket(tokens, index, true);
     if (!endTokenResult) {
         return unexpectedEof(
             tokens,

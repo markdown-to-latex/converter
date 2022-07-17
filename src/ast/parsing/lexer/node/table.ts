@@ -1,9 +1,16 @@
-import {TokenParser, TokenPredicate} from "../struct";
-import {TokenType} from "../../tokenizer";
-import {applyVisitors, findTokenOrNull, sliceTokenText} from "../index";
-import {NodeType, RawNodeType, TableCellNode, TableNode, TableRowNode, TokensNode} from "../../../node";
-import {DiagnoseList} from "../../../../diagnose";
-import {isPrevTokenDelimiter} from "./breaks";
+import { TokenParser, TokenPredicate } from '../struct';
+import { TokenType } from '../../tokenizer';
+import { applyVisitors, findTokenOrNull, sliceTokenText } from '../index';
+import {
+    NodeType,
+    RawNodeType,
+    TableCellNode,
+    TableNode,
+    TableRowNode,
+    TokensNode,
+} from '../../../node';
+import { DiagnoseList } from '../../../../diagnose';
+import { isPrevTokenDelimiter } from './breaks';
 
 export const isTableLine: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(node.tokens[index], index, node)) {
@@ -11,32 +18,50 @@ export const isTableLine: TokenPredicate = function (token, index, node) {
     }
 
     if (!(token.type === TokenType.SeparatedSpecial && token.text === '|')) {
-        return false
+        return false;
     }
 
-    const delimiter = findTokenOrNull(node, index, n => n.type === TokenType.Delimiter);
+    const delimiter = findTokenOrNull(
+        node,
+        index,
+        n => n.type === TokenType.Delimiter,
+    );
     const lineEndTokenIndex = (delimiter?.index ?? node.tokens.length) - 1;
     if (lineEndTokenIndex === index) {
         return false;
     }
 
     const lineEndToken = node.tokens[lineEndTokenIndex];
-    return lineEndToken.type === TokenType.SeparatedSpecial && lineEndToken.text === '|';
-}
+    return (
+        lineEndToken.type === TokenType.SeparatedSpecial &&
+        lineEndToken.text === '|'
+    );
+};
 
 interface ParseTableLineResult {
     line: TableRowNode | null;
-    diagnostic: DiagnoseList
+    diagnostic: DiagnoseList;
 }
 
-function parseTableLine(tokens: TokensNode, startIndex: number, endIndex: number): ParseTableLineResult {
+function parseTableLine(
+    tokens: TokensNode,
+    startIndex: number,
+    endIndex: number,
+): ParseTableLineResult {
     const startToken = tokens.tokens[startIndex];
     const endToken = tokens.tokens[endIndex];
-    if (!(startToken.type === TokenType.SeparatedSpecial && startToken.text === '|' && endToken.type === TokenType.SeparatedSpecial && endToken.text === '|')) {
+    if (
+        !(
+            startToken.type === TokenType.SeparatedSpecial &&
+            startToken.text === '|' &&
+            endToken.type === TokenType.SeparatedSpecial &&
+            endToken.text === '|'
+        )
+    ) {
         return {
             line: null,
             diagnostic: [],
-        }
+        };
     }
 
     const result: ParseTableLineResult = {
@@ -47,13 +72,17 @@ function parseTableLine(tokens: TokensNode, startIndex: number, endIndex: number
                 start: startToken.pos,
                 end: endToken.pos + endToken.text.length,
             },
-            children: []
+            children: [],
         },
         diagnostic: [],
     };
     let curIndex = startIndex;
     while (curIndex < endIndex) {
-        const nextBar = findTokenOrNull(tokens, curIndex + 1, t => t.type === TokenType.SeparatedSpecial && t.text === '|')!;
+        const nextBar = findTokenOrNull(
+            tokens,
+            curIndex + 1,
+            t => t.type === TokenType.SeparatedSpecial && t.text === '|',
+        )!;
         // TODO: handle null
 
         const cellNode: TableCellNode = {
@@ -63,8 +92,8 @@ function parseTableLine(tokens: TokensNode, startIndex: number, endIndex: number
                 start: tokens.tokens[curIndex + 1].pos,
                 end: tokens.tokens[nextBar.index].pos,
             },
-            children: []
-        }
+            children: [],
+        };
 
         const partialTokenNode: TokensNode = {
             type: RawNodeType.Tokens,
@@ -74,13 +103,13 @@ function parseTableLine(tokens: TokensNode, startIndex: number, endIndex: number
             pos: {
                 start: tokens.tokens[curIndex + 1].pos,
                 end: tokens.tokens[nextBar.index].pos,
-            }
-        }
-        const parseResult = applyVisitors([partialTokenNode])
+            },
+        };
+        const parseResult = applyVisitors([partialTokenNode]);
         result.diagnostic.push(...parseResult.diagnostic);
 
         cellNode.children = parseResult.nodes;
-        result.line!.children.push(cellNode)
+        result.line!.children.push(cellNode);
 
         curIndex = nextBar.index;
     }
@@ -88,11 +117,10 @@ function parseTableLine(tokens: TokensNode, startIndex: number, endIndex: number
     return result;
 }
 
-
 export const parseTable: TokenParser = function (tokens, index) {
     // TODO: parse control rows separately
 
-    const diagnostic: DiagnoseList = []
+    const diagnostic: DiagnoseList = [];
     const rows: TableRowNode[] = [];
 
     let delimiter: ReturnType<typeof findTokenOrNull> | null = null;
@@ -100,12 +128,20 @@ export const parseTable: TokenParser = function (tokens, index) {
     let lastTokenIndex: number = index;
 
     while (lineDelimiterIndex < tokens.tokens.length) {
-        delimiter = findTokenOrNull(tokens, lineDelimiterIndex + 1, n => n.type === TokenType.Delimiter);
+        delimiter = findTokenOrNull(
+            tokens,
+            lineDelimiterIndex + 1,
+            n => n.type === TokenType.Delimiter,
+        );
 
         const prevIndex = lineDelimiterIndex + 1;
         lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
 
-        const lineResult = parseTableLine(tokens, prevIndex, lineDelimiterIndex - 1);
+        const lineResult = parseTableLine(
+            tokens,
+            prevIndex,
+            lineDelimiterIndex - 1,
+        );
         diagnostic.push(...lineResult.diagnostic);
 
         if (!lineResult.line) {
@@ -121,7 +157,7 @@ export const parseTable: TokenParser = function (tokens, index) {
             diagnostic: diagnostic,
             index: lastTokenIndex + 1,
             nodes: [],
-        }
+        };
     }
     if (rows.length === 0) {
         return null;
@@ -132,18 +168,18 @@ export const parseTable: TokenParser = function (tokens, index) {
         type: NodeType.Table,
         align: [],
         header: [rows[0]],
-        rows: rows.slice(1,),
+        rows: rows.slice(1),
         pos: {
             start: tokens.tokens[index].pos,
             end: endToken.pos + endToken.text.length,
         },
         parent: tokens.parent,
     };
-    rows.forEach(n => n.parent = tableNode);
+    rows.forEach(n => (n.parent = tableNode));
 
     return {
         nodes: [tableNode],
         index: lastTokenIndex + 1,
         diagnostic: diagnostic,
-    }
-}
+    };
+};

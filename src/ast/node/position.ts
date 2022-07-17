@@ -122,7 +122,7 @@ export function positionToTextPosition(
     return {
         // line and column starts from 1
         line: index + 1,
-        column: (position - lines[index].pos) + 1,
+        column: position - lines[index].pos + 1,
     };
 }
 

@@ -12,7 +12,7 @@ import {
     unexpectedEof,
 } from '../index';
 import { DiagnoseSeverity } from '../../../../diagnose';
-import {isPrevTokenDelimiter} from "./breaks";
+import { isPrevTokenDelimiter } from './breaks';
 
 export const isCode: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(token, index, node)) {

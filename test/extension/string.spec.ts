@@ -5,9 +5,11 @@ describe('StringE getLinesWithThextPositions', () => {
 
     test('With custom base', () => {
         const result = STRING.getLinesWithTextPositions(15);
-        const original = '123456789012345' + STRING.s
+        const original = '123456789012345' + STRING.s;
 
-        expect(original.slice(result[3].pos, result[3].pos + 5)).toEqual('Line ');
+        expect(original.slice(result[3].pos, result[3].pos + 5)).toEqual(
+            'Line ',
+        );
 
         expect(result).toMatchSnapshot();
     });

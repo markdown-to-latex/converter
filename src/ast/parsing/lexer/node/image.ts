@@ -1,6 +1,6 @@
-import {TokenParser, TokenPredicate} from '../struct';
-import {Token, TokenType} from '../../tokenizer';
-import {ImageNode, Node, NodeType, TextNode} from '../../../node';
+import { TokenParser, TokenPredicate } from '../struct';
+import { Token, TokenType } from '../../tokenizer';
+import { ImageNode, Node, NodeType, TextNode } from '../../../node';
 import {
     DiagnoseErrorType,
     DiagnoseList,
