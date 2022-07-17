@@ -1,6 +1,6 @@
 import { Token, TokenByType } from '../lexer/tokens';
 import { createStartEndTextPos, Node, NodeTableAlign, NodeType } from './node';
-import { NodeByTokenType } from './tokens';
+import { NodeByTokenType } from './nodes';
 
 export function astProcessTokenList(tokens: readonly Token[]): Node[] {
     const resultList: Node[] = [];

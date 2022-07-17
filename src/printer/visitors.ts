@@ -5,7 +5,6 @@ import {
     Node,
     NodeType,
 } from '../ast/node';
-import { NodesByType } from '../processing/nodes';
 import {
     addApplicationByKey,
     addReferenceByKey,
@@ -14,7 +13,7 @@ import {
     createTableLabel,
     getOrCreatePictureLabel,
 } from './context';
-import { CodeLanguageTemporary, resolveOpCode } from './opcodes';
+import {CodeLanguageTemporary, resolveOpCode} from './opcodes';
 import {
     getLatexCode,
     getLatexCodeSpan,
@@ -26,14 +25,15 @@ import {
     getLatexTable,
 } from './latex/transpile';
 
-import { getLatexHeader, LatexString } from './latex';
+import {getLatexHeader, LatexString} from './latex';
+import {NodesByType} from "../ast/nodes";
 
 type Visitor<T extends Node> = (node: T, context: Context) => string;
 
 export function applyPrinterVisitors(node: Node, context: Context): string {
     const visitor = processingVisitors[
         node.type as keyof NodesByType
-    ] as Visitor<Node>;
+        ] as Visitor<Node>;
     return visitor(node, context);
 }
 
@@ -70,7 +70,7 @@ function isNodeBeforeBoxed(node: Node): boolean {
         [NodeType.Space, NodeType.OpCode].indexOf(
             right.type as keyof NodesByType,
         ) !== -1
-    ) {
+        ) {
         right = getNodeRightNeighbourLeaf(right);
     }
     if (right === null) {
@@ -212,7 +212,7 @@ ${node.text}
         getLatexLinkText(
             printNodeList(node.children, context),
             new LatexString(node.href, context).prepare(NodeType.Link).s,
-            node.title,
+            printNodeList(node.children, context),
             context.config.latex,
         ),
     [NodeType.Image]: (node, context) => {
@@ -252,6 +252,11 @@ ${node.text}
     [NodeType.TableRow]: (node, context) => {
         return printNodeList(node.children, context, ' & ') + '\\\\ \\hline\n';
     },
+
+    // TODO: Control sequences
+    [NodeType.TableControlRow]: (node, context) => '',
+    [NodeType.TableControlCell]: (node, context) => '',
+
     [NodeType.OpCode]: resolveOpCode,
     [NodeType.Latex]: node => node.text,
     [NodeType.LatexSpan]: node => node.text,
@@ -264,4 +269,5 @@ ${node.text}
             context.config.latex,
         );
     },
+    [NodeType.Comment]: () => '',
 };

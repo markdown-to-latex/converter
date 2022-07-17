@@ -52,7 +52,12 @@ Object {
     },
     Object {
       "pos": 24,
-      "text": "-#",
+      "text": "-",
+      "type": "JoinableSpecial",
+    },
+    Object {
+      "pos": 25,
+      "text": "#",
       "type": "JoinableSpecial",
     },
     Object {
