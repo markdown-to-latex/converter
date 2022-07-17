@@ -3380,6 +3380,270 @@ Array [
 ]
 `;
 
+exports[`table parsing Simple 1`] = `
+Array [
+  Object {
+    "header": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 10,
+                  "start": 2,
+                },
+                "text": "Column 1",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 11,
+              "start": 1,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 21,
+                  "start": 13,
+                },
+                "text": "Column 2",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 22,
+              "start": 12,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 0,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 35,
+              "start": 25,
+            },
+            "type": "TableControlCell",
+          },
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 46,
+              "start": 36,
+            },
+            "type": "TableControlCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 47,
+          "start": 24,
+        },
+        "type": "TableControlRow",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 99,
+            "start": 0,
+          },
+          "text": "| Column 1 | Column 2 |
+| -------- | -------- |
+| Value **1** | Value \`2\` |
+|Value [with](link) | |",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 99,
+        "start": 0,
+      },
+      "raw": "| Column 1 | Column 2 |
+| -------- | -------- |
+| Value **1** | Value \`2\` |
+|Value [with](link) | |",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 99,
+      "start": 0,
+    },
+    "rows": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 56,
+                  "start": 50,
+                },
+                "text": "Value ",
+                "type": "Text",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 59,
+                      "start": 58,
+                    },
+                    "text": "1",
+                    "type": "Text",
+                  },
+                ],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 61,
+                  "start": 56,
+                },
+                "type": "Strong",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 62,
+              "start": 49,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 70,
+                  "start": 64,
+                },
+                "text": "Value ",
+                "type": "Text",
+              },
+              Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 73,
+                  "start": 70,
+                },
+                "text": "2",
+                "type": "CodeSpan",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 74,
+              "start": 63,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 75,
+          "start": 48,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 83,
+                  "start": 77,
+                },
+                "text": "Value ",
+                "type": "Text",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 88,
+                      "start": 84,
+                    },
+                    "text": "with",
+                    "type": "Text",
+                  },
+                ],
+                "href": "link",
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 95,
+                  "start": 83,
+                },
+                "type": "Link",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 96,
+              "start": 77,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 98,
+              "start": 97,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 99,
+          "start": 76,
+        },
+        "type": "TableRow",
+      },
+    ],
+    "type": "Table",
+  },
+]
+`;
+
 exports[`table parsing Simple table 1`] = `
 Array [
   Object {
@@ -3654,6 +3918,304 @@ Array [
         "pos": Object {
           "end": 99,
           "start": 76,
+        },
+        "type": "TableRow",
+      },
+    ],
+    "type": "Table",
+  },
+]
+`;
+
+exports[`table parsing With additional  1`] = `
+Array [
+  Object {
+    "header": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 10,
+                  "start": 2,
+                },
+                "text": "Column 1",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 11,
+              "start": 1,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 21,
+                  "start": 13,
+                },
+                "text": "Column 2",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 22,
+              "start": 12,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 0,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 35,
+              "start": 25,
+            },
+            "type": "TableControlCell",
+          },
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 46,
+              "start": 36,
+            },
+            "type": "TableControlCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 47,
+          "start": 24,
+        },
+        "type": "TableControlRow",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 125,
+            "start": 0,
+          },
+          "text": "| Column 1 | Column 2 |
+| -------- | -------- |
+| Value **1** | Value \`2\` |
+| --------: | :-------- |
+|Value [with](link) | |",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 125,
+        "start": 0,
+      },
+      "raw": "| Column 1 | Column 2 |
+| -------- | -------- |
+| Value **1** | Value \`2\` |
+| --------: | :-------- |
+|Value [with](link) | |",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 125,
+      "start": 0,
+    },
+    "rows": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 56,
+                  "start": 50,
+                },
+                "text": "Value ",
+                "type": "Text",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 59,
+                      "start": 58,
+                    },
+                    "text": "1",
+                    "type": "Text",
+                  },
+                ],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 61,
+                  "start": 56,
+                },
+                "type": "Strong",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 62,
+              "start": 49,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 70,
+                  "start": 64,
+                },
+                "text": "Value ",
+                "type": "Text",
+              },
+              Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 73,
+                  "start": 70,
+                },
+                "text": "2",
+                "type": "CodeSpan",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 74,
+              "start": 63,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 75,
+          "start": 48,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "align": "Right",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 88,
+              "start": 77,
+            },
+            "type": "TableControlCell",
+          },
+          Object {
+            "align": "Left",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 100,
+              "start": 89,
+            },
+            "type": "TableControlCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 101,
+          "start": 76,
+        },
+        "type": "TableControlRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 109,
+                  "start": 103,
+                },
+                "text": "Value ",
+                "type": "Text",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 114,
+                      "start": 110,
+                    },
+                    "text": "with",
+                    "type": "Text",
+                  },
+                ],
+                "href": "link",
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 121,
+                  "start": 109,
+                },
+                "type": "Link",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 122,
+              "start": 103,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 124,
+              "start": 123,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 125,
+          "start": 102,
         },
         "type": "TableRow",
       },

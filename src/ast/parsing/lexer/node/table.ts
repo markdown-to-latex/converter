@@ -1,16 +1,73 @@
-import { TokenParser, TokenPredicate } from '../struct';
-import { TokenType } from '../../tokenizer';
-import { applyVisitors, findTokenOrNull, sliceTokenText } from '../index';
+import {TokenParser, TokenPredicate} from '../struct';
+import {TokenType} from '../../tokenizer';
+import {applyVisitors, findTokenOrNull, sliceTokenText} from '../index';
 import {
+    NodeTableAlign,
     NodeType,
     RawNodeType,
     TableCellNode,
+    TableControlCellNode,
+    TableControlRowNode,
     TableNode,
     TableRowNode,
     TokensNode,
 } from '../../../node';
-import { DiagnoseList } from '../../../../diagnose';
-import { isPrevTokenDelimiter } from './breaks';
+import {DiagnoseErrorType, DiagnoseList, DiagnoseSeverity, nodeToDiagnose} from '../../../../diagnose';
+import {isPrevTokenDelimiter} from './breaks';
+
+const isTableControlCell: TokenPredicate = function (token, index, node) {
+    if (token.type === TokenType.Spacer) {
+        token = node.tokens[index + 1];
+    }
+    if (!token) {
+        return false;
+    }
+
+    if (
+        [TokenType.JoinableSpecial, TokenType.SeparatedSpecial].indexOf(
+            token.type,
+        ) === -1
+    ) {
+        return false;
+    }
+
+    return token.text.startsWith('-') || token.text.startsWith(':');
+};
+
+interface ParseControlCellResult {
+    align?: NodeTableAlign;
+    joinRowsUp?: number;
+    joinColsRight?: number;
+
+    diagnostic: DiagnoseList;
+}
+
+function parseControlCell(text: string): ParseControlCellResult {
+    text = text.trim();
+    const diagnostic: DiagnoseList = [];
+
+    const align: NodeTableAlign = (() => {
+        if (text.startsWith(':') && text.endsWith(':')) {
+            return NodeTableAlign.Center;
+        }
+        if (text.startsWith(':')) {
+            return NodeTableAlign.Left;
+        }
+        if (text.endsWith(':')) {
+            return NodeTableAlign.Right;
+        }
+
+        return NodeTableAlign.Default;
+    })();
+
+    return {
+        align,
+
+        // TODO: Add join rows parsing
+
+        diagnostic,
+    };
+}
 
 export const isTableLine: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(node.tokens[index], index, node)) {
@@ -39,7 +96,7 @@ export const isTableLine: TokenPredicate = function (token, index, node) {
 };
 
 interface ParseTableLineResult {
-    line: TableRowNode | null;
+    line: TableRowNode | TableControlRowNode | null;
     diagnostic: DiagnoseList;
 }
 
@@ -85,31 +142,72 @@ function parseTableLine(
         )!;
         // TODO: handle null
 
-        const cellNode: TableCellNode = {
-            type: NodeType.TableCell,
-            parent: result.line,
-            pos: {
-                start: tokens.tokens[curIndex + 1].pos,
-                end: tokens.tokens[nextBar.index].pos,
-            },
-            children: [],
-        };
+        const innerTokens = tokens.tokens.slice(curIndex + 1, nextBar.index);
+        const slicedText = sliceTokenText(tokens, curIndex + 1, nextBar.index);
 
-        const partialTokenNode: TokensNode = {
-            type: RawNodeType.Tokens,
-            tokens: tokens.tokens.slice(curIndex + 1, nextBar.index),
-            text: sliceTokenText(tokens, curIndex + 1, nextBar.index),
-            parent: cellNode,
-            pos: {
-                start: tokens.tokens[curIndex + 1].pos,
-                end: tokens.tokens[nextBar.index].pos,
-            },
-        };
-        const parseResult = applyVisitors([partialTokenNode]);
-        result.diagnostic.push(...parseResult.diagnostic);
+        const isControlCell = isTableControlCell(innerTokens[0], curIndex + 1, tokens);
+        let cellNode: TableControlCellNode | TableCellNode;
 
-        cellNode.children = parseResult.nodes;
-        result.line!.children.push(cellNode);
+        if (
+            innerTokens.length !== 0 &&
+            isControlCell
+        ) {
+            const controlParserResult = parseControlCell(slicedText);
+            result.diagnostic.push(...controlParserResult.diagnostic);
+
+            cellNode = {
+                type: NodeType.TableControlCell,
+                parent: result.line,
+                pos: {
+                    start: tokens.tokens[curIndex + 1].pos,
+                    end: tokens.tokens[nextBar.index].pos,
+                },
+
+                // TODO: encapsulate into an object
+                align: controlParserResult.align,
+                joinRowsUp: controlParserResult.joinRowsUp,
+                joinColsRight: controlParserResult.joinColsRight,
+            } as TableControlCellNode;
+
+            result.line!.children.push(cellNode as any);
+            result.line!.type = NodeType.TableControlRow;
+        } else {
+            cellNode = {
+                type: NodeType.TableCell,
+                parent: result.line,
+                pos: {
+                    start: tokens.tokens[curIndex + 1].pos,
+                    end: tokens.tokens[nextBar.index].pos,
+                },
+                children: [],
+            } as TableCellNode;
+
+            const partialTokenNode: TokensNode = {
+                type: RawNodeType.Tokens,
+                tokens: innerTokens,
+                text: slicedText,
+                parent: cellNode,
+                pos: {
+                    start: tokens.tokens[curIndex + 1].pos,
+                    end: tokens.tokens[nextBar.index].pos,
+                },
+            };
+            const parseResult = applyVisitors([partialTokenNode]);
+            result.diagnostic.push(...parseResult.diagnostic);
+
+            cellNode.children = parseResult.nodes;
+            result.line!.children.push(cellNode as any);
+        }
+
+        if (!isControlCell && result.line!.type == NodeType.TableControlRow) {
+            result.diagnostic.push(nodeToDiagnose(
+                cellNode,
+                DiagnoseSeverity.Error,
+                DiagnoseErrorType.ApplyParserError,
+                'Expected control sequence, got text'
+            ))
+            result.line!.type = NodeType.TableRow;
+        }
 
         curIndex = nextBar.index;
     }
@@ -121,7 +219,7 @@ export const parseTable: TokenParser = function (tokens, index) {
     // TODO: parse control rows separately
 
     const diagnostic: DiagnoseList = [];
-    const rows: TableRowNode[] = [];
+    const rows: (TableRowNode | TableControlRowNode)[] = [];
 
     let delimiter: ReturnType<typeof findTokenOrNull> | null = null;
     let lineDelimiterIndex: number = index - 1;
@@ -159,16 +257,31 @@ export const parseTable: TokenParser = function (tokens, index) {
             nodes: [],
         };
     }
-    if (rows.length === 0) {
+    if (rows.length < 2) {
         return null;
+    }
+    if (rows[0].type !== NodeType.TableRow) {
+        diagnostic.push(nodeToDiagnose(
+            rows[0],
+            DiagnoseSeverity.Error,
+            DiagnoseErrorType.ApplyParserError,
+            'The first table row must be not control'
+        ))
+    }
+    if (rows[1].type !== NodeType.TableControlRow) {
+        diagnostic.push(nodeToDiagnose(
+            rows[1],
+            DiagnoseSeverity.Error,
+            DiagnoseErrorType.ApplyParserError,
+            'The second table row must be control'
+        ))
     }
 
     const endToken = tokens.tokens[lastTokenIndex];
     const tableNode: TableNode = {
         type: NodeType.Table,
-        align: [],
-        header: [rows[0]],
-        rows: rows.slice(1),
+        header: [rows[0] as TableRowNode, rows[1] as TableControlRowNode],
+        rows: rows.slice(2),
         pos: {
             start: tokens.tokens[index].pos,
             end: endToken.pos + endToken.text.length,

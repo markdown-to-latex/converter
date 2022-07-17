@@ -1,5 +1,5 @@
-import { StartEndPosition } from './position';
-import { Token } from '../parsing/tokenizer';
+import {StartEndPosition} from './position';
+import {Token} from '../parsing/tokenizer';
 
 export const enum RawNodeType {
     Raw = 'Raw',
@@ -34,6 +34,8 @@ export const enum NodeType {
 
     // Custom
     File = 'File',
+    TableControlCell = 'TableControlCell',
+    TableControlRow = 'TableControlRow',
     TableCell = 'TableCell',
     TableRow = 'TableRow',
     OpCode = 'OpCode',
@@ -43,13 +45,6 @@ export const enum NodeType {
     FormulaSpan = 'FormulaSpan',
 
     Comment = 'Comment',
-}
-
-export const enum NodeTableAlign {
-    Default = 'Default',
-    Left = 'Left',
-    Right = 'Right',
-    Center = 'Center',
 }
 
 export type StartEndNumberPosition = StartEndPosition<number>;
@@ -115,9 +110,8 @@ export interface HeadingNode extends Node, NodeChildren {
 
 export interface TableNode extends Node {
     type: NodeType.Table;
-    align: NodeTableAlign[];
-    header: [TableRowNode];
-    rows: TableRowNode[];
+    header: [TableRowNode, TableControlRowNode];
+    rows: (TableRowNode | TableControlRowNode)[];
 }
 
 export interface BlockquoteNode extends Node, NodeChildren {
@@ -212,13 +206,23 @@ export interface TableRowNode extends Node, NodeChildren {
     children: TableCellNode[];
 }
 
-export interface TableCellNode extends Node, NodeChildren {
-    type: NodeType.TableCell;
+export const enum NodeTableAlign {
+    Default = 'Default',
+    Left = 'Left',
+    Right = 'Right',
+    Center = 'Center',
 }
 
-export interface TableControlRowNode extends Node, NodeChildren {
-    type: NodeType.TableRow;
-    children: TableCellNode[];
+export interface TableControlCellNode extends Node {
+    type: NodeType.TableControlCell;
+    align?: NodeTableAlign;
+    joinRowsUp?: number;
+    joinColsRight?: number;
+}
+
+export interface TableControlRowNode extends Node {
+    type: NodeType.TableControlRow;
+    children: TableControlCellNode[];
 }
 
 export interface OpCodeNode extends Node, NodeArgs {

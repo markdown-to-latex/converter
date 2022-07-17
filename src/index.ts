@@ -1,6 +1,5 @@
 import { buildMarkdownAST } from './ast/build';
 import { lexer } from './lexer/lexer';
-import { applyProcessing } from './processing';
 import { printMarkdownAST } from './printer';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -14,7 +13,7 @@ import {
 import { readConfig } from './config';
 import { MarkDownToLaTeXConverter } from './printer/types';
 
-export { buildMarkdownAST, lexer, applyProcessing, printMarkdownAST };
+export { buildMarkdownAST, lexer, printMarkdownAST };
 
 const defaultConfig: ContextConfig = {
     latex: {
@@ -253,6 +252,7 @@ export function convertMarkdownFiles(rootDir: string): void {
             filepath: path.join(rootDir, fileInfo.out),
         });
 
+        // TODO: apply visitors
         applyProcessing(result, context);
 
         printMarkdownAST(result, context);

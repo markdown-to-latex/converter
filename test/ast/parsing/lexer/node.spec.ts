@@ -152,7 +152,7 @@ describe('macros parsing', () => {
 });
 
 describe('table parsing', () => {
-    test('Simple table', () => {
+    test('Simple', () => {
         const rawNode = rawNodeTemplate(`| Column 1 | Column 2 |
 | -------- | -------- |
 | Value **1** | Value \`2\` |
@@ -162,6 +162,25 @@ describe('table parsing', () => {
         let node = nodes[0] as TableNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Table);
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('With additional ', () => {
+        const rawNode = rawNodeTemplate(`| Column 1 | Column 2 |
+| -------- | -------- |
+| Value **1** | Value \`2\` |
+| --------: | :-------- |
+|Value [with](link) | |`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as TableNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Table);
+
+        expect(node.rows[0].type).toEqual(NodeType.TableRow);
+        expect(node.rows[1].type).toEqual(NodeType.TableControlRow);
+        expect(node.rows[2].type).toEqual(NodeType.TableRow);
 
         expect(nodes).toMatchSnapshot();
     });
