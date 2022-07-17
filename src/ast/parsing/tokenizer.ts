@@ -31,8 +31,8 @@ const JOINABLE_TOKEN_TYPES: TokenType[] = [
 ];
 
 const SPACER_REGEXP = new RegExp(/[ \t\r]/);
-const SEPARATED_SPECIAL_REGEXP = new RegExp(/[\[\]{}~!@%^&()=+\\,.<>;:'"|№?]/);
-const JOINABLE_SPECIAL_REGEXP = new RegExp(/[`#$*\-_\/]/);
+const SEPARATED_SPECIAL_REGEXP = new RegExp(/[\[\]{}!@%^&()=+\\,.<>;:'"|№?]/);
+const JOINABLE_SPECIAL_REGEXP = new RegExp(/[`#$*\-_\/~]/);
 const NUMBER_REGEXP = new RegExp(/\d/);
 
 function isCharSeparatedSpecial(char: string): boolean {
@@ -88,6 +88,8 @@ function createToken(char: string, pos: number): Token {
 }
 
 export function tokenize(text: string, basePos: number = 0): TokenizeResult {
+    const joinables = ['$', '`'];
+
     const tokens: Token[] = [];
     let currentToken: Token | null = null;
 
@@ -100,7 +102,6 @@ export function tokenize(text: string, basePos: number = 0): TokenizeResult {
         const type = getCharType(c);
         const currentTokenEndChar =
             currentToken.text[currentToken.text.length - 1];
-        const joinables = ['$', '`'];
         if (
             type === currentToken.type &&
             JOINABLE_TOKEN_TYPES.indexOf(type) !== -1

@@ -37,10 +37,10 @@ export const enum NodeType {
     TableCell = 'TableCell',
     TableRow = 'TableRow',
     OpCode = 'OpCode',
-    InlineLatex = 'InlineLatex',
-    CodeLatex = 'CodeLatex',
-    MathLatex = 'MathLatex',
-    MathInlineLatex = 'MathInlineLatex',
+    LatexSpan = 'LatexSpan',
+    Latex = 'Latex',
+    Formula = 'Formula',
+    FormulaSpan = 'FormulaSpan',
 
     Comment = 'Comment',
 }
@@ -212,26 +212,35 @@ export interface TableRowNode extends Node, NodeChildren {
     children: TableCellNode[];
 }
 
+export interface TableCellNode extends Node, NodeChildren {
+    type: NodeType.TableCell;
+}
+
+export interface TableControlRowNode extends Node, NodeChildren {
+    type: NodeType.TableRow;
+    children: TableCellNode[];
+}
+
 export interface OpCodeNode extends Node, NodeArgs {
     type: NodeType.OpCode;
     opcode: string;
     label: string | null;
 }
 
-export interface CodeLatexNode extends Node, NodeText {
-    type: NodeType.CodeLatex;
+export interface LatexNode extends Node, NodeText {
+    type: NodeType.Latex;
 }
 
-export interface InlineLatexNode extends Node, NodeText {
-    type: NodeType.InlineLatex;
+export interface LatexSpanNode extends Node, NodeText {
+    type: NodeType.LatexSpan;
 }
 
-export interface MathLatexNode extends Node, NodeText {
-    type: NodeType.MathLatex;
+export interface FormulaNode extends Node, NodeText {
+    type: NodeType.Formula;
 }
 
-export interface MathInlineLatexNode extends Node, NodeText {
-    type: NodeType.MathInlineLatex;
+export interface FormulaSpanNode extends Node, NodeText {
+    type: NodeType.FormulaSpan;
 }
 
 export interface CommentNode extends Node {

@@ -125,11 +125,15 @@ export function getMacroArgs(
         let keyToken: Token | null = null;
         const keyChar = tokens.tokens[argsIndex + 1];
         const keyTokenIndex = argsIndex + 2;
+        const spacerTokenIndex = argsIndex + 3;
         if (
             keyChar.type === TokenType.SeparatedSpecial &&
             keyChar.text === '@' &&
             tokens.tokens[keyTokenIndex]?.type === TokenType.Letter &&
-            tokens.tokens[argsIndex + 3]?.type === TokenType.Spacer
+            (tokens.tokens[spacerTokenIndex]?.type === TokenType.Spacer ||
+                (tokens.tokens[spacerTokenIndex]?.type ===
+                    TokenType.Delimiter &&
+                    tokens.tokens[spacerTokenIndex].text.length <= 1))
         ) {
             keyToken = tokens.tokens[keyTokenIndex];
         }

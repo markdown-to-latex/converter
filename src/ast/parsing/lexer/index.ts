@@ -39,6 +39,10 @@ import { parseHr } from './node/hr';
 import { parseEm } from './node/em';
 import { parseStrongWithOptionalEm } from './node/strong';
 import { parseComment } from './node/comment';
+import { parseDel } from './node/del';
+import { parseFormulaSpan } from './node/formulaSpan';
+import { parseLatexSpan } from './node/latexSpan';
+import { parseFormulaOrLatex } from './node/formulaOrLatex';
 
 class FatalError extends Error {}
 
@@ -428,15 +432,14 @@ function applyParagraphs(roNodes: Readonly<Node[]>): Node[] {
         NodeType.Escape,
         NodeType.Text,
         NodeType.Link,
-        NodeType.Image,
         NodeType.Strong,
         NodeType.Em,
         NodeType.CodeSpan,
         NodeType.Br,
         NodeType.Del,
         NodeType.OpCode,
-        NodeType.InlineLatex,
-        NodeType.MathInlineLatex,
+        NodeType.LatexSpan,
+        NodeType.FormulaSpan,
     ];
 
     let lastTextNodeIndex: number | null = null;
@@ -518,12 +521,17 @@ function parseTokensNodeByType(
 
 const parsersByType: Record<TokenType, TokenParser[]> = {
     [TokenType.JoinableSpecial]: [
+        parseList,
         parseCodeSpan,
         parseStrongWithOptionalEm,
+        parseDel,
         parseEm,
         parseHeading,
         parseHr,
         parseCode,
+        parseFormulaSpan,
+        parseFormulaOrLatex,
+        parseLatexSpan,
         parseComment,
     ],
     [TokenType.SeparatedSpecial]: [

@@ -117,6 +117,81 @@ Text",
 ]
 `;
 
+exports[`Del parsing Simple del 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 0,
+        },
+        "text": "Text with ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 15,
+              "start": 12,
+            },
+            "text": "del",
+            "type": "Text",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 10,
+        },
+        "type": "Del",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 22,
+          "start": 17,
+        },
+        "text": "-text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 22,
+            "start": 0,
+          },
+          "text": "Text with ~~del~~-text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 22,
+        "start": 0,
+      },
+      "raw": "Text with ~~del~~-text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 22,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
 exports[`Em parsing Em in text 1`] = `
 Array [
   Object {
@@ -279,6 +354,220 @@ Array [
     },
     "pos": Object {
       "end": 30,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`Formula parsing Simple 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 11,
+          "start": 0,
+        },
+        "text": "Sample text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 46,
+            "start": 0,
+          },
+          "text": "Sample text
+$$$
+a = b + x
+$$$
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 46,
+        "start": 0,
+      },
+      "raw": "Sample text
+$$$
+a = b + x
+$$$
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 11,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 46,
+            "start": 0,
+          },
+          "text": "Sample text
+$$$
+a = b + x
+$$$
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 46,
+        "start": 0,
+      },
+      "raw": "Sample text
+$$$
+a = b + x
+$$$
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 29,
+      "start": 12,
+    },
+    "text": "a = b + x",
+    "type": "Formula",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 45,
+          "start": 30,
+        },
+        "text": "New sample text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 46,
+            "start": 0,
+          },
+          "text": "Sample text
+$$$
+a = b + x
+$$$
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 46,
+        "start": 0,
+      },
+      "raw": "Sample text
+$$$
+a = b + x
+$$$
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 45,
+      "start": 30,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`FormulaSpan parsing Simple 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 12,
+          "start": 0,
+        },
+        "text": "Sample text ",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 25,
+          "start": 12,
+        },
+        "text": "a = b + h",
+        "type": "FormulaSpan",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 41,
+          "start": 26,
+        },
+        "text": "New sample text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 42,
+            "start": 0,
+          },
+          "text": "Sample
+text $\`a = b + h\`$
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 42,
+        "start": 0,
+      },
+      "raw": "Sample
+text $\`a = b + h\`$
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 41,
       "start": 0,
     },
     "type": "Paragraph",
@@ -759,29 +1048,17 @@ Text 2
 exports[`Image parsing Extended image 1`] = `
 Array [
   Object {
-    "children": Array [
+    "href": "../../image.png",
+    "name": Array [
       Object {
-        "href": "../../image.png",
-        "name": Array [
-          Object {
-            "children": Array [],
-            "parent": [Circular],
-            "pos": Object {
-              "end": 47,
-              "start": 37,
-            },
-            "text": "Image Name",
-            "type": "Text",
-          },
-        ],
+        "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 61,
-          "start": 0,
+          "end": 47,
+          "start": 37,
         },
-        "text": "image-label",
-        "type": "Image",
-        "width": "14cm",
+        "text": "Image Name",
+        "type": "Text",
       },
     ],
     "parent": Object {
@@ -817,7 +1094,9 @@ Array [
       "end": 61,
       "start": 0,
     },
-    "type": "Paragraph",
+    "text": "image-label",
+    "type": "Image",
+    "width": "14cm",
   },
 ]
 `;
@@ -830,12 +1109,12 @@ Array [
     "message": "Argument name specified twice",
     "pos": Object {
       "end": Object {
-        "absolute": 73,
+        "absolute": 72,
         "column": 1,
         "line": 1,
       },
       "start": Object {
-        "absolute": 61,
+        "absolute": 60,
         "column": 1,
         "line": 1,
       },
@@ -848,18 +1127,7 @@ Array [
 exports[`Image parsing Markdown-like image 1`] = `
 Array [
   Object {
-    "children": Array [
-      Object {
-        "href": "../../image.png",
-        "parent": [Circular],
-        "pos": Object {
-          "end": 31,
-          "start": 0,
-        },
-        "text": "image-label",
-        "type": "Image",
-      },
-    ],
+    "href": "../../image.png",
     "parent": Object {
       "children": Array [
         Object {
@@ -883,6 +1151,221 @@ Array [
     },
     "pos": Object {
       "end": 31,
+      "start": 0,
+    },
+    "text": "image-label",
+    "type": "Image",
+  },
+]
+`;
+
+exports[`Latex parsing Simple 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 11,
+          "start": 0,
+        },
+        "text": "Sample text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 76,
+            "start": 0,
+          },
+          "text": "Sample text
+$$$raw
+\\\\textbf{Some bold text in raw latex}
+$$$
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 76,
+        "start": 0,
+      },
+      "raw": "Sample text
+$$$raw
+\\\\textbf{Some bold text in raw latex}
+$$$
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 11,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 76,
+            "start": 0,
+          },
+          "text": "Sample text
+$$$raw
+\\\\textbf{Some bold text in raw latex}
+$$$
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 76,
+        "start": 0,
+      },
+      "raw": "Sample text
+$$$raw
+\\\\textbf{Some bold text in raw latex}
+$$$
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 59,
+      "start": 12,
+    },
+    "text": "\\\\textbf{Some bold text in raw latex}",
+    "type": "Latex",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 75,
+          "start": 60,
+        },
+        "text": "New sample text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 76,
+            "start": 0,
+          },
+          "text": "Sample text
+$$$raw
+\\\\textbf{Some bold text in raw latex}
+$$$
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 76,
+        "start": 0,
+      },
+      "raw": "Sample text
+$$$raw
+\\\\textbf{Some bold text in raw latex}
+$$$
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 75,
+      "start": 60,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`LatexSpan parsing Simple 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 12,
+          "start": 0,
+        },
+        "text": "Sample text ",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 43,
+          "start": 12,
+        },
+        "text": "\\\\textbf{some inlined latex}",
+        "type": "LatexSpan",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 59,
+          "start": 44,
+        },
+        "text": "New sample text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 60,
+            "start": 0,
+          },
+          "text": "Sample
+text $$\\\\textbf{some inlined latex}$$
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 60,
+        "start": 0,
+      },
+      "raw": "Sample
+text $$\\\\textbf{some inlined latex}$$
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 59,
       "start": 0,
     },
     "type": "Paragraph",

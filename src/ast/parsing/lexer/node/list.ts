@@ -19,6 +19,8 @@ export interface IsListItemResult {
 const UNORDERED_LIST_DOTS = ['*', '-', '+'];
 const ORDERED_LIST_DOTS = ['.', ')'];
 
+const ORDERED_ITEM_INDEX_REGEXP = RegExp(/^\d+$/g);
+
 export function isOrderedListItem(
     token: Token,
     index: number,
@@ -31,7 +33,12 @@ export function isOrderedListItem(
         token = node.tokens[index];
     }
 
-    if (token?.type !== TokenType.Letter) {
+    if (
+        !(
+            token?.type === TokenType.Letter &&
+            token.text.match(ORDERED_ITEM_INDEX_REGEXP)
+        )
+    ) {
         return {
             result: false,
             indent: 0,
@@ -105,6 +112,7 @@ function parseListItem(
 
         const listSeparator: Token | null = tokens.tokens[index + 1];
         if (
+            !initValue.match(ORDERED_ITEM_INDEX_REGEXP) ||
             listSeparator?.type !== TokenType.SeparatedSpecial ||
             ORDERED_LIST_DOTS.indexOf(listSeparator?.text) === -1
         ) {

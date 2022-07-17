@@ -2,7 +2,12 @@ import {
     CodeNode,
     CodeSpanNode,
     FileNode,
+    FormulaNode,
+    FormulaSpanNode,
     HeadingNode,
+    ImageNode,
+    LatexNode,
+    LatexSpanNode,
     LinkNode,
     ListNode,
     NodeType,
@@ -11,36 +16,10 @@ import {
     RawNode,
     RawNodeType,
     TableNode,
-} from '../../../src/ast/node';
-import { fullContentPos } from '../../../src/ast/parsing';
-import { applyVisitors } from '../../../src/ast/parsing/lexer';
-
-function rawNodeTemplate(content: string): RawNode {
-    const fileNode: FileNode = {
-        type: NodeType.File,
-        parent: null,
-        pos: {
-            start: 0,
-            end: content.length,
-        },
-        raw: content,
-        path: 'test.md',
-        children: [],
-    };
-
-    const rawNode: RawNode = {
-        type: RawNodeType.Raw,
-        parent: fileNode,
-        pos: {
-            start: 0,
-            end: content.length,
-        },
-        text: content,
-    };
-    fileNode.children.push(rawNode);
-
-    return rawNode;
-}
+} from '../../../../src/ast/node';
+import { fullContentPos } from '../../../../src/ast/parsing';
+import { applyVisitors } from '../../../../src/ast/parsing/lexer';
+import { rawNodeTemplate } from './utils';
 
 describe('code block lexer check', () => {
     test('Complex raw node', () => {
@@ -334,9 +313,9 @@ describe('Image parsing', () => {
         const rawNode = rawNodeTemplate('![image-label](../../image.png)');
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        const paragraphNode = nodes[0] as ParagraphNode;
-        expect(paragraphNode.children).toHaveLength(1);
-        expect(paragraphNode.children[0].type).toEqual(NodeType.Image);
+        expect(nodes).toHaveLength(1);
+        const node = nodes[0] as ImageNode;
+        expect(node.type).toEqual(NodeType.Image);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -349,9 +328,9 @@ describe('Image parsing', () => {
 )`);
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        const paragraphNode = nodes[0] as ParagraphNode;
-        expect(paragraphNode.children).toHaveLength(1);
-        expect(paragraphNode.children[0].type).toEqual(NodeType.Image);
+        expect(nodes).toHaveLength(1);
+        const node = nodes[0] as ImageNode;
+        expect(node.type).toEqual(NodeType.Image);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -359,7 +338,7 @@ describe('Image parsing', () => {
     test('Image args error', () => {
         const rawNode = rawNodeTemplate(`![image-label](../../image.png)(
     Image Name
-)(@name 
+)(@name
     Another name
 )`);
         const { nodes, diagnostic } = applyVisitors([rawNode]);
@@ -428,6 +407,21 @@ describe('Strong parsing', () => {
     });
 });
 
+describe('Del parsing', () => {
+    test('Simple del', () => {
+        const rawNode = rawNodeTemplate(`Text with ~~del~~-text`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(3);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[1].type).toEqual(NodeType.Del);
+        expect(paragraphNode.children[2].type).toEqual(NodeType.Text);
+
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
 describe('Paragraph parsing', () => {
     test('Complex', () => {
         const rawNode = rawNodeTemplate(`## Not a paragraph
@@ -453,6 +447,82 @@ text`);
         expect(nodes[4].type).toEqual(NodeType.Hr);
         expect(nodes[5].type).toEqual(NodeType.Heading);
         expect(nodes[6].type).toEqual(NodeType.Paragraph);
+
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
+describe('Latex parsing', () => {
+    test('Simple', () => {
+        const rawNode = rawNodeTemplate(`Sample text
+$$$raw
+\\textbf{Some bold text in raw latex}
+$$$
+New sample text
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[1] as LatexNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Latex);
+        expect(node.text).toEqual('\\textbf{Some bold text in raw latex}');
+
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
+describe('Formula parsing', () => {
+    test('Simple', () => {
+        const rawNode = rawNodeTemplate(`Sample text
+$$$
+a = b + x
+$$$
+New sample text
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(1);
+        let node = nodes[1] as FormulaNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Formula);
+        expect(node.text).toEqual('a = b + x');
+
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
+describe('LatexSpan parsing', () => {
+    test('Simple', () => {
+        const rawNode = rawNodeTemplate(`Sample
+text $$\\textbf{some inlined latex}$$
+New sample text
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(3);
+        const node = paragraphNode.children[1] as LatexSpanNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.LatexSpan);
+        expect(node.text).toEqual('\\textbf{some inlined latex}');
+
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
+describe('FormulaSpan parsing', () => {
+    test('Simple', () => {
+        const rawNode = rawNodeTemplate(`Sample
+text $\`a = b + h\`$
+New sample text
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(3);
+        const node = paragraphNode.children[1] as FormulaSpanNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.FormulaSpan);
+        expect(node.text).toEqual('a = b + h');
 
         expect(nodes).toMatchSnapshot();
     });

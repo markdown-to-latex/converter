@@ -1,20 +1,20 @@
-import {
-    TokenByTypeParserResult,
-    TokenParser,
-    TokenPredicate,
-} from '../struct';
+import { TokenParser, TokenPredicate } from '../struct';
 import { TokenType } from '../../tokenizer';
-import { CodeNode, NodeType, TokensNode } from '../../../node';
+import { FormulaNode, LatexNode, NodeType } from '../../../node';
 import {
     findTokenOrNull,
     findTokenOrNullBackward,
-    tokenToDiagnose,
     unexpectedEof,
 } from '../index';
-import { DiagnoseSeverity } from '../../../../diagnose';
+import {
+    DiagnoseErrorType,
+    DiagnoseList,
+    DiagnoseSeverity,
+    nodeToDiagnose,
+} from '../../../../diagnose';
 import { isPrevTokenDelimiter } from './breaks';
 
-export const isCode: TokenPredicate = function (token, index, node) {
+export const isLatex: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(token, index, node)) {
         return false;
     }
@@ -22,7 +22,7 @@ export const isCode: TokenPredicate = function (token, index, node) {
     if (token.type !== TokenType.JoinableSpecial) {
         return false;
     }
-    if (!token.text.startsWith('```')) {
+    if (!token.text.startsWith('$$$')) {
         return false;
     }
 
@@ -36,11 +36,18 @@ export const isCode: TokenPredicate = function (token, index, node) {
     return true;
 };
 
-export const parseCode: TokenParser = function (tokens, index) {
+const enum LatexTarget {
+    Raw = 'raw',
+    Math = 'math',
+}
+
+export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
     const token = tokens.tokens[index];
-    if (!isCode(token, index, tokens)) {
+    if (!isLatex(token, index, tokens)) {
         return null;
     }
+
+    const diagnostic: DiagnoseList = [];
 
     const lineBreakResult = findTokenOrNull(
         tokens,
@@ -55,8 +62,9 @@ export const parseCode: TokenParser = function (tokens, index) {
         );
     }
 
-    let languageName: string | null = null;
+    let latexTarget: string = '';
     for (let i = index + 1; i < lineBreakResult.index; ++i) {
+        // TODO: encapsulate
         const token = tokens.tokens[i];
         if (
             [
@@ -68,14 +76,14 @@ export const parseCode: TokenParser = function (tokens, index) {
             break;
         }
 
-        languageName ??= '';
-        languageName += token.text;
+        latexTarget ??= '';
+        latexTarget += token.text;
     }
 
     const endTokenResult = findTokenOrNull(
         tokens,
         lineBreakResult.index + 1,
-        isCode,
+        isLatex,
     );
     if (!endTokenResult) {
         return unexpectedEof(
@@ -100,24 +108,40 @@ export const parseCode: TokenParser = function (tokens, index) {
     }
 
     const endToken = endTokenResult.token;
+    const latexNode: LatexNode | FormulaNode = {
+        type:
+            latexTarget === LatexTarget.Raw ? NodeType.Latex : NodeType.Formula,
+        pos: {
+            start: token.pos,
+            end: endToken.pos + endToken.text.length,
+        },
+        text: tokens.tokens
+            .slice(lineBreakResult.index + 1, lineBreakEndResult.index)
+            .map(v => v.text)
+            .join(''),
+        parent: tokens.parent,
+    };
+
+    if (
+        ([LatexTarget.Math, LatexTarget.Raw] as string[]).indexOf(
+            latexTarget,
+        ) === -1
+    ) {
+        diagnostic.push(
+            nodeToDiagnose(
+                latexNode,
+                DiagnoseSeverity.Warning,
+                DiagnoseErrorType.ApplyParserError,
+                'Expected target (label) should be ' +
+                    `"${LatexTarget.Math}" or "${LatexTarget.Raw}". ` +
+                    `Using default value: "${LatexTarget.Math}"`,
+            ),
+        );
+    }
+
     return {
-        nodes: [
-            {
-                type: NodeType.Code,
-                pos: {
-                    start: token.pos,
-                    end: endToken.pos + endToken.text.length,
-                },
-                text: tokens.tokens
-                    .slice(lineBreakResult.index + 1, lineBreakEndResult.index)
-                    .map(v => v.text)
-                    .join(''),
-                parent: tokens.parent,
-                lang: languageName,
-                codeBlockStyle: null,
-            } as CodeNode,
-        ],
+        nodes: [latexNode],
         index: endTokenResult.index + 1,
-        diagnostic: [],
+        diagnostic: diagnostic,
     };
 };
