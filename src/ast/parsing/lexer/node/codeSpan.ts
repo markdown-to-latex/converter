@@ -2,7 +2,7 @@ import {TokenParser, TokenPredicate,} from '../struct';
 import {TokenType} from '../../tokenizer';
 import {CodeNode, CodeSpanNode, NodeType} from '../../../node';
 import {findTokenClosingBracket, findTokenOrNull, findTokenOrNullBackward, unexpectedEof,} from '../index';
-import {isParagraphBreak} from "./paragraph";
+import {isParagraphBreak} from "./breaks";
 
 export const isCodeSpan: TokenPredicate = function (token, index, node) {
     if (token.type !== TokenType.JoinableSpecial) {

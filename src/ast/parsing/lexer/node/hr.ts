@@ -1,5 +1,5 @@
 import { TokenParser, TokenPredicate } from "../struct";
-import { isPrevTokenDelimiter } from "./paragraph";
+import { isPrevTokenDelimiter } from "./breaks";
 import { TokenType } from "../../tokenizer";
 import { HrNode, NodeType } from "../../../node";
 

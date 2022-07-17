@@ -1,20 +1,23 @@
-import { TokenParser, TokenPredicate } from '../struct';
-import { Token, TokenType } from '../../tokenizer';
-import {
-    ImageNode,
-    Node,
-    NodeType,
-    RawNodeType,
-    TextNode,
-} from '../../../node';
-import { applyVisitors } from '../index';
+import {TokenParser, TokenPredicate} from '../struct';
+import {Token, TokenType} from '../../tokenizer';
+import {ImageNode, Node, NodeType, TextNode} from '../../../node';
 import {
     DiagnoseErrorType,
     DiagnoseList,
     DiagnoseSeverity,
     nodesToDiagnose,
 } from '../../../../diagnose';
-import { getMacroArgs, getMacroLabel } from './macros';
+import {
+    getMacroArgs,
+    getMacroLabel,
+    parseMacroKeyArgs,
+    parseMacroPosArgs,
+} from './macros';
+import {
+    ArgInfo,
+    ArgInfoType,
+    parseMacrosArguments,
+} from '../../../../macros/args';
 
 export const isImage: TokenPredicate = function (token, index, node) {
     if (!(token.type === TokenType.SeparatedSpecial && token.text === '!')) {
@@ -28,153 +31,26 @@ export const isImage: TokenPredicate = function (token, index, node) {
     );
 };
 
-interface ConvertMetricResult {
-    result?: string;
-    diagnostic: DiagnoseList;
-}
-
-function convertMetric(nodes: Node[]): ConvertMetricResult {
-    // nodes = nodes
-    //     .filter(
-    //         n =>
-    //             n.type !== NodeType.Text ||
-    //             (n as TextNode).text.trim().length !== 0,
-    //     )
-    //     .flatMap(n => (n.type === RawNodeType.SoftBreak ? [] : [n]));
-
-    if (nodes.length === 0) {
-        return {
-            diagnostic: [],
-        };
-    }
-
-    if (!(nodes.length === 1 && nodes[0].type === NodeType.Text)) {
-        return {
-            diagnostic: [
-                nodesToDiagnose(
-                    nodes,
-                    DiagnoseSeverity.Error,
-                    DiagnoseErrorType.ApplyParserError,
-                    'Metric argument must be a text without spaces',
-                ),
-            ],
-        };
-    }
-
-    const textNode = nodes[0] as TextNode;
-    return {
-        result: textNode.text,
-        diagnostic: [],
-    };
-}
-
-interface ParseImageArgumentsResult {
-    result: {
-        width?: string;
-        height?: string;
-        name?: Node[];
-    };
-    diagnostic: DiagnoseList;
-}
-
-function parseImageArguments(
-    posArgs: Node[][],
-    keyArgs: Record<string, Node[]>,
-): ParseImageArgumentsResult {
-    const diagnostic: DiagnoseList = [];
-    const result: ParseImageArgumentsResult['result'] = {};
-
-    if (posArgs[0]) {
-        // Name
-
-        result.name = posArgs[0];
-        // TODO: encapsulate
-    }
-    if (posArgs[1]) {
-        // Width
-
-        const metric = convertMetric(posArgs[1]);
-        diagnostic.push(...metric.diagnostic);
-        result.width = metric.result;
-    }
-    if (posArgs[2]) {
-        // Height
-
-        const metric = convertMetric(posArgs[2]);
-        diagnostic.push(...metric.diagnostic);
-        result.height = metric.result;
-    }
-
-    if (posArgs.length > 3) {
-        for (let i = 3; i < posArgs.length; ++i) {
-            diagnostic.push(
-                nodesToDiagnose(
-                    posArgs[i],
-                    DiagnoseSeverity.Error,
-                    DiagnoseErrorType.ApplyParserError,
-                    `Unexpected positional image argument ${i}`,
-                ),
-            );
-        }
-    }
-
-    const keys: string[] = Object.keys(keyArgs);
-    if (!result.name) {
-        const nameKeyNames = ['n', 'name'];
-        for (const name of nameKeyNames) {
-            const index = keys.indexOf(name);
-            if (index !== -1) {
-                keys.splice(index, 1);
-                result.name = keyArgs[name];
-                break;
-            }
-        }
-
-        // TODO: encapsulate
-    }
-    if (!result.width) {
-        const nameKeyNames = ['w', 'width'];
-        for (const name of nameKeyNames) {
-            const index = keys.indexOf(name);
-            if (index !== -1) {
-                keys.splice(index, 1);
-                const metric = convertMetric(keyArgs[name]);
-                diagnostic.push(...metric.diagnostic);
-                result.width = metric.result;
-                break;
-            }
-        }
-    }
-    if (!result.height) {
-        const nameKeyNames = ['h', 'height'];
-        for (const name of nameKeyNames) {
-            const index = keys.indexOf(name);
-            if (index !== -1) {
-                keys.splice(index, 1);
-                const metric = convertMetric(keyArgs[name]);
-                diagnostic.push(...metric.diagnostic);
-                result.height = metric.result;
-                break;
-            }
-        }
-    }
-
-    for (const key of keys) {
-        diagnostic.push(
-            nodesToDiagnose(
-                keyArgs[key],
-                DiagnoseSeverity.Error,
-                DiagnoseErrorType.ApplyParserError,
-                `Unexpected key image argument ${key}`,
-            ),
-        );
-    }
-
-    return {
-        result,
-        diagnostic,
-    };
-}
+const argInfo: ArgInfo[] = [
+    {
+        name: 'name',
+        type: ArgInfoType.NodeArray,
+        optional: true,
+        aliases: ['n'],
+    },
+    {
+        name: 'width',
+        type: ArgInfoType.Text,
+        optional: true,
+        aliases: ['w'],
+    },
+    {
+        name: 'height',
+        type: ArgInfoType.Text,
+        optional: true,
+        aliases: ['h'],
+    },
+];
 
 export const parseImage: TokenParser = function (tokens, index) {
     const token = tokens.tokens[index];
@@ -200,24 +76,34 @@ export const parseImage: TokenParser = function (tokens, index) {
     }
     const imageUrl = macroArgsResult.posArgs.splice(0, 1)[0];
 
-    const parsePosArgs: Node[][] = macroArgsResult.posArgs.map(n => {
-        const result = applyVisitors([n]);
-        diagnostic.push(...result.diagnostic);
-        return result.nodes;
-    });
-    const parseKeyArgs: Record<string, Node[]> = Object.fromEntries(
-        Object.entries(macroArgsResult.keyArgs).map(([k, v]) => {
-            const result = applyVisitors([v]);
-            diagnostic.push(...result.diagnostic);
+    const parsePosArgsResult = parseMacroPosArgs(macroArgsResult.posArgs);
+    diagnostic.push(...parsePosArgsResult.diagnostic);
 
-            return [k, result.nodes];
-        }),
-    );
-
-    const imageInfo = parseImageArguments(parsePosArgs, parseKeyArgs);
-    diagnostic.push(...imageInfo.diagnostic);
+    const parseKeyArgsResult = parseMacroKeyArgs(macroArgsResult.keyArgs);
+    diagnostic.push(...parseKeyArgsResult.diagnostic);
 
     const endToken = tokens.tokens[macroArgsResult.index - 1];
+    const argParsingResult = parseMacrosArguments(
+        {
+            // Ephimeral node
+            type: NodeType.OpCode,
+            pos: {
+                start: token.pos,
+                end: endToken.pos + endToken.text.length,
+            },
+            posArgs: parsePosArgsResult.result,
+            keyArgs: parseKeyArgsResult.result,
+            parent: tokens.parent,
+        },
+        argInfo,
+    );
+    diagnostic.push(...argParsingResult.diagnostic);
+    const argsResult = argParsingResult.result as {
+        name?: Node[];
+        width?: string;
+        height?: string;
+    };
+
     const imageNode: ImageNode = {
         type: NodeType.Image,
         pos: {
@@ -227,10 +113,10 @@ export const parseImage: TokenParser = function (tokens, index) {
         parent: tokens.parent,
         text: label,
         href: imageUrl.text,
-        ...imageInfo.result,
+        ...argsResult,
     };
 
-    imageInfo.result.name?.forEach(v => (v.parent = imageNode));
+    argsResult.name?.forEach(v => (v.parent = imageNode));
 
     return {
         nodes: [imageNode],

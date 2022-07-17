@@ -3,7 +3,7 @@ import {Token, TokenType} from '../../tokenizer';
 import {applyVisitors, findTokenOrNull, sliceTokenText,} from '../index';
 import {HeadingNode, NodeType, RawNodeType, TokensNode} from "../../../node";
 import {DiagnoseList} from "../../../../diagnose";
-import {isPrevTokenDelimiter} from "./paragraph";
+import {isPrevTokenDelimiter} from "./breaks";
 
 export const isHeading: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(node.tokens[index], index, node)) {

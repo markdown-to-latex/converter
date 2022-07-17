@@ -3,7 +3,7 @@ import { Token, TokenType } from "../../tokenizer";
 import { ListItemNode, ListNode, NodeType, RawNodeType, TokensNode } from "../../../node";
 import { applyVisitors, findTokenOrNull, sliceTokenText } from "../index";
 import { DiagnoseList } from "../../../../diagnose";
-import { isPrevTokenDelimiter } from "./paragraph";
+import { isPrevTokenDelimiter } from "./breaks";
 
 export interface IsListItemResult {
     result: boolean;

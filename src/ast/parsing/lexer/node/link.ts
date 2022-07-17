@@ -65,7 +65,6 @@ export const parseLink: TokenParser = function (tokens, index) {
         children: [
             childNode,
         ],
-        title: '',
         href: tokens.tokens
             .slice(argOpenBracketIndex + 1, argCloseBracketResult.index)
             .map(v => v.text)

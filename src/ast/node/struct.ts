@@ -1,53 +1,55 @@
-import { StartEndPosition } from "./position";
-import { Token } from "../parsing/tokenizer";
+import { StartEndPosition } from './position';
+import { Token } from '../parsing/tokenizer';
 
 export const enum RawNodeType {
-    Raw = "Raw",
-    Tokens = "Tokens",
-    SoftBreak = "SoftBreak", // One \n
-    ParagraphBreak = "ParagraphBreak", // Multiple \n
-    TextBreak = "TextBreak", // Two spaces and one \n
+    Raw = 'Raw',
+    Tokens = 'Tokens',
+    SoftBreak = 'SoftBreak', // One \n
+    ParagraphBreak = 'ParagraphBreak', // Multiple \n
+    TextBreak = 'TextBreak', // Two spaces and one \n
 }
 
 export const enum NodeType {
     // From marked
-    Space = "Space",
-    Code = "Code",
-    Heading = "Heading",
-    Table = "Table",
-    Blockquote = "Blockquote",
-    List = "List",
-    ListItem = "ListItem",
-    Paragraph = "Paragraph",
-    Html = "HTML",
-    Def = "Def",
-    Escape = "Escape",
-    Text = "Text",
-    Link = "Link",
-    Image = "Image",
-    Strong = "Strong",
-    Em = "Em",      // italic
-    Hr = "Hr",
-    CodeSpan = "CodeSpan",
-    Br = "Br",
-    Del = "Del",
+    Space = 'Space',
+    Code = 'Code',
+    Heading = 'Heading',
+    Table = 'Table',
+    Blockquote = 'Blockquote',
+    List = 'List',
+    ListItem = 'ListItem',
+    Paragraph = 'Paragraph',
+    Html = 'HTML',
+    Def = 'Def',
+    Escape = 'Escape',
+    Text = 'Text',
+    Link = 'Link',
+    Image = 'Image',
+    Strong = 'Strong',
+    Em = 'Em', // italic
+    Hr = 'Hr',
+    CodeSpan = 'CodeSpan',
+    Br = 'Br',
+    Del = 'Del',
 
     // Custom
-    File = "File",
-    TableCell = "TableCell",
-    TableRow = "TableRow",
-    OpCode = "OpCode",
-    InlineLatex = "InlineLatex",
-    CodeLatex = "CodeLatex",
-    MathLatex = "MathLatex",
-    MathInlineLatex = "MathInlineLatex",
+    File = 'File',
+    TableCell = 'TableCell',
+    TableRow = 'TableRow',
+    OpCode = 'OpCode',
+    InlineLatex = 'InlineLatex',
+    CodeLatex = 'CodeLatex',
+    MathLatex = 'MathLatex',
+    MathInlineLatex = 'MathInlineLatex',
+
+    Comment = 'Comment',
 }
 
 export const enum NodeTableAlign {
-    Default = "Default",
-    Left = "Left",
-    Right = "Right",
-    Center = "Center",
+    Default = 'Default',
+    Left = 'Left',
+    Right = 'Right',
+    Center = 'Center',
 }
 
 export type StartEndNumberPosition = StartEndPosition<number>;
@@ -68,6 +70,11 @@ export interface NodeText {
 
 export interface NodeHref {
     href: string;
+}
+
+export interface NodeArgs {
+    posArgs: Node[][];
+    keyArgs: Record<string, Node[]>;
 }
 
 export interface RawNode extends Node, NodeText {
@@ -97,7 +104,7 @@ export interface SpaceNode extends Node {
 
 export interface CodeNode extends Node, NodeText {
     type: NodeType.Code;
-    codeBlockStyle: "indented" | null;
+    codeBlockStyle: 'indented' | null;
     lang: string | null;
 }
 
@@ -120,7 +127,7 @@ export interface BlockquoteNode extends Node, NodeChildren {
 export interface ListNode extends Node, NodeChildren {
     type: NodeType.List;
     ordered: boolean;
-    start: number | "";
+    start: number | '';
     loose: boolean;
 }
 
@@ -157,7 +164,6 @@ export interface TextNode extends Node, NodeChildren, NodeText {
 
 export interface LinkNode extends Node, NodeHref, NodeChildren {
     type: NodeType.Link;
-    title: string;
 }
 
 export interface ImageNode extends Node, NodeHref, NodeText {
@@ -206,12 +212,10 @@ export interface TableRowNode extends Node, NodeChildren {
     children: TableCellNode[];
 }
 
-export interface OpCodeNode extends Node {
+export interface OpCodeNode extends Node, NodeArgs {
     type: NodeType.OpCode;
     opcode: string;
     label: string | null;
-    posArgs: Node[][];
-    keyArgs: Record<string, Node[]>;
 }
 
 export interface CodeLatexNode extends Node, NodeText {
@@ -228,4 +232,8 @@ export interface MathLatexNode extends Node, NodeText {
 
 export interface MathInlineLatexNode extends Node, NodeText {
     type: NodeType.MathInlineLatex;
+}
+
+export interface CommentNode extends Node {
+    type: NodeType.Comment;
 }

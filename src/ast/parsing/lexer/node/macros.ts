@@ -207,6 +207,46 @@ export function getMacroArgs(
     };
 }
 
+export interface ParseArgsResult<T> {
+    result: T;
+    diagnostic: DiagnoseList;
+}
+
+export function parseMacroPosArgs(
+    posArgs: TokensNode[],
+): ParseArgsResult<Node[][]> {
+    const diagnostic: DiagnoseList = [];
+    const result = posArgs.map(n => {
+        const result = applyVisitors([n]);
+        diagnostic.push(...result.diagnostic);
+        return result.nodes;
+    });
+
+    return {
+        result,
+        diagnostic,
+    };
+}
+
+export function parseMacroKeyArgs(
+    keyArgs: Record<string, TokensNode>,
+): ParseArgsResult<Record<string, Node[]>> {
+    const diagnostic: DiagnoseList = [];
+    const result = Object.fromEntries(
+        Object.entries(keyArgs).map(([k, v]) => {
+            const result = applyVisitors([v]);
+            diagnostic.push(...result.diagnostic);
+
+            return [k, result.nodes];
+        }),
+    );
+
+    return {
+        result,
+        diagnostic,
+    };
+}
+
 export const parseMacro: TokenParser = function (tokens, index) {
     const token = tokens.tokens[index];
     if (!isMacro(token, index, tokens)) {
@@ -224,19 +264,11 @@ export const parseMacro: TokenParser = function (tokens, index) {
     const macroArgsResult = getMacroArgs(tokens, labelResult.index);
     diagnostic.push(...macroArgsResult.diagnostic);
 
-    const parsePosArgs: Node[][] = macroArgsResult.posArgs.map(n => {
-        const result = applyVisitors([n]);
-        diagnostic.push(...result.diagnostic);
-        return result.nodes;
-    });
-    const parseKeyArgs: Record<string, Node[]> = Object.fromEntries(
-        Object.entries(macroArgsResult.keyArgs).map(([k, v]) => {
-            const result = applyVisitors([v]);
-            diagnostic.push(...result.diagnostic);
+    const parsePosArgsResult = parseMacroPosArgs(macroArgsResult.posArgs);
+    diagnostic.push(...parsePosArgsResult.diagnostic);
 
-            return [k, result.nodes];
-        }),
-    );
+    const parseKeyArgsResult = parseMacroKeyArgs(macroArgsResult.keyArgs);
+    diagnostic.push(...parseKeyArgsResult.diagnostic);
 
     const endToken = tokens.tokens[macroArgsResult.index - 1];
     const macrosNode: OpCodeNode = {
@@ -245,15 +277,17 @@ export const parseMacro: TokenParser = function (tokens, index) {
             start: token.pos,
             end: endToken.pos + endToken.text.length,
         },
-        posArgs: parsePosArgs,
-        keyArgs: parseKeyArgs,
+        posArgs: parsePosArgsResult.result,
+        keyArgs: parseKeyArgsResult.result,
         parent: tokens.parent,
         label,
         opcode: name,
     };
 
-    parsePosArgs.forEach(v => v.forEach(v => (v.parent = macrosNode)));
-    Object.values(parseKeyArgs).forEach(v =>
+    parsePosArgsResult.result.forEach(v =>
+        v.forEach(v => (v.parent = macrosNode)),
+    );
+    Object.values(parseKeyArgsResult.result).forEach(v =>
         v.forEach(v => (v.parent = macrosNode)),
     );
 

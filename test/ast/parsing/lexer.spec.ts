@@ -7,12 +7,13 @@ import {
     ListNode,
     NodeType,
     OpCodeNode,
+    ParagraphNode,
     RawNode,
     RawNodeType,
     TableNode,
 } from '../../../src/ast/node';
-import { fullContentPos } from '../../../src/ast/parsing';
-import { applyVisitors } from '../../../src/ast/parsing/lexer';
+import {fullContentPos} from '../../../src/ast/parsing';
+import {applyVisitors} from '../../../src/ast/parsing/lexer';
 
 function rawNodeTemplate(content: string): RawNode {
     const fileNode: FileNode = {
@@ -49,7 +50,7 @@ Code block
 \`\`\`
 New sample text
 `);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
 
         let node = nodes[1] as CodeNode;
@@ -70,7 +71,7 @@ Code block
 \`\`\`
 New sample text
 `);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[1] as CodeNode;
         expect(node).not.toBeUndefined();
@@ -84,7 +85,7 @@ New sample text
 Code block
 New sample text
 `);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(1);
         expect(diagnostic).toMatchSnapshot();
     });
@@ -93,23 +94,24 @@ New sample text
 describe('link check', () => {
     test('Simple Link in text', () => {
         const rawNode = rawNodeTemplate('Hello [ti t le](li-nk) text');
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        let node = nodes[1] as LinkNode;
+        let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
-        expect(node.type).toEqual(NodeType.Link);
+        expect(node.children[1].type).toEqual(NodeType.Link);
 
         expect(nodes).toMatchSnapshot();
     });
 
     test('Link with inner md in text', () => {
         const rawNode = rawNodeTemplate('Hello [ti \n`co][de` le](li-nk) text');
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        let node = nodes[1] as LinkNode;
+        let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
-        expect(node.type).toEqual(NodeType.Link);
-        let codeSpan = node.children[1] as CodeSpanNode;
+        const linkNode = node.children[1] as LinkNode;
+        expect(linkNode.type).toEqual(NodeType.Link);
+        let codeSpan = linkNode.children[1] as CodeSpanNode;
         expect(codeSpan).not.toBeUndefined();
         expect(codeSpan.type).toEqual(NodeType.CodeSpan);
 
@@ -122,22 +124,22 @@ describe('macros parsing', () => {
         const rawNode = rawNodeTemplate(
             '!Macro[label-text](pos arg 1)(`pos arg` 2)(@keyArgName argName)',
         );
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        let node = nodes[0] as OpCodeNode;
+        let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
-        expect(node.type).toEqual(NodeType.OpCode);
+        expect(node.children[0].type).toEqual(NodeType.OpCode);
 
         expect(nodes).toMatchSnapshot();
     });
 
     test('Key is defined wrongly', () => {
         const rawNode = rawNodeTemplate('!Macro(@key)(@)');
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        let node = nodes[0] as OpCodeNode;
+        let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
-        expect(node.type).toEqual(NodeType.OpCode);
+        expect(node.children[0].type).toEqual(NodeType.OpCode);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -146,7 +148,7 @@ describe('macros parsing', () => {
         const rawNode = rawNodeTemplate(
             '!Macro(@key value)(@key another value)',
         );
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(1);
 
         const errText = rawNode.text.slice(
@@ -160,11 +162,11 @@ describe('macros parsing', () => {
         const rawNode = rawNodeTemplate(
             '!Macro[(@key ]value)(@key another value)',
         );
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        let node = nodes[0] as OpCodeNode;
+        let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
-        expect(node.type).toEqual(NodeType.OpCode);
+        expect(node.children[0].type).toEqual(NodeType.OpCode);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -176,7 +178,7 @@ describe('table parsing', () => {
 | -------- | -------- |
 | Value **1** | Value \`2\` |
 |Value [with](link) | |`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as TableNode;
         expect(node).not.toBeUndefined();
@@ -191,7 +193,7 @@ describe('List parsing', () => {
         const rawNode = rawNodeTemplate(`1. Text 1
 2. Text \`2\`
 3. **Text** 3`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ListNode;
         expect(node).not.toBeUndefined();
@@ -206,7 +208,7 @@ Additional text 1
 2. Text \`2\`
 3. **Text** 3
    Additional text 3`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ListNode;
         expect(node).not.toBeUndefined();
@@ -224,7 +226,7 @@ Additional text 1
     * Conclusion
 4. Text \`2\`
 5. **Text** 3`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         let node = nodes[0] as ListNode;
         expect(node).not.toBeUndefined();
@@ -239,11 +241,13 @@ Additional text 1
 Text`);
 
         // TODO: wrong
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(2);
         expect(nodes[0].type).toEqual(NodeType.List);
-        expect(nodes[1].type).toEqual(NodeType.Text);
+        const paragraphNode = nodes[1] as ParagraphNode;
+        expect(paragraphNode.type).toEqual(NodeType.Paragraph);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -255,7 +259,7 @@ describe('Heading parsing', () => {
 ## Header \`2\`
 ### Header 3
 #### Header 4`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         for (const absNode of nodes) {
             let node = absNode as HeadingNode;
@@ -270,7 +274,7 @@ describe('Heading parsing', () => {
         const rawNode = rawNodeTemplate(`# Header 1
 
 Text`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
 
         expect(nodes).toMatchSnapshot();
@@ -283,11 +287,13 @@ describe('Blockquote parsing', () => {
 > Line 2
 > Line 3
 Text`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(2);
         expect(nodes[0].type).toEqual(NodeType.Blockquote);
-        expect(nodes[1].type).toEqual(NodeType.Text);
+        const paragraphNode = nodes[1] as ParagraphNode;
+        expect(paragraphNode.type).toEqual(NodeType.Paragraph);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -298,7 +304,7 @@ describe('Hr parsing', function () {
         const rawNode = rawNodeTemplate(`
 -----
 `);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(1);
         expect(nodes[0].type).toEqual(NodeType.Hr);
@@ -312,12 +318,12 @@ Text 1
 -----
 Text 2
 `);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(3);
-        expect(nodes[0].type).toEqual(NodeType.Text);
+        expect(nodes[0].type).toEqual(NodeType.Paragraph);
         expect(nodes[1].type).toEqual(NodeType.Hr);
-        expect(nodes[2].type).toEqual(NodeType.Text);
+        expect(nodes[2].type).toEqual(NodeType.Paragraph);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -326,10 +332,11 @@ Text 2
 describe('Image parsing', () => {
     test('Markdown-like image', () => {
         const rawNode = rawNodeTemplate('![image-label](../../image.png)');
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        expect(nodes).toHaveLength(1);
-        expect(nodes[0].type).toEqual(NodeType.Image);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(1);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Image);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -340,10 +347,11 @@ describe('Image parsing', () => {
 )(
     14cm
 )`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        expect(nodes).toHaveLength(1);
-        expect(nodes[0].type).toEqual(NodeType.Image);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(1);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Image);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -354,7 +362,7 @@ describe('Image parsing', () => {
 )(@name 
     Another name
 )`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(1);
         expect(diagnostic).toMatchSnapshot();
     });
@@ -363,24 +371,26 @@ describe('Image parsing', () => {
 describe('Em parsing', () => {
     test('Em in text', () => {
         const rawNode = rawNodeTemplate(`Text with *em text*-text`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        expect(nodes).toHaveLength(3);
-        expect(nodes[0].type).toEqual(NodeType.Text);
-        expect(nodes[1].type).toEqual(NodeType.Em);
-        expect(nodes[2].type).toEqual(NodeType.Text);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(3);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[1].type).toEqual(NodeType.Em);
+        expect(paragraphNode.children[2].type).toEqual(NodeType.Text);
 
         expect(nodes).toMatchSnapshot();
     });
 
     test('Em in text with sub-node', () => {
         const rawNode = rawNodeTemplate(`Text with *em\`code\` text*-text`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        expect(nodes).toHaveLength(3);
-        expect(nodes[0].type).toEqual(NodeType.Text);
-        expect(nodes[1].type).toEqual(NodeType.Em);
-        expect(nodes[2].type).toEqual(NodeType.Text);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(3);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[1].type).toEqual(NodeType.Em);
+        expect(paragraphNode.children[2].type).toEqual(NodeType.Text);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -389,12 +399,13 @@ describe('Em parsing', () => {
 describe('Strong parsing', () => {
     test('Simple strong', () => {
         const rawNode = rawNodeTemplate(`Text with **strong text**-text`);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        expect(nodes).toHaveLength(3);
-        expect(nodes[0].type).toEqual(NodeType.Text);
-        expect(nodes[1].type).toEqual(NodeType.Strong);
-        expect(nodes[2].type).toEqual(NodeType.Text);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(3);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[1].type).toEqual(NodeType.Strong);
+        expect(paragraphNode.children[2].type).toEqual(NodeType.Text);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -403,14 +414,45 @@ describe('Strong parsing', () => {
         const rawNode = rawNodeTemplate(
             `Text *em **strong** text* with **strong *em* text**-text`,
         );
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
-        expect(nodes).toHaveLength(5);
-        expect(nodes[0].type).toEqual(NodeType.Text);
-        expect(nodes[1].type).toEqual(NodeType.Em);
-        expect(nodes[2].type).toEqual(NodeType.Text);
-        expect(nodes[3].type).toEqual(NodeType.Strong);
-        expect(nodes[4].type).toEqual(NodeType.Text);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(5);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[1].type).toEqual(NodeType.Em);
+        expect(paragraphNode.children[2].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[3].type).toEqual(NodeType.Strong);
+        expect(paragraphNode.children[4].type).toEqual(NodeType.Text);
+
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
+describe('Paragraph parsing', () => {
+    test('Complex', () => {
+        const rawNode = rawNodeTemplate(`## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text`);
+        const {nodes, diagnostic} = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(7);
+        expect(nodes[0].type).toEqual(NodeType.Heading);
+        expect(nodes[1].type).toEqual(NodeType.Paragraph);
+        expect(nodes[2].type).toEqual(NodeType.Paragraph);
+        expect(nodes[3].type).toEqual(NodeType.List);
+        expect(nodes[4].type).toEqual(NodeType.Hr);
+        expect(nodes[5].type).toEqual(NodeType.Heading);
+        expect(nodes[6].type).toEqual(NodeType.Paragraph);
 
         expect(nodes).toMatchSnapshot();
     });

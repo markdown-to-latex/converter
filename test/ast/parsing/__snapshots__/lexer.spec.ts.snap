@@ -69,7 +69,18 @@ Text",
     "type": "Blockquote",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 31,
+          "start": 27,
+        },
+        "text": "Text",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -101,8 +112,7 @@ Text",
       "end": 31,
       "start": 27,
     },
-    "text": "Text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -110,77 +120,48 @@ Text",
 exports[`Em parsing Em in text 1`] = `
 Array [
   Object {
-    "children": Array [],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 24,
-            "start": 0,
-          },
-          "text": "Text with *em text*-text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 24,
-        "start": 0,
-      },
-      "raw": "Text with *em text*-text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 10,
-      "start": 0,
-    },
-    "text": "Text with ",
-    "type": "Text",
-  },
-  Object {
     "children": Array [
       Object {
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 18,
-          "start": 11,
+          "end": 10,
+          "start": 0,
         },
-        "text": "em text",
+        "text": "Text with ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 18,
+              "start": 11,
+            },
+            "text": "em text",
+            "type": "Text",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 19,
+          "start": 10,
+        },
+        "type": "Em",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 24,
+          "start": 19,
+        },
+        "text": "-text",
         "type": "Text",
       },
     ],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 24,
-            "start": 0,
-          },
-          "text": "Text with *em text*-text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 24,
-        "start": 0,
-      },
-      "raw": "Text with *em text*-text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 19,
-      "start": 10,
-    },
-    "type": "Em",
-  },
-  Object {
-    "children": Array [],
     "parent": Object {
       "children": Array [
         Object {
@@ -204,10 +185,9 @@ Array [
     },
     "pos": Object {
       "end": 24,
-      "start": 19,
+      "start": 0,
     },
-    "text": "-text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -215,64 +195,64 @@ Array [
 exports[`Em parsing Em in text with sub-node 1`] = `
 Array [
   Object {
-    "children": Array [],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 30,
-            "start": 0,
-          },
-          "text": "Text with *em\`code\` text*-text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 30,
-        "start": 0,
-      },
-      "raw": "Text with *em\`code\` text*-text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 10,
-      "start": 0,
-    },
-    "text": "Text with ",
-    "type": "Text",
-  },
-  Object {
     "children": Array [
       Object {
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 13,
-          "start": 11,
+          "end": 10,
+          "start": 0,
         },
-        "text": "em",
+        "text": "Text with ",
         "type": "Text",
       },
       Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 13,
+              "start": 11,
+            },
+            "text": "em",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 19,
+              "start": 13,
+            },
+            "text": "code",
+            "type": "CodeSpan",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 24,
+              "start": 19,
+            },
+            "text": " text",
+            "type": "Text",
+          },
+        ],
         "parent": [Circular],
         "pos": Object {
-          "end": 19,
-          "start": 13,
+          "end": 25,
+          "start": 10,
         },
-        "text": "code",
-        "type": "CodeSpan",
+        "type": "Em",
       },
       Object {
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 24,
-          "start": 19,
+          "end": 30,
+          "start": 25,
         },
-        "text": " text",
+        "text": "-text",
         "type": "Text",
       },
     ],
@@ -298,40 +278,10 @@ Array [
       "type": "File",
     },
     "pos": Object {
-      "end": 25,
-      "start": 10,
-    },
-    "type": "Em",
-  },
-  Object {
-    "children": Array [],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 30,
-            "start": 0,
-          },
-          "text": "Text with *em\`code\` text*-text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 30,
-        "start": 0,
-      },
-      "raw": "Text with *em\`code\` text*-text",
-      "type": "File",
-    },
-    "pos": Object {
       "end": 30,
-      "start": 25,
+      "start": 0,
     },
-    "text": "-text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -384,7 +334,18 @@ Text",
     "type": "Heading",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 16,
+          "start": 12,
+        },
+        "text": "Text",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -414,8 +375,7 @@ Text",
       "end": 16,
       "start": 12,
     },
-    "text": "Text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -662,7 +622,18 @@ Array [
 exports[`Hr parsing HR with text 1`] = `
 Array [
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 7,
+          "start": 1,
+        },
+        "text": "Text 1",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -696,8 +667,7 @@ Text 2
       "end": 7,
       "start": 1,
     },
-    "text": "Text 1",
-    "type": "Text",
+    "type": "Paragraph",
   },
   Object {
     "parent": Object {
@@ -736,7 +706,18 @@ Text 2
     "type": "Hr",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 20,
+          "start": 14,
+        },
+        "text": "Text 2",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -770,8 +751,7 @@ Text 2
       "end": 20,
       "start": 14,
     },
-    "text": "Text 2",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -779,17 +759,29 @@ Text 2
 exports[`Image parsing Extended image 1`] = `
 Array [
   Object {
-    "href": "../../image.png",
-    "name": Array [
+    "children": Array [
       Object {
-        "children": Array [],
+        "href": "../../image.png",
+        "name": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 47,
+              "start": 37,
+            },
+            "text": "Image Name",
+            "type": "Text",
+          },
+        ],
         "parent": [Circular],
         "pos": Object {
-          "end": 47,
-          "start": 37,
+          "end": 61,
+          "start": 0,
         },
-        "text": "Image Name",
-        "type": "Text",
+        "text": "image-label",
+        "type": "Image",
+        "width": "14cm",
       },
     ],
     "parent": Object {
@@ -825,9 +817,7 @@ Array [
       "end": 61,
       "start": 0,
     },
-    "text": "image-label",
-    "type": "Image",
-    "width": "14cm",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -837,7 +827,7 @@ Array [
   Object {
     "errorType": 0,
     "filePath": "null",
-    "message": "Unexpected key image argument name",
+    "message": "Argument name specified twice",
     "pos": Object {
       "end": Object {
         "absolute": 73,
@@ -850,7 +840,7 @@ Array [
         "line": 1,
       },
     },
-    "severity": "ERROR",
+    "severity": "WARNING",
   },
 ]
 `;
@@ -858,7 +848,18 @@ Array [
 exports[`Image parsing Markdown-like image 1`] = `
 Array [
   Object {
-    "href": "../../image.png",
+    "children": Array [
+      Object {
+        "href": "../../image.png",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 31,
+          "start": 0,
+        },
+        "text": "image-label",
+        "type": "Image",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -884,8 +885,7 @@ Array [
       "end": 31,
       "start": 0,
     },
-    "text": "image-label",
-    "type": "Image",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -1363,7 +1363,18 @@ Text",
     "type": "List",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 15,
+          "start": 11,
+        },
+        "text": "Text",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -1393,8 +1404,7 @@ Text",
       "end": 15,
       "start": 11,
     },
-    "text": "Text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -1536,37 +1546,72 @@ Array [
 ]
 `;
 
-exports[`Strong parsing Simple strong 1`] = `
+exports[`Paragraph parsing Complex 1`] = `
 Array [
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 18,
+          "start": 3,
+        },
+        "text": "Not a paragraph",
+        "type": "Text",
+      },
+    ],
+    "depth": 2,
     "parent": Object {
       "children": Array [
         Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 30,
+            "end": 155,
             "start": 0,
           },
-          "text": "Text with **strong text**-text",
+          "text": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
           "type": "Raw",
         },
       ],
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 30,
+        "end": 155,
         "start": 0,
       },
-      "raw": "Text with **strong text**-text",
+      "raw": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
       "type": "File",
     },
     "pos": Object {
-      "end": 10,
+      "end": 18,
       "start": 0,
     },
-    "text": "Text with ",
-    "type": "Text",
+    "type": "Heading",
   },
   Object {
     "children": Array [
@@ -1574,10 +1619,58 @@ Array [
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 23,
-          "start": 12,
+          "end": 29,
+          "start": 19,
         },
-        "text": "strong text",
+        "text": "Text with ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 42,
+              "start": 31,
+            },
+            "text": "strong text",
+            "type": "Text",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 44,
+          "start": 29,
+        },
+        "type": "Strong",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 49,
+          "start": 44,
+        },
+        "text": "-text",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 51,
+          "start": 49,
+        },
+        "type": "Br",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 65,
+          "start": 52,
+        },
+        "text": "With BR break",
         "type": "Text",
       },
     ],
@@ -1586,30 +1679,464 @@ Array [
         Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 30,
+            "end": 155,
             "start": 0,
           },
-          "text": "Text with **strong text**-text",
+          "text": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
           "type": "Raw",
         },
       ],
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 30,
+        "end": 155,
         "start": 0,
       },
-      "raw": "Text with **strong text**-text",
+      "raw": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
       "type": "File",
     },
     "pos": Object {
-      "end": 25,
-      "start": 10,
+      "end": 65,
+      "start": 19,
     },
-    "type": "Strong",
+    "type": "Paragraph",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 90,
+          "start": 67,
+        },
+        "text": "New paragraph via break",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 155,
+            "start": 0,
+          },
+          "text": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 155,
+        "start": 0,
+      },
+      "raw": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 90,
+      "start": 67,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 98,
+              "start": 94,
+            },
+            "text": "List",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 100,
+              "start": 98,
+            },
+            "type": "Br",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 107,
+              "start": 101,
+            },
+            "text": "item 1",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 107,
+          "start": 91,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 122,
+              "start": 111,
+            },
+            "text": "List item 3",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 122,
+          "start": 108,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": true,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 155,
+            "start": 0,
+          },
+          "text": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 155,
+        "start": 0,
+      },
+      "raw": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 122,
+      "start": 91,
+    },
+    "start": 1,
+    "type": "List",
+  },
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 155,
+            "start": 0,
+          },
+          "text": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 155,
+        "start": 0,
+      },
+      "raw": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 128,
+      "start": 124,
+    },
+    "type": "Hr",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 150,
+          "start": 133,
+        },
+        "text": "Not a paragraph 2",
+        "type": "Text",
+      },
+    ],
+    "depth": 2,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 155,
+            "start": 0,
+          },
+          "text": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 155,
+        "start": 0,
+      },
+      "raw": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 150,
+      "start": 130,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 155,
+          "start": 151,
+        },
+        "text": "text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 155,
+            "start": 0,
+          },
+          "text": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 155,
+        "start": 0,
+      },
+      "raw": "## Not a paragraph
+Text with **strong text**-text  
+With BR break
+
+New paragraph via break
+1. List  
+item 1
+2. List item 3
+
+----
+
+## Not a paragraph 2
+text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 155,
+      "start": 151,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`Strong parsing Simple strong 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 0,
+        },
+        "text": "Text with ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 23,
+              "start": 12,
+            },
+            "text": "strong text",
+            "type": "Text",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 25,
+          "start": 10,
+        },
+        "type": "Strong",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 30,
+          "start": 25,
+        },
+        "text": "-text",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -1633,10 +2160,9 @@ Array [
     },
     "pos": Object {
       "end": 30,
-      "start": 25,
+      "start": 0,
     },
-    "text": "-text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -1644,45 +2170,15 @@ Array [
 exports[`Strong parsing Strong and strong-em 1`] = `
 Array [
   Object {
-    "children": Array [],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 56,
-            "start": 0,
-          },
-          "text": "Text *em **strong** text* with **strong *em* text**-text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 56,
-        "start": 0,
-      },
-      "raw": "Text *em **strong** text* with **strong *em* text**-text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 5,
-      "start": 0,
-    },
-    "text": "Text ",
-    "type": "Text",
-  },
-  Object {
     "children": Array [
       Object {
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 9,
-          "start": 6,
+          "end": 5,
+          "start": 0,
         },
-        "text": "em ",
+        "text": "Text ",
         "type": "Text",
       },
       Object {
@@ -1691,117 +2187,47 @@ Array [
             "children": Array [],
             "parent": [Circular],
             "pos": Object {
-              "end": 17,
-              "start": 11,
+              "end": 9,
+              "start": 6,
             },
-            "text": "strong",
+            "text": "em ",
             "type": "Text",
           },
-        ],
-        "parent": [Circular],
-        "pos": Object {
-          "end": 19,
-          "start": 9,
-        },
-        "type": "Strong",
-      },
-      Object {
-        "children": Array [],
-        "parent": [Circular],
-        "pos": Object {
-          "end": 24,
-          "start": 19,
-        },
-        "text": " text",
-        "type": "Text",
-      },
-    ],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 56,
-            "start": 0,
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 17,
+                  "start": 11,
+                },
+                "text": "strong",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 19,
+              "start": 9,
+            },
+            "type": "Strong",
           },
-          "text": "Text *em **strong** text* with **strong *em* text**-text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 56,
-        "start": 0,
-      },
-      "raw": "Text *em **strong** text* with **strong *em* text**-text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 25,
-      "start": 5,
-    },
-    "type": "Em",
-  },
-  Object {
-    "children": Array [],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 56,
-            "start": 0,
-          },
-          "text": "Text *em **strong** text* with **strong *em* text**-text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 56,
-        "start": 0,
-      },
-      "raw": "Text *em **strong** text* with **strong *em* text**-text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 31,
-      "start": 25,
-    },
-    "text": " with ",
-    "type": "Text",
-  },
-  Object {
-    "children": Array [
-      Object {
-        "children": Array [],
-        "parent": [Circular],
-        "pos": Object {
-          "end": 40,
-          "start": 33,
-        },
-        "text": "strong ",
-        "type": "Text",
-      },
-      Object {
-        "children": Array [
           Object {
             "children": Array [],
             "parent": [Circular],
             "pos": Object {
-              "end": 43,
-              "start": 41,
+              "end": 24,
+              "start": 19,
             },
-            "text": "em",
+            "text": " text",
             "type": "Text",
           },
         ],
         "parent": [Circular],
         "pos": Object {
-          "end": 44,
-          "start": 40,
+          "end": 25,
+          "start": 5,
         },
         "type": "Em",
       },
@@ -1809,42 +2235,73 @@ Array [
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 49,
-          "start": 44,
+          "end": 31,
+          "start": 25,
         },
-        "text": " text",
+        "text": " with ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 40,
+              "start": 33,
+            },
+            "text": "strong ",
+            "type": "Text",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 43,
+                  "start": 41,
+                },
+                "text": "em",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 44,
+              "start": 40,
+            },
+            "type": "Em",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 49,
+              "start": 44,
+            },
+            "text": " text",
+            "type": "Text",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 51,
+          "start": 31,
+        },
+        "type": "Strong",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 56,
+          "start": 51,
+        },
+        "text": "-text",
         "type": "Text",
       },
     ],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 56,
-            "start": 0,
-          },
-          "text": "Text *em **strong** text* with **strong *em* text**-text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 56,
-        "start": 0,
-      },
-      "raw": "Text *em **strong** text* with **strong *em* text**-text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 51,
-      "start": 31,
-    },
-    "type": "Strong",
-  },
-  Object {
-    "children": Array [],
     "parent": Object {
       "children": Array [
         Object {
@@ -1868,10 +2325,9 @@ Array [
     },
     "pos": Object {
       "end": 56,
-      "start": 51,
+      "start": 0,
     },
-    "text": "-text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -1879,7 +2335,18 @@ Array [
 exports[`code block lexer check Complex raw node 1`] = `
 Array [
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 11,
+          "start": 0,
+        },
+        "text": "Sample text",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -1915,8 +2382,7 @@ New sample text
       "end": 11,
       "start": 0,
     },
-    "text": "Sample text",
-    "type": "Text",
+    "type": "Paragraph",
   },
   Object {
     "codeBlockStyle": null,
@@ -1960,7 +2426,18 @@ New sample text
     "type": "Code",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 46,
+          "start": 31,
+        },
+        "text": "New sample text",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -1996,8 +2473,7 @@ New sample text
       "end": 46,
       "start": 31,
     },
-    "text": "New sample text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -2028,102 +2504,68 @@ Array [
 exports[`link check Link with inner md in text 1`] = `
 Array [
   Object {
-    "children": Array [],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 35,
-            "start": 0,
-          },
-          "text": "Hello [ti 
-\`co][de\` le](li-nk) text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 35,
-        "start": 0,
-      },
-      "raw": "Hello [ti 
-\`co][de\` le](li-nk) text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 6,
-      "start": 0,
-    },
-    "text": "Hello ",
-    "type": "Text",
-  },
-  Object {
     "children": Array [
       Object {
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 10,
-          "start": 7,
+          "end": 6,
+          "start": 0,
         },
-        "text": "ti ",
+        "text": "Hello ",
         "type": "Text",
       },
       Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 10,
+              "start": 7,
+            },
+            "text": "ti ",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 19,
+              "start": 11,
+            },
+            "text": "co][de",
+            "type": "CodeSpan",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 22,
+              "start": 19,
+            },
+            "text": " le",
+            "type": "Text",
+          },
+        ],
+        "href": "li-nk",
         "parent": [Circular],
         "pos": Object {
-          "end": 19,
-          "start": 11,
+          "end": 30,
+          "start": 6,
         },
-        "text": "co][de",
-        "type": "CodeSpan",
+        "type": "Link",
       },
       Object {
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 22,
-          "start": 19,
+          "end": 35,
+          "start": 30,
         },
-        "text": " le",
+        "text": " text",
         "type": "Text",
       },
     ],
-    "href": "li-nk",
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 35,
-            "start": 0,
-          },
-          "text": "Hello [ti 
-\`co][de\` le](li-nk) text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 35,
-        "start": 0,
-      },
-      "raw": "Hello [ti 
-\`co][de\` le](li-nk) text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 30,
-      "start": 6,
-    },
-    "title": "",
-    "type": "Link",
-  },
-  Object {
-    "children": Array [],
     "parent": Object {
       "children": Array [
         Object {
@@ -2149,10 +2591,9 @@ Array [
     },
     "pos": Object {
       "end": 35,
-      "start": 30,
+      "start": 0,
     },
-    "text": " text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -2160,79 +2601,49 @@ Array [
 exports[`link check Simple Link in text 1`] = `
 Array [
   Object {
-    "children": Array [],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 27,
-            "start": 0,
-          },
-          "text": "Hello [ti t le](li-nk) text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 27,
-        "start": 0,
-      },
-      "raw": "Hello [ti t le](li-nk) text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 6,
-      "start": 0,
-    },
-    "text": "Hello ",
-    "type": "Text",
-  },
-  Object {
     "children": Array [
       Object {
         "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 14,
-          "start": 7,
+          "end": 6,
+          "start": 0,
         },
-        "text": "ti t le",
+        "text": "Hello ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 14,
+              "start": 7,
+            },
+            "text": "ti t le",
+            "type": "Text",
+          },
+        ],
+        "href": "li-nk",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 22,
+          "start": 6,
+        },
+        "type": "Link",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 27,
+          "start": 22,
+        },
+        "text": " text",
         "type": "Text",
       },
     ],
-    "href": "li-nk",
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 27,
-            "start": 0,
-          },
-          "text": "Hello [ti t le](li-nk) text",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 27,
-        "start": 0,
-      },
-      "raw": "Hello [ti t le](li-nk) text",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 22,
-      "start": 6,
-    },
-    "title": "",
-    "type": "Link",
-  },
-  Object {
-    "children": Array [],
     "parent": Object {
       "children": Array [
         Object {
@@ -2256,10 +2667,9 @@ Array [
     },
     "pos": Object {
       "end": 27,
-      "start": 22,
+      "start": 0,
     },
-    "text": " text",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -2267,39 +2677,30 @@ Array [
 exports[`macros parsing Brackets mismatch 1`] = `
 Array [
   Object {
-    "keyArgs": Object {},
-    "label": "(@key ",
-    "opcode": "Macro",
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 40,
-            "start": 0,
-          },
-          "text": "!Macro[(@key ]value)(@key another value)",
-          "type": "Raw",
+    "children": Array [
+      Object {
+        "keyArgs": Object {},
+        "label": "(@key ",
+        "opcode": "Macro",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 14,
+          "start": 0,
         },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 40,
-        "start": 0,
+        "posArgs": Array [],
+        "type": "OpCode",
       },
-      "raw": "!Macro[(@key ]value)(@key another value)",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 14,
-      "start": 0,
-    },
-    "posArgs": Array [],
-    "type": "OpCode",
-  },
-  Object {
-    "children": Array [],
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 40,
+          "start": 14,
+        },
+        "text": "value)(@key another value)",
+        "type": "Text",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -2323,10 +2724,9 @@ Array [
     },
     "pos": Object {
       "end": 40,
-      "start": 14,
+      "start": 0,
     },
-    "text": "value)(@key another value)",
-    "type": "Text",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -2334,22 +2734,67 @@ Array [
 exports[`macros parsing Complex macros with name, label, pos and key args 1`] = `
 Array [
   Object {
-    "keyArgs": Object {
-      "keyArgName": Array [
-        Object {
-          "children": Array [],
-          "parent": [Circular],
-          "pos": Object {
-            "end": 62,
-            "start": 55,
-          },
-          "text": "argName",
-          "type": "Text",
+    "children": Array [
+      Object {
+        "keyArgs": Object {
+          "keyArgName": Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 62,
+                "start": 55,
+              },
+              "text": "argName",
+              "type": "Text",
+            },
+          ],
         },
-      ],
-    },
-    "label": "label-text",
-    "opcode": "Macro",
+        "label": "label-text",
+        "opcode": "Macro",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 63,
+          "start": 0,
+        },
+        "posArgs": Array [
+          Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 28,
+                "start": 19,
+              },
+              "text": "pos arg 1",
+              "type": "Text",
+            },
+          ],
+          Array [
+            Object {
+              "parent": [Circular],
+              "pos": Object {
+                "end": 39,
+                "start": 30,
+              },
+              "text": "pos arg",
+              "type": "CodeSpan",
+            },
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 41,
+                "start": 39,
+              },
+              "text": " 2",
+              "type": "Text",
+            },
+          ],
+        ],
+        "type": "OpCode",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -2375,42 +2820,7 @@ Array [
       "end": 63,
       "start": 0,
     },
-    "posArgs": Array [
-      Array [
-        Object {
-          "children": Array [],
-          "parent": [Circular],
-          "pos": Object {
-            "end": 28,
-            "start": 19,
-          },
-          "text": "pos arg 1",
-          "type": "Text",
-        },
-      ],
-      Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 39,
-            "start": 30,
-          },
-          "text": "pos arg",
-          "type": "CodeSpan",
-        },
-        Object {
-          "children": Array [],
-          "parent": [Circular],
-          "pos": Object {
-            "end": 41,
-            "start": 39,
-          },
-          "text": " 2",
-          "type": "Text",
-        },
-      ],
-    ],
-    "type": "OpCode",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -2418,9 +2828,45 @@ Array [
 exports[`macros parsing Key is defined wrongly 1`] = `
 Array [
   Object {
-    "keyArgs": Object {},
-    "label": null,
-    "opcode": "Macro",
+    "children": Array [
+      Object {
+        "keyArgs": Object {},
+        "label": null,
+        "opcode": "Macro",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 15,
+          "start": 0,
+        },
+        "posArgs": Array [
+          Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 11,
+                "start": 7,
+              },
+              "text": "@key",
+              "type": "Text",
+            },
+          ],
+          Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 14,
+                "start": 13,
+              },
+              "text": "@",
+              "type": "Text",
+            },
+          ],
+        ],
+        "type": "OpCode",
+      },
+    ],
     "parent": Object {
       "children": Array [
         Object {
@@ -2446,33 +2892,7 @@ Array [
       "end": 15,
       "start": 0,
     },
-    "posArgs": Array [
-      Array [
-        Object {
-          "children": Array [],
-          "parent": [Circular],
-          "pos": Object {
-            "end": 11,
-            "start": 7,
-          },
-          "text": "@key",
-          "type": "Text",
-        },
-      ],
-      Array [
-        Object {
-          "children": Array [],
-          "parent": [Circular],
-          "pos": Object {
-            "end": 14,
-            "start": 13,
-          },
-          "text": "@",
-          "type": "Text",
-        },
-      ],
-    ],
-    "type": "OpCode",
+    "type": "Paragraph",
   },
 ]
 `;
@@ -2727,7 +3147,6 @@ Array [
                   "end": 95,
                   "start": 83,
                 },
-                "title": "",
                 "type": "Link",
               },
             ],

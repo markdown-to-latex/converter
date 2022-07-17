@@ -38,7 +38,7 @@ export const parseStrongWithOptionalEm: TokenParser = function(tokens, index) {
         type: RawNodeType.Tokens,
         tokens: tokens.tokens.slice(index + 1, bracketResult.index),
         text: sliceTokenText(tokens, index + 1, bracketResult.index),
-        parent: null,
+        parent: strongNode,
         pos: {
             start: token.pos,
             end: bracketResult.token.pos + bracketResult.token.text.length
