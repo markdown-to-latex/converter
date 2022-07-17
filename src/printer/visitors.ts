@@ -253,12 +253,12 @@ ${node.text}
         return printNodeList(node.children, context, ' & ') + '\\\\ \\hline\n';
     },
     [NodeType.OpCode]: resolveOpCode,
-    [NodeType.CodeLatex]: node => node.text,
-    [NodeType.InlineLatex]: node => node.text,
-    [NodeType.MathLatex]: (node, context) => {
+    [NodeType.Latex]: node => node.text,
+    [NodeType.LatexSpan]: node => node.text,
+    [NodeType.Formula]: (node, context) => {
         return getLatexMath(node.text, context.config.latex);
     },
-    [NodeType.MathInlineLatex]: (node, context) => {
+    [NodeType.FormulaSpan]: (node, context) => {
         return getLatexInlineMath(
             new LatexString(node.text, context).resolveDeReplacements().s,
             context.config.latex,

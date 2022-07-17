@@ -1,0 +1,3987 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Complex File 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 31,
+          "start": 2,
+        },
+        "text": "MarkXDown - MarkDown Extended",
+        "type": "Text",
+      },
+    ],
+    "depth": 1,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 31,
+      "start": 0,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 40,
+              "start": 34,
+            },
+            "text": "Marked",
+            "type": "Text",
+          },
+        ],
+        "href": "https://github.com/markedjs/marked/",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 78,
+          "start": 33,
+        },
+        "type": "Link",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 95,
+          "start": 78,
+        },
+        "text": " lets you convert",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 105,
+              "start": 97,
+            },
+            "text": "Markdown",
+            "type": "Text",
+          },
+        ],
+        "href": "http://daringfireball.net/projects/markdown",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 151,
+          "start": 96,
+        },
+        "type": "Link",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 389,
+          "start": 151,
+        },
+        "text": " into HTML. Markdown is a simple text format whose goal is to be very easy to read and write, even when not converted to HTML. This demo page will let you type anything you like and see how it gets converted. Live. No more waiting around.",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 389,
+      "start": 33,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "codeBlockStyle": null,
+    "lang": "kotlin",
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 420,
+      "start": 391,
+    },
+    "text": "Code block here",
+    "type": "Code",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 444,
+          "start": 425,
+        },
+        "text": "How To Use The Demo",
+        "type": "Text",
+      },
+    ],
+    "depth": 2,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 444,
+      "start": 422,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 497,
+      "start": 446,
+    },
+    "type": "Comment",
+  },
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 520,
+      "start": 497,
+    },
+    "type": "Comment",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 544,
+              "start": 523,
+            },
+            "text": "Type in stuff on the ",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 558,
+              "start": 544,
+            },
+            "text": "\\\\leftarrow",
+            "type": "FormulaSpan",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 564,
+              "start": 558,
+            },
+            "text": " left.",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 564,
+          "start": 520,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 596,
+              "start": 568,
+            },
+            "text": "See the live updates on the ",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 611,
+              "start": 596,
+            },
+            "text": "\\\\rightarrow",
+            "type": "FormulaSpan",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 618,
+              "start": 611,
+            },
+            "text": " right.",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 618,
+          "start": 565,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": true,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 618,
+      "start": 520,
+    },
+    "start": 1,
+    "type": "List",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 729,
+          "start": 620,
+        },
+        "text": "That's it. Pretty simple. There's also a drop-down option in the upper right to switch between various views:",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 729,
+      "start": 620,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 743,
+                  "start": 735,
+                },
+                "text": "Preview:",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 745,
+              "start": 733,
+            },
+            "type": "Strong",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 819,
+              "start": 746,
+            },
+            "text": "    A live display of the generated HTML as it would render in a browser.",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 819,
+          "start": 731,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 836,
+                  "start": 824,
+                },
+                "text": "HTML Source:",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 838,
+              "start": 822,
+            },
+            "type": "Strong",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 898,
+              "start": 839,
+            },
+            "text": "    The generated HTML before your browser makes it pretty.",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 898,
+          "start": 820,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 914,
+                  "start": 903,
+                },
+                "text": "Lexer Data:",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 916,
+              "start": 901,
+            },
+            "type": "Strong",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 988,
+              "start": 917,
+            },
+            "text": "    What marked uses internally, in case you like gory stuff like this.",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 988,
+          "start": 899,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 1009,
+                  "start": 993,
+                },
+                "text": "Quick Reference:",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 1011,
+              "start": 991,
+            },
+            "type": "Strong",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 1072,
+              "start": 1012,
+            },
+            "text": "    A brief run-down of how to format things using markdown.",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1072,
+          "start": 989,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": false,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1072,
+      "start": 731,
+    },
+    "start": 0,
+    "type": "List",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1091,
+          "start": 1077,
+        },
+        "text": "Why MarkXdown?",
+        "type": "Text",
+      },
+    ],
+    "depth": 2,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1091,
+      "start": 1074,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1138,
+          "start": 1093,
+        },
+        "text": "Hello there look at the awesome block formula",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1138,
+      "start": 1093,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1177,
+      "start": 1140,
+    },
+    "text": "i_{am} = the + for^{mula}",
+    "type": "Formula",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1252,
+          "start": 1179,
+        },
+        "text": "It's easy. It's not overly bloated, unlike HTML. Also, as the creator of ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 1261,
+              "start": 1253,
+            },
+            "text": "markdown",
+            "type": "Text",
+          },
+        ],
+        "href": "http://daringfireball.net/projects/markdown",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1307,
+          "start": 1252,
+        },
+        "type": "Link",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1313,
+          "start": 1307,
+        },
+        "text": " says,",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1313,
+      "start": 1179,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1358,
+          "start": 1317,
+        },
+        "text": "The overriding design goal for Markdown's",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1404,
+          "start": 1361,
+        },
+        "text": "formatting syntax is to make it as readable",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1438,
+          "start": 1407,
+        },
+        "text": "as possible. The idea is that a",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1478,
+          "start": 1441,
+        },
+        "text": "Markdown-formatted document should be",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1522,
+          "start": 1481,
+        },
+        "text": "publishable as-is, as plain text, without",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1567,
+          "start": 1525,
+        },
+        "text": "looking like it's been marked up with tags",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1597,
+          "start": 1570,
+        },
+        "text": "or formatting instructions.",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1599,
+      "start": 1315,
+    },
+    "type": "Blockquote",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1665,
+          "start": 1599,
+        },
+        "text": "Ready to start writing? Either start changing stuff on the left or",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 1683,
+              "start": 1667,
+            },
+            "text": "clear everything",
+            "type": "Text",
+          },
+        ],
+        "href": "/demo/?text=",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1698,
+          "start": 1666,
+        },
+        "type": "Link",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1719,
+          "start": 1698,
+        },
+        "text": " with a simple click.",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1719,
+      "start": 1599,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1735,
+          "start": 1724,
+        },
+        "text": "Custom tags",
+        "type": "Text",
+      },
+    ],
+    "depth": 2,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1735,
+      "start": 1721,
+    },
+    "type": "Heading",
+  },
+  Object {
+    "href": "test.png",
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1761,
+      "start": 1737,
+    },
+    "text": "image-label",
+    "type": "Image",
+  },
+  Object {
+    "height": "6cm",
+    "href": "
+    test.png
+",
+    "name": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1836,
+          "start": 1801,
+        },
+        "text": "Extended image with name and height",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1856,
+      "start": 1763,
+    },
+    "text": "image-label-1",
+    "type": "Image",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1875,
+          "start": 1858,
+        },
+        "text": "Look at the pic. ",
+        "type": "Text",
+      },
+      Object {
+        "keyArgs": Object {},
+        "label": "image-label",
+        "opcode": "PL",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1891,
+          "start": 1875,
+        },
+        "posArgs": Array [],
+        "type": "OpCode",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1896,
+          "start": 1891,
+        },
+        "text": " and ",
+        "type": "Text",
+      },
+      Object {
+        "keyArgs": Object {},
+        "label": "image-label-2",
+        "opcode": "PL",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1914,
+          "start": 1896,
+        },
+        "posArgs": Array [],
+        "type": "OpCode",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 1915,
+          "start": 1914,
+        },
+        "text": ".",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1916,
+            "start": 0,
+          },
+          "text": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 1916,
+        "start": 0,
+      },
+      "raw": "# MarkXDown - MarkDown Extended
+
+[Marked](https://github.com/markedjs/marked/) lets you convert
+[Markdown](http://daringfireball.net/projects/markdown) into HTML.
+Markdown is a simple text format whose goal is to be very easy to read and write,
+even when not converted to HTML.
+This demo page will let you type anything you like and see how it gets converted.
+Live.
+No more waiting around.
+
+\`\`\`kotlin
+Code block here
+\`\`\`
+
+## How To Use The Demo
+
+// There is a comments, that will not be displayed
+// In the output file
+
+1. Type in stuff on the $\`\\\\leftarrow\`$ left.
+2. See the live updates on the $\`\\\\rightarrow\`$ right.
+
+That's it.
+Pretty simple.
+There's also a drop-down option in the upper right to switch between various views:
+
+- **Preview:**
+    A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**
+    The generated HTML before your browser makes it pretty.
+- **Lexer Data:**
+    What marked uses internally, in case you like gory stuff like this.
+- **Quick Reference:**
+    A brief run-down of how to format things using markdown.
+
+## Why MarkXdown?
+
+Hello there look at the awesome block formula
+
+$$$math
+i_{am} = the + for^{mula}
+$$$
+
+It's easy.
+It's not overly bloated, unlike HTML.
+Also, as the creator of [markdown](http://daringfireball.net/projects/markdown) says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?
+Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+
+## Custom tags
+
+![image-label](test.png)
+
+![image-label-1](
+    test.png
+)(
+    Extended image with name and height
+)(@height
+    6cm
+)
+
+Look at the pic. !PL[image-label] and !PL[image-label-2].
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 1915,
+      "start": 1858,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`Honorable mention Bold with del with code span 1`] = `Array []`;
+
+exports[`Honorable mention Bold with del with code span 2`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 10,
+              "start": 2,
+            },
+            "text": "asdas ~~",
+            "type": "Text",
+          },
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 17,
+              "start": 10,
+            },
+            "text": "lol~~",
+            "type": "CodeSpan",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 22,
+              "start": 17,
+            },
+            "text": " adas",
+            "type": "Text",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 24,
+          "start": 0,
+        },
+        "type": "Strong",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 24,
+            "start": 0,
+          },
+          "text": "**asdas ~~\`lol~~\` adas**",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 24,
+        "start": 0,
+      },
+      "raw": "**asdas ~~\`lol~~\` adas**",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 24,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
