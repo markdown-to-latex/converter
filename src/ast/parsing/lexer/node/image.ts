@@ -2,10 +2,7 @@ import { TokenParser, TokenPredicate } from '../struct';
 import { Token, TokenType } from '../../tokenizer';
 import { ImageNode, Node, NodeType, TextNode } from '../../../node';
 import {
-    DiagnoseErrorType,
     DiagnoseList,
-    DiagnoseSeverity,
-    nodesToDiagnose,
 } from '../../../../diagnose';
 import {
     getMacroArgs,
@@ -60,13 +57,12 @@ export const parseImage: TokenParser = function (tokens, index) {
 
     const diagnostic: DiagnoseList = [];
     const labelResult = getMacroLabel(tokens, index + 1);
+    diagnostic.push(...labelResult.diagnostic);
 
     const label = labelResult.label;
     if (!label) {
         return null; // TODO: diagnostic error
     }
-
-    diagnostic.push(...labelResult.diagnostic);
 
     const macroArgsResult = getMacroArgs(tokens, labelResult.index);
     diagnostic.push(...macroArgsResult.diagnostic);
@@ -111,7 +107,7 @@ export const parseImage: TokenParser = function (tokens, index) {
             end: endToken.pos + endToken.text.length,
         },
         parent: tokens.parent,
-        text: label,
+        label: label,
         href: imageUrl.text,
         ...argsResult,
     };

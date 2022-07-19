@@ -43,6 +43,7 @@ New sample text
 
         expect(nodes).toMatchSnapshot();
     });
+
     test('With language', () => {
         const rawNode = rawNodeTemplate(`Sample text
 \`\`\`test-language  
@@ -56,6 +57,99 @@ New sample text
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toEqual('test-language');
+        expect(node.text).toEqual('Code block');
+    });
+
+    test('With name arg', () => {
+        const rawNode = rawNodeTemplate(`
+\`\`\`test-language(@name Sample **Code** Block)
+Code block
+\`\`\`
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as CodeNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Code);
+        expect(node.lang).toEqual('test-language');
+        expect(node.text).toEqual('Code block');
+
+        expect(node.name).toMatchSnapshot();
+    });
+
+    test('With label only', () => {
+        const rawNode = rawNodeTemplate(`
+\`\`\`[label]
+Code block
+\`\`\`
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as CodeNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Code);
+        expect(node.lang).toBeUndefined();
+        expect(node.label).toEqual("label");
+        expect(node.text).toEqual('Code block');
+    });
+
+    test('With all args', () => {
+        const rawNode = rawNodeTemplate(`
+\`\`\`test-language[label](@name Sample \`Code\` Block)
+Code block
+\`\`\`
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as CodeNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Code);
+        expect(node.lang).toEqual('test-language');
+        expect(node.label).toEqual("label");
+        expect(node.text).toEqual('Code block');
+
+        expect(node.name).toMatchSnapshot();
+    });
+
+    test('With lang arg', () => {
+        const rawNode = rawNodeTemplate(`
+\`\`\`[label](@name Sample \`Code\` Block)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as CodeNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Code);
+        expect(node.lang).toEqual('kotlin');
+        expect(node.label).toEqual("label");
+        expect(node.text).toEqual('Code block');
+
+        expect(node.name).toMatchSnapshot();
+    });
+
+    test('With two lang args', () => {
+        const rawNode = rawNodeTemplate(`
+\`\`\`test-language[label](@name
+    Sample \`Code\` Block
+)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(1);
+        let node = nodes[0] as CodeNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Code);
+        expect(node.lang).toEqual('test-language');
+        expect(node.label).toEqual("label");
+
+        expect(node.name).toMatchSnapshot();
     });
 
     test('Error raw node', () => {
@@ -67,6 +161,19 @@ New sample text
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(1);
         expect(diagnostic).toMatchSnapshot();
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('Error args node', () => {
+        const rawNode = rawNodeTemplate(`Sample text
+\`\`\`lang[what(argume
+Code block
+New sample text
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toMatchSnapshot();
+        expect(nodes).toMatchSnapshot();
     });
 });
 

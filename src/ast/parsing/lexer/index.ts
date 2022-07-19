@@ -580,11 +580,13 @@ export function unexpectedEof(
     tokens: TokensNode,
     index: number,
     message: string,
+    diagnostic?: DiagnoseList
 ): TokenByTypeParserResult {
     return {
         nodes: [],
         index: tokens.tokens.length,
         diagnostic: [
+            ...(diagnostic ?? []),
             tokenToDiagnose(tokens, index, message, DiagnoseSeverity.Error),
         ],
     };

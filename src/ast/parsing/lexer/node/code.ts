@@ -1,18 +1,30 @@
-import {
-    TokenByTypeParserResult,
-    TokenParser,
-    TokenPredicate,
-} from '../struct';
+import { TokenParser, TokenPredicate } from '../struct';
 import { TokenType } from '../../tokenizer';
-import { CodeNode, NodeType, TokensNode } from '../../../node';
+import { CodeNode, Node, NodeType } from '../../../node';
 import {
     findTokenOrNull,
     findTokenOrNullBackward,
     tokenToDiagnose,
     unexpectedEof,
 } from '../index';
-import { DiagnoseSeverity } from '../../../../diagnose';
+import {
+    DiagnoseErrorType,
+    DiagnoseList,
+    DiagnoseSeverity,
+    nodesToDiagnose,
+} from '../../../../diagnose';
 import { isPrevTokenDelimiter } from './breaks';
+import {
+    getMacroArgs,
+    getMacroLabel,
+    parseMacroKeyArgs,
+    parseMacroPosArgs,
+} from './macros';
+import {
+    ArgInfo,
+    ArgInfoType,
+    parseMacrosArguments,
+} from '../../../../macros/args';
 
 export const isCode: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(token, index, node)) {
@@ -36,13 +48,30 @@ export const isCode: TokenPredicate = function (token, index, node) {
     return true;
 };
 
+const argInfo: ArgInfo[] = [
+    {
+        name: 'name',
+        type: ArgInfoType.NodeArray,
+        optional: true,
+        aliases: ['n'],
+    },
+    {
+        name: 'language',
+        type: ArgInfoType.Text,
+        optional: true,
+        aliases: ['lang', 'l'],
+    },
+];
+
 export const parseCode: TokenParser = function (tokens, index) {
+    const diagnostic: DiagnoseList = [];
+
     const token = tokens.tokens[index];
     if (!isCode(token, index, tokens)) {
         return null;
     }
 
-    const lineBreakResult = findTokenOrNull(
+    let lineBreakResult = findTokenOrNull(
         tokens,
         index + 1,
         t => t.type === TokenType.Delimiter,
@@ -52,24 +81,93 @@ export const parseCode: TokenParser = function (tokens, index) {
             tokens,
             index,
             'Unable to find line break after code',
+            diagnostic,
         );
     }
 
-    let languageName: string | null = null;
-    for (let i = index + 1; i < lineBreakResult.index; ++i) {
-        const token = tokens.tokens[i];
+    let languageName: string | undefined = undefined;
+    let argStartIndex;
+    for (
+        argStartIndex = index + 1;
+        argStartIndex < lineBreakResult.index;
+        ++argStartIndex
+    ) {
+        const token = tokens.tokens[argStartIndex];
         if (
             [
                 TokenType.Letter,
                 TokenType.SeparatedSpecial,
                 TokenType.JoinableSpecial,
-            ].indexOf(token.type) === -1
+            ].indexOf(token.type) === -1 ||
+            ['[', '('].indexOf(token.text) !== -1
         ) {
             break;
         }
 
         languageName ??= '';
         languageName += token.text;
+    }
+
+    const labelResult = getMacroLabel(tokens, argStartIndex);
+    diagnostic.push(...labelResult.diagnostic);
+
+    const label = labelResult.label ?? undefined;
+
+    const macroArgsResult = getMacroArgs(tokens, labelResult.index);
+    diagnostic.push(...macroArgsResult.diagnostic);
+
+    lineBreakResult = findTokenOrNull(
+        tokens,
+        macroArgsResult.index,
+        t => t.type === TokenType.Delimiter,
+    );
+    if (!lineBreakResult) {
+        return unexpectedEof(
+            tokens,
+            index,
+            'Unable to find line break after code',
+            diagnostic,
+        );
+    }
+
+    // TODO: encapsulate pos and key args parsing
+    const parsePosArgsResult = parseMacroPosArgs(macroArgsResult.posArgs);
+    diagnostic.push(...parsePosArgsResult.diagnostic);
+
+    const parseKeyArgsResult = parseMacroKeyArgs(macroArgsResult.keyArgs);
+    diagnostic.push(...parseKeyArgsResult.diagnostic);
+
+    const endArgToken = tokens.tokens[macroArgsResult.index - 1];
+    const argParsingResult = parseMacrosArguments(
+        {
+            // Ephimeral node
+            type: NodeType.OpCode,
+            pos: {
+                start: token.pos,
+                end: endArgToken.pos + endArgToken.text.length,
+            },
+            posArgs: parsePosArgsResult.result,
+            keyArgs: parseKeyArgsResult.result,
+            parent: tokens.parent,
+        },
+        argInfo,
+    );
+    diagnostic.push(...argParsingResult.diagnostic);
+
+    const argsResult = argParsingResult.result as {
+        name?: Node[];
+        language?: string;
+    };
+
+    if (languageName && argsResult.language) {
+        diagnostic.push(
+            tokenToDiagnose(
+                tokens,
+                index + 1,
+                'Multiple "lang" definition',
+                DiagnoseSeverity.Error,
+            ),
+        );
     }
 
     const endTokenResult = findTokenOrNull(
@@ -82,6 +180,7 @@ export const parseCode: TokenParser = function (tokens, index) {
             tokens,
             index,
             'Unable to find closing quotes for block code',
+            diagnostic,
         );
     }
 
@@ -96,28 +195,29 @@ export const parseCode: TokenParser = function (tokens, index) {
             index,
             'Unable to find end closing quotes for block code ' +
                 '(internal error)',
+            diagnostic,
         );
     }
 
     const endToken = endTokenResult.token;
+    const codeNode: CodeNode = {
+        type: NodeType.Code,
+        pos: {
+            start: token.pos,
+            end: endToken.pos + endToken.text.length,
+        },
+        text: tokens.tokens
+            .slice(lineBreakResult.index + 1, lineBreakEndResult.index)
+            .map(v => v.text)
+            .join(''),
+        parent: tokens.parent,
+        lang: languageName ?? argsResult.language,
+        label: label,
+        name: argsResult.name,
+    };
     return {
-        nodes: [
-            {
-                type: NodeType.Code,
-                pos: {
-                    start: token.pos,
-                    end: endToken.pos + endToken.text.length,
-                },
-                text: tokens.tokens
-                    .slice(lineBreakResult.index + 1, lineBreakEndResult.index)
-                    .map(v => v.text)
-                    .join(''),
-                parent: tokens.parent,
-                lang: languageName,
-                codeBlockStyle: null,
-            } as CodeNode,
-        ],
+        nodes: [codeNode],
         index: endTokenResult.index + 1,
-        diagnostic: [],
+        diagnostic: diagnostic,
     };
 };
