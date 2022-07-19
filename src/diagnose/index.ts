@@ -40,6 +40,7 @@ export enum DiagnoseErrorType {
     ApplyParserError,
     InternalError,
     ContextError,
+    MacrosError,
     OtherError,
 }
 

@@ -24,7 +24,7 @@ import {
     ArgInfo,
     ArgInfoType,
     parseMacrosArguments,
-} from '../../../../macros/args';
+} from '../../../../macro/args';
 
 export const isCode: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(token, index, node)) {

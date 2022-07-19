@@ -26,8 +26,10 @@ export interface ArgInfo {
     optional: boolean;
 }
 
+export type ParsedMacrosArguments = Record<string, Node[] | string | null>;
+
 export interface ParseMacrosArgumentsResult {
-    result: Record<string, Node[] | string | null>;
+    result: ParsedMacrosArguments;
     diagnostic: DiagnoseList;
 }
 
@@ -41,7 +43,6 @@ interface ConvertArgumentTypeResult<T extends ArgInfoType> {
     diagnostic: DiagnoseList;
 }
 
-// const argumentConverter: Record<ArgInfoType, (nodes: Node[]) => _ArgInfoTypeType[]>
 const argumentConverter: {
     [key in ArgInfoType]: (nodes: Node[]) => ConvertArgumentTypeResult<key>;
 } = {

@@ -89,7 +89,7 @@ Code block
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toBeUndefined();
-        expect(node.label).toEqual("label");
+        expect(node.label).toEqual('label');
         expect(node.text).toEqual('Code block');
     });
 
@@ -105,7 +105,7 @@ Code block
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toEqual('test-language');
-        expect(node.label).toEqual("label");
+        expect(node.label).toEqual('label');
         expect(node.text).toEqual('Code block');
 
         expect(node.name).toMatchSnapshot();
@@ -125,7 +125,7 @@ Code block
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toEqual('kotlin');
-        expect(node.label).toEqual("label");
+        expect(node.label).toEqual('label');
         expect(node.text).toEqual('Code block');
 
         expect(node.name).toMatchSnapshot();
@@ -147,7 +147,7 @@ Code block
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toEqual('test-language');
-        expect(node.label).toEqual("label");
+        expect(node.label).toEqual('label');
 
         expect(node.name).toMatchSnapshot();
     });
@@ -205,8 +205,8 @@ describe('link check', () => {
     });
 });
 
-describe('macros parsing', () => {
-    test('Complex macros with name, label, pos and key args', () => {
+describe('macro parsing', () => {
+    test('Complex macro with name, label, pos and key args', () => {
         const rawNode = rawNodeTemplate(
             '!Macro[label-text](pos arg 1)(`pos arg` 2)(@keyArgName argName)',
         );
@@ -215,6 +215,33 @@ describe('macros parsing', () => {
         let node = nodes[0] as ParagraphNode;
         expect(node).not.toBeUndefined();
         expect(node.children[0].type).toEqual(NodeType.OpCode);
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('Nested', () => {
+        const rawNode = rawNodeTemplate(`
+!Macro[label-text](
+    text before
+    !Macro2(@key arg)
+    text after
+)(
+    \`pos arg\` 2
+)(@keyArgName 
+    argName
+)`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as ParagraphNode;
+        expect(node).not.toBeUndefined();
+
+        const opCodeNode = node.children[0] as OpCodeNode;
+        expect(opCodeNode.type).toEqual(NodeType.OpCode);
+        expect(opCodeNode.posArgs).toHaveLength(2);
+
+        const nestedOpCodeNode = opCodeNode.posArgs[0][1] as OpCodeNode;
+        expect(nestedOpCodeNode).not.toBeUndefined();
+        expect(nestedOpCodeNode.type).toEqual(NodeType.OpCode);
 
         expect(nodes).toMatchSnapshot();
     });

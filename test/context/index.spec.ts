@@ -22,7 +22,6 @@ function createSimpleContext(): ContextE {
             application: null,
             reference: null,
         },
-        config: {} as any,
         data: {
             application: {
                 labels: [],
@@ -46,8 +45,8 @@ function createSimpleContext(): ContextE {
             },
         },
         diagnostic: [],
-        writeDiagnosticList: () => {},
-        writeFile: () => {},
+        // writeDiagnosticList: () => {},
+        // writeFile: () => {},
     });
 }
 

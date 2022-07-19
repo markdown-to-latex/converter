@@ -4,7 +4,7 @@ import {
     getNodeAllChildren,
     getNodeLeftNeighbourLeaf,
     getNodeParentFile,
-    getNodeRightNeighbourLeaf,
+    getNodeRightNeighbourLeaf, NodeListProps,
     NodeParentData,
     replaceNode,
     traverseNodeChildren,
@@ -20,7 +20,8 @@ import { StringE } from '../../extension/string';
 export interface NodeEParentData<T extends Node = Node> {
     node: NodeE<T>;
     index: number;
-    container: NodeE[];
+    container: Node[];
+    property: NodeListProps;
 }
 
 export class NodeE<T extends Node = Node> {
@@ -47,7 +48,7 @@ export class NodeE<T extends Node = Node> {
             yield {
                 ...value,
                 node: NodeE.from(value.node),
-                container: value.container.map(node => NodeE.from(node)),
+                container: value.container,
             };
         }
     }
@@ -91,7 +92,7 @@ export class NodeE<T extends Node = Node> {
         return {
             ...data,
             node: NodeE.from(data.node as N),
-            container: data.container.map(node => NodeE.from(node)),
+            container: data.container,
         };
     }
 

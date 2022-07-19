@@ -3399,6 +3399,153 @@ Array [
 ]
 `;
 
+exports[`macro parsing Nested 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "keyArgs": Object {
+          "keyArgName": Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 119,
+                "start": 112,
+              },
+              "text": "argName",
+              "type": "Text",
+            },
+          ],
+        },
+        "label": "label-text",
+        "opcode": "Macro",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 121,
+          "start": 1,
+        },
+        "posArgs": Array [
+          Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 41,
+                "start": 25,
+              },
+              "text": "text before     ",
+              "type": "Text",
+            },
+            Object {
+              "keyArgs": Object {
+                "key": Array [
+                  Object {
+                    "children": Array [],
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 57,
+                      "start": 54,
+                    },
+                    "text": "arg",
+                    "type": "Text",
+                  },
+                ],
+              },
+              "label": null,
+              "opcode": "Macro2",
+              "parent": [Circular],
+              "pos": Object {
+                "end": 58,
+                "start": 41,
+              },
+              "posArgs": Array [],
+              "type": "OpCode",
+            },
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 73,
+                "start": 59,
+              },
+              "text": "    text after",
+              "type": "Text",
+            },
+          ],
+          Array [
+            Object {
+              "parent": [Circular],
+              "pos": Object {
+                "end": 90,
+                "start": 81,
+              },
+              "text": "pos arg",
+              "type": "CodeSpan",
+            },
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 92,
+                "start": 90,
+              },
+              "text": " 2",
+              "type": "Text",
+            },
+          ],
+        ],
+        "type": "OpCode",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 121,
+            "start": 0,
+          },
+          "text": "
+!Macro[label-text](
+    text before
+    !Macro2(@key arg)
+    text after
+)(
+    \`pos arg\` 2
+)(@keyArgName 
+    argName
+)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 121,
+        "start": 0,
+      },
+      "raw": "
+!Macro[label-text](
+    text before
+    !Macro2(@key arg)
+    text after
+)(
+    \`pos arg\` 2
+)(@keyArgName 
+    argName
+)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 121,
+      "start": 1,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
 exports[`macros parsing Brackets mismatch 1`] = `
 Array [
   Object {

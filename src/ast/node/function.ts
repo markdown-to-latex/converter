@@ -1,15 +1,18 @@
 import { FileNode, Node, NodeType } from './struct';
 
-const nodeListProps = ['children', 'rows', 'header'] as const;
+const nodeListProps = ['children', 'rows', 'header', 'name'] as const;
+
+export type NodeListProps = typeof nodeListProps[number];
 
 type NodeWithAnyChildren = {
-    [ListKey in typeof nodeListProps[number]]?: Node[];
+    [ListKey in NodeListProps]?: Node[];
 };
 
 export interface NodeParentData {
     node: Node;
     index: number;
     container: Node[];
+    property: NodeListProps;
 }
 
 export function* traverseNodeChildren(
@@ -29,6 +32,7 @@ export function* traverseNodeChildren(
                 node: child,
                 index: i,
                 container: toProcess,
+                property: prop,
             };
         }
     }

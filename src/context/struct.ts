@@ -1,6 +1,7 @@
-import { Node } from '../ast/node';
-import { DiagnoseList } from '../diagnose';
-import { ContextConfig } from '../printer/context';
+import {FileNode, Node, NodeType} from '../ast/node';
+import {DiagnoseList} from '../diagnose';
+import {ContextConfig} from '../printer/context';
+import {ContextE} from "./extension";
 
 export interface ContextApplicationInfo {
     title: Node[];
@@ -51,7 +52,7 @@ export interface ContextDataGeneric<T> {
     /**
      * Labels to node mapping (for diagnostic positioning)
      */
-    labelToRefs: Record<string, ContextInfoReference>
+    labelToRefs: Record<string, ContextInfoReference>;
 
     /**
      * Mapping labels to object information
@@ -76,11 +77,43 @@ export interface ContextData {
 
 export interface Context {
     diagnostic: DiagnoseList;
-    config: ContextConfig;
 
     data: ContextData;
     temp: ContextTemp;
 
-    writeDiagnosticList: (this: Context) => void;
-    writeFile: (this: Context, fileName: string, content: string) => void;
+    // writeDiagnosticList: (this: Context) => void;
+    // writeFile: (this: Context, fileName: string, content: string) => void;
+}
+
+export function initContext(node: FileNode): Context {
+    return {
+        temp: {
+            node: node,
+            application: null,
+            reference: null,
+        },
+        data: {
+            application: {
+                labels: [],
+                labelToRefs: {},
+                labelToInfo: {},
+            },
+            reference: {
+                labels: [],
+                labelToRefs: {},
+                labelToInfo: {},
+            },
+            picture: {
+                labels: [],
+                labelToRefs: {},
+                labelToInfo: {},
+            },
+            table: {
+                labels: [],
+                labelToRefs: {},
+                labelToInfo: {},
+            },
+        },
+        diagnostic: [],
+    };
 }

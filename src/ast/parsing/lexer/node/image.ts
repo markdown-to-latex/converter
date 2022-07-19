@@ -14,7 +14,7 @@ import {
     ArgInfo,
     ArgInfoType,
     parseMacrosArguments,
-} from '../../../../macros/args';
+} from '../../../../macro/args';
 
 export const isImage: TokenPredicate = function (token, index, node) {
     if (!(token.type === TokenType.SeparatedSpecial && token.text === '!')) {
