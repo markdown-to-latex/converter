@@ -1,0 +1,1265 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`context application create same key twice 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Application with app-1 already exist",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused application label app-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`context application create same key twice 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {
+      "app-1": Object {
+        "label": "app-1",
+      },
+    },
+    "labelToRefs": Object {
+      "app-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+    },
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context application create undefined keys 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Application with app-1 does not exist",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Application with app-2 does not exist",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+]
+`;
+
+exports[`context application create undefined keys 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context application create unused keys 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused application label app-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused application label app-2",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`context application create unused keys 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {
+      "app-1": Object {
+        "label": "app-1",
+      },
+      "app-2": Object {
+        "label": "app-2",
+      },
+    },
+    "labelToRefs": Object {
+      "app-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+      "app-2": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+    },
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context application simple 1`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {
+      "app-1": Object {
+        "label": "app-1",
+      },
+      "app-2": Object {
+        "label": "app-2",
+      },
+    },
+    "labelToRefs": Object {
+      "app-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+      "app-2": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+    },
+    "labels": Array [
+      "app-2",
+      "app-1",
+    ],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context pictures create same key twice 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Picture with label pic-1 already exists",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`context pictures create same key twice 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {
+      "pic-1": Object {
+        "label": "pic-1",
+      },
+    },
+    "labelToRefs": Object {
+      "pic-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+    },
+    "labels": Array [
+      "pic-1",
+    ],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context pictures create undefined keys 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Undefined picture label pic-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Undefined picture label pic-3",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+]
+`;
+
+exports[`context pictures create undefined keys 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {
+      "pic-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+      "pic-3": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+    },
+    "labels": Array [
+      "pic-1",
+      "pic-3",
+    ],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context pictures create unused keys 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused picture label pic-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused picture label pic-2",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`context pictures create unused keys 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {
+      "pic-1": Object {
+        "label": "pic-1",
+      },
+      "pic-2": Object {
+        "label": "pic-2",
+      },
+    },
+    "labelToRefs": Object {
+      "pic-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+      "pic-2": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+    },
+    "labels": Array [
+      "pic-1",
+      "pic-2",
+    ],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context pictures simple 1`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {
+      "pic-1": Object {
+        "label": "pic-1",
+      },
+      "pic-2": Object {
+        "label": "pic-2",
+      },
+      "pic-3": Object {
+        "label": "pic-3",
+      },
+    },
+    "labelToRefs": Object {
+      "pic-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+      "pic-2": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+      "pic-3": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+    },
+    "labels": Array [
+      "pic-3",
+      "pic-1",
+      "pic-2",
+    ],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context reference create same key twice 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Reference with ref-1 already exist",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused reference label ref-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`context reference create same key twice 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {
+      "ref-1": Object {
+        "label": "ref-1",
+      },
+    },
+    "labelToRefs": Object {
+      "ref-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+    },
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context reference create undefined keys 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Reference with ref-1 does not exist",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Reference with ref-2 does not exist",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+]
+`;
+
+exports[`context reference create undefined keys 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context reference create unused keys 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused reference label ref-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused reference label ref-2",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`context reference create unused keys 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {
+      "ref-1": Object {
+        "label": "ref-1",
+      },
+      "ref-2": Object {
+        "label": "ref-2",
+      },
+    },
+    "labelToRefs": Object {
+      "ref-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+      "ref-2": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+    },
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context reference simple 1`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {
+      "ref-1": Object {
+        "label": "ref-1",
+      },
+      "ref-2": Object {
+        "label": "ref-2",
+      },
+    },
+    "labelToRefs": Object {
+      "ref-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+      "ref-2": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+    },
+    "labels": Array [
+      "ref-2",
+      "ref-1",
+    ],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+}
+`;
+
+exports[`context tables create same key twice 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Table with label table-1 already exists",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`context tables create same key twice 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {
+      "table-1": Object {
+        "label": "table-1",
+      },
+    },
+    "labelToRefs": Object {
+      "table-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+    },
+    "labels": Array [
+      "table-1",
+    ],
+  },
+}
+`;
+
+exports[`context tables create undefined keys 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Undefined table label table-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Undefined table label table-3",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "ERROR",
+  },
+]
+`;
+
+exports[`context tables create undefined keys 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {
+      "table-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+      "table-3": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+    },
+    "labels": Array [
+      "table-1",
+      "table-3",
+    ],
+  },
+}
+`;
+
+exports[`context tables create unused keys 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused table label table-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "null",
+    "message": "Unused table label table-2",
+    "pos": Object {
+      "end": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 1,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`context tables create unused keys 2`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {
+      "table-1": Object {
+        "label": "table-1",
+      },
+      "table-2": Object {
+        "label": "table-2",
+      },
+    },
+    "labelToRefs": Object {
+      "table-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+      "table-2": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 1,
+      },
+    },
+    "labels": Array [
+      "table-1",
+      "table-2",
+    ],
+  },
+}
+`;
+
+exports[`context tables simple 1`] = `
+Object {
+  "application": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "picture": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "reference": Object {
+    "labelToInfo": Object {},
+    "labelToRefs": Object {},
+    "labels": Array [],
+  },
+  "table": Object {
+    "labelToInfo": Object {
+      "table-1": Object {
+        "label": "table-1",
+      },
+      "table-2": Object {
+        "label": "table-2",
+      },
+      "table-3": Object {
+        "label": "table-3",
+      },
+    },
+    "labelToRefs": Object {
+      "table-1": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+      "table-2": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+      "table-3": Object {
+        "node": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 1,
+            "start": 0,
+          },
+          "type": "File",
+        },
+        "refs": 2,
+      },
+    },
+    "labels": Array [
+      "table-3",
+      "table-1",
+      "table-2",
+    ],
+  },
+}
+`;

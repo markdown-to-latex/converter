@@ -39,6 +39,7 @@ export function isSeverityGEq(left: DiagnoseSeverity, right: DiagnoseSeverity) {
 export enum DiagnoseErrorType {
     ApplyParserError,
     InternalError,
+    ContextError,
     OtherError,
 }
 
