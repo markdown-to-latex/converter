@@ -10,9 +10,6 @@
         "latex": {
             "$ref": "#/definitions/LatexInfo"
         },
-        "opCode": {
-            "$ref": "#/definitions/OpCodeData"
-        },
         "files": {
             "type": "array",
             "description": "Files to process",
@@ -192,24 +189,6 @@
             },
             "required": [],
             "additionalProperties": false
-        },
-        "OpCodeData": {
-            "type": "object",
-            "description": "OpCode properties",
-            "properties": {
-                "starter": {
-                    "type": "string",
-                    "description": "Start word for OpCode",
-                    "default": "!",
-                    "minLength": 1
-                },
-                "delimiter": {
-                    "type": "string",
-                    "description": "Start word for OpCode",
-                    "default": "!",
-                    "minLength": 1
-                }
-            }
         },
         "FileInfo": {
             "type": "object",
