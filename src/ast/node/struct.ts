@@ -1,5 +1,5 @@
-import {StartEndPosition} from './position';
-import {Token} from '../parsing/tokenizer';
+import { StartEndPosition } from './position';
+import { Token } from '../parsing/tokenizer';
 
 export const enum RawNodeType {
     Raw = 'Raw',
@@ -10,11 +10,13 @@ export const enum RawNodeType {
 }
 
 export const enum NodeType {
-    // From marked
+    // Default MarkDown Nodes
     Space = 'Space',
     Code = 'Code',
     Heading = 'Heading',
     Table = 'Table',
+    TableCell = 'TableCell',
+    TableRow = 'TableRow',
     Blockquote = 'Blockquote',
     List = 'List',
     ListItem = 'ListItem',
@@ -30,14 +32,12 @@ export const enum NodeType {
     Hr = 'Hr',
     CodeSpan = 'CodeSpan',
     Br = 'Br',
-    Del = 'Del',
+    Del = 'Del', // through-lined text
 
     // Custom
     File = 'File',
     TableControlCell = 'TableControlCell',
     TableControlRow = 'TableControlRow',
-    TableCell = 'TableCell',
-    TableRow = 'TableRow',
     OpCode = 'OpCode',
     LatexSpan = 'LatexSpan',
     Latex = 'Latex',
@@ -49,8 +49,8 @@ export const enum NodeType {
 
 export type StartEndNumberPosition = StartEndPosition<number>;
 
-export interface Node {
-    type: NodeType | RawNodeType;
+export interface Node<T = never> {
+    type: NodeType | RawNodeType | T;
     parent: Node | null;
     pos: StartEndNumberPosition;
 }
@@ -99,8 +99,9 @@ export interface SpaceNode extends Node {
 
 export interface CodeNode extends Node, NodeText {
     type: NodeType.Code;
-    codeBlockStyle: 'indented' | null;
-    lang: string | null;
+    lang?: string;
+    name?: Node[];
+    label?: string;
 }
 
 export interface HeadingNode extends Node, NodeChildren {
@@ -152,7 +153,7 @@ export interface EscapeNode extends Node, NodeText {
     type: NodeType.Escape;
 }
 
-export interface TextNode extends Node, NodeChildren, NodeText {
+export interface TextNode extends Node, NodeText {
     type: NodeType.Text;
 }
 
@@ -160,8 +161,9 @@ export interface LinkNode extends Node, NodeHref, NodeChildren {
     type: NodeType.Link;
 }
 
-export interface ImageNode extends Node, NodeHref, NodeText {
+export interface ImageNode extends Node, NodeHref {
     type: NodeType.Image;
+    label: string;
     name?: Node[];
     width?: string;
     height?: string;
@@ -220,7 +222,7 @@ export interface TableControlCellNode extends Node {
     joinColsRight?: number;
 }
 
-export interface TableControlRowNode extends Node {
+export interface TableControlRowNode extends Node, NodeChildren {
     type: NodeType.TableControlRow;
     children: TableControlCellNode[];
 }

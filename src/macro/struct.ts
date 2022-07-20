@@ -12,15 +12,15 @@ export interface CommandMacrosNodeData {
     container: Node[];
 }
 
-export interface CommandMacrosArgsData<T = ParsedMacrosArguments> {
+export interface CommandMacrosArgsData<T = ParsedMacrosArguments, LT = string | undefined> {
     args: T;
-    label?: string;
+    label: LT;
 }
 
-export type CommandInfoCallback<T = ParsedMacrosArguments> = (
+export type CommandInfoCallback<T = ParsedMacrosArguments, LT = string | undefined> = (
     ctx: ContextE,
     data: CommandMacrosNodeData,
-    args: CommandMacrosArgsData,
+    args: CommandMacrosArgsData<T, LT>,
 ) => Node[];
 
 export interface CommandInfo {

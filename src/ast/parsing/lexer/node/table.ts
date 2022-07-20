@@ -225,7 +225,7 @@ export const parseTable: TokenParser = function (tokens, index) {
     let lineDelimiterIndex: number = index - 1;
     let lastTokenIndex: number = index;
 
-    while (lineDelimiterIndex < tokens.tokens.length) {
+    while (lineDelimiterIndex + 1 < tokens.tokens.length) {
         delimiter = findTokenOrNull(
             tokens,
             lineDelimiterIndex + 1,

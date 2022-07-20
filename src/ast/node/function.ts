@@ -38,6 +38,12 @@ export function* traverseNodeChildren(
     }
 }
 
+export function *traverseNodeChildrenDeepDepth() {
+    // TODO
+    // TODO
+    // TODO
+}
+
 export function getNodeAllChildren(originalNode: Readonly<Node>): Node[] {
     const node = originalNode as NodeWithAnyChildren;
 

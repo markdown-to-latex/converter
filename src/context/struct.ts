@@ -1,7 +1,7 @@
-import {FileNode, Node, NodeType} from '../ast/node';
-import {DiagnoseList} from '../diagnose';
-import {ContextConfig} from '../printer/context';
-import {ContextE} from "./extension";
+import { FileNode, Node, NodeType } from '../ast/node';
+import { DiagnoseList } from '../diagnose';
+import { ContextConfig } from '../printer/context';
+import { ContextE } from './extension';
 
 export interface ContextApplicationInfo {
     title: Node[];
@@ -22,10 +22,12 @@ export interface ContextReferenceContentInfo extends ContextReferenceInfo {
 
 export interface ContextPictureInfo {
     label: string;
+    name: Node[]
 }
 
 export interface ContextTableInfo {
     label: string;
+    name: Node[]
 }
 
 export interface ContextInfoReference {
@@ -36,6 +38,7 @@ export interface ContextInfoReference {
 export interface ContextTemp {
     application: ContextApplicationInfo | null;
     reference: ContextReferenceInfo | null;
+    table: ContextTableInfo | null;
 
     /**
      * Current node
@@ -91,6 +94,7 @@ export function initContext(node: FileNode): Context {
             node: node,
             application: null,
             reference: null,
+            table: null,
         },
         data: {
             application: {

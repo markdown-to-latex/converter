@@ -318,6 +318,21 @@ describe('table parsing', () => {
 
         expect(nodes).toMatchSnapshot();
     });
+
+    test('End line bug ', () => {
+        const rawNode = rawNodeTemplate(`|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as TableNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Table);
+
+        expect(nodes).toMatchSnapshot();
+    });
 });
 
 describe('List parsing', () => {

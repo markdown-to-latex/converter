@@ -1,5 +1,3 @@
-import { marked } from 'marked';
-import Text = marked.Tokens.Text;
 import { LINE_SPLIT_REGEXP } from '../../extension/regexp';
 
 export interface TextPosition {

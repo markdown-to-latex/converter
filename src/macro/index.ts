@@ -7,20 +7,35 @@ import {
 } from '../ast/node';
 import { ContextE, initContext } from '../context';
 import { parseMacro } from './function';
+import { processNode } from './node';
+import { NodeProcessed } from './node/struct';
+import { DiagnoseList } from '../diagnose';
 
-export function applyMacros(fileNode: FileNode): void {
+export function applyMacros(fileNode: FileNode): DiagnoseList {
     const context = new ContextE(initContext(fileNode));
 
     // TODO: maybe make a while for nested macros
 
     const nodeE = new NodeE(fileNode);
-    const allNodes = Array.from(nodeE.traverse()).filter(
-        d => d.node.n.type === NodeType.OpCode,
-    ) as NodeEParentData<OpCodeNode>[];
+    const allNodes = Array.from(nodeE.traverse());
     for (const data of allNodes) {
         context.c.temp.node = data.node.n;
+        if (data.node.n.type === NodeType.OpCode) {
+            const nodes = parseMacro(
+                context,
+                data as NodeEParentData<OpCodeNode>,
+            );
+            data.container.splice(data.index, 1, ...nodes);
+            continue;
+        }
 
-        const nodes = parseMacro(context, data);
-        data.container.splice(data.index, 1, ...nodes);
+        const processing = processNode(context, data);
+        if (processing) {
+            const container = data.container as NodeProcessed[];
+            container.splice(data.index, 1, ...processing);
+        }
     }
+
+    context.diagnoseAll();
+    return context.c.diagnostic;
 }
