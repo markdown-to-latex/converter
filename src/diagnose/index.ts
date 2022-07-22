@@ -75,23 +75,26 @@ export function nodeToDiagnose(
     errorType: DiagnoseErrorType,
     message?: string,
 ): DiagnoseInfo {
+    const fileNode = getNodeParentFile(node);
+    const rawText = fileNode?.raw ?? '';
+
     return {
         errorType,
         severity,
         message,
-        filePath: getNodeParentFile(node)?.path ?? 'null',
+        filePath: fileNode?.path ?? 'null',
         pos: {
             start: {
                 absolute: node.pos.start,
                 ...positionToTextPosition(
-                    getNodeParentFile(node)?.raw ?? '',
+                    rawText,
                     node.pos.start,
                 ),
             },
             end: {
                 absolute: node.pos.end,
                 ...positionToTextPosition(
-                    getNodeParentFile(node)?.raw ?? '',
+                    rawText,
                     node.pos.end,
                 ),
             },

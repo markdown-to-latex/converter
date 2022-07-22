@@ -160,7 +160,7 @@ export function parseMacrosArguments(
                 node,
                 DiagnoseSeverity.Error,
                 DiagnoseErrorType.ApplyParserError,
-                `Expected argument ${info.name}`,
+                `Expected argument '${info.name}'`,
             ),
         );
     }

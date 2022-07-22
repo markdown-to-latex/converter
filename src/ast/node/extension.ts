@@ -7,8 +7,8 @@ import {
     getNodeRightNeighbourLeaf, NodeListProps,
     NodeParentData,
     replaceNode,
-    traverseNodeChildren,
-} from './function';
+    traverseNodeChildren, traverseNodeChildrenDeepDepth
+} from "./function";
 import {
     DiagnoseErrorType,
     DiagnoseInfo,
@@ -44,12 +44,28 @@ export class NodeE<T extends Node = Node> {
     }
 
     public *traverse(): Generator<NodeEParentData, void, never> {
-        for (const value of Array.from(traverseNodeChildren(this.node))) {
+        const iter = traverseNodeChildren(this.node);
+        let value = iter.next();
+        while (!value.done) {
             yield {
-                ...value,
-                node: NodeE.from(value.node),
-                container: value.container,
+                ...value.value,
+                node: NodeE.from(value.value.node),
             };
+
+            value = iter.next();
+        }
+    }
+
+    public *traverseDeepDepth(): Generator<NodeEParentData, void, never> {
+        const iter = traverseNodeChildrenDeepDepth(this.node);
+        let value = iter.next();
+        while (!value.done) {
+            yield {
+                ...value.value,
+                node: NodeE.from(value.value.node),
+            };
+
+            value = iter.next();
         }
     }
 

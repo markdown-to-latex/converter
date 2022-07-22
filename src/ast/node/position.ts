@@ -102,7 +102,10 @@ export function positionToTextPosition(
     const index: number | null = (() => {
         for (let i = 0; i < lines.length; ++i) {
             const line = lines[i];
-            if (line.pos <= position && position < line.pos + line.str.length) {
+            if (line.pos <= position && position <= line.pos + line.str.length) {
+                return i;
+            }
+            if (line.pos >= position) {
                 return i;
             }
         }

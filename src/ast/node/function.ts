@@ -38,10 +38,39 @@ export function* traverseNodeChildren(
     }
 }
 
-export function *traverseNodeChildrenDeepDepth() {
-    // TODO
-    // TODO
-    // TODO
+function* __traverseNodeChildrenDeepDepth(
+    originalNode: Readonly<Node>,
+    index: number,
+    container: Node[],
+    property: NodeListProps,
+): Generator<NodeParentData, void, never> {
+    yield {
+        node: originalNode,
+        index: index,
+        container: container,
+        property: property, // a little workaround
+    };
+
+    const children = Array.from(traverseNodeChildren(originalNode));
+    for (const data of children) {
+        const iter = __traverseNodeChildrenDeepDepth(data.node, data.index, data.container, data.property);
+        let value = iter.next();
+        while (!value.done) {
+            yield value.value;
+            value = iter.next();
+        }
+    }
+}
+
+export function* traverseNodeChildrenDeepDepth(
+    originalNode: Readonly<Node>,
+): Generator<NodeParentData, void, never> {
+    const iter = __traverseNodeChildrenDeepDepth(originalNode, 0, [], 'rows');
+    let value = iter.next();
+    while (!value.done) {
+        yield value.value;
+        value = iter.next();
+    }
 }
 
 export function getNodeAllChildren(originalNode: Readonly<Node>): Node[] {

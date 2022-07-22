@@ -3,13 +3,13 @@ import {
     NodeE,
     NodeEParentData,
     NodeType,
-    OpCodeNode,
-} from '../ast/node';
-import { ContextE, initContext } from '../context';
-import { parseMacro } from './function';
-import { processNode } from './node';
-import { NodeProcessed } from './node/struct';
-import { DiagnoseList } from '../diagnose';
+    OpCodeNode
+} from "../ast/node";
+import { ContextE, initContext } from "../context";
+import { parseMacro } from "./function";
+import { processNode } from "./node";
+import { NodeProcessed } from "./node/struct";
+import { DiagnoseList } from "../diagnose";
 
 export function applyMacros(fileNode: FileNode): DiagnoseList {
     const context = new ContextE(initContext(fileNode));
@@ -17,15 +17,21 @@ export function applyMacros(fileNode: FileNode): DiagnoseList {
     // TODO: maybe make a while for nested macros
 
     const nodeE = new NodeE(fileNode);
-    const allNodes = Array.from(nodeE.traverse());
-    for (const data of allNodes) {
+
+    const iter = nodeE.traverseDeepDepth();
+    let value = iter.next();
+    while (!value.done) {
+        const data = value.value;
+
         context.c.temp.node = data.node.n;
         if (data.node.n.type === NodeType.OpCode) {
             const nodes = parseMacro(
                 context,
-                data as NodeEParentData<OpCodeNode>,
+                data as NodeEParentData<OpCodeNode>
             );
             data.container.splice(data.index, 1, ...nodes);
+            value = iter.next();
+
             continue;
         }
 
@@ -34,6 +40,7 @@ export function applyMacros(fileNode: FileNode): DiagnoseList {
             const container = data.container as NodeProcessed[];
             container.splice(data.index, 1, ...processing);
         }
+        value = iter.next();
     }
 
     context.diagnoseAll();

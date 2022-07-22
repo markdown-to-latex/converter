@@ -1,0 +1,557 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`macros table 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 1,
+        },
+        "text": "0",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 26,
+          "start": 18,
+        },
+        "type": "Br",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 96,
+        "start": 0,
+      },
+      "raw": "
+!TK[table-label]
+        
+!T[table-label](a table)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 51,
+      "start": 1,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "header": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 58,
+                  "start": 54,
+                },
+                "text": "asda",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 58,
+              "start": 54,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 65,
+                  "start": 59,
+                },
+                "text": "asdasd",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 65,
+              "start": 59,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": Object {
+          "header": [Circular],
+          "parent": Object {
+            "children": [Circular],
+            "parent": null,
+            "path": "test.md",
+            "pos": Object {
+              "end": 96,
+              "start": 0,
+            },
+            "raw": "
+!TK[table-label]
+        
+!T[table-label](a table)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+            "type": "File",
+          },
+          "pos": Object {
+            "end": 94,
+            "start": 53,
+          },
+          "rows": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [],
+                      "parent": [Circular],
+                      "pos": Object {
+                        "end": 86,
+                        "start": 82,
+                      },
+                      "text": "asda",
+                      "type": "Text",
+                    },
+                  ],
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 86,
+                    "start": 82,
+                  },
+                  "type": "TableCell",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [],
+                      "parent": [Circular],
+                      "pos": Object {
+                        "end": 93,
+                        "start": 87,
+                      },
+                      "text": "asdasd",
+                      "type": "Text",
+                    },
+                  ],
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 93,
+                    "start": 87,
+                  },
+                  "type": "TableCell",
+                },
+              ],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 94,
+                "start": 81,
+              },
+              "type": "TableRow",
+            },
+          ],
+          "type": "Table",
+        },
+        "pos": Object {
+          "end": 66,
+          "start": 53,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 72,
+              "start": 68,
+            },
+            "type": "TableControlCell",
+          },
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 79,
+              "start": 73,
+            },
+            "type": "TableControlCell",
+          },
+        ],
+        "parent": Object {
+          "header": [Circular],
+          "parent": Object {
+            "children": [Circular],
+            "parent": null,
+            "path": "test.md",
+            "pos": Object {
+              "end": 96,
+              "start": 0,
+            },
+            "raw": "
+!TK[table-label]
+        
+!T[table-label](a table)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+            "type": "File",
+          },
+          "pos": Object {
+            "end": 94,
+            "start": 53,
+          },
+          "rows": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [],
+                      "parent": [Circular],
+                      "pos": Object {
+                        "end": 86,
+                        "start": 82,
+                      },
+                      "text": "asda",
+                      "type": "Text",
+                    },
+                  ],
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 86,
+                    "start": 82,
+                  },
+                  "type": "TableCell",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [],
+                      "parent": [Circular],
+                      "pos": Object {
+                        "end": 93,
+                        "start": 87,
+                      },
+                      "text": "asdasd",
+                      "type": "Text",
+                    },
+                  ],
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 93,
+                    "start": 87,
+                  },
+                  "type": "TableCell",
+                },
+              ],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 94,
+                "start": 81,
+              },
+              "type": "TableRow",
+            },
+          ],
+          "type": "Table",
+        },
+        "pos": Object {
+          "end": 80,
+          "start": 67,
+        },
+        "type": "TableControlRow",
+      },
+    ],
+    "label": "table-label",
+    "name": Array [
+      Object {
+        "children": Array [],
+        "parent": Object {
+          "keyArgs": Object {},
+          "label": "table-label",
+          "opcode": "T",
+          "parent": Object {
+            "children": Array [
+              Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 17,
+                  "start": 1,
+                },
+                "text": "0",
+                "type": "Text",
+              },
+              Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 26,
+                  "start": 18,
+                },
+                "type": "Br",
+              },
+            ],
+            "parent": Object {
+              "children": [Circular],
+              "parent": null,
+              "path": "test.md",
+              "pos": Object {
+                "end": 96,
+                "start": 0,
+              },
+              "raw": "
+!TK[table-label]
+        
+!T[table-label](a table)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+              "type": "File",
+            },
+            "pos": Object {
+              "end": 51,
+              "start": 1,
+            },
+            "type": "Paragraph",
+          },
+          "pos": Object {
+            "end": 51,
+            "start": 27,
+          },
+          "posArgs": Array [
+            Array [
+              [Circular],
+            ],
+          ],
+          "type": "OpCode",
+        },
+        "pos": Object {
+          "end": 50,
+          "start": 43,
+        },
+        "text": "a table",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 96,
+        "start": 0,
+      },
+      "raw": "
+!TK[table-label]
+        
+!T[table-label](a table)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 94,
+      "start": 53,
+    },
+    "rows": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 86,
+                  "start": 82,
+                },
+                "text": "asda",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 86,
+              "start": 82,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 93,
+                  "start": 87,
+                },
+                "text": "asdasd",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 93,
+              "start": 87,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": Object {
+          "header": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [],
+                      "parent": [Circular],
+                      "pos": Object {
+                        "end": 58,
+                        "start": 54,
+                      },
+                      "text": "asda",
+                      "type": "Text",
+                    },
+                  ],
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 58,
+                    "start": 54,
+                  },
+                  "type": "TableCell",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [],
+                      "parent": [Circular],
+                      "pos": Object {
+                        "end": 65,
+                        "start": 59,
+                      },
+                      "text": "asdasd",
+                      "type": "Text",
+                    },
+                  ],
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 65,
+                    "start": 59,
+                  },
+                  "type": "TableCell",
+                },
+              ],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 66,
+                "start": 53,
+              },
+              "type": "TableRow",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "align": "Default",
+                  "joinColsRight": undefined,
+                  "joinRowsUp": undefined,
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 72,
+                    "start": 68,
+                  },
+                  "type": "TableControlCell",
+                },
+                Object {
+                  "align": "Default",
+                  "joinColsRight": undefined,
+                  "joinRowsUp": undefined,
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 79,
+                    "start": 73,
+                  },
+                  "type": "TableControlCell",
+                },
+              ],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 80,
+                "start": 67,
+              },
+              "type": "TableControlRow",
+            },
+          ],
+          "parent": Object {
+            "children": [Circular],
+            "parent": null,
+            "path": "test.md",
+            "pos": Object {
+              "end": 96,
+              "start": 0,
+            },
+            "raw": "
+!TK[table-label]
+        
+!T[table-label](a table)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+            "type": "File",
+          },
+          "pos": Object {
+            "end": 94,
+            "start": 53,
+          },
+          "rows": [Circular],
+          "type": "Table",
+        },
+        "pos": Object {
+          "end": 94,
+          "start": 81,
+        },
+        "type": "TableRow",
+      },
+    ],
+    "type": "TableProcessed",
+  },
+]
+`;

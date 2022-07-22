@@ -1,19 +1,9 @@
-import { ContextE } from '../context';
-import {
-    Node,
-    NodeEParentData,
-    NodeType,
-    OpCodeNode,
-    TextNode,
-} from '../ast/node';
-import { CommandInfo } from './struct';
-import pictureKey from './command/pictureKey';
-import { parseMacrosArguments } from './args';
-import {
-    DiagnoseErrorType,
-    DiagnoseSeverity,
-    nodeToDiagnose,
-} from '../diagnose';
+import { ContextE } from "../context";
+import { Node, NodeEParentData, NodeType, OpCodeNode, TextNode } from "../ast/node";
+import { CommandInfo } from "./struct";
+import pictureKey from "./command/pictureKey";
+import { parseMacrosArguments } from "./args";
+import { DiagnoseErrorType, diagnoseListHasSeverity, DiagnoseSeverity, nodeToDiagnose } from "../diagnose";
 import table from "./command/table";
 import tableKey from "./command/tableKey";
 
@@ -65,6 +55,9 @@ function applyCommandForMacros(
     const opCodeNode = data.node.n;
     const parseResult = parseMacrosArguments(opCodeNode, command.args);
     ctx.c.diagnostic.push(...parseResult.diagnostic);
+    if (diagnoseListHasSeverity(parseResult.diagnostic, DiagnoseSeverity.Error)) {
+        return [];
+    }
 
     if (!command.labelOptional && !opCodeNode.label) {
         ctx.c.diagnostic.push(

@@ -7,8 +7,8 @@ describe('macros', () => {
     test('table', () => {
         const rawNode = rawNodeTemplate(`
 !TK[table-label]
-        
-!T[table-label]
+
+!T[table-label](a table)
 
 |asda|asdasd|
 |----|------|
@@ -16,6 +16,7 @@ describe('macros', () => {
 
 `);
         const { nodes } = applyVisitors([rawNode]);
+        (rawNode.parent as FileNode).children = nodes;
 
         const diagnostic = applyMacros(rawNode.parent as FileNode);
         expect(diagnostic).toHaveLength(0)
