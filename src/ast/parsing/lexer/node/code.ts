@@ -51,15 +51,17 @@ export const isCode: TokenPredicate = function (token, index, node) {
 const argInfo: ArgInfo[] = [
     {
         name: 'name',
+        aliases: ['n'],
         type: ArgInfoType.NodeArray,
         optional: true,
-        aliases: ['n'],
+        onlySpans: true,
     },
     {
         name: 'language',
+        aliases: ['lang', 'l'],
         type: ArgInfoType.Text,
         optional: true,
-        aliases: ['lang', 'l'],
+        onlySpans: true,
     },
 ];
 

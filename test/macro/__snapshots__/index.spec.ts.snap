@@ -1,25 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`macros table 1`] = `
+exports[`references multiple references 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "test.md",
+    "message": "Unused reference label ref-2",
+    "pos": Object {
+      "end": Object {
+        "absolute": 38,
+        "column": 2,
+        "line": 7,
+      },
+      "start": Object {
+        "absolute": 20,
+        "column": 1,
+        "line": 5,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`references multiple references 2`] = `
 Array [
   Object {
     "children": Array [
       Object {
+        "children": Array [],
         "parent": [Circular],
         "pos": Object {
-          "end": 17,
-          "start": 1,
+          "end": 137,
+          "start": 59,
         },
-        "text": "0",
+        "text": "Block-Matching Convolutional Neural Network for Image Denoising described in [",
         "type": "Text",
       },
       Object {
+        "index": 0,
         "parent": [Circular],
         "pos": Object {
-          "end": 26,
-          "start": 18,
+          "end": 147,
+          "start": 137,
         },
-        "type": "Br",
+        "type": "ReferenceKey",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 149,
+          "start": 147,
+        },
+        "text": ", ",
+        "type": "Text",
+      },
+      Object {
+        "index": 1,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 159,
+          "start": 149,
+        },
+        "type": "ReferenceKey",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 161,
+          "start": 159,
+        },
+        "text": "].",
+        "type": "Text",
       },
     ],
     "parent": Object {
@@ -27,12 +81,1133 @@ Array [
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 96,
+        "end": 177,
+        "start": 0,
+      },
+      "raw": "
+!R[ref-1](
+    A
+)
+!R[ref-2](
+    B
+)
+!R[ref-3](
+    C
+)
+
+Block-Matching Convolutional Neural Network
+for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 161,
+      "start": 59,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-3",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 177,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    A
+)
+!R[ref-2](
+    B
+)
+!R[ref-3](
+    C
+)
+
+Block-Matching Convolutional Neural Network
+for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 57,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 57,
+                    "start": 39,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 55,
+                  "start": 54,
+                },
+                "text": "C",
+                "type": "Text",
+              },
+            ],
+            "index": 0,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 55,
+              "start": 54,
+            },
+            "type": "Reference",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 177,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    A
+)
+!R[ref-2](
+    B
+)
+!R[ref-3](
+    C
+)
+
+Block-Matching Convolutional Neural Network
+for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 57,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 19,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 17,
+                  "start": 16,
+                },
+                "text": "A",
+                "type": "Text",
+              },
+            ],
+            "index": 1,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 17,
+              "start": 16,
+            },
+            "type": "Reference",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 169,
+          "start": 163,
+        },
+        "type": "AllReferences",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 176,
+          "start": 170,
+        },
+        "type": "AllApplications",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 177,
+        "start": 0,
+      },
+      "raw": "
+!R[ref-1](
+    A
+)
+!R[ref-2](
+    B
+)
+!R[ref-3](
+    C
+)
+
+Block-Matching Convolutional Neural Network
+for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 176,
+      "start": 163,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`references simple reference 1`] = `
+Array [
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 264,
+        "start": 0,
+      },
+      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 156,
+      "start": 1,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 236,
+          "start": 158,
+        },
+        "text": "Block-Matching Convolutional Neural Network for Image Denoising described in [",
+        "type": "Text",
+      },
+      Object {
+        "index": 0,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 246,
+          "start": 236,
+        },
+        "type": "ReferenceKey",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 248,
+          "start": 246,
+        },
+        "text": "].",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 264,
+        "start": 0,
+      },
+      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 248,
+      "start": 158,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 20,
+                  "start": 16,
+                },
+                "text": "Ahn,",
+                "type": "Text",
+              },
+              Object {
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 21,
+                  "start": 20,
+                },
+                "type": "ThinNonBreakingSpace",
+              },
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 35,
+                  "start": 21,
+                },
+                "text": "Byeongyong; Ik",
+                "type": "Text",
+              },
+              Object {
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 36,
+                  "start": 35,
+                },
+                "type": "ThinNonBreakingSpace",
+              },
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 40,
+                  "start": 36,
+                },
+                "text": "Cho,",
+                "type": "Text",
+              },
+              Object {
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 41,
+                  "start": 40,
+                },
+                "type": "ThinNonBreakingSpace",
+              },
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 47,
+                  "start": 41,
+                },
+                "text": "Nam (3",
+                "type": "Text",
+              },
+              Object {
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 49,
+                  "start": 47,
+                },
+                "type": "NonBreakingSpace",
+              },
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 54,
+                  "start": 49,
+                },
+                "text": "April",
+                "type": "Text",
+              },
+              Object {
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 56,
+                  "start": 54,
+                },
+                "type": "NonBreakingSpace",
+              },
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 67,
+                  "start": 56,
+                },
+                "text": "2017).     ",
+                "type": "Text",
+              },
+              Object {
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 132,
+                  "start": 67,
+                },
+                "text": "Block-Matching Convolutional Neural Network for Image Denoising",
+                "type": "CodeSpan",
+              },
+              Object {
+                "children": Array [],
+                "parent": Object {
+                  "keyArgs": Object {},
+                  "label": "ref-1",
+                  "opcode": "R",
+                  "parent": Object {
+                    "children": Array [],
+                    "parent": Object {
+                      "children": [Circular],
+                      "parent": null,
+                      "path": "test.md",
+                      "pos": Object {
+                        "end": 264,
+                        "start": 0,
+                      },
+                      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                      "type": "File",
+                    },
+                    "pos": Object {
+                      "end": 156,
+                      "start": 1,
+                    },
+                    "type": "Paragraph",
+                  },
+                  "pos": Object {
+                    "end": 156,
+                    "start": 1,
+                  },
+                  "posArgs": Array [
+                    [Circular],
+                  ],
+                  "type": "OpCode",
+                },
+                "pos": Object {
+                  "end": 154,
+                  "start": 132,
+                },
+                "text": ".     arXiv:1704.00524",
+                "type": "Text",
+              },
+            ],
+            "index": 0,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 154,
+              "start": 16,
+            },
+            "type": "Reference",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 256,
+          "start": 250,
+        },
+        "type": "AllReferences",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 263,
+          "start": 257,
+        },
+        "type": "AllApplications",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 264,
+        "start": 0,
+      },
+      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 263,
+      "start": 250,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`tables error block node in the name 1`] = `
+Array [
+  Object {
+    "errorType": 3,
+    "filePath": "test.md",
+    "message": "Cannot use non-span nodes at argument name",
+    "pos": Object {
+      "end": Object {
+        "absolute": 57,
+        "column": 4,
+        "line": 7,
+      },
+      "start": Object {
+        "absolute": 41,
+        "column": 1,
+        "line": 5,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 3,
+    "filePath": "test.md",
+    "message": "Table must be followed by !T[] macros",
+    "pos": Object {
+      "end": Object {
+        "absolute": 102,
+        "column": 14,
+        "line": 12,
+      },
+      "start": Object {
+        "absolute": 61,
+        "column": 1,
+        "line": 10,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "test.md",
+    "message": "Undefined table label table-label",
+    "pos": Object {
+      "end": Object {
+        "absolute": 17,
+        "column": 17,
+        "line": 2,
+      },
+      "start": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 2,
+      },
+    },
+    "severity": "ERROR",
+  },
+]
+`;
+
+exports[`tables table 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "index": 0,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 1,
+        },
+        "type": "TableKey",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 88,
         "start": 0,
       },
       "raw": "
 !TK[table-label]
-        
+
 !T[table-label](a table)
 
 |asda|asdasd|
@@ -43,8 +1218,36 @@ Array [
       "type": "File",
     },
     "pos": Object {
-      "end": 51,
+      "end": 17,
       "start": 1,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 88,
+        "start": 0,
+      },
+      "raw": "
+!TK[table-label]
+
+!T[table-label](a table)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 43,
+      "start": 19,
     },
     "type": "Paragraph",
   },
@@ -58,8 +1261,8 @@ Array [
                 "children": Array [],
                 "parent": [Circular],
                 "pos": Object {
-                  "end": 58,
-                  "start": 54,
+                  "end": 50,
+                  "start": 46,
                 },
                 "text": "asda",
                 "type": "Text",
@@ -67,8 +1270,8 @@ Array [
             ],
             "parent": [Circular],
             "pos": Object {
-              "end": 58,
-              "start": 54,
+              "end": 50,
+              "start": 46,
             },
             "type": "TableCell",
           },
@@ -78,8 +1281,8 @@ Array [
                 "children": Array [],
                 "parent": [Circular],
                 "pos": Object {
-                  "end": 65,
-                  "start": 59,
+                  "end": 57,
+                  "start": 51,
                 },
                 "text": "asdasd",
                 "type": "Text",
@@ -87,8 +1290,8 @@ Array [
             ],
             "parent": [Circular],
             "pos": Object {
-              "end": 65,
-              "start": 59,
+              "end": 57,
+              "start": 51,
             },
             "type": "TableCell",
           },
@@ -100,12 +1303,12 @@ Array [
             "parent": null,
             "path": "test.md",
             "pos": Object {
-              "end": 96,
+              "end": 88,
               "start": 0,
             },
             "raw": "
 !TK[table-label]
-        
+
 !T[table-label](a table)
 
 |asda|asdasd|
@@ -116,8 +1319,8 @@ Array [
             "type": "File",
           },
           "pos": Object {
-            "end": 94,
-            "start": 53,
+            "end": 86,
+            "start": 45,
           },
           "rows": Array [
             Object {
@@ -128,8 +1331,8 @@ Array [
                       "children": Array [],
                       "parent": [Circular],
                       "pos": Object {
-                        "end": 86,
-                        "start": 82,
+                        "end": 78,
+                        "start": 74,
                       },
                       "text": "asda",
                       "type": "Text",
@@ -137,8 +1340,8 @@ Array [
                   ],
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 86,
-                    "start": 82,
+                    "end": 78,
+                    "start": 74,
                   },
                   "type": "TableCell",
                 },
@@ -148,8 +1351,8 @@ Array [
                       "children": Array [],
                       "parent": [Circular],
                       "pos": Object {
-                        "end": 93,
-                        "start": 87,
+                        "end": 85,
+                        "start": 79,
                       },
                       "text": "asdasd",
                       "type": "Text",
@@ -157,16 +1360,16 @@ Array [
                   ],
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 93,
-                    "start": 87,
+                    "end": 85,
+                    "start": 79,
                   },
                   "type": "TableCell",
                 },
               ],
               "parent": [Circular],
               "pos": Object {
-                "end": 94,
-                "start": 81,
+                "end": 86,
+                "start": 73,
               },
               "type": "TableRow",
             },
@@ -174,8 +1377,8 @@ Array [
           "type": "Table",
         },
         "pos": Object {
-          "end": 66,
-          "start": 53,
+          "end": 58,
+          "start": 45,
         },
         "type": "TableRow",
       },
@@ -187,8 +1390,8 @@ Array [
             "joinRowsUp": undefined,
             "parent": [Circular],
             "pos": Object {
-              "end": 72,
-              "start": 68,
+              "end": 64,
+              "start": 60,
             },
             "type": "TableControlCell",
           },
@@ -198,8 +1401,8 @@ Array [
             "joinRowsUp": undefined,
             "parent": [Circular],
             "pos": Object {
-              "end": 79,
-              "start": 73,
+              "end": 71,
+              "start": 65,
             },
             "type": "TableControlCell",
           },
@@ -211,12 +1414,12 @@ Array [
             "parent": null,
             "path": "test.md",
             "pos": Object {
-              "end": 96,
+              "end": 88,
               "start": 0,
             },
             "raw": "
 !TK[table-label]
-        
+
 !T[table-label](a table)
 
 |asda|asdasd|
@@ -227,8 +1430,8 @@ Array [
             "type": "File",
           },
           "pos": Object {
-            "end": 94,
-            "start": 53,
+            "end": 86,
+            "start": 45,
           },
           "rows": Array [
             Object {
@@ -239,8 +1442,8 @@ Array [
                       "children": Array [],
                       "parent": [Circular],
                       "pos": Object {
-                        "end": 86,
-                        "start": 82,
+                        "end": 78,
+                        "start": 74,
                       },
                       "text": "asda",
                       "type": "Text",
@@ -248,8 +1451,8 @@ Array [
                   ],
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 86,
-                    "start": 82,
+                    "end": 78,
+                    "start": 74,
                   },
                   "type": "TableCell",
                 },
@@ -259,8 +1462,8 @@ Array [
                       "children": Array [],
                       "parent": [Circular],
                       "pos": Object {
-                        "end": 93,
-                        "start": 87,
+                        "end": 85,
+                        "start": 79,
                       },
                       "text": "asdasd",
                       "type": "Text",
@@ -268,16 +1471,16 @@ Array [
                   ],
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 93,
-                    "start": 87,
+                    "end": 85,
+                    "start": 79,
                   },
                   "type": "TableCell",
                 },
               ],
               "parent": [Circular],
               "pos": Object {
-                "end": 94,
-                "start": 81,
+                "end": 86,
+                "start": 73,
               },
               "type": "TableRow",
             },
@@ -285,8 +1488,8 @@ Array [
           "type": "Table",
         },
         "pos": Object {
-          "end": 80,
-          "start": 67,
+          "end": 72,
+          "start": 59,
         },
         "type": "TableControlRow",
       },
@@ -300,36 +1503,18 @@ Array [
           "label": "table-label",
           "opcode": "T",
           "parent": Object {
-            "children": Array [
-              Object {
-                "parent": [Circular],
-                "pos": Object {
-                  "end": 17,
-                  "start": 1,
-                },
-                "text": "0",
-                "type": "Text",
-              },
-              Object {
-                "parent": [Circular],
-                "pos": Object {
-                  "end": 26,
-                  "start": 18,
-                },
-                "type": "Br",
-              },
-            ],
+            "children": Array [],
             "parent": Object {
               "children": [Circular],
               "parent": null,
               "path": "test.md",
               "pos": Object {
-                "end": 96,
+                "end": 88,
                 "start": 0,
               },
               "raw": "
 !TK[table-label]
-        
+
 !T[table-label](a table)
 
 |asda|asdasd|
@@ -340,14 +1525,14 @@ Array [
               "type": "File",
             },
             "pos": Object {
-              "end": 51,
-              "start": 1,
+              "end": 43,
+              "start": 19,
             },
             "type": "Paragraph",
           },
           "pos": Object {
-            "end": 51,
-            "start": 27,
+            "end": 43,
+            "start": 19,
           },
           "posArgs": Array [
             Array [
@@ -357,8 +1542,8 @@ Array [
           "type": "OpCode",
         },
         "pos": Object {
-          "end": 50,
-          "start": 43,
+          "end": 42,
+          "start": 35,
         },
         "text": "a table",
         "type": "Text",
@@ -369,12 +1554,12 @@ Array [
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 96,
+        "end": 88,
         "start": 0,
       },
       "raw": "
 !TK[table-label]
-        
+
 !T[table-label](a table)
 
 |asda|asdasd|
@@ -385,8 +1570,8 @@ Array [
       "type": "File",
     },
     "pos": Object {
-      "end": 94,
-      "start": 53,
+      "end": 86,
+      "start": 45,
     },
     "rows": Array [
       Object {
@@ -397,8 +1582,8 @@ Array [
                 "children": Array [],
                 "parent": [Circular],
                 "pos": Object {
-                  "end": 86,
-                  "start": 82,
+                  "end": 78,
+                  "start": 74,
                 },
                 "text": "asda",
                 "type": "Text",
@@ -406,8 +1591,8 @@ Array [
             ],
             "parent": [Circular],
             "pos": Object {
-              "end": 86,
-              "start": 82,
+              "end": 78,
+              "start": 74,
             },
             "type": "TableCell",
           },
@@ -417,8 +1602,8 @@ Array [
                 "children": Array [],
                 "parent": [Circular],
                 "pos": Object {
-                  "end": 93,
-                  "start": 87,
+                  "end": 85,
+                  "start": 79,
                 },
                 "text": "asdasd",
                 "type": "Text",
@@ -426,8 +1611,8 @@ Array [
             ],
             "parent": [Circular],
             "pos": Object {
-              "end": 93,
-              "start": 87,
+              "end": 85,
+              "start": 79,
             },
             "type": "TableCell",
           },
@@ -442,8 +1627,8 @@ Array [
                       "children": Array [],
                       "parent": [Circular],
                       "pos": Object {
-                        "end": 58,
-                        "start": 54,
+                        "end": 50,
+                        "start": 46,
                       },
                       "text": "asda",
                       "type": "Text",
@@ -451,8 +1636,8 @@ Array [
                   ],
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 58,
-                    "start": 54,
+                    "end": 50,
+                    "start": 46,
                   },
                   "type": "TableCell",
                 },
@@ -462,8 +1647,8 @@ Array [
                       "children": Array [],
                       "parent": [Circular],
                       "pos": Object {
-                        "end": 65,
-                        "start": 59,
+                        "end": 57,
+                        "start": 51,
                       },
                       "text": "asdasd",
                       "type": "Text",
@@ -471,16 +1656,16 @@ Array [
                   ],
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 65,
-                    "start": 59,
+                    "end": 57,
+                    "start": 51,
                   },
                   "type": "TableCell",
                 },
               ],
               "parent": [Circular],
               "pos": Object {
-                "end": 66,
-                "start": 53,
+                "end": 58,
+                "start": 45,
               },
               "type": "TableRow",
             },
@@ -492,8 +1677,8 @@ Array [
                   "joinRowsUp": undefined,
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 72,
-                    "start": 68,
+                    "end": 64,
+                    "start": 60,
                   },
                   "type": "TableControlCell",
                 },
@@ -503,16 +1688,16 @@ Array [
                   "joinRowsUp": undefined,
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 79,
-                    "start": 73,
+                    "end": 71,
+                    "start": 65,
                   },
                   "type": "TableControlCell",
                 },
               ],
               "parent": [Circular],
               "pos": Object {
-                "end": 80,
-                "start": 67,
+                "end": 72,
+                "start": 59,
               },
               "type": "TableControlRow",
             },
@@ -522,12 +1707,12 @@ Array [
             "parent": null,
             "path": "test.md",
             "pos": Object {
-              "end": 96,
+              "end": 88,
               "start": 0,
             },
             "raw": "
 !TK[table-label]
-        
+
 !T[table-label](a table)
 
 |asda|asdasd|
@@ -538,20 +1723,79 @@ Array [
             "type": "File",
           },
           "pos": Object {
-            "end": 94,
-            "start": 53,
+            "end": 86,
+            "start": 45,
           },
           "rows": [Circular],
           "type": "Table",
         },
         "pos": Object {
-          "end": 94,
-          "start": 81,
+          "end": 86,
+          "start": 73,
         },
         "type": "TableRow",
       },
     ],
     "type": "TableProcessed",
+  },
+]
+`;
+
+exports[`tables table with macro err 1`] = `
+Array [
+  Object {
+    "errorType": 0,
+    "filePath": "test.md",
+    "message": "Expected argument 'name'",
+    "pos": Object {
+      "end": Object {
+        "absolute": 34,
+        "column": 16,
+        "line": 4,
+      },
+      "start": Object {
+        "absolute": 19,
+        "column": 1,
+        "line": 4,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 3,
+    "filePath": "test.md",
+    "message": "Table must be followed by !T[] macros",
+    "pos": Object {
+      "end": Object {
+        "absolute": 77,
+        "column": 14,
+        "line": 8,
+      },
+      "start": Object {
+        "absolute": 36,
+        "column": 1,
+        "line": 6,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "test.md",
+    "message": "Undefined table label table-label",
+    "pos": Object {
+      "end": Object {
+        "absolute": 17,
+        "column": 17,
+        "line": 2,
+      },
+      "start": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 2,
+      },
+    },
+    "severity": "ERROR",
   },
 ]
 `;

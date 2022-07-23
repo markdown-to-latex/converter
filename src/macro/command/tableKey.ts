@@ -1,5 +1,5 @@
 import { CommandInfo, CommandInfoCallback } from '../struct';
-import { NodeType, TextNode } from '../../ast/node';
+import { ProcessedNodeType, TableKeyNode } from '../node/struct';
 
 interface ArgsType {}
 
@@ -10,9 +10,9 @@ const callback: CommandInfoCallback<ArgsType, string> = function (
 ) {
     const index = ctx.getOrCreateTableLabelIndex(args.label);
 
-    const textNode: TextNode = {
-        type: NodeType.Text,
-        text: index.toString(),
+    const textNode: TableKeyNode = {
+        type: ProcessedNodeType.TableKey,
+        index,
         pos: {
             ...data.node.n.pos,
         },

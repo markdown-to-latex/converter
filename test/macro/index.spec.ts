@@ -1,9 +1,9 @@
-import {rawNodeTemplate} from "../ast/parsing/lexer/utils";
-import {applyVisitors} from "../../src/ast/parsing/lexer";
-import {FileNode, ParagraphNode} from "../../src/ast/node";
-import {applyMacros} from "../../src/macro";
+import { rawNodeTemplate } from '../ast/parsing/lexer/utils';
+import { applyVisitors } from '../../src/ast/parsing/lexer';
+import { FileNode, ParagraphNode } from '../../src/ast/node';
+import { applyMacros } from '../../src/macro';
 
-describe('macros', () => {
+describe('tables', () => {
     test('table', () => {
         const rawNode = rawNodeTemplate(`
 !TK[table-label]
@@ -19,8 +19,99 @@ describe('macros', () => {
         (rawNode.parent as FileNode).children = nodes;
 
         const diagnostic = applyMacros(rawNode.parent as FileNode);
-        expect(diagnostic).toHaveLength(0)
-        // TODO: not working, needs in-depth traverse
+        expect(diagnostic).toHaveLength(0);
         expect(nodes).toMatchSnapshot();
-    })
+    });
+
+    test('table with macro err', () => {
+        const rawNode = rawNodeTemplate(`
+!TK[table-label]
+
+!T[table-label]
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+`);
+        const { nodes } = applyVisitors([rawNode]);
+        (rawNode.parent as FileNode).children = nodes;
+
+        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        expect(diagnostic).toHaveLength(3);
+        expect(diagnostic).toMatchSnapshot();
+    });
+
+    test('error block node in the name', () => {
+        const rawNode = rawNodeTemplate(`
+!TK[table-label]
+
+!T[table-label](@name
+\`\`\`
+The name
+\`\`\`
+)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+`);
+        const { nodes } = applyVisitors([rawNode]);
+        (rawNode.parent as FileNode).children = nodes;
+
+        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        expect(diagnostic).toHaveLength(3);
+        expect(diagnostic).toMatchSnapshot();
+    });
+});
+
+describe('references', () => {
+    test('simple reference', () => {
+        const rawNode = rawNodeTemplate(`
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+`);
+        const { nodes, diagnostic: diagnostic1 } = applyVisitors([rawNode]);
+        (rawNode.parent as FileNode).children = nodes;
+
+        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('multiple references', () => {
+        const rawNode = rawNodeTemplate(`
+!R[ref-1](
+    A
+)
+!R[ref-2](
+    B
+)
+!R[ref-3](
+    C
+)
+
+Block-Matching Convolutional Neural Network
+for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
+
+!LAR[]
+!LAA[]
+`);
+        const { nodes, diagnostic: diagnostic1 } = applyVisitors([rawNode]);
+        (rawNode.parent as FileNode).children = nodes;
+
+        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        expect(diagnostic).toHaveLength(1);
+        expect(diagnostic).toMatchSnapshot();
+        expect(nodes).toMatchSnapshot();
+    });
 });

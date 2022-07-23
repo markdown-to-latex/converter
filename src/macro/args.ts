@@ -2,9 +2,8 @@ import {
     Node,
     NodeArgs,
     NodeType,
-    OpCodeNode,
+    SPAN_NODE_TYPES,
     TextNode,
-    TokensNode,
 } from '../ast/node';
 import {
     DiagnoseErrorType,
@@ -24,6 +23,7 @@ export interface ArgInfo {
     aliases: string[];
     type: ArgInfoType;
     optional: boolean;
+    onlySpans: boolean; // No block nodes
 }
 
 export type ParsedMacrosArguments = Record<string, Node[] | string | null>;
@@ -44,9 +44,32 @@ interface ConvertArgumentTypeResult<T extends ArgInfoType> {
 }
 
 const argumentConverter: {
-    [key in ArgInfoType]: (nodes: Node[]) => ConvertArgumentTypeResult<key>;
+    [key in ArgInfoType]: (
+        nodes: Node[],
+        info: ArgInfo,
+    ) => ConvertArgumentTypeResult<key>;
 } = {
-    [ArgInfoType.NodeArray]: nodes => ({ result: nodes, diagnostic: [] }),
+    [ArgInfoType.NodeArray]: (nodes, info) => {
+        const diagnostic: DiagnoseList = [];
+        if (info.onlySpans) {
+            diagnostic.push(
+                ...nodes
+                    .filter(
+                        n => SPAN_NODE_TYPES.indexOf(n.type as NodeType) === -1,
+                    )
+                    .map(n =>
+                        nodeToDiagnose(
+                            n,
+                            DiagnoseSeverity.Error,
+                            DiagnoseErrorType.MacrosError,
+                            `Cannot use non-span nodes at argument ${info.name}`,
+                        ),
+                    ),
+            );
+        }
+
+        return { result: nodes, diagnostic: diagnostic };
+    },
 
     [ArgInfoType.Text]: nodes => {
         if (nodes.length === 0) {
@@ -79,10 +102,11 @@ const argumentConverter: {
 };
 
 export function convertArgumentType<T extends ArgInfoType>(
+    info: ArgInfo,
     argument: Node[],
     type: T,
 ): ConvertArgumentTypeResult<T> {
-    return argumentConverter[type](argument);
+    return argumentConverter[type](argument, info);
 }
 
 export function parseMacrosArguments(
@@ -94,15 +118,20 @@ export function parseMacrosArguments(
 
     for (let i = 0; i < Math.min(node.posArgs.length, argsInfo.length); ++i) {
         const info = argsInfo[i];
-        const convertResult = convertArgumentType(node.posArgs[i], info.type);
+        const convertResult = convertArgumentType(
+            info,
+            node.posArgs[i],
+            info.type,
+        );
         diagnostic.push(...convertResult.diagnostic);
         result[info.name] = convertResult.result;
     }
 
     for (let i = argsInfo.length; i < node.posArgs.length; ++i) {
+        const posArgNodes = node.posArgs[i];
         diagnostic.push(
             nodesToDiagnose(
-                node.posArgs[i],
+                posArgNodes.length === 0 ? [node] : posArgNodes,
                 DiagnoseSeverity.Error,
                 DiagnoseErrorType.ApplyParserError,
                 `Unexpected positional image argument ${i}`,
@@ -123,10 +152,11 @@ export function parseMacrosArguments(
         }
 
         const key = keys.splice(index, 1)[0];
+        const keyArgNodes = node.keyArgs[key];
         if (result[info.name]) {
             diagnostic.push(
                 nodesToDiagnose(
-                    node.keyArgs[key],
+                    keyArgNodes.length === 0 ? [node] : keyArgNodes,
                     DiagnoseSeverity.Warning,
                     DiagnoseErrorType.ApplyParserError,
                     `Argument ${key} specified twice`,
@@ -134,7 +164,7 @@ export function parseMacrosArguments(
             );
         }
 
-        const convertResult = convertArgumentType(node.keyArgs[key], info.type);
+        const convertResult = convertArgumentType(info, keyArgNodes, info.type);
         diagnostic.push(...convertResult.diagnostic);
         result[info.name] = convertResult.result;
     }

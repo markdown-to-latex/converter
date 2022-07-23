@@ -2,6 +2,7 @@ import { FileNode, Node, NodeType } from '../ast/node';
 import { DiagnoseList } from '../diagnose';
 import { ContextConfig } from '../printer/context';
 import { ContextE } from './extension';
+import {NodeProcessed} from "../macro/node/struct";
 
 export interface ContextApplicationInfo {
     title: Node[];
@@ -9,7 +10,7 @@ export interface ContextApplicationInfo {
 }
 
 export interface ContextApplicationContentInfo extends ContextApplicationInfo {
-    content: (this: ContextApplicationContentInfo, indexText: Node[]) => Node[];
+    content: NodeProcessed[];
 }
 
 export interface ContextReferenceInfo {
@@ -17,7 +18,7 @@ export interface ContextReferenceInfo {
 }
 
 export interface ContextReferenceContentInfo extends ContextReferenceInfo {
-    content: (this: ContextReferenceContentInfo, indexText: Node[]) => Node[];
+    content: NodeProcessed[];
 }
 
 export interface ContextPictureInfo {

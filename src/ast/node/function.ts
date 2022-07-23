@@ -34,6 +34,10 @@ export function* traverseNodeChildren(
                 container: toProcess,
                 property: prop,
             };
+
+            if (child !== toProcess[i]) {
+                --i;
+            }
         }
     }
 }
@@ -51,14 +55,24 @@ function* __traverseNodeChildrenDeepDepth(
         property: property, // a little workaround
     };
 
-    const children = Array.from(traverseNodeChildren(originalNode));
-    for (const data of children) {
-        const iter = __traverseNodeChildrenDeepDepth(data.node, data.index, data.container, data.property);
-        let value = iter.next();
-        while (!value.done) {
-            yield value.value;
-            value = iter.next();
+    const iter = traverseNodeChildren(originalNode);
+    let value = iter.next();
+    while (!value.done) {
+        const data = value.value;
+
+        const innerIter = __traverseNodeChildrenDeepDepth(
+            data.node,
+            data.index,
+            data.container,
+            data.property,
+        );
+        let innerValue = innerIter.next();
+        while (!innerValue.done) {
+            yield innerValue.value;
+            innerValue = innerIter.next();
         }
+
+        value = iter.next();
     }
 }
 

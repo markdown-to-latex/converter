@@ -1,10 +1,11 @@
 import {CommandInfo, CommandInfoCallback} from '../struct';
+import {ProcessedNodeType} from '../node/struct';
 import {Node} from '../../ast/node';
 import {ArgInfoType} from '../args';
 import {DiagnoseErrorType, DiagnoseSeverity, nodeToDiagnose} from "../../diagnose";
 
 interface ArgsType {
-    name?: Node[];
+    reference?: Node[];
 }
 
 const callback: CommandInfoCallback<ArgsType, string> = function (
@@ -12,37 +13,35 @@ const callback: CommandInfoCallback<ArgsType, string> = function (
     data,
     args,
 ) {
-    if (!args.args.name) {
+    if (!args.args.reference) {
         ctx.c.diagnostic.push(nodeToDiagnose(
             data.node.n,
             DiagnoseSeverity.Fatal,
             DiagnoseErrorType.MacrosError,
-            'Table macros name argument is undefined ' +
+            'Reference macros reference argument is undefined ' +
             '(internal error)'
         ))
 
         return [];
     }
 
-    const tableData = {
+    ctx.createReference({
         label: args.label,
-        name: args.args.name,
-    };
-    const index = ctx.createTableLabelData(tableData);
-    ctx.c.temp.table = tableData;
+        content: args.args.reference,
+    });
     return [];
 };
 
 export default {
     args: [
         {
-            name: 'name',
-            aliases: ['n'],
+            name: 'reference',
+            aliases: ['r', 'ref'],
             type: ArgInfoType.NodeArray,
-            onlySpans: true,
+            onlySpans: false,
             optional: false,
         },
     ],
-    name: 'T',
-    callback: callback as CommandInfoCallback,
+    name: 'R',
+    callback: callback,
 } as CommandInfo;

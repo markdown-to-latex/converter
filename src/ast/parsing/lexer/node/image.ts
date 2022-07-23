@@ -33,18 +33,21 @@ const argInfo: ArgInfo[] = [
         name: 'name',
         type: ArgInfoType.NodeArray,
         optional: true,
+        onlySpans:  true,
         aliases: ['n'],
     },
     {
         name: 'width',
         type: ArgInfoType.Text,
         optional: true,
+        onlySpans:  true,
         aliases: ['w'],
     },
     {
         name: 'height',
         type: ArgInfoType.Text,
         optional: true,
+        onlySpans:  true,
         aliases: ['h'],
     },
 ];

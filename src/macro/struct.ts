@@ -5,6 +5,7 @@ import {
 } from './args';
 import { Context, ContextE } from '../context';
 import {Node, NodeE, OpCodeNode} from '../ast/node';
+import {NodeProcessed} from "./node/struct";
 
 export interface CommandMacrosNodeData {
     node: NodeE<OpCodeNode>;
@@ -21,7 +22,7 @@ export type CommandInfoCallback<T = ParsedMacrosArguments, LT = string | undefin
     ctx: ContextE,
     data: CommandMacrosNodeData,
     args: CommandMacrosArgsData<T, LT>,
-) => Node[];
+) => NodeProcessed[];
 
 export interface CommandInfo {
     args: ArgInfo[];

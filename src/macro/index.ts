@@ -1,15 +1,16 @@
 import {
     FileNode,
+    Node,
     NodeE,
     NodeEParentData,
     NodeType,
-    OpCodeNode
-} from "../ast/node";
-import { ContextE, initContext } from "../context";
-import { parseMacro } from "./function";
-import { processNode } from "./node";
-import { NodeProcessed } from "./node/struct";
-import { DiagnoseList } from "../diagnose";
+    OpCodeNode, ParagraphNode,
+} from '../ast/node';
+import {ContextE, initContext} from '../context';
+import {parseMacro} from './function';
+import {processNode} from './node';
+import {NodeProcessed} from './node/struct';
+import {DiagnoseList} from '../diagnose';
 
 export function applyMacros(fileNode: FileNode): DiagnoseList {
     const context = new ContextE(initContext(fileNode));
@@ -27,9 +28,9 @@ export function applyMacros(fileNode: FileNode): DiagnoseList {
         if (data.node.n.type === NodeType.OpCode) {
             const nodes = parseMacro(
                 context,
-                data as NodeEParentData<OpCodeNode>
+                data as NodeEParentData<OpCodeNode>,
             );
-            data.container.splice(data.index, 1, ...nodes);
+            data.container.splice(data.index, 1, ...(nodes as Node[]));
             value = iter.next();
 
             continue;
@@ -43,6 +44,26 @@ export function applyMacros(fileNode: FileNode): DiagnoseList {
         value = iter.next();
     }
 
+    clearance(fileNode);
+
     context.diagnoseAll();
     return context.c.diagnostic;
+}
+
+function clearance(fileNode: FileNode): void {
+    const nodeE = new NodeE(fileNode);
+
+    const iter = nodeE.traverse();
+    let value = iter.next();
+    while (!value.done) {
+        const data = value.value;
+
+        if (data.node.n.type === NodeType.Paragraph) {
+            const paragraphNode = data.node.n as ParagraphNode;
+            if (paragraphNode.children.length === 0) {
+                data.container.splice(data.index, 1);
+            }
+        }
+        value = iter.next();
+    }
 }
