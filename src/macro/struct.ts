@@ -3,7 +3,7 @@ import {
     ParsedMacrosArguments,
     ParseMacrosArgumentsResult,
 } from './args';
-import { Context, ContextE } from '../context';
+import { Context, ContextE } from './context';
 import {Node, NodeE, OpCodeNode} from '../ast/node';
 import {NodeProcessed} from "./node/struct";
 

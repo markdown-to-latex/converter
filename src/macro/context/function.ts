@@ -9,7 +9,7 @@ import {
     DiagnoseErrorType,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../diagnose';
+} from '../../diagnose';
 
 export function getOrCreateContextPictureLabelIndex(
     ctx: Context,

@@ -8,8 +8,7 @@ import {
     OpCodeNode,
     TableNode,
 } from '../../ast/node';
-import { CommandMacrosNodeData } from '../struct';
-import { ContextE } from '../../context';
+import { ContextE } from '../context';
 
 export interface ProcessingNodeData<T extends Node> {
     node: NodeE<T>;
@@ -29,7 +28,7 @@ export interface ProcessingInfo<T extends Node> {
 
 export const enum ProcessedNodeType {
     TableProcessed = 'TableProcessed',
-    ImageProcessed = 'ImageProcessed',
+    PictureProcessed = 'PictureProcessed',
     CodeProcessed = 'CodeProcessed',
 
     PictureKey = 'PictureKey',
@@ -62,14 +61,16 @@ export interface TableProcessedNode
     name: Node[];
     width?: string;
     height?: string;
+    index: number;
 }
 
 export interface ImageProcessedNode
     extends NodeProcessed,
         Omit<ImageNode, 'type'> {
-    type: ProcessedNodeType.ImageProcessed;
+    type: ProcessedNodeType.PictureProcessed;
     label: string;
     name: Node[];
+    index: number;
 }
 
 export interface CodeProcessedNode
@@ -79,6 +80,7 @@ export interface CodeProcessedNode
     label: string;
     name: Node[];
     lang: string;
+    index: number;
 }
 
 export interface PictureKeyNode extends NodeProcessed {
@@ -103,7 +105,7 @@ export interface ReferenceKeyNode extends NodeProcessed {
 
 export interface AllReferencesNode extends NodeProcessed {
     type: ProcessedNodeType.AllReferences;
-    children: ReferenceNode[]
+    children: ReferenceNode[];
 }
 
 export interface ReferenceNode extends NodeProcessed, NodeChildren {
@@ -113,7 +115,7 @@ export interface ReferenceNode extends NodeProcessed, NodeChildren {
 
 export interface AllApplicationsNode extends NodeProcessed {
     type: ProcessedNodeType.AllApplications;
-    children: ApplicationNode[]
+    children: ApplicationNode[];
 }
 
 export interface ApplicationNode extends NodeProcessed, NodeChildren {
@@ -128,16 +130,15 @@ export interface RawApplicationNode extends NodeProcessed, NodeChildren {
 
 export interface PictureApplicationNode
     extends NodeProcessed,
-        Omit<ImageProcessedNode, 'type' | 'name' | 'label'> {
+        Omit<ImageProcessedNode, 'type' | 'name' | 'label' | 'index'> {
     type: ProcessedNodeType.PictureApplication;
     rotated: boolean;
 }
 
-export interface CodeApplicationNode
-    extends NodeProcessed {
+export interface CodeApplicationNode extends NodeProcessed {
     type: ProcessedNodeType.CodeApplication;
-    columns: number
-    lang: string
+    columns: number;
+    lang: string;
     directory: string;
     filename: string;
 }

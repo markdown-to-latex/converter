@@ -9,7 +9,8 @@ import {
 } from '../node';
 import path from 'path';
 import { StringE } from '../../extension/string';
-import { tokenize, tokensToNode } from './tokenizer';
+import { applyVisitors } from './lexer';
+import { DiagnoseList } from '../../diagnose';
 
 export function fullContentPos(
     content: string | StringE,
@@ -25,7 +26,12 @@ export function fullContentPos(
     );
 }
 
-function parseFile(content: string, filePath: string) {
+export interface ParseFileResult {
+    result: FileNode;
+    diagnostic: DiagnoseList;
+}
+
+export function parseFile(content: string, filePath: string): ParseFileResult {
     const contentNode: RawNode = {
         type: RawNodeType.Raw,
         parent: null,
@@ -50,5 +56,11 @@ function parseFile(content: string, filePath: string) {
 
     contentNode.parent = fileNode;
 
-    let nodeE = NodeE.from(fileNode);
+    const result = applyVisitors([contentNode]);
+    fileNode.children = result.nodes;
+
+    return {
+        result: fileNode,
+        diagnostic: result.diagnostic,
+    };
 }

@@ -217,6 +217,14 @@ export const parseCode: TokenParser = function (tokens, index) {
         label: label,
         name: argsResult.name,
     };
+
+    parsePosArgsResult.result.forEach(v =>
+        v.forEach(v => (v.parent = codeNode)),
+    );
+    Object.values(parseKeyArgsResult.result).forEach(v =>
+        v.forEach(v => (v.parent = codeNode)),
+    );
+
     return {
         nodes: [codeNode],
         index: endTokenResult.index + 1,

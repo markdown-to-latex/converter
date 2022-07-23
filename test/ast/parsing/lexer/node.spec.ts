@@ -513,6 +513,21 @@ describe('Image parsing', () => {
         expect(diagnostic).toHaveLength(1);
         expect(diagnostic).toMatchSnapshot();
     });
+
+    test('Image args with aliases', () => {
+        const rawNode = rawNodeTemplate(`![image-label](../../image.png)(@w
+    10cm
+)(@n
+    Name
+)`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        const node = nodes[0] as ImageNode;
+        expect(node.type).toEqual(NodeType.Image);
+
+        expect(nodes).toMatchSnapshot();
+    });
 });
 
 describe('Em parsing', () => {
@@ -633,7 +648,7 @@ New sample text
         let node = nodes[1] as LatexNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Latex);
-        expect(node.text).toEqual('\\textbf{Some bold text in raw latex}');
+        expect(node.text).toEqual('\\textbf{Some bold text in raw __deprecated_latex}');
 
         expect(nodes).toMatchSnapshot();
     });
@@ -671,7 +686,7 @@ New sample text
         const node = paragraphNode.children[1] as LatexSpanNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.LatexSpan);
-        expect(node.text).toEqual('\\textbf{some inlined latex}');
+        expect(node.text).toEqual('\\textbf{some inlined __deprecated_latex}');
 
         expect(nodes).toMatchSnapshot();
     });

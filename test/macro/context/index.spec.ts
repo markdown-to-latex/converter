@@ -5,8 +5,8 @@ import {
     ContextPictureInfo,
     ContextReferenceContentInfo,
     ContextTableInfo,
-} from '../../src/context';
-import { Node, NodeType } from '../../src/ast/node';
+} from '../../../src/macro/context';
+import { Node, NodeType } from '../../../src/ast/node';
 
 function createSimpleContext(): ContextE {
     return new ContextE({
@@ -21,6 +21,7 @@ function createSimpleContext(): ContextE {
             },
             application: null,
             reference: null,
+            table: null,
         },
         data: {
             application: {

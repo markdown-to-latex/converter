@@ -1,5 +1,3 @@
-import { LINE_SPLIT_REGEXP } from '../../extension/regexp';
-
 export interface TextPosition {
     line: number;
     column: number;

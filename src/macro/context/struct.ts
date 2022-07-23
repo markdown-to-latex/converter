@@ -1,8 +1,8 @@
-import { FileNode, Node, NodeType } from '../ast/node';
-import { DiagnoseList } from '../diagnose';
-import { ContextConfig } from '../printer/context';
+import { FileNode, Node, NodeType } from '../../ast/node';
+import { DiagnoseList } from '../../diagnose';
+import { ContextConfig } from '../../printer/context';
 import { ContextE } from './extension';
-import {NodeProcessed} from "../macro/node/struct";
+import {NodeProcessed} from "../node/struct";
 
 export interface ContextApplicationInfo {
     title: Node[];

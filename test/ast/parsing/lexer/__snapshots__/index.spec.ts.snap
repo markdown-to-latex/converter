@@ -424,8 +424,9 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
     "type": "Paragraph",
   },
   Object {
-    "codeBlockStyle": null,
+    "label": undefined,
     "lang": "kotlin",
+    "name": undefined,
     "parent": Object {
       "children": Array [
         Object {
@@ -3318,6 +3319,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
   },
   Object {
     "href": "test.png",
+    "label": "image-label",
     "parent": Object {
       "children": Array [
         Object {
@@ -3487,7 +3489,6 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       "end": 1761,
       "start": 1737,
     },
-    "text": "image-label",
     "type": "Image",
   },
   Object {
@@ -3495,6 +3496,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
     "href": "
     test.png
 ",
+    "label": "image-label-1",
     "name": Array [
       Object {
         "children": Array [],
@@ -3676,7 +3678,6 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       "end": 1856,
       "start": 1763,
     },
-    "text": "image-label-1",
     "type": "Image",
   },
   Object {
@@ -3925,7 +3926,7 @@ Array [
               "end": 10,
               "start": 2,
             },
-            "text": "asdas ~~",
+            "text": "asdas ==",
             "type": "Text",
           },
           Object {
@@ -3934,7 +3935,7 @@ Array [
               "end": 17,
               "start": 10,
             },
-            "text": "lol~~",
+            "text": "lol==",
             "type": "CodeSpan",
           },
           Object {
@@ -3964,7 +3965,7 @@ Array [
             "end": 24,
             "start": 0,
           },
-          "text": "**asdas ~~\`lol~~\` adas**",
+          "text": "**asdas ==\`lol==\` adas**",
           "type": "Raw",
         },
       ],
@@ -3974,7 +3975,7 @@ Array [
         "end": 24,
         "start": 0,
       },
-      "raw": "**asdas ~~\`lol~~\` adas**",
+      "raw": "**asdas ==\`lol==\` adas**",
       "type": "File",
     },
     "pos": Object {

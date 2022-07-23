@@ -16,9 +16,10 @@ function fallbackImageNode(imageNode: ImageNode): ImageProcessedNode {
     return {
         ...imageNode,
 
-        type: ProcessedNodeType.ImageProcessed,
+        type: ProcessedNodeType.PictureProcessed,
         name: fallbackNameNodes(imageNode),
         label: 'unknown-picture-1',
+        index: -1,
     };
 }
 
@@ -36,14 +37,19 @@ const callback: ProcessingInfoCallback<ImageNode> = function (ctx, data) {
         );
         return [fallbackImageNode(imageNode)];
     }
+    const index = ctx.createPictureLabelData({
+        label: imageNode.label,
+        name: imageNode.name
+    })
 
     return [
         {
             ...imageNode,
 
-            type: ProcessedNodeType.TableProcessed,
+            type: ProcessedNodeType.PictureProcessed,
             name: [...imageNode.name],
             label: imageNode.label,
+            index
         },
     ];
 };

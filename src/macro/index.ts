@@ -6,7 +6,7 @@ import {
     NodeType,
     OpCodeNode, ParagraphNode,
 } from '../ast/node';
-import {ContextE, initContext} from '../context';
+import {ContextE, initContext} from './context';
 import {parseMacro} from './function';
 import {processNode} from './node';
 import {NodeProcessed} from './node/struct';

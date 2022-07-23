@@ -66,6 +66,24 @@ The name
     });
 });
 
+describe('pictures', () => {
+    test('multiple pictures', () => {
+        const rawNode = rawNodeTemplate(`
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+`);
+        const { nodes } = applyVisitors([rawNode]);
+        (rawNode.parent as FileNode).children = nodes;
+
+        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toMatchSnapshot();
+    })
+})
+
 describe('references', () => {
     test('simple reference', () => {
         const rawNode = rawNodeTemplate(`

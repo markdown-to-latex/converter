@@ -24,12 +24,11 @@ const callback: CommandInfoCallback<ArgsType, string> = function (
         return [];
     }
 
-    const tableData = {
+    ctx.c.temp.table = {
         label: args.label,
         name: args.args.name,
     };
-    const index = ctx.createTableLabelData(tableData);
-    ctx.c.temp.table = tableData;
+
     return [];
 };
 

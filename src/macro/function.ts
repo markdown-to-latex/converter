@@ -1,4 +1,4 @@
-import { ContextE } from "../context";
+import { ContextE } from "./context";
 import { Node, NodeEParentData, NodeType, OpCodeNode, TextNode } from "../ast/node";
 import { CommandInfo } from "./struct";
 import pictureKey from "./command/pictureKey";

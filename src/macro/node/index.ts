@@ -5,7 +5,7 @@ import {
     Node,
     NodeEParentData,
 } from '../../ast/node';
-import { ContextE } from '../../context';
+import { ContextE } from '../context';
 import picture from './processing/picture';
 
 const ALL_PROCESSING: ProcessingInfo<Node>[] = [

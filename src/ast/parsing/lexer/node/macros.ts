@@ -153,7 +153,7 @@ export function getMacroArgs(
 
             keyArgs[keyToken.text] = {
                 type: RawNodeType.Tokens,
-                parent: null,
+                parent: tokens,
                 text: sliceTokenText(
                     tokens,
                     argsIndex + 4,
@@ -182,7 +182,7 @@ export function getMacroArgs(
 
             posArgs.push({
                 type: RawNodeType.Tokens,
-                parent: null,
+                parent: tokens,
                 tokens: tokens.tokens.slice(
                     argsIndex + 1,
                     endTokenResult.index,

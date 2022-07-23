@@ -1,5 +1,222 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`pictures multiple pictures 1`] = `
+Array [
+  Object {
+    "href": "test.png",
+    "index": 0,
+    "label": "image-label",
+    "name": Array [
+      Object {
+        "children": Array [],
+        "parent": Object {
+          "href": "test.png",
+          "label": "image-label",
+          "name": Array [
+            [Circular],
+          ],
+          "parent": Object {
+            "children": [Circular],
+            "parent": null,
+            "path": "test.md",
+            "pos": Object {
+              "end": 147,
+              "start": 0,
+            },
+            "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+            "type": "File",
+          },
+          "pos": Object {
+            "end": 42,
+            "start": 1,
+          },
+          "type": "Image",
+          "width": "14cm",
+        },
+        "pos": Object {
+          "end": 41,
+          "start": 38,
+        },
+        "text": "asd",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 147,
+        "start": 0,
+      },
+      "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 42,
+      "start": 1,
+    },
+    "type": "PictureProcessed",
+    "width": "14cm",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 61,
+          "start": 44,
+        },
+        "text": "Look at the pic. ",
+        "type": "Text",
+      },
+      Object {
+        "index": 1,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 79,
+          "start": 61,
+        },
+        "type": "PictureKey",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 84,
+          "start": 79,
+        },
+        "text": " and ",
+        "type": "Text",
+      },
+      Object {
+        "index": 0,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 100,
+          "start": 84,
+        },
+        "type": "PictureKey",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 101,
+          "start": 100,
+        },
+        "text": ".",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 147,
+        "start": 0,
+      },
+      "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 101,
+      "start": 44,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "href": "test.png",
+    "index": 1,
+    "label": "image-label-2",
+    "name": Array [
+      Object {
+        "children": Array [],
+        "parent": Object {
+          "href": "test.png",
+          "label": "image-label-2",
+          "name": Array [
+            [Circular],
+          ],
+          "parent": Object {
+            "children": [Circular],
+            "parent": null,
+            "path": "test.md",
+            "pos": Object {
+              "end": 147,
+              "start": 0,
+            },
+            "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+            "type": "File",
+          },
+          "pos": Object {
+            "end": 146,
+            "start": 103,
+          },
+          "type": "Image",
+          "width": "14cm",
+        },
+        "pos": Object {
+          "end": 145,
+          "start": 142,
+        },
+        "text": "asd",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 147,
+        "start": 0,
+      },
+      "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 146,
+      "start": 103,
+    },
+    "type": "PictureProcessed",
+    "width": "14cm",
+  },
+]
+`;
+
 exports[`references multiple references 1`] = `
 Array [
   Object {
@@ -305,36 +522,6 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
 
 exports[`references simple reference 1`] = `
 Array [
-  Object {
-    "children": Array [],
-    "parent": Object {
-      "children": [Circular],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 264,
-        "start": 0,
-      },
-      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 156,
-      "start": 1,
-    },
-    "type": "Paragraph",
-  },
   Object {
     "children": Array [
       Object {
@@ -1224,34 +1411,6 @@ Array [
     "type": "Paragraph",
   },
   Object {
-    "children": Array [],
-    "parent": Object {
-      "children": [Circular],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 88,
-        "start": 0,
-      },
-      "raw": "
-!TK[table-label]
-
-!T[table-label](a table)
-
-|asda|asdasd|
-|----|------|
-|asda|asdasd|
-
-",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 43,
-      "start": 19,
-    },
-    "type": "Paragraph",
-  },
-  Object {
     "header": Array [
       Object {
         "children": Array [
@@ -1494,6 +1653,7 @@ Array [
         "type": "TableControlRow",
       },
     ],
+    "index": 0,
     "label": "table-label",
     "name": Array [
       Object {

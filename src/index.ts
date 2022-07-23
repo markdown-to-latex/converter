@@ -225,7 +225,34 @@ export function getContextEscapes(ctx: Context): LatexEscapeDataStrict[] {
     return getConfigLatexEscapes(ctx.config.latex);
 }
 
-export function convertMarkdownFiles(rootDir: string): void {
+export function fileToNode(content: string, filepath: string): RawNode {
+    const fileNode: FileNode = {
+        type: NodeType.File,
+        parent: null,
+        pos: {
+            start: 0,
+            end: content.length,
+        },
+        raw: content,
+        path: filepath,
+        children: [],
+    };
+
+    const rawNode: RawNode = {
+        type: RawNodeType.Raw,
+        parent: fileNode,
+        pos: {
+            start: 0,
+            end: content.length,
+        },
+        text: content,
+    };
+    fileNode.children.push(rawNode);
+
+    return rawNode;
+}
+
+export function convertMarkdownFiles(rootDir: string): DiagnoseList {
     const writeFile: WriteFileFunction = function (content, filepath) {
         fs.writeFileSync(filepath, content, 'utf8');
     };

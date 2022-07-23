@@ -19,6 +19,7 @@ function fallbackTableNode(tableNode: TableNode): TableProcessedNode {
         type: ProcessedNodeType.TableProcessed,
         name: fallbackNameNodes(tableNode),
         label: 'unknown-table-1',
+        index: -1,
     };
 }
 
@@ -38,16 +39,21 @@ const callback: ProcessingInfoCallback<TableNode> = function (ctx, data) {
         return [fallbackTableNode(tableNode)];
     }
 
-    ctx.c.temp.table = null;
-    return [
-        {
-            ...tableNode,
+    const index = ctx.createTableLabelData({
+        ...currentTableInfo,
+    });
 
-            type: ProcessedNodeType.TableProcessed,
-            name: [...currentTableInfo.name],
-            label: currentTableInfo.label,
-        },
-    ];
+    const tableProcessedNode: TableProcessedNode = {
+        ...tableNode,
+
+        type: ProcessedNodeType.TableProcessed,
+        name: [...currentTableInfo.name],
+        label: currentTableInfo.label,
+        index,
+    };
+    ctx.c.temp.table = null;
+
+    return [tableProcessedNode];
 };
 
 export default {

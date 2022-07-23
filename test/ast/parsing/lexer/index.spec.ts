@@ -6,7 +6,7 @@ import { applyVisitors } from '../../../../src/ast/parsing/lexer';
 describe('Honorable mention', () => {
     snapshotTestTemplate(
         'Bold with del with code span',
-        '**asdas ~~`lol~~` adas**',
+        '**asdas ==`lol==` adas**',
     );
 });
 

@@ -20,6 +20,7 @@ function fallbackCodeNode(codeNode: CodeNode): CodeProcessedNode {
         name: fallbackNameNodes(codeNode),
         label: 'unknown-code-1',
         lang: 'text',
+        index: -1,
     };
 }
 
@@ -32,11 +33,15 @@ const callback: ProcessingInfoCallback<CodeNode> = function (ctx, data) {
                 codeNode,
                 DiagnoseSeverity.Error,
                 DiagnoseErrorType.MacrosError,
-                'Code must have @name and label argument',
+                'Code must have @name and @label argument',
             ),
         );
         return [fallbackCodeNode(codeNode)];
     }
+    const index = ctx.createPictureLabelData({
+        label: codeNode.label,
+        name: codeNode.name
+    });
 
     return [
         {
@@ -45,6 +50,7 @@ const callback: ProcessingInfoCallback<CodeNode> = function (ctx, data) {
             type: ProcessedNodeType.CodeProcessed,
             name: [...codeNode.name],
             label: codeNode.label,
+            index,
         },
     ];
 };

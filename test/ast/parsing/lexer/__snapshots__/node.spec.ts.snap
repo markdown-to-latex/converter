@@ -1105,21 +1105,77 @@ exports[`Image parsing Image args error 1`] = `
 Array [
   Object {
     "errorType": 0,
-    "filePath": "null",
+    "filePath": "test.md",
     "message": "Argument name specified twice",
     "pos": Object {
       "end": Object {
         "absolute": 72,
-        "column": 1,
-        "line": 1,
+        "column": 17,
+        "line": 4,
       },
       "start": Object {
         "absolute": 60,
-        "column": 1,
-        "line": 1,
+        "column": 5,
+        "line": 4,
       },
     },
     "severity": "WARNING",
+  },
+]
+`;
+
+exports[`Image parsing Image args with aliases 1`] = `
+Array [
+  Object {
+    "href": "../../image.png",
+    "label": "image-label",
+    "name": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 57,
+          "start": 53,
+        },
+        "text": "Name",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 59,
+            "start": 0,
+          },
+          "text": "![image-label](../../image.png)(@w
+    10cm
+)(@n
+    Name
+)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 59,
+        "start": 0,
+      },
+      "raw": "![image-label](../../image.png)(@w
+    10cm
+)(@n
+    Name
+)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 59,
+      "start": 0,
+    },
+    "type": "Image",
+    "width": "10cm",
   },
 ]
 `;
@@ -3136,7 +3192,46 @@ exports[`code block lexer check With all args 1`] = `
 Array [
   Object {
     "children": Array [],
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 67,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language[label](@name Sample \`Code\` Block)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 67,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language[label](@name Sample \`Code\` Block)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 66,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 38,
       "start": 31,
@@ -3145,7 +3240,46 @@ Array [
     "type": "Text",
   },
   Object {
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 67,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language[label](@name Sample \`Code\` Block)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 67,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language[label](@name Sample \`Code\` Block)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 66,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 44,
       "start": 38,
@@ -3155,7 +3289,46 @@ Array [
   },
   Object {
     "children": Array [],
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 67,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language[label](@name Sample \`Code\` Block)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 67,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language[label](@name Sample \`Code\` Block)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 66,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 50,
       "start": 44,
@@ -3170,7 +3343,50 @@ exports[`code block lexer check With lang arg 1`] = `
 Array [
   Object {
     "children": Array [],
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "kotlin",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 74,
+              "start": 0,
+            },
+            "text": "
+\`\`\`[label](@name Sample \`Code\` Block)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 74,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`[label](@name Sample \`Code\` Block)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 73,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 25,
       "start": 18,
@@ -3179,7 +3395,50 @@ Array [
     "type": "Text",
   },
   Object {
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "kotlin",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 74,
+              "start": 0,
+            },
+            "text": "
+\`\`\`[label](@name Sample \`Code\` Block)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 74,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`[label](@name Sample \`Code\` Block)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 73,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 31,
       "start": 25,
@@ -3189,7 +3448,50 @@ Array [
   },
   Object {
     "children": Array [],
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "kotlin",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 74,
+              "start": 0,
+            },
+            "text": "
+\`\`\`[label](@name Sample \`Code\` Block)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 74,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`[label](@name Sample \`Code\` Block)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 73,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 37,
       "start": 31,
@@ -3204,7 +3506,46 @@ exports[`code block lexer check With name arg 1`] = `
 Array [
   Object {
     "children": Array [],
-    "parent": null,
+    "parent": Object {
+      "label": undefined,
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 62,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language(@name Sample **Code** Block)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 62,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language(@name Sample **Code** Block)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 61,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 31,
       "start": 24,
@@ -3225,7 +3566,46 @@ Array [
         "type": "Text",
       },
     ],
-    "parent": null,
+    "parent": Object {
+      "label": undefined,
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 62,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language(@name Sample **Code** Block)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 62,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language(@name Sample **Code** Block)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 61,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 39,
       "start": 31,
@@ -3234,7 +3614,46 @@ Array [
   },
   Object {
     "children": Array [],
-    "parent": null,
+    "parent": Object {
+      "label": undefined,
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 62,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language(@name Sample **Code** Block)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 62,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language(@name Sample **Code** Block)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 61,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 45,
       "start": 39,
@@ -3249,7 +3668,54 @@ exports[`code block lexer check With two lang args 1`] = `
 Array [
   Object {
     "children": Array [],
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 92,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language[label](@name
+    Sample \`Code\` Block
+)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 92,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language[label](@name
+    Sample \`Code\` Block
+)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 91,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 42,
       "start": 35,
@@ -3258,7 +3724,54 @@ Array [
     "type": "Text",
   },
   Object {
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 92,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language[label](@name
+    Sample \`Code\` Block
+)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 92,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language[label](@name
+    Sample \`Code\` Block
+)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 91,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 48,
       "start": 42,
@@ -3268,7 +3781,54 @@ Array [
   },
   Object {
     "children": Array [],
-    "parent": null,
+    "parent": Object {
+      "label": "label",
+      "lang": "test-language",
+      "name": [Circular],
+      "parent": Object {
+        "children": Array [
+          Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 92,
+              "start": 0,
+            },
+            "text": "
+\`\`\`test-language[label](@name
+    Sample \`Code\` Block
+)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+            "type": "Raw",
+          },
+        ],
+        "parent": null,
+        "path": "test.md",
+        "pos": Object {
+          "end": 92,
+          "start": 0,
+        },
+        "raw": "
+\`\`\`test-language[label](@name
+    Sample \`Code\` Block
+)(@lang 
+    kotlin
+)
+Code block
+\`\`\`
+",
+        "type": "File",
+      },
+      "pos": Object {
+        "end": 91,
+        "start": 1,
+      },
+      "text": "Code block",
+      "type": "Code",
+    },
     "pos": Object {
       "end": 54,
       "start": 48,

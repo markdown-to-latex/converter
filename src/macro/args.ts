@@ -141,9 +141,11 @@ export function parseMacrosArguments(
 
     const keys: string[] = Object.keys(node.keyArgs);
     for (const info of argsInfo) {
-        const aliasIndex = info.aliases.findIndex(
-            alias => keys.indexOf(alias) !== -1,
-        );
+        const aliasIndex =
+            (info.aliases
+                .map(alias => [alias, keys.indexOf(alias)] as const)
+                .find(([_, indexOf]) => indexOf !== -1) ?? [])[1] ?? -1;
+
         const nameIndex = keys.indexOf(info.name);
 
         const index = nameIndex !== -1 ? nameIndex : aliasIndex;

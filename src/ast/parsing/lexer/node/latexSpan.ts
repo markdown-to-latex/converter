@@ -28,7 +28,7 @@ export const parseLatexSpan: TokenParser = function (tokens, index) {
         return unexpectedEof(
             tokens,
             index,
-            'Unable to find closing quotes for span latex',
+            'Unable to find closing quotes for span __deprecated_latex',
         );
     }
 
