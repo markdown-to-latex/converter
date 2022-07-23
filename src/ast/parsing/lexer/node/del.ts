@@ -15,7 +15,7 @@ import {
 import { DiagnoseList } from '../../../../diagnose';
 
 export const isDel: TokenPredicate = function (token, index, node) {
-    return token.type === TokenType.JoinableSpecial && token.text === '~~';
+    return token.type === TokenType.JoinableSpecial && token.text === '==';
 };
 
 export const parseDel: TokenParser = function (tokens, index) {

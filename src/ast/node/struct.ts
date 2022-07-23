@@ -43,9 +43,27 @@ export const enum NodeType {
     Latex = 'Latex',
     Formula = 'Formula',
     FormulaSpan = 'FormulaSpan',
+    NonBreakingSpace = 'NonBreakingSpace',
+    ThinNonBreakingSpace = 'ThinNonBreakingSpace',
 
     Comment = 'Comment',
 }
+
+export const SPAN_NODE_TYPES: NodeType[] = [
+    NodeType.Space,
+    NodeType.Def,
+    NodeType.Escape,
+    NodeType.Text,
+    NodeType.Link,
+    NodeType.Strong,
+    NodeType.Em,
+    NodeType.CodeSpan,
+    NodeType.Br,
+    NodeType.Del,
+    NodeType.LatexSpan,
+    NodeType.FormulaSpan,
+    NodeType.Comment,
+];
 
 export type StartEndNumberPosition = StartEndPosition<number>;
 
@@ -247,6 +265,14 @@ export interface FormulaNode extends Node, NodeText {
 
 export interface FormulaSpanNode extends Node, NodeText {
     type: NodeType.FormulaSpan;
+}
+
+export interface NonBreakingSpaceNode extends Node {
+    type: NodeType.NonBreakingSpace;
+}
+
+export interface ThinNonBreakingSpaceNode extends Node {
+    type: NodeType.ThinNonBreakingSpace;
 }
 
 export interface CommentNode extends Node {

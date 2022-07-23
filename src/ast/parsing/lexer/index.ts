@@ -43,6 +43,7 @@ import { parseDel } from './node/del';
 import { parseFormulaSpan } from './node/formulaSpan';
 import { parseLatexSpan } from './node/latexSpan';
 import { parseFormulaOrLatex } from './node/formulaOrLatex';
+import { parseNonBreakingSpace, parseThinNonBreakingSpace } from './node/space';
 
 class FatalError extends Error {}
 
@@ -428,6 +429,7 @@ function nodeJoiner(nodes: Node[]): void {
 function applyParagraphs(roNodes: Readonly<Node[]>): Node[] {
     const nodes: Node[] = [...roNodes];
 
+    // TODO: move into ast/node/struct.ts
     const TEXT_LIKE_NODES: (NodeType | RawNodeType)[] = [
         NodeType.Escape,
         NodeType.Text,
@@ -440,6 +442,8 @@ function applyParagraphs(roNodes: Readonly<Node[]>): Node[] {
         NodeType.OpCode,
         NodeType.LatexSpan,
         NodeType.FormulaSpan,
+        NodeType.NonBreakingSpace,
+        NodeType.ThinNonBreakingSpace,
     ];
 
     let lastTextNodeIndex: number | null = null;
@@ -525,6 +529,8 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
         parseCodeSpan,
         parseStrongWithOptionalEm,
         parseDel,
+        parseNonBreakingSpace,
+        parseThinNonBreakingSpace,
         parseEm,
         parseHeading,
         parseHr,
@@ -580,7 +586,7 @@ export function unexpectedEof(
     tokens: TokensNode,
     index: number,
     message: string,
-    diagnostic?: DiagnoseList
+    diagnostic?: DiagnoseList,
 ): TokenByTypeParserResult {
     return {
         nodes: [],

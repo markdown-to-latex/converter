@@ -170,7 +170,7 @@ Array [
             "end": 22,
             "start": 0,
           },
-          "text": "Text with ~~del~~-text",
+          "text": "Text with ==del==-text",
           "type": "Raw",
         },
       ],
@@ -180,7 +180,7 @@ Array [
         "end": 22,
         "start": 0,
       },
-      "raw": "Text with ~~del~~-text",
+      "raw": "Text with ==del==-text",
       "type": "File",
     },
     "pos": Object {
@@ -1049,6 +1049,7 @@ exports[`Image parsing Extended image 1`] = `
 Array [
   Object {
     "href": "../../image.png",
+    "label": "image-label",
     "name": Array [
       Object {
         "children": Array [],
@@ -1094,7 +1095,6 @@ Array [
       "end": 61,
       "start": 0,
     },
-    "text": "image-label",
     "type": "Image",
     "width": "14cm",
   },
@@ -3065,8 +3065,8 @@ Array [
     "pos": Object {
       "end": Object {
         "absolute": 15,
-        "column": 1,
-        "line": 5,
+        "column": 4,
+        "line": 2,
       },
       "start": Object {
         "absolute": 12,
@@ -3075,6 +3075,59 @@ Array [
       },
     },
     "severity": "ERROR",
+  },
+]
+`;
+
+exports[`code block lexer check Error raw node 2`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 11,
+          "start": 0,
+        },
+        "text": "Sample text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 43,
+            "start": 0,
+          },
+          "text": "Sample text
+\`\`\`
+Code block
+New sample text
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 43,
+        "start": 0,
+      },
+      "raw": "Sample text
+\`\`\`
+Code block
+New sample text
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 11,
+      "start": 0,
+    },
+    "type": "Paragraph",
   },
 ]
 `;
@@ -3399,6 +3452,229 @@ Array [
 ]
 `;
 
+exports[`macro parsing Brackets mismatch 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "keyArgs": Object {},
+        "label": "(@key ",
+        "opcode": "Macro",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 14,
+          "start": 0,
+        },
+        "posArgs": Array [],
+        "type": "OpCode",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 40,
+          "start": 14,
+        },
+        "text": "value)(@key another value)",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 40,
+            "start": 0,
+          },
+          "text": "!Macro[(@key ]value)(@key another value)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 40,
+        "start": 0,
+      },
+      "raw": "!Macro[(@key ]value)(@key another value)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 40,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`macro parsing Complex macro with name, label, pos and key args 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "keyArgs": Object {
+          "keyArgName": Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 62,
+                "start": 55,
+              },
+              "text": "argName",
+              "type": "Text",
+            },
+          ],
+        },
+        "label": "label-text",
+        "opcode": "Macro",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 63,
+          "start": 0,
+        },
+        "posArgs": Array [
+          Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 28,
+                "start": 19,
+              },
+              "text": "pos arg 1",
+              "type": "Text",
+            },
+          ],
+          Array [
+            Object {
+              "parent": [Circular],
+              "pos": Object {
+                "end": 39,
+                "start": 30,
+              },
+              "text": "pos arg",
+              "type": "CodeSpan",
+            },
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 41,
+                "start": 39,
+              },
+              "text": " 2",
+              "type": "Text",
+            },
+          ],
+        ],
+        "type": "OpCode",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 63,
+            "start": 0,
+          },
+          "text": "!Macro[label-text](pos arg 1)(\`pos arg\` 2)(@keyArgName argName)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 63,
+        "start": 0,
+      },
+      "raw": "!Macro[label-text](pos arg 1)(\`pos arg\` 2)(@keyArgName argName)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 63,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`macro parsing Key is defined wrongly 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "keyArgs": Object {},
+        "label": null,
+        "opcode": "Macro",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 15,
+          "start": 0,
+        },
+        "posArgs": Array [
+          Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 11,
+                "start": 7,
+              },
+              "text": "@key",
+              "type": "Text",
+            },
+          ],
+          Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 14,
+                "start": 13,
+              },
+              "text": "@",
+              "type": "Text",
+            },
+          ],
+        ],
+        "type": "OpCode",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 15,
+            "start": 0,
+          },
+          "text": "!Macro(@key)(@)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 15,
+        "start": 0,
+      },
+      "raw": "!Macro(@key)(@)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 15,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
 exports[`macro parsing Nested 1`] = `
 Array [
   Object {
@@ -3546,31 +3822,91 @@ Array [
 ]
 `;
 
-exports[`macros parsing Brackets mismatch 1`] = `
+exports[`table parsing End line bug  1`] = `
 Array [
   Object {
-    "children": Array [
+    "header": Array [
       Object {
-        "keyArgs": Object {},
-        "label": "(@key ",
-        "opcode": "Macro",
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 5,
+                  "start": 1,
+                },
+                "text": "asda",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 5,
+              "start": 1,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 12,
+                  "start": 6,
+                },
+                "text": "asdasd",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 12,
+              "start": 6,
+            },
+            "type": "TableCell",
+          },
+        ],
         "parent": [Circular],
         "pos": Object {
-          "end": 14,
+          "end": 13,
           "start": 0,
         },
-        "posArgs": Array [],
-        "type": "OpCode",
+        "type": "TableRow",
       },
       Object {
-        "children": Array [],
+        "children": Array [
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 19,
+              "start": 15,
+            },
+            "type": "TableControlCell",
+          },
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 26,
+              "start": 20,
+            },
+            "type": "TableControlCell",
+          },
+        ],
         "parent": [Circular],
         "pos": Object {
-          "end": 40,
+          "end": 27,
           "start": 14,
         },
-        "text": "value)(@key another value)",
-        "type": "Text",
+        "type": "TableControlRow",
       },
     ],
     "parent": Object {
@@ -3578,193 +3914,87 @@ Array [
         Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 40,
+            "end": 43,
             "start": 0,
           },
-          "text": "!Macro[(@key ]value)(@key another value)",
+          "text": "|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
           "type": "Raw",
         },
       ],
       "parent": null,
       "path": "test.md",
       "pos": Object {
-        "end": 40,
+        "end": 43,
         "start": 0,
       },
-      "raw": "!Macro[(@key ]value)(@key another value)",
+      "raw": "|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
       "type": "File",
     },
     "pos": Object {
-      "end": 40,
+      "end": 41,
       "start": 0,
     },
-    "type": "Paragraph",
-  },
-]
-`;
-
-exports[`macros parsing Complex macros with name, label, pos and key args 1`] = `
-Array [
-  Object {
-    "children": Array [
+    "rows": Array [
       Object {
-        "keyArgs": Object {
-          "keyArgName": Array [
-            Object {
-              "children": Array [],
-              "parent": [Circular],
-              "pos": Object {
-                "end": 62,
-                "start": 55,
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 33,
+                  "start": 29,
+                },
+                "text": "asda",
+                "type": "Text",
               },
-              "text": "argName",
-              "type": "Text",
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 33,
+              "start": 29,
             },
-          ],
-        },
-        "label": "label-text",
-        "opcode": "Macro",
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 40,
+                  "start": 34,
+                },
+                "text": "asdasd",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 40,
+              "start": 34,
+            },
+            "type": "TableCell",
+          },
+        ],
         "parent": [Circular],
         "pos": Object {
-          "end": 63,
-          "start": 0,
+          "end": 41,
+          "start": 28,
         },
-        "posArgs": Array [
-          Array [
-            Object {
-              "children": Array [],
-              "parent": [Circular],
-              "pos": Object {
-                "end": 28,
-                "start": 19,
-              },
-              "text": "pos arg 1",
-              "type": "Text",
-            },
-          ],
-          Array [
-            Object {
-              "parent": [Circular],
-              "pos": Object {
-                "end": 39,
-                "start": 30,
-              },
-              "text": "pos arg",
-              "type": "CodeSpan",
-            },
-            Object {
-              "children": Array [],
-              "parent": [Circular],
-              "pos": Object {
-                "end": 41,
-                "start": 39,
-              },
-              "text": " 2",
-              "type": "Text",
-            },
-          ],
-        ],
-        "type": "OpCode",
+        "type": "TableRow",
       },
     ],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 63,
-            "start": 0,
-          },
-          "text": "!Macro[label-text](pos arg 1)(\`pos arg\` 2)(@keyArgName argName)",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 63,
-        "start": 0,
-      },
-      "raw": "!Macro[label-text](pos arg 1)(\`pos arg\` 2)(@keyArgName argName)",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 63,
-      "start": 0,
-    },
-    "type": "Paragraph",
-  },
-]
-`;
-
-exports[`macros parsing Key is defined wrongly 1`] = `
-Array [
-  Object {
-    "children": Array [
-      Object {
-        "keyArgs": Object {},
-        "label": null,
-        "opcode": "Macro",
-        "parent": [Circular],
-        "pos": Object {
-          "end": 15,
-          "start": 0,
-        },
-        "posArgs": Array [
-          Array [
-            Object {
-              "children": Array [],
-              "parent": [Circular],
-              "pos": Object {
-                "end": 11,
-                "start": 7,
-              },
-              "text": "@key",
-              "type": "Text",
-            },
-          ],
-          Array [
-            Object {
-              "children": Array [],
-              "parent": [Circular],
-              "pos": Object {
-                "end": 14,
-                "start": 13,
-              },
-              "text": "@",
-              "type": "Text",
-            },
-          ],
-        ],
-        "type": "OpCode",
-      },
-    ],
-    "parent": Object {
-      "children": Array [
-        Object {
-          "parent": [Circular],
-          "pos": Object {
-            "end": 15,
-            "start": 0,
-          },
-          "text": "!Macro(@key)(@)",
-          "type": "Raw",
-        },
-      ],
-      "parent": null,
-      "path": "test.md",
-      "pos": Object {
-        "end": 15,
-        "start": 0,
-      },
-      "raw": "!Macro(@key)(@)",
-      "type": "File",
-    },
-    "pos": Object {
-      "end": 15,
-      "start": 0,
-    },
-    "type": "Paragraph",
+    "type": "Table",
   },
 ]
 `;

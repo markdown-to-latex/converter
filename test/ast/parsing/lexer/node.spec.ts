@@ -10,12 +10,12 @@ import {
     LatexSpanNode,
     LinkNode,
     ListNode,
-    NodeType,
+    NodeType, NonBreakingSpaceNode,
     OpCodeNode,
     ParagraphNode,
     RawNode,
     RawNodeType,
-    TableNode,
+    TableNode, TextNode, ThinNonBreakingSpaceNode,
 } from '../../../../src/ast/node';
 import { fullContentPos } from '../../../../src/ast/parsing';
 import { applyVisitors } from '../../../../src/ast/parsing/lexer';
@@ -577,7 +577,7 @@ describe('Strong parsing', () => {
 
 describe('Del parsing', () => {
     test('Simple del', () => {
-        const rawNode = rawNodeTemplate(`Text with ~~del~~-text`);
+        const rawNode = rawNodeTemplate(`Text with ==del==-text`);
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         const paragraphNode = nodes[0] as ParagraphNode;
@@ -693,5 +693,20 @@ New sample text
         expect(node.text).toEqual('a = b + h');
 
         expect(nodes).toMatchSnapshot();
+    });
+});
+
+describe('Spaces parsing', () => {
+    test('Spaces', () => {
+        const rawNode = rawNodeTemplate(`hello~~world with~spaces`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(5);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[1].type).toEqual(NodeType.NonBreakingSpace);
+        expect(paragraphNode.children[2].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[3].type).toEqual(NodeType.ThinNonBreakingSpace);
+        expect(paragraphNode.children[4].type).toEqual(NodeType.Text);
     });
 });
