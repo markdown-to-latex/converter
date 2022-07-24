@@ -1,18 +1,30 @@
-import { ContextE } from "./context";
-import { Node, NodeEParentData, NodeType, OpCodeNode, TextNode } from "../ast/node";
-import { CommandInfo } from "./struct";
-import pictureKey from "./command/pictureKey";
-import { parseMacrosArguments } from "./args";
-import { DiagnoseErrorType, diagnoseListHasSeverity, DiagnoseSeverity, nodeToDiagnose } from "../diagnose";
-import table from "./command/table";
-import tableKey from "./command/tableKey";
-import applicationKey from "./command/applicationKey";
-import referenceKey from "./command/referenceKey";
-import listAllApplications from "./command/listAllApplications";
-import listAllReferences from "./command/listAllReferences";
-import {NodeProcessed} from "./node/struct";
-import application from "./command/application";
-import reference from "./command/reference";
+import { ContextE } from './context';
+import {
+    Node,
+    NodeAbstract,
+    NodeEParentData,
+    NodeType,
+    OpCodeNode,
+    TextNode,
+} from '../ast/node';
+import { CommandInfo } from './struct';
+import pictureKey from './command/pictureKey';
+import { parseMacrosArguments } from './args';
+import {
+    DiagnoseErrorType,
+    diagnoseListHasSeverity,
+    DiagnoseSeverity,
+    nodeToDiagnose,
+} from '../diagnose';
+import table from './command/table';
+import tableKey from './command/tableKey';
+import applicationKey from './command/applicationKey';
+import referenceKey from './command/referenceKey';
+import listAllApplications from './command/listAllApplications';
+import listAllReferences from './command/listAllReferences';
+import { NodeProcessed } from './node/struct';
+import application from './command/application';
+import reference from './command/reference';
 
 function createFallbackNode(node: Node, macroName: string): TextNode {
     return {
@@ -43,7 +55,7 @@ const ALL_COMMAND_LIST: CommandInfo[] = [
 export function parseMacro(
     ctx: ContextE,
     data: NodeEParentData<OpCodeNode>,
-): NodeProcessed[] {
+): NodeAbstract[] {
     const opCodeNode = data.node.n;
     const macros = opCodeNode.opcode.toUpperCase();
     const command = ALL_COMMAND_LIST.find(d => d.name.toUpperCase() === macros);
@@ -67,11 +79,13 @@ function applyCommandForMacros(
     ctx: ContextE,
     command: CommandInfo,
     data: NodeEParentData<OpCodeNode>,
-): NodeProcessed[] {
+): NodeAbstract[] {
     const opCodeNode = data.node.n;
     const parseResult = parseMacrosArguments(opCodeNode, command.args);
     ctx.c.diagnostic.push(...parseResult.diagnostic);
-    if (diagnoseListHasSeverity(parseResult.diagnostic, DiagnoseSeverity.Error)) {
+    if (
+        diagnoseListHasSeverity(parseResult.diagnostic, DiagnoseSeverity.Error)
+    ) {
         return [];
     }
 

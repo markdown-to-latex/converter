@@ -1,3 +1,4 @@
+/*
 import {
     addApplicationByKey,
     Context,
@@ -5,13 +6,13 @@ import {
     getOrCreatePictureLabel,
     getOrCreateTableLabel,
     getReferenceLabelByKey,
-} from './context';
+} from '../context';
 import {
     getNodeRightNeighbourLeaf,
     NodeType,
     OpCodeNode,
     RawNodeType,
-} from '../ast/node';
+} from '../../ast/node';
 
 export function resolveOpCode(node: OpCodeNode, context: Context): string {
     const lazy = opCodeMap[node.opcode as OpCodeType];
@@ -28,7 +29,7 @@ export const enum OpCodeType {
     Table = 'T',
     TableKey = 'TK',
     Code = 'C',
-    MinusSingle = 'MS',
+    MinusSingle = 'MS',     // deprecated
     ApplicationRaw = 'AR',
     ApplicationPicture = 'AP',
     ApplicationPictureRotated = 'APR',
@@ -44,15 +45,6 @@ export const enum OpCodeType {
 export const enum CodeLanguageTemporary {
     Application = 'app',
     Reference = 'ref',
-}
-
-export class OpCodeError extends Error {
-    constructor(m: string) {
-        super(m);
-
-        // Set the prototype explicitly.
-        Object.setPrototypeOf(this, OpCodeError.prototype);
-    }
 }
 
 function shouldHaveLength(
@@ -303,7 +295,7 @@ ${context.code.cols !== 1 ? `\\end{multicols}` : ''}
     // Usage: !RR[key]
     // Expected code with language "ref" after the Macros
     [OpCodeType.ReferenceRaw]: (args, node, context) => {
-        /**
+        /!**
          * TODO: make in functional style
          *
          * new MyWrapper((args, asd,asd) => {})
@@ -311,7 +303,7 @@ ${context.code.cols !== 1 ? `\\end{multicols}` : ''}
          *         .shouldNotBeEmptyArguments(....)
          *         .shouldHaveNodeWithTypeAfter(...)
          *         .raw()
-         */
+         *!/
 
         shouldHaveLength(node.opcode, args, 1);
         shouldNotBeEmptyArguments(node.opcode, args);
@@ -361,3 +353,4 @@ ${context.code.cols !== 1 ? `\\end{multicols}` : ''}
             .join('\n\n');
     },
 };
+*/

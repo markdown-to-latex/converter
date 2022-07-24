@@ -1,6 +1,6 @@
-import * as ts from 'typescript';
 import { convertMarkdownFiles } from './index';
 import * as path from 'path';
+import { DiagnoseList } from './diagnose';
 
 export function getVersion(): string {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -18,18 +18,30 @@ const ERROR_MESSAGE =
     'Unexpected argument. Use command below to get information:\n' +
     '\x1b[34mmd-to-latex --help\x1b[0m\n';
 
+export function printDiagnosticList(diagnostic: DiagnoseList): void {
+    for (const diagnose of diagnostic) {
+        const message = `${diagnose.filePath}:${diagnose.pos.start.line}:${diagnose.pos.start.column} - ${diagnose.severity} ${diagnose.message}`;
+        console.log(message);
+    }
+}
+
 export function executeCli(args: string[]): void {
     if (args.length > 1) {
         console.log(ERROR_MESSAGE);
-        ts.sys.exit(1);
+        process.exit(1);
     }
 
     if (args[0] === '--help') {
         console.log(HELP_MESSAGE);
-        ts.sys.exit(1);
+        process.exit(1);
     }
 
-    convertMarkdownFiles(path.resolve('.'));
+    const diagnostic = convertMarkdownFiles(path.resolve('.'));
+    printDiagnosticList(diagnostic);
+
+    if (diagnostic.length) {
+        process.exit(1);
+    }
 }
 
-executeCli(ts.sys.args);
+executeCli(process.argv.slice(2));

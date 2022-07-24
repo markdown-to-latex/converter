@@ -1,12 +1,10 @@
 import { CommandInfo, CommandInfoCallback } from '../struct';
 import {
-    AllApplicationsNode,
     AllReferencesNode,
-    ApplicationNode,
     ProcessedNodeType,
     ReferenceNode,
-} from '../node/struct';
-import { Node } from '../../ast/node';
+} from '../node';
+import { Node, NodeAbstract } from '../../ast/node';
 
 interface ArgsType {}
 
@@ -30,7 +28,7 @@ const callback: CommandInfoCallback<ArgsType, string> = function (
                         : info.content[info.content.length - 1].pos.end,
             },
             parent: data.node.n.parent,
-            children: info.content as Node[],
+            children: info.content as NodeAbstract[] as Node[],
             index,
         }));
 

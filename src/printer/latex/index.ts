@@ -1,107 +1,68 @@
-import { Context } from '../context';
-import { NodeType } from '../../ast/node';
-import { Escaper } from './escaper';
-import { StringE } from '../../extension/string';
-import { LatexError } from './error';
+import {
+    Printer,
+    PrinterConfiguration,
+    PrinterVisitor,
+    PrinterVisitorList,
+    PrinterVisitorResult,
+} from '../struct';
+import { NodeProcessed, ProcessedNodeType } from '../../macro/node/struct';
+import { DiagnoseList } from '../../diagnose';
+import { NodesByType } from '../../ast/nodes';
+import { ProcessedNodesByType } from '../../macro/nodes';
+import {
+    LatexPrinterVisitor,
+    LatexPrinterVisitorList,
+    ProcessingVisitors,
+    processingVisitors,
+} from './visitors';
+import { Node, NodeAbstract, RawNode } from '../../ast/node';
+import { buildConfig, LatexPrinterConfiguration } from './config';
 
-export class LatexString extends StringE {
-    public context: Context;
-
-    public constructor(value: string | StringE, context: Context) {
-        super(value);
-        this.context = context;
-    }
-
-    public prepare(nodeType: NodeType): LatexString {
-        // TODO: move escaper into the context
-
-        const stringE = this.resolveDeReplacements();
-        return new LatexString(
-            stringE.applyEscaper(
-                Escaper.fromContext(this.context).prepare({
-                    nodeType: nodeType,
-                }),
-            ),
-            this.context,
+const processNode: LatexPrinterVisitor<NodeProcessed | RawNode | Node> =
+    function (printer, node) {
+        return processingVisitors[node.type](
+            printer,
+            /* TODO: resolve that */ node as any,
         );
-    }
+    };
 
-    public get se(): StringE {
-        return this;
-    }
-}
-
-const headerByDepth: ((text: string) => string)[] = [
-    text => `\\subtitle{${text}}`,
-    text => `\\section{${text}}`,
-    text => `\\subsection{${text}}`,
-];
-
-export function getLatexHeader(text: string, depth: number): string {
-    const lazyResult = headerByDepth[depth - 1];
-    if (lazyResult === undefined) {
-        throw new LatexError(`Cannot process header with depth ${depth}`);
-    }
-
-    return lazyResult(text) + '\n\n';
-}
-
-// TODO: localization
-const applicationLetters = [
-    'А',
-    'Б',
-    'В',
-    'Г',
-    'Д',
-    'Е',
-    'Ж',
-    'И',
-    'К',
-    'Л',
-    'М',
-    'Н',
-    'П',
-    'Р',
-    'С',
-    'Т',
-    'У',
-    'Ф',
-    'Х',
-    'Ц',
-    'Ш',
-    'Щ',
-    'Э',
-    'Ю',
-    'Я',
-];
-
-export function getLatexApplicationLetter(index: number): string {
-    if (applicationLetters[index] === undefined) {
-        throw new LatexError(
-            `Index ${index} is out of range application letters`,
+const processNodeList: LatexPrinterVisitorList<NodeProcessed | RawNode | Node> =
+    function (printer, nodes, separator = '') {
+        const processedNodes = nodes.map(node =>
+            printer.processNode(printer, node),
         );
-    }
 
-    return applicationLetters[index];
+        const diagnostic: DiagnoseList = processedNodes.flatMap(
+            nodes => nodes.diagnostic,
+        );
+        const result: string = processedNodes
+            .map(nodes => nodes.result)
+            .join(separator);
+
+        return {
+            result,
+            diagnostic,
+        };
+    };
+
+export interface LatexPrinter {
+    processNode: LatexPrinterVisitor<NodeProcessed | RawNode | Node>;
+    processNodeList: LatexPrinterVisitorList<NodeProcessed | RawNode | Node>;
+
+    processingVisitors: ProcessingVisitors;
+    config: LatexPrinterConfiguration;
 }
 
-export function getLatexOrderedListPoint(depth: number, index: number): string {
-    if (!(0 < depth && depth < 3)) {
-        throw new LatexError(`Depth ${depth} of ordered list is out of range`);
-    }
+export function createLatexPrinter(
+    config: LatexPrinterConfiguration,
+): LatexPrinter {
+    return {
+        processingVisitors,
+        config: config,
 
-    if (depth === 1) {
-        const letter = applicationLetters.map(char => char.toLowerCase())[
-            index
-        ];
-        if (letter === undefined) {
-            throw new LatexError(
-                `Cannot found letter for index ${index} in ordered list`,
-            );
-        }
-
-        return letter;
-    }
-
-    return (index + 1).toString();
+        processNode,
+        processNodeList,
+    };
 }
+
+export { buildConfig };

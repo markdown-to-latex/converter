@@ -10,7 +10,7 @@
         "prettier": "prettier --check .",
         "prettier-fix": "prettier --write .",
         "test": "jest test",
-        "convert-schema": "node utils/convert-schema.js && prettier --write src/printer/types.ts"
+        "convert-schema": "node utils/convert-schema.js && prettier --write src/config/types.ts"
     },
     "repository": {
         "type": "git",

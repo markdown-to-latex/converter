@@ -2,6 +2,4 @@
 
 Image here
 
-!P[img!4cm]
-
-![Image](./nothing)
+![image-label](./nothing)(@h 4cm)(@n Image)

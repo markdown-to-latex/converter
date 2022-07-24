@@ -1,5 +1,5 @@
-import { Validator, ValidatorResult } from 'jsonschema';
-import { MarkDownToLaTeXConverter } from './printer/types';
+import {Validator, ValidatorResult} from 'jsonschema';
+import {MarkDownToLaTeXConverter} from './types';
 import * as path from 'path';
 import * as JSON5 from 'json5';
 import * as fs from 'fs';
@@ -19,7 +19,7 @@ export function validateConfig(
 ): ValidatorResult {
     const schemaPath = path.resolve(
         __dirname,
-        '../md-to-latex-converter.schema.json',
+        '../../md-to-latex-converter.schema.json',
     );
     const schemaContent = fs.readFileSync(schemaPath, 'utf8');
     const schema = JSON5.parse(schemaContent);

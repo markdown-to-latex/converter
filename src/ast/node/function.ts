@@ -1,4 +1,4 @@
-import { FileNode, Node, NodeType } from './struct';
+import { FileNode, Node, NodeAbstract, NodeType } from './struct';
 
 const nodeListProps = ['children', 'rows', 'header', 'name'] as const;
 
@@ -127,7 +127,9 @@ export function getNodeLeftNeighbourLeaf(node: Node): Node | null {
     return getNodeLeftNeighbourLeaf(parent);
 }
 
-export function getNodeRightNeighbourLeaf(node: Node): Node | null {
+export function getNodeRightNeighbourLeaf(
+    node: NodeAbstract,
+): NodeAbstract | null {
     const parent = node.parent;
     if (parent === null) {
         return null;
@@ -181,8 +183,8 @@ export function replaceNode(node: Node, newNode: Node): void {
     newNode.parent = node.parent;
 }
 
-export function getNodeParentFile(node: Node): FileNode | null {
-    let n: Node | null = node;
+export function getNodeParentFile(node: NodeAbstract): FileNode | null {
+    let n: NodeAbstract | null = node;
     while (n) {
         if (n.type === NodeType.File) {
             return n as FileNode;

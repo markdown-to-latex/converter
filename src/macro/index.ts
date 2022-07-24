@@ -1,16 +1,18 @@
 import {
     FileNode,
     Node,
+    NodeAbstract,
     NodeE,
     NodeEParentData,
     NodeType,
-    OpCodeNode, ParagraphNode,
+    OpCodeNode,
+    ParagraphNode,
 } from '../ast/node';
-import {ContextE, initContext} from './context';
-import {parseMacro} from './function';
-import {processNode} from './node';
-import {NodeProcessed} from './node/struct';
-import {DiagnoseList} from '../diagnose';
+import { ContextE, initContext } from './context';
+import { parseMacro } from './function';
+import { processNode } from './node';
+import { NodeProcessed } from './node/struct';
+import { DiagnoseList } from '../diagnose';
 
 export function applyMacros(fileNode: FileNode): DiagnoseList {
     const context = new ContextE(initContext(fileNode));
@@ -38,7 +40,7 @@ export function applyMacros(fileNode: FileNode): DiagnoseList {
 
         const processing = processNode(context, data);
         if (processing) {
-            const container = data.container as NodeProcessed[];
+            const container = data.container as NodeAbstract[];
             container.splice(data.index, 1, ...processing);
         }
         value = iter.next();
@@ -50,6 +52,10 @@ export function applyMacros(fileNode: FileNode): DiagnoseList {
     return context.c.diagnostic;
 }
 
+/**
+ * Removed empty paragraphs and commands
+ * @param fileNode
+ */
 function clearance(fileNode: FileNode): void {
     const nodeE = new NodeE(fileNode);
 
@@ -64,6 +70,11 @@ function clearance(fileNode: FileNode): void {
                 data.container.splice(data.index, 1);
             }
         }
+
+        if (data.node.n.type === NodeType.Comment) {
+            data.container.splice(data.index, 1);
+        }
+
         value = iter.next();
     }
 }

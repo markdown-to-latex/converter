@@ -1,5 +1,5 @@
 import {
-    ImageProcessedNode,
+    PictureProcessedNode,
     ProcessedNodeType,
     ProcessingInfo,
     ProcessingInfoCallback,
@@ -12,7 +12,7 @@ import {
 } from '../../../diagnose';
 import {ImageNode, NodeType} from "../../../ast/node";
 
-function fallbackImageNode(imageNode: ImageNode): ImageProcessedNode {
+function fallbackImageNode(imageNode: ImageNode): PictureProcessedNode {
     return {
         ...imageNode,
 

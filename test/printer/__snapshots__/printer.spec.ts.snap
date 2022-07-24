@@ -102,6 +102,11 @@ exports[`References Inline latex math dereplacement 1`] = `
 "
 `;
 
+exports[`References Inline math 1`] = `
+"Text \\\\displaystyle a = b + \\\\sum_{i=0}^\\\\infty c_i ending.
+"
+`;
+
 exports[`References Table and picture key 1`] = `
 "Displayed in picture 1 (1) and table 1.
 

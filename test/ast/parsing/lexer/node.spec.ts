@@ -648,7 +648,7 @@ New sample text
         let node = nodes[1] as LatexNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Latex);
-        expect(node.text).toEqual('\\textbf{Some bold text in raw __deprecated_latex}');
+        expect(node.text).toEqual('\\textbf{Some bold text in raw latex}');
 
         expect(nodes).toMatchSnapshot();
     });
@@ -686,7 +686,7 @@ New sample text
         const node = paragraphNode.children[1] as LatexSpanNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.LatexSpan);
-        expect(node.text).toEqual('\\textbf{some inlined __deprecated_latex}');
+        expect(node.text).toEqual('\\textbf{some inlined latex}');
 
         expect(nodes).toMatchSnapshot();
     });

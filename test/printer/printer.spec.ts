@@ -1,31 +1,37 @@
-import {
-    applyProcessing,
-    buildMarkdownAST,
-    initContext,
-    lexer,
-    printMarkdownAST,
-} from '../../src';
-import { OpCodeError } from '../../src/printer/opcodes';
-import { ContextError } from '../../src/printer/context';
-import { MarkDownToLaTeXConverter } from '../../src/printer/types';
+import { MarkDownToLaTeXConverter } from '../../src/config/types';
+import { parseFile } from '../../src/ast/parsing';
+import { applyMacros } from '../../src/macro';
+import { buildConfig, createLatexPrinter } from '../../src/printer/latex';
+import { DiagnoseList } from '../../src/diagnose';
 
 function processingChain(
     text: string,
     config?: Partial<MarkDownToLaTeXConverter>,
-): Record<string, string> {
-    const lexerResult = lexer(text);
-    const result = buildMarkdownAST(lexerResult, { filepath: 'filepath' });
+): {
+    result: string;
+    diagnostic: DiagnoseList;
+} {
+    const { result: fileNode, diagnostic: fileDiagnostic } = parseFile(
+        text,
+        'filepath',
+    );
 
-    const files: Record<string, string> = {};
-    const context = initContext((content, fileName) => {
-        files[fileName] = content;
-    }, config);
+    const macroDiagnostic = applyMacros(fileNode);
 
-    applyProcessing(result, context);
+    const printer = createLatexPrinter(buildConfig(config?.latex));
+    const { result, diagnostic: printerDiagnostic } = printer.processNode(
+        printer,
+        fileNode,
+    );
 
-    printMarkdownAST(result, context);
-
-    return files;
+    return {
+        result,
+        diagnostic: [
+            ...fileDiagnostic,
+            ...macroDiagnostic,
+            ...printerDiagnostic,
+        ],
+    };
 }
 
 describe('simple md to latex docs printer', () => {
@@ -34,9 +40,9 @@ describe('simple md to latex docs printer', () => {
 # Header
 
 Text
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Subheader + List + Code Span', () => {
@@ -56,9 +62,9 @@ Text
         - 700
     2. \`Code_span\`
 3. Z
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Header + Image + Code + Image', () => {
@@ -76,17 +82,19 @@ def main():
 
 !P[img-2!7cm]
 ![Image name 2](./assets/img/dolphin.png)
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Del node', () => {
         const result = processingChain(`
 Test~node *what* hell~yeah we~ll.
-        `)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        `);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Code + Code', () => {
@@ -106,9 +114,10 @@ def main():
 def hello_world():
     print "Hello World"
 \`\`\`
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Table', () => {
@@ -121,9 +130,10 @@ Demonstrated in table
 |---|---|---|---|
 |1|2|3|4|
 |t|r|e|z|
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Header + Formula', () => {
@@ -133,36 +143,37 @@ Demonstrated in table
 \`\`\`math
     a = b + c
 \`\`\`
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('bold and italic', () => {
-        const result = processingChain(`**Bold**: *testing*`)['filepath'];
+        const result = processingChain(`**Bold**: *testing*`);
 
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('ListItem + Br + Text must have 2 line breaks', () => {
         const result = processingChain(`1. Item  
 New Line
 
-2. New Item`)['filepath'];
+2. New Item`);
 
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('ListItem + MathLatex must have 2 line breaks', () => {
         const result = processingChain(`1. Text  
 \`\`\`math
 Some text here
-\`\`\``)['filepath'];
+\`\`\``);
 
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 });
 
@@ -182,9 +193,10 @@ See application !AK[code-full].
 # Applications
 
 !LAA[]
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('with multiple columns', () => {
@@ -199,27 +211,30 @@ See application !AK[code-full].
 # Applications
 
 !LAA[]
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Unused application, should throw error', () => {
-        const result = () =>
-            processingChain(`
+        const result = processingChain(`
 !AC[code-full!./assets/code!template-full.py!python]
 
 !LAA[]
-`)['filepath'];
-        expect(result).toThrow(OpCodeError);
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Undefined application, should throw error', () => {
-        const result = () =>
-            processingChain(`
+        const result = processingChain(`
 !AK[nope]
-`)['filepath'];
-        expect(result).toThrow(ContextError);
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 });
 
@@ -243,38 +258,41 @@ Code from reference !RK[ref-2] describes image from reference !RK[ref-1].
 # References
 
 !LAR[]
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Unused reference, should throw error', () => {
-        const result = () =>
-            processingChain(`
+        const result = processingChain(`
 !RR[ref]
 \`\`\`ref
 A.\\,A.\\~Amogus. "Impostor\\~theorem" // Steam library, 2021
 \`\`\`
 
 !LAR[]
-`)['filepath'];
-        expect(result).toThrow(OpCodeError);
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Undefined reference, should throw error', () => {
-        const result = () =>
-            processingChain(`
+        const result = processingChain(`
 !RK[nope]
-`)['filepath'];
-        expect(result).toThrow(ContextError);
+`);
     });
 
     test('Inline math', () => {
         const result = processingChain(`
 Text $\`a = b + \\sum_{i=0}^\\infty c_i\`$ ending.
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result)
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
+
+        expect(result.result)
             .toEqual(`Text $\\displaystyle a = b + \\sum_{i=0}^\\infty c_i$ ending.
 `);
     });
@@ -282,17 +300,19 @@ Text $\`a = b + \\sum_{i=0}^\\infty c_i\`$ ending.
     test('Text with percents', () => {
         const result = processingChain(`
 Text with 10% number.
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Text with escapes ("<" sound be corrent also)', () => {
         const result = processingChain(`
 Text with \\<assdasd.
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Tag <hr> should break the page', () => {
@@ -302,41 +322,46 @@ The first page
 ---------------------------------------
 
 The second page
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Tag <br> should put additional break', () => {
         const result = processingChain(`
 The first line  
 The second line
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test("Text ' dereplacement", () => {
         const result = processingChain(`
 Otsu's method is a one-dimensional discrete analog of Fisher's 
 Discriminant Analysis, is related to Jenks optimization method.
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('CodeSpan dereplacement', () => {
-        const result = processingChain('`"sample & text"`')['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        const result = processingChain('`"sample & text"`');
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Inline latex math dereplacement', () => {
         const result = processingChain(`
 $\`a > b < c\`$
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Table and picture key', () => {
@@ -352,9 +377,10 @@ Displayed in picture !PK[gray-square] (!PK[gray-square]) and table !TK[table].
 |-------|------|
 |Static number | 50 |
 |Random number | $$ \\showcaserandomnumber $$ |
-`)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 });
 
@@ -370,10 +396,10 @@ describe('latex picture after table (#52)', function () {
 
 !P[gray-square!5cm]
 ![Gray square](./assets/img/example.png)`,
-        )['filepath'];
+        );
 
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Table + text + picture', () => {
@@ -388,10 +414,10 @@ Sample text line
 
 !P[gray-square!5cm]
 ![Gray square](./assets/img/example.png)`,
-        )['filepath'];
+        );
 
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 });
 
@@ -399,9 +425,10 @@ describe('url variants', () => {
     test('Default url', () => {
         const result = processingChain(
             'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
-        )['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        );
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Bold url', () => {
@@ -412,9 +439,10 @@ describe('url variants', () => {
                     useLinkAs: 'bold',
                 },
             },
-        )['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        );
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Italic url', () => {
@@ -425,9 +453,10 @@ describe('url variants', () => {
                     useLinkAs: 'italic',
                 },
             },
-        )['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        );
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Underlined url', () => {
@@ -438,9 +467,10 @@ describe('url variants', () => {
                     useLinkAs: 'underline',
                 },
             },
-        )['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        );
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('No escape & code url', () => {
@@ -448,13 +478,14 @@ describe('url variants', () => {
             'https://example.com/index_page.html?asd=asdasd&asdasd=gege#header',
             {
                 latex: {
-                    useLinkAs: 'code',
+                    useLinkAs: 'monospace',
                     defaultAutoEscapes: false,
                 },
             },
-        )['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        );
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 });
 
@@ -466,17 +497,19 @@ describe('Escapes', () => {
 [Link name](https://testing.url/com?some=thing&wtf#xdxdxd)
 
 The "definition" increased by 1% (more text more text).
-    `)['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+    `);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 });
 
 describe('CodeSpan', () => {
     test('Monospace', () => {
-        const result = processingChain('CodeSpan `text & text`.')['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        const result = processingChain('CodeSpan `text & text`.');
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 
     test('Quote', () => {
@@ -484,8 +517,9 @@ describe('CodeSpan', () => {
             latex: {
                 useCodeSpanAs: 'quotes',
             },
-        })['filepath'];
-        expect(result).not.toBeUndefined();
-        expect(result).toMatchSnapshot();
+        });
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
     });
 });

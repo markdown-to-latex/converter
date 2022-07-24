@@ -67,10 +67,14 @@ export const SPAN_NODE_TYPES: NodeType[] = [
 
 export type StartEndNumberPosition = StartEndPosition<number>;
 
-export interface Node<T = never> {
-    type: NodeType | RawNodeType | T;
+export interface NodeAbstract {
+    type: string;
     parent: Node | null;
     pos: StartEndNumberPosition;
+}
+
+export interface Node extends NodeAbstract {
+    type: NodeType | RawNodeType;
 }
 
 export interface NodeChildren {

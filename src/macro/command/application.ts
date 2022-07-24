@@ -1,12 +1,12 @@
-import { CommandInfo, CommandInfoCallback } from '../struct';
+import {CommandInfo, CommandInfoCallback} from '../struct';
 import {
     CodeApplicationNode,
     PictureApplicationNode,
     ProcessedNodeType,
     RawApplicationNode,
 } from '../node/struct';
-import { Node } from '../../ast/node';
-import { ArgInfoType } from '../args';
+import {Node} from '../../ast/node';
+import {ArgInfoType} from '../args';
 import {
     DiagnoseErrorType,
     DiagnoseSeverity,
@@ -33,7 +33,7 @@ const callbackRaw: CommandInfoCallback<RawArgsType, string> = function (
                 DiagnoseSeverity.Fatal,
                 DiagnoseErrorType.MacrosError,
                 'Application macros title argument is undefined ' +
-                    '(internal error)',
+                '(internal error)',
             ),
         );
 
@@ -46,7 +46,7 @@ const callbackRaw: CommandInfoCallback<RawArgsType, string> = function (
                 DiagnoseSeverity.Fatal,
                 DiagnoseErrorType.MacrosError,
                 'Application macros raw argument is undefined ' +
-                    '(internal error)',
+                '(internal error)',
             ),
         );
 
@@ -55,15 +55,16 @@ const callbackRaw: CommandInfoCallback<RawArgsType, string> = function (
 
     const node: RawApplicationNode = {
         type: ProcessedNodeType.RawApplication,
-        pos: { ...data.node.n.pos },
+        pos: {...data.node.n.pos},
         parent: data.node.n.parent,
         children: args.args.content,
+        index: -1,
     };
 
     ctx.createApplication({
         label: args.label,
         title: args.args.title,
-        content: [node],
+        content: node,
     });
     return [];
 };
@@ -79,15 +80,17 @@ const __callbackPicture: CommandInfoCallback<__PictureArgsType, string> =
         const node: PictureApplicationNode = {
             type: ProcessedNodeType.PictureApplication,
             parent: data.node.n.parent,
-            pos: { ...data.node.n.pos },
+            pos: {...data.node.n.pos},
             rotated: args.args.rotated,
             href: args.args.filepath,
+            title: args.args.title,
+            index: -1,
         };
 
         ctx.createApplication({
             label: args.label,
             title: args.args.title,
-            content: [node],
+            content: node,
         });
 
         return [];
@@ -106,7 +109,7 @@ const callbackPicture = (rotated: boolean) =>
                     DiagnoseSeverity.Fatal,
                     DiagnoseErrorType.MacrosError,
                     'Application macros title argument is undefined ' +
-                        '(internal error)',
+                    '(internal error)',
                 ),
             );
 
@@ -119,7 +122,7 @@ const callbackPicture = (rotated: boolean) =>
                     DiagnoseSeverity.Fatal,
                     DiagnoseErrorType.MacrosError,
                     'Application macros filepath argument is undefined ' +
-                        '(internal error)',
+                    '(internal error)',
                 ),
             );
 
@@ -172,7 +175,7 @@ const callbackCode: CommandInfoCallback<CodeArgsType, string> = function (
                 DiagnoseSeverity.Fatal,
                 DiagnoseErrorType.MacrosError,
                 'Application macros directory argument is undefined ' +
-                    '(internal error)',
+                '(internal error)',
             ),
         );
 
@@ -185,7 +188,7 @@ const callbackCode: CommandInfoCallback<CodeArgsType, string> = function (
                 DiagnoseSeverity.Fatal,
                 DiagnoseErrorType.MacrosError,
                 'Application macros filename argument is undefined ' +
-                    '(internal error)',
+                '(internal error)',
             ),
         );
 
@@ -198,7 +201,7 @@ const callbackCode: CommandInfoCallback<CodeArgsType, string> = function (
                 DiagnoseSeverity.Fatal,
                 DiagnoseErrorType.MacrosError,
                 'Application macros language argument is undefined ' +
-                    '(internal error)',
+                '(internal error)',
             ),
         );
 
@@ -207,18 +210,19 @@ const callbackCode: CommandInfoCallback<CodeArgsType, string> = function (
 
     const node: CodeApplicationNode = {
         type: ProcessedNodeType.CodeApplication,
-        pos: { ...data.node.n.pos },
+        pos: {...data.node.n.pos},
         parent: data.node.n.parent,
         columns: +(args.args.columns ?? 1),
         lang: args.args.language,
         directory: args.args.directory,
         filename: args.args.filename,
+        index: -1,
     };
 
     ctx.createApplication({
         label: args.label,
         title: [],
-        content: [node],
+        content: node,
     });
     return [];
 };

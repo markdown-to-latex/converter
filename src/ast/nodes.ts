@@ -1,5 +1,21 @@
 import * as nodes from '../ast/node';
-import {NodeType} from './node';
+import { NodeType } from './node';
+import { RawNodeType } from '../ast/node';
+
+const RawNodesByTypeMap = {
+    [RawNodeType.Raw]: {} as nodes.RawNode,
+    [RawNodeType.Tokens]: {} as nodes.TokensNode,
+    [RawNodeType.SoftBreak]: {} as nodes.SoftBreakNode,
+    [RawNodeType.ParagraphBreak]: {} as nodes.ParagraphBreakNode,
+    [RawNodeType.TextBreak]: {} as nodes.TextBreakNode,
+} as const;
+
+export type RawNodesByType = typeof RawNodesByTypeMap;
+
+// Compile-time interface validation
+const _1 = RawNodesByTypeMap as {
+    [Key in RawNodeType]: {};
+};
 
 const NodesByTypeMap = {
     [NodeType.Space]: {} as nodes.SpaceNode,
@@ -42,6 +58,6 @@ const NodesByTypeMap = {
 export type NodesByType = typeof NodesByTypeMap;
 
 // Compile-time interface validation
-const _ = NodesByTypeMap as {
+const _2 = NodesByTypeMap as {
     [Key in NodeType]: nodes.Node;
 };

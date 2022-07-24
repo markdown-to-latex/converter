@@ -42,13 +42,13 @@
                 "useLinkAs": {
                     "type": "string",
                     "description": "How to interpret markdown Link?",
-                    "enum": ["code", "default", "bold", "underline", "italic"],
-                    "default": "default"
+                    "enum": ["monospace", "quotes", "bold", "underline", "italic"],
+                    "default": "underline"
                 },
                 "useCodeSpanAs": {
                     "type": "string",
                     "description": "How to interpret markdown CodeSpan?",
-                    "enum": ["monospace", "quotes"],
+                    "enum": ["monospace", "quotes", "bold", "underline", "italic"],
                     "default": "quotes"
                 },
                 "margin": {

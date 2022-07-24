@@ -1,36 +1,26 @@
-import { CommandInfo, CommandInfoCallback } from '../struct';
+import {CommandInfo, CommandInfoCallback} from '../struct';
 import {
     AllApplicationsNode,
-    ApplicationNode,
+    NodeApplication,
+    NodeProcessed,
     ProcessedNodeType,
-} from '../node/struct';
-import { Node } from '../../ast/node';
+} from '../node';
 
-interface ArgsType {}
+interface ArgsType {
+}
 
 const callback: CommandInfoCallback<ArgsType, string> = function (
     ctx,
     data,
     args,
 ) {
-    const { labels, labelToInfo } = ctx.c.data.application;
+    const {labels, labelToInfo} = ctx.c.data.application;
 
-    const children: ApplicationNode[] = labels
+    const children: (NodeProcessed & NodeApplication)[] = labels
         .map((label, index) => [labelToInfo[label], label, index] as const)
         .map(([info, label, index]) => ({
-            type: ProcessedNodeType.Application,
-            pos: {
-                start:
-                    info.content.length === 0 ? 0 : info.content[0].pos.start,
-                end:
-                    info.content.length === 0
-                        ? 0
-                        : info.content[info.content.length - 1].pos.end,
-            },
-            parent: data.node.n.parent,
-            children: info.content as Node[],
-            index,
-            title: info.title,
+            ...info.content,
+            index: index,
         }));
 
     const node: AllApplicationsNode = {

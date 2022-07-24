@@ -1,26 +1,12 @@
-import { EscaperReady } from '../printer/latex/escaper';
 import { LINE_SPLIT_REGEXP } from './regexp';
 import {
     positionToTextPosition,
     splitLinesWithTextPositions,
     TextPosition,
 } from '../ast/node';
+import {EscaperReady} from "../printer/latex/string/escapes";
 
 export class StringE {
-    /**
-     * Anti-Replacement mapping
-     *
-     * [md-to-latex specific]
-     * @see https://github.com/markedjs/marked/blob/288f1cbe2f55881972c0f594ddb9910888986bee/src/helpers.js#L8
-     * @protected
-     */
-    protected static _escapeDeReplacements: Record<string, string> = {
-        '&amp;': '&',
-        '&lt;': '<',
-        '&gt;': '>',
-        '&quot;': '"',
-        '&#39;': "'",
-    };
     protected _string: string;
 
     constructor(string: string | StringE) {
@@ -201,27 +187,6 @@ export class StringE {
 
     public toString(): string {
         return this._string;
-    }
-
-    /**
-     * Remove replacements made by `marked`
-     *
-     * [md-to-latex specific]
-     * @see https://github.com/markedjs/marked/blob/288f1cbe2f55881972c0f594ddb9910888986bee/src/helpers.js#L8
-     */
-    public resolveDeReplacements(): StringE {
-        let text: StringE = this;
-        for (const dereplacement of Object.keys(
-            StringE._escapeDeReplacements,
-        )) {
-            const regexp = new RegExp(dereplacement, 'g');
-            text = text.replaceE(
-                regexp,
-                StringE._escapeDeReplacements[dereplacement],
-            );
-        }
-
-        return text;
     }
 
     /**

@@ -7,4 +7,4 @@ const fs = require('fs');
 // compile from file
 schemaConverter
     .compileFromFile('md-to-latex-converter.schema.json')
-    .then(ts => fs.writeFileSync('src/printer/types.ts', ts));
+    .then(ts => fs.writeFileSync('src/config/types.ts', ts));

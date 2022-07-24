@@ -1,4 +1,4 @@
-import { copyStartEndPos, getNodeParentFile, Node } from '../ast/node';
+import {copyStartEndPos, getNodeParentFile, Node, NodeAbstract} from '../ast/node';
 import path from 'path';
 import {
     positionToTextPosition,
@@ -41,6 +41,8 @@ export enum DiagnoseErrorType {
     InternalError,
     ContextError,
     MacrosError,
+    PrinterError,
+    LatexPrinterError,
     OtherError,
 }
 
@@ -70,7 +72,7 @@ export function diagnoseToString(diag: DiagnoseInfo) {
 }
 
 export function nodeToDiagnose(
-    node: Node,
+    node: NodeAbstract,
     severity: DiagnoseSeverity,
     errorType: DiagnoseErrorType,
     message?: string,
