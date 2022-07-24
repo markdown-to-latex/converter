@@ -4,11 +4,13 @@ import {
     getNodeAllChildren,
     getNodeLeftNeighbourLeaf,
     getNodeParentFile,
-    getNodeRightNeighbourLeaf, NodeListProps,
+    getNodeRightNeighbourLeaf,
+    NodeListProps,
     NodeParentData,
     replaceNode,
-    traverseNodeChildren, traverseNodeChildrenDeepDepth
-} from "./function";
+    traverseNodeChildren,
+    traverseNodeChildrenDeepDepth,
+} from './function';
 import {
     DiagnoseErrorType,
     DiagnoseInfo,

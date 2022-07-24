@@ -58,7 +58,7 @@ function isNodeBeforeBoxed(node: NodeAbstract): boolean {
             NodeType.Image,
             ProcessedNodeType.CodeProcessed,
             ProcessedNodeType.TableProcessed,
-            ProcessedNodeType.TableProcessed,
+            ProcessedNodeType.PictureProcessed,
         ].indexOf(right.type as keyof NodesByType) !== -1
     );
 }
@@ -225,7 +225,7 @@ export const processingVisitors: ProcessingVisitors = {
     [NodeType.Paragraph]: (printer, node) => {
         const result = printer.processNodeList(printer, node.children);
         return {
-            result: result.result + '\n',
+            result: `\n${result.result}\n`,
             diagnostic: result.diagnostic,
         };
     },
@@ -341,7 +341,7 @@ export const processingVisitors: ProcessingVisitors = {
         diagnostic: [],
     }),
     [NodeType.ThinNonBreakingSpace]: () => ({
-        result: ',',
+        result: '\\,',
         diagnostic: [],
     }),
 
@@ -430,7 +430,7 @@ export const processingVisitors: ProcessingVisitors = {
         const indexResult = getLatexApplicationLetter(node.index, node);
 
         return {
-            result: (node.rotated ? getLatexPicture : getLatexRotatedPicture)(
+            result: (node.rotated ? getLatexRotatedPicture : getLatexPicture)(
                 {
                     index: indexResult.result,
                     title: titleResult.result,
@@ -465,7 +465,7 @@ export const processingVisitors: ProcessingVisitors = {
         const index = (node.index + 1).toString();
 
         return {
-            result: `${index}.\,${childrenResult.result}\n\n`,
+            result: `${index}.\\,${childrenResult.result}\n\n`,
             diagnostic: childrenResult.diagnostic,
         };
     },

@@ -1,11 +1,8 @@
 import table from './processing/table';
 import code from './processing/code';
-import {NodeProcessed, ProcessingInfo} from './struct';
-import {
-    Node,
-    NodeEParentData,
-} from '../../ast/node';
-import {ContextE} from '../context';
+import { NodeProcessed, ProcessingInfo } from './struct';
+import { Node, NodeEParentData } from '../../ast/node';
+import { ContextE } from '../context';
 import picture from './processing/picture';
 
 const ALL_PROCESSING: ProcessingInfo<Node>[] = [
@@ -24,10 +21,10 @@ export function processNode(
     return !processing
         ? null
         : processing.callback(ctx, {
-            node: data.node,
-            index: data.index,
-            container: data.container,
-        });
+              node: data.node,
+              index: data.index,
+              container: data.container,
+          });
 }
 
 export * from './struct';

@@ -1,8 +1,12 @@
-import {CommandInfo, CommandInfoCallback} from '../struct';
-import {ProcessedNodeType} from '../node/struct';
-import {Node} from '../../ast/node';
-import {ArgInfoType} from '../args';
-import {DiagnoseErrorType, DiagnoseSeverity, nodeToDiagnose} from "../../diagnose";
+import { CommandInfo, CommandInfoCallback } from '../struct';
+import { ProcessedNodeType } from '../node/struct';
+import { Node } from '../../ast/node';
+import { ArgInfoType } from '../args';
+import {
+    DiagnoseErrorType,
+    DiagnoseSeverity,
+    nodeToDiagnose,
+} from '../../diagnose';
 
 interface ArgsType {
     reference?: Node[];
@@ -14,13 +18,15 @@ const callback: CommandInfoCallback<ArgsType, string> = function (
     args,
 ) {
     if (!args.args.reference) {
-        ctx.c.diagnostic.push(nodeToDiagnose(
-            data.node.n,
-            DiagnoseSeverity.Fatal,
-            DiagnoseErrorType.MacrosError,
-            'Reference macros reference argument is undefined ' +
-            '(internal error)'
-        ))
+        ctx.c.diagnostic.push(
+            nodeToDiagnose(
+                data.node.n,
+                DiagnoseSeverity.Fatal,
+                DiagnoseErrorType.MacrosError,
+                'Reference macros reference argument is undefined ' +
+                    '(internal error)',
+            ),
+        );
 
         return [];
     }

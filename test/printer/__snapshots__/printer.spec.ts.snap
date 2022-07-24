@@ -1,5 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Applications Undefined application, should throw error 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Application with nope does not exist",
+    "pos": Object {
+      "end": Object {
+        "absolute": 10,
+        "column": 10,
+        "line": 2,
+      },
+      "start": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 2,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 5,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Index -1 is out of range application letters",
+    "pos": Object {
+      "end": Object {
+        "absolute": 10,
+        "column": 10,
+        "line": 2,
+      },
+      "start": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 2,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`Applications Undefined application, should throw error 2`] = `
+"Ъ
+"
+`;
+
+exports[`Applications Unused application, should throw error 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused application label code-full",
+    "pos": Object {
+      "end": Object {
+        "absolute": 56,
+        "column": 56,
+        "line": 2,
+      },
+      "start": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 2,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`Applications Unused application, should throw error 2`] = `""`;
+
 exports[`Applications with list 1`] = `
 "\\\\subtitle{Header}
 
@@ -88,31 +159,95 @@ exports[`Escapes Default escapes 1`] = `
 \\\\underline{https://testing.url/com?some=thing\\\\&wtf\\\\#xdxdxd}
 
 The \\"{}definition\\"{} increased by 1\\\\% (more text more text).
-    
 "
 `;
 
-exports[`References CodeSpan dereplacement 1`] = `
-"\\\\texttt{\\"{}sample \\\\& text\\"{}}
+exports[`References Undefined reference, should throw error 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Reference with nope does not exist",
+    "pos": Object {
+      "end": Object {
+        "absolute": 10,
+        "column": 10,
+        "line": 2,
+      },
+      "start": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 2,
+      },
+    },
+    "severity": "ERROR",
+  },
+]
+`;
+
+exports[`References Undefined reference, should throw error 2`] = `
+"0
 "
 `;
 
-exports[`References Inline latex math dereplacement 1`] = `
+exports[`References Unused reference, should throw error 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused reference label ref",
+    "pos": Object {
+      "end": Object {
+        "absolute": 75,
+        "column": 2,
+        "line": 4,
+      },
+      "start": Object {
+        "absolute": 1,
+        "column": 1,
+        "line": 2,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`References Unused reference, should throw error 2`] = `""`;
+
+exports[`References with list 1`] = `
+"\\\\subtitle{Header}
+
+Code from reference 1 describes image from reference 2.
+
+\\\\subtitle{References}
+
+1.\\\\,H.\\\\,Y.~Ignat. <<Reference~2>> // Some Journal, 1867
+
+2.\\\\,H.\\\\,Y.~Ignat. <<Reference~1>> // Some Journal, 1867
+"
+`;
+
+exports[`complex latex CodeSpan dereplacement 1`] = `
+"<<\\"{}sample \\\\& text\\"{}>>
+"
+`;
+
+exports[`complex latex Inline latex math dereplacement 1`] = `
 "$\\\\displaystyle a > b < c$
 "
 `;
 
-exports[`References Inline math 1`] = `
-"Text \\\\displaystyle a = b + \\\\sum_{i=0}^\\\\infty c_i ending.
+exports[`complex latex Inline math 1`] = `
+"Text $\\\\displaystyle a = b + \\\\sum_{i=0}^\\\\infty c_i$ ending.
 "
 `;
 
-exports[`References Table and picture key 1`] = `
+exports[`complex latex Table and picture key 1`] = `
 "Displayed in picture 1 (1) and table 1.
 
 \\\\setlength{\\\\intextsep}{3em}
 \\\\setlength{\\\\belowcaptionskip}{-4ex}
-\\\\addtolength{\\\\belowcaptionskip}{-1.6em}
 \\\\setlength{\\\\abovecaptionskip}{0.5em}
 
 \\\\begin{figure}[H]
@@ -150,51 +285,79 @@ Random number &  \\\\showcaserandomnumber \\\\\\\\ \\\\hline
 "
 `;
 
-exports[`References Tag <br> should put additional break 1`] = `
+exports[`complex latex Tag <br> should put additional break 1`] = `
 "The first line
 
 The second line
 "
 `;
 
-exports[`References Tag <hr> should break the page 1`] = `
+exports[`complex latex Tag <hr> should break the page 1`] = `
 "The first page
 
 \\\\pagebreak
+
 The second page
 "
 `;
 
-exports[`References Text ' dereplacement 1`] = `
-"Otsu's method is a one-dimensional discrete analog of Fisher's 
-Discriminant Analysis, is related to Jenks optimization method.
+exports[`complex latex Text ' dereplacement 1`] = `
+"Otsu's method is a one-dimensional discrete analog of Fisher's  Discriminant Analysis, is related to Jenks optimization method.
 "
 `;
 
-exports[`References Text with escapes ("<" sound be corrent also) 1`] = `
+exports[`complex latex Text with escapes ("<" sound be corrent also) 1`] = `
 "Text with \\\\<assdasd.
 "
 `;
 
-exports[`References Text with percents 1`] = `
+exports[`complex latex Text with percents 1`] = `
 "Text with 10\\\\% number.
 "
 `;
 
-exports[`References with list 1`] = `
-"\\\\subtitle{Header}
-
-Code from reference 1 describes image from reference 2.
-
-\\\\subtitle{References}
-
-1.\\\\,H.\\\\,Y.\\\\~Ignat. \\"Reference\\\\~2\\" // Some Journal, 1867
-
-2.\\\\,H.\\\\,Y.\\\\~Ignat. \\"Reference\\\\~1\\" // Some Journal, 1867
-"
+exports[`latex picture after table (#52) Picture right after the table 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused picture label gray-square",
+    "pos": Object {
+      "end": Object {
+        "absolute": 232,
+        "column": 62,
+        "line": 7,
+      },
+      "start": Object {
+        "absolute": 171,
+        "column": 1,
+        "line": 7,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused table label table",
+    "pos": Object {
+      "end": Object {
+        "absolute": 169,
+        "column": 48,
+        "line": 5,
+      },
+      "start": Object {
+        "absolute": 26,
+        "column": 1,
+        "line": 3,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
 `;
 
-exports[`latex picture after table (#52) Picture right after the table 1`] = `
+exports[`latex picture after table (#52) Picture right after the table 2`] = `
 "\\\\fontsize{\\\\tablefontsize}{\\\\tablefontsize}\\\\selectfont
 \\\\setlength{\\\\belowcaptionskip}{0em}
 \\\\setlength{\\\\abovecaptionskip}{0em}
@@ -234,6 +397,47 @@ Static number & 50\\\\\\\\ \\\\hline
 `;
 
 exports[`latex picture after table (#52) Table + text + picture 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused picture label gray-square",
+    "pos": Object {
+      "end": Object {
+        "absolute": 250,
+        "column": 62,
+        "line": 9,
+      },
+      "start": Object {
+        "absolute": 189,
+        "column": 1,
+        "line": 9,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused table label table",
+    "pos": Object {
+      "end": Object {
+        "absolute": 169,
+        "column": 48,
+        "line": 5,
+      },
+      "start": Object {
+        "absolute": 26,
+        "column": 1,
+        "line": 3,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`latex picture after table (#52) Table + text + picture 2`] = `
 "\\\\fontsize{\\\\tablefontsize}{\\\\tablefontsize}\\\\selectfont
 \\\\setlength{\\\\belowcaptionskip}{0em}
 \\\\setlength{\\\\abovecaptionskip}{0em}
@@ -313,8 +517,7 @@ def hello_world():
 `;
 
 exports[`simple md to latex docs printer Del node 1`] = `
-"Test~node \\\\textit{what} hell~yeah we~ll.
-        
+"Test~node \\\\textit{what} hell~yeah we\\\\,ll.
 "
 `;
 
@@ -333,6 +536,65 @@ exports[`simple md to latex docs printer Header + Formula 1`] = `
 `;
 
 exports[`simple md to latex docs printer Header + Image + Code + Image 1`] = `
+Array [
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused picture label img-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 65,
+        "column": 55,
+        "line": 4,
+      },
+      "start": Object {
+        "absolute": 11,
+        "column": 1,
+        "line": 4,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused picture label code-1",
+    "pos": Object {
+      "end": Object {
+        "absolute": 144,
+        "column": 4,
+        "line": 9,
+      },
+      "start": Object {
+        "absolute": 67,
+        "column": 1,
+        "line": 6,
+      },
+    },
+    "severity": "WARNING",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "message": "Unused picture label img-2",
+    "pos": Object {
+      "end": Object {
+        "absolute": 202,
+        "column": 57,
+        "line": 11,
+      },
+      "start": Object {
+        "absolute": 146,
+        "column": 1,
+        "line": 11,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`simple md to latex docs printer Header + Image + Code + Image 2`] = `
 "\\\\subtitle{Header}
 
 \\\\setlength{\\\\intextsep}{3em}
@@ -427,14 +689,14 @@ exports[`simple md to latex docs printer Subheader + List + Code Span 1`] = `
 
 \\\\hspace{2.5cm}-\\\\,700
 
-\\\\hspace{1.25cm}2)\\\\,\\\\texttt{Code\\\\_span}
+\\\\hspace{1.25cm}2)\\\\,<<Code\\\\_span>>
 
 \\\\hspace{0cm}в)\\\\,Z
 "
 `;
 
 exports[`simple md to latex docs printer Table 1`] = `
-"Demonstrated in table  
+"Demonstrated in table 1.
 
 \\\\fontsize{\\\\tablefontsize}{\\\\tablefontsize}\\\\selectfont
 \\\\setlength{\\\\belowcaptionskip}{0em}

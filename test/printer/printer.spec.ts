@@ -71,26 +71,24 @@ Text
         const result = processingChain(`
 # Header
 
-!P[img-1!5cm]
-![Image name](./assets/img/dolphin.png)
+![img-1](./assets/img/dolphin.png)(Image name)(@h 5cm)
 
-!C[code-1!Python Sample Code]
-\`\`\`python
+\`\`\`python[code-1](Python Sample Code)
 def main():
     print "Hello World"
 \`\`\`
 
-!P[img-2!7cm]
-![Image name 2](./assets/img/dolphin.png)
+![img-2](./assets/img/dolphin.png)(Image name 2)(@h 7cm)
 `);
 
-        expect(result.diagnostic).toHaveLength(0);
+        expect(result.diagnostic).not.toHaveLength(0);
+        expect(result.diagnostic).toMatchSnapshot();
         expect(result.result).toMatchSnapshot();
     });
 
     test('Del node', () => {
         const result = processingChain(`
-Test~node *what* hell~yeah we~ll.
+Test==node *what* hell==yeah we~ll.
         `);
 
         expect(result.diagnostic).toHaveLength(0);
@@ -103,14 +101,13 @@ Test~node *what* hell~yeah we~ll.
 
 Code in !PK[code-1] и !PK[code-2].
 
-!C[code-1!Python Sample Code]
-\`\`\`python
+
+\`\`\`python[code-1](Python Sample Code)
 def main():
     print "Hello World"
 \`\`\`
 
-!C[code-2!Python Sample Code 2]
-\`\`\`python
+\`\`\`python[code-2](Python Sample Code 2)
 def hello_world():
     print "Hello World"
 \`\`\`
@@ -122,9 +119,9 @@ def hello_world():
 
     test('Table', () => {
         const result = processingChain(`
-Demonstrated in table  
+Demonstrated in table !TK[table].
 
-!T[table!Table with content]
+!T[table](Table with content)
 
 |a|b|c|d|
 |---|---|---|---|
@@ -140,9 +137,9 @@ Demonstrated in table
         const result = processingChain(`
 # Header
 
-\`\`\`math
+$$$math
     a = b + c
-\`\`\`
+$$$
 `);
 
         expect(result.diagnostic).toHaveLength(0);
@@ -168,9 +165,9 @@ New Line
 
     test('ListItem + MathLatex must have 2 line breaks', () => {
         const result = processingChain(`1. Text  
-\`\`\`math
+$$$math
 Some text here
-\`\`\``);
+$$$`);
 
         expect(result.diagnostic).toHaveLength(0);
         expect(result.result).toMatchSnapshot();
@@ -179,10 +176,10 @@ Some text here
 
 describe('Applications', () => {
     test('with list', () => {
-        const result = processingChain(`
-!AC[code-full!./assets/code!template-full.py!python]
-!AC[code-full2!./assets/code!template-full2.py!python]
-!APR[picture-large!Large scheme!./assets/img/circuit.png]
+        const result = processingChain(`\
+!AC[code-full](@dir ./assets/code)(@file template-full.py)(@lang python)
+!AC[code-full2](@dir ./assets/code)(@file template-full2.py)(@lang python)
+!APR[picture-large](Large scheme)(./assets/img/circuit.png)
         
 # Header
 
@@ -201,8 +198,7 @@ See application !AK[code-full].
 
     test('with multiple columns', () => {
         const result = processingChain(`
-!ACC[2]
-!AC[code-full!./assets/code!template-full.py!python]
+!AC[code-full](@dir ./assets/code)(@file template-full.py)(@lang python)(@c 2)
         
 # Header
 
@@ -219,12 +215,13 @@ See application !AK[code-full].
 
     test('Unused application, should throw error', () => {
         const result = processingChain(`
-!AC[code-full!./assets/code!template-full.py!python]
+!AC[code-full](./assets/code)(template-full.py)(python)
 
 !LAA[]
 `);
 
-        expect(result.diagnostic).toHaveLength(0);
+        expect(result.diagnostic).not.toHaveLength(0);
+        expect(result.diagnostic).toMatchSnapshot();
         expect(result.result).toMatchSnapshot();
     });
 
@@ -233,7 +230,8 @@ See application !AK[code-full].
 !AK[nope]
 `);
 
-        expect(result.diagnostic).toHaveLength(0);
+        expect(result.diagnostic).not.toHaveLength(0);
+        expect(result.diagnostic).toMatchSnapshot();
         expect(result.result).toMatchSnapshot();
     });
 });
@@ -241,16 +239,14 @@ See application !AK[code-full].
 describe('References', () => {
     test('with list', () => {
         const result = processingChain(`
-!RR[ref-1]
-\`\`\`ref
-H.\\,Y.\\~Ignat. "Reference\\~1" // Some Journal, 1867
-\`\`\`
+!R[ref-1](
+    H.~Y.~~Ignat. <<Reference~~1>> // Some Journal, 1867
+)
 
-!RR[ref-2]
-\`\`\`ref
-H.\\,Y.\\~Ignat. "Reference\\~2" // Some Journal, 1867
-\`\`\`
-        
+!R[ref-2](
+    H.~Y.~~Ignat. <<Reference~~2>> // Some Journal, 1867
+)
+
 # Header
 
 Code from reference !RK[ref-2] describes image from reference !RK[ref-1].
@@ -266,15 +262,15 @@ Code from reference !RK[ref-2] describes image from reference !RK[ref-1].
 
     test('Unused reference, should throw error', () => {
         const result = processingChain(`
-!RR[ref]
-\`\`\`ref
-A.\\,A.\\~Amogus. "Impostor\\~theorem" // Steam library, 2021
-\`\`\`
+!R[ref](
+    A.~A.~~Amogus. <<Impostor~~theorem>> // Steam library, 2021
+)
 
 !LAR[]
 `);
 
-        expect(result.diagnostic).toHaveLength(0);
+        expect(result.diagnostic).not.toHaveLength(0);
+        expect(result.diagnostic).toMatchSnapshot();
         expect(result.result).toMatchSnapshot();
     });
 
@@ -282,8 +278,14 @@ A.\\,A.\\~Amogus. "Impostor\\~theorem" // Steam library, 2021
         const result = processingChain(`
 !RK[nope]
 `);
-    });
 
+        expect(result.diagnostic).not.toHaveLength(0);
+        expect(result.diagnostic).toMatchSnapshot();
+        expect(result.result).toMatchSnapshot();
+    });
+});
+
+describe('complex latex', function () {
     test('Inline math', () => {
         const result = processingChain(`
 Text $\`a = b + \\sum_{i=0}^\\infty c_i\`$ ending.
@@ -368,10 +370,9 @@ $\`a > b < c\`$
         const result = processingChain(`
 Displayed in picture !PK[gray-square] (!PK[gray-square]) and table !TK[table].
 
-!P[gray-square!5cm]
-![Gray square](./assets/img/example.png)
+![gray-square](./assets/img/example.png)(Gray square)(@h 5cm)
 
-!T[table!Table]
+!T[table](Table)
         
 |Key    |Value |
 |-------|------|
@@ -388,23 +389,23 @@ describe('latex picture after table (#52)', function () {
     // See https://github.com/markdown-to-latex/converter/issues/52
     test('Picture right after the table', () => {
         const result = processingChain(
-            `!T[table!Table example]
+            `!T[table](Table example)
 
 | Key           | Value                       |
 | ------------- | --------------------------- |
 | Static number | 50                          |
 
-!P[gray-square!5cm]
-![Gray square](./assets/img/example.png)`,
+![gray-square](./assets/img/example.png)(Gray square)(@h 5cm)`,
         );
 
-        expect(result.diagnostic).toHaveLength(0);
+        expect(result.diagnostic).not.toHaveLength(0);
+        expect(result.diagnostic).toMatchSnapshot();
         expect(result.result).toMatchSnapshot();
     });
 
     test('Table + text + picture', () => {
         const result = processingChain(
-            `!T[table!Table example]
+            `!T[table](Table example)
 
 | Key           | Value                       |
 | ------------- | --------------------------- |
@@ -412,11 +413,11 @@ describe('latex picture after table (#52)', function () {
 
 Sample text line
 
-!P[gray-square!5cm]
-![Gray square](./assets/img/example.png)`,
+![gray-square](./assets/img/example.png)(Gray square)(@h 5cm)`,
         );
 
-        expect(result.diagnostic).toHaveLength(0);
+        expect(result.diagnostic).not.toHaveLength(0);
+        expect(result.diagnostic).toMatchSnapshot();
         expect(result.result).toMatchSnapshot();
     });
 });
@@ -424,7 +425,7 @@ Sample text line
 describe('url variants', () => {
     test('Default url', () => {
         const result = processingChain(
-            'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
+            '[](https://example.com/index_page.html?asd=asdasd&gege=gegege#header)',
         );
 
         expect(result.diagnostic).toHaveLength(0);
@@ -433,7 +434,7 @@ describe('url variants', () => {
 
     test('Bold url', () => {
         const result = processingChain(
-            'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
+            '[](https://example.com/index_page.html?asd=asdasd&gege=gegege#header)',
             {
                 latex: {
                     useLinkAs: 'bold',
@@ -447,7 +448,7 @@ describe('url variants', () => {
 
     test('Italic url', () => {
         const result = processingChain(
-            'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
+            '[](https://example.com/index_page.html?asd=asdasd&gege=gegege#header)',
             {
                 latex: {
                     useLinkAs: 'italic',
@@ -461,7 +462,7 @@ describe('url variants', () => {
 
     test('Underlined url', () => {
         const result = processingChain(
-            'https://example.com/index_page.html?asd=asdasd&gege=gegege#header',
+            '[](https://example.com/index_page.html?asd=asdasd&gege=gegege#header)',
             {
                 latex: {
                     useLinkAs: 'underline',
@@ -475,7 +476,7 @@ describe('url variants', () => {
 
     test('No escape & code url', () => {
         const result = processingChain(
-            'https://example.com/index_page.html?asd=asdasd&asdasd=gege#header',
+            '[](https://example.com/index_page.html?asd=asdasd&asdasd=gege#header)',
             {
                 latex: {
                     useLinkAs: 'monospace',
@@ -506,7 +507,11 @@ The "definition" increased by 1% (more text more text).
 
 describe('CodeSpan', () => {
     test('Monospace', () => {
-        const result = processingChain('CodeSpan `text & text`.');
+        const result = processingChain('CodeSpan `text & text`.', {
+            latex: {
+                useCodeSpanAs: 'monospace',
+            },
+        });
 
         expect(result.diagnostic).toHaveLength(0);
         expect(result.result).toMatchSnapshot();

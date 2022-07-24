@@ -81,8 +81,8 @@ Look at the pic. !PK[image-label-2] and !PK[image-label].
         const diagnostic = applyMacros(rawNode.parent as FileNode);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toMatchSnapshot();
-    })
-})
+    });
+});
 
 describe('references', () => {
     test('simple reference', () => {

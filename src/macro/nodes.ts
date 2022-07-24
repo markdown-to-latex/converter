@@ -1,5 +1,5 @@
 import * as nodes from '../macro/node/index';
-import {ProcessedNodeType} from './node';
+import { ProcessedNodeType } from './node';
 
 const ProcessedNodesByTypeMap = {
     [ProcessedNodeType.TableProcessed]: {} as nodes.TableProcessedNode,

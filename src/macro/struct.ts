@@ -4,8 +4,8 @@ import {
     ParseMacrosArgumentsResult,
 } from './args';
 import { Context, ContextE } from './context';
-import {Node, NodeE, OpCodeNode} from '../ast/node';
-import {NodeProcessed} from "./node/struct";
+import { Node, NodeE, OpCodeNode } from '../ast/node';
+import { NodeProcessed } from './node/struct';
 
 export interface CommandMacrosNodeData {
     node: NodeE<OpCodeNode>;
@@ -13,12 +13,18 @@ export interface CommandMacrosNodeData {
     container: Node[];
 }
 
-export interface CommandMacrosArgsData<T = ParsedMacrosArguments, LT = string | undefined> {
+export interface CommandMacrosArgsData<
+    T = ParsedMacrosArguments,
+    LT = string | undefined,
+> {
     args: T;
     label: LT;
 }
 
-export type CommandInfoCallback<T = ParsedMacrosArguments, LT = string | undefined> = (
+export type CommandInfoCallback<
+    T = ParsedMacrosArguments,
+    LT = string | undefined,
+> = (
     ctx: ContextE,
     data: CommandMacrosNodeData,
     args: CommandMacrosArgsData<T, LT>,

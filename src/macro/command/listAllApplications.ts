@@ -1,4 +1,4 @@
-import {CommandInfo, CommandInfoCallback} from '../struct';
+import { CommandInfo, CommandInfoCallback } from '../struct';
 import {
     AllApplicationsNode,
     NodeApplication,
@@ -6,15 +6,14 @@ import {
     ProcessedNodeType,
 } from '../node';
 
-interface ArgsType {
-}
+interface ArgsType {}
 
 const callback: CommandInfoCallback<ArgsType, string> = function (
     ctx,
     data,
     args,
 ) {
-    const {labels, labelToInfo} = ctx.c.data.application;
+    const { labels, labelToInfo } = ctx.c.data.application;
 
     const children: (NodeProcessed & NodeApplication)[] = labels
         .map((label, index) => [labelToInfo[label], label, index] as const)

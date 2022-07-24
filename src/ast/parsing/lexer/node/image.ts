@@ -1,9 +1,7 @@
 import { TokenParser, TokenPredicate } from '../struct';
 import { Token, TokenType } from '../../tokenizer';
 import { ImageNode, Node, NodeType, TextNode } from '../../../node';
-import {
-    DiagnoseList,
-} from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnose';
 import {
     getMacroArgs,
     getMacroLabel,
@@ -33,21 +31,21 @@ const argInfo: ArgInfo[] = [
         name: 'name',
         type: ArgInfoType.NodeArray,
         optional: true,
-        onlySpans:  true,
+        onlySpans: true,
         aliases: ['n'],
     },
     {
         name: 'width',
         type: ArgInfoType.Text,
         optional: true,
-        onlySpans:  true,
+        onlySpans: true,
         aliases: ['w'],
     },
     {
         name: 'height',
         type: ArgInfoType.Text,
         optional: true,
-        onlySpans:  true,
+        onlySpans: true,
         aliases: ['h'],
     },
 ];

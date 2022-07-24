@@ -31,7 +31,7 @@ export const parseLink: TokenParser = function (tokens, index) {
 
     const argOpenBracket = tokens.tokens[argOpenBracketIndex];
     if (!isOpenArgumentBracket(tokens, argOpenBracketIndex)) {
-        return null;    // No bracket => thats not a link
+        return null; // No bracket => thats not a link
     }
 
     const argCloseBracketResult = findTokenClosingBracket(

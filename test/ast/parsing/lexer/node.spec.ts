@@ -10,12 +10,15 @@ import {
     LatexSpanNode,
     LinkNode,
     ListNode,
-    NodeType, NonBreakingSpaceNode,
+    NodeType,
+    NonBreakingSpaceNode,
     OpCodeNode,
     ParagraphNode,
     RawNode,
     RawNodeType,
-    TableNode, TextNode, ThinNonBreakingSpaceNode,
+    TableNode,
+    TextNode,
+    ThinNonBreakingSpaceNode,
 } from '../../../../src/ast/node';
 import { fullContentPos } from '../../../../src/ast/parsing';
 import { applyVisitors } from '../../../../src/ast/parsing/lexer';
@@ -719,9 +722,13 @@ describe('Spaces parsing', () => {
         const paragraphNode = nodes[0] as ParagraphNode;
         expect(paragraphNode.children).toHaveLength(5);
         expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
-        expect(paragraphNode.children[1].type).toEqual(NodeType.NonBreakingSpace);
+        expect(paragraphNode.children[1].type).toEqual(
+            NodeType.NonBreakingSpace,
+        );
         expect(paragraphNode.children[2].type).toEqual(NodeType.Text);
-        expect(paragraphNode.children[3].type).toEqual(NodeType.ThinNonBreakingSpace);
+        expect(paragraphNode.children[3].type).toEqual(
+            NodeType.ThinNonBreakingSpace,
+        );
         expect(paragraphNode.children[4].type).toEqual(NodeType.Text);
     });
 });

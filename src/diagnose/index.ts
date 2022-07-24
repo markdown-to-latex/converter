@@ -1,4 +1,9 @@
-import {copyStartEndPos, getNodeParentFile, Node, NodeAbstract} from '../ast/node';
+import {
+    copyStartEndPos,
+    getNodeParentFile,
+    Node,
+    NodeAbstract,
+} from '../ast/node';
 import path from 'path';
 import {
     positionToTextPosition,
@@ -88,17 +93,11 @@ export function nodeToDiagnose(
         pos: {
             start: {
                 absolute: node.pos.start,
-                ...positionToTextPosition(
-                    rawText,
-                    node.pos.start,
-                ),
+                ...positionToTextPosition(rawText, node.pos.start),
             },
             end: {
                 absolute: node.pos.end,
-                ...positionToTextPosition(
-                    rawText,
-                    node.pos.end,
-                ),
+                ...positionToTextPosition(rawText, node.pos.end),
             },
         },
     };

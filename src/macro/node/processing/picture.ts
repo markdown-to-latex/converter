@@ -10,7 +10,7 @@ import {
     DiagnoseSeverity,
     nodeToDiagnose,
 } from '../../../diagnose';
-import {ImageNode, NodeType} from "../../../ast/node";
+import { ImageNode, NodeType } from '../../../ast/node';
 
 function fallbackImageNode(imageNode: ImageNode): PictureProcessedNode {
     return {
@@ -39,8 +39,8 @@ const callback: ProcessingInfoCallback<ImageNode> = function (ctx, data) {
     }
     const index = ctx.createPictureLabelData({
         label: imageNode.label,
-        name: imageNode.name
-    })
+        name: imageNode.name,
+    });
 
     return [
         {
@@ -49,7 +49,7 @@ const callback: ProcessingInfoCallback<ImageNode> = function (ctx, data) {
             type: ProcessedNodeType.PictureProcessed,
             name: [...imageNode.name],
             label: imageNode.label,
-            index
+            index,
         },
     ];
 };

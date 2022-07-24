@@ -1,6 +1,6 @@
 import { FileNode, Node, NodeType } from '../../ast/node';
 import { DiagnoseList } from '../../diagnose';
-import {NodeApplication, NodeProcessed} from "../node";
+import { NodeApplication, NodeProcessed } from '../node';
 
 export interface ContextApplicationInfo {
     title: Node[];
@@ -21,12 +21,12 @@ export interface ContextReferenceContentInfo extends ContextReferenceInfo {
 
 export interface ContextPictureInfo {
     label: string;
-    name: Node[]
+    name: Node[];
 }
 
 export interface ContextTableInfo {
     label: string;
-    name: Node[]
+    name: Node[];
 }
 
 export interface ContextInfoReference {

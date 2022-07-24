@@ -4,7 +4,7 @@ import {
     splitLinesWithTextPositions,
     TextPosition,
 } from '../ast/node';
-import {EscaperReady} from "../printer/latex/string/escapes";
+import { EscaperReady } from '../printer/latex/string/escapes';
 
 export class StringE {
     protected _string: string;

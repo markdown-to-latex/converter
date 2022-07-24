@@ -1,6 +1,6 @@
-import {TokenParser, TokenPredicate} from '../struct';
-import {TokenType} from '../../tokenizer';
-import {applyVisitors, findTokenOrNull, sliceTokenText} from '../index';
+import { TokenParser, TokenPredicate } from '../struct';
+import { TokenType } from '../../tokenizer';
+import { applyVisitors, findTokenOrNull, sliceTokenText } from '../index';
 import {
     NodeTableAlign,
     NodeType,
@@ -12,8 +12,13 @@ import {
     TableRowNode,
     TokensNode,
 } from '../../../node';
-import {DiagnoseErrorType, DiagnoseList, DiagnoseSeverity, nodeToDiagnose} from '../../../../diagnose';
-import {isPrevTokenDelimiter} from './breaks';
+import {
+    DiagnoseErrorType,
+    DiagnoseList,
+    DiagnoseSeverity,
+    nodeToDiagnose,
+} from '../../../../diagnose';
+import { isPrevTokenDelimiter } from './breaks';
 
 const isTableControlCell: TokenPredicate = function (token, index, node) {
     if (token.type === TokenType.Spacer) {
@@ -145,13 +150,14 @@ function parseTableLine(
         const innerTokens = tokens.tokens.slice(curIndex + 1, nextBar.index);
         const slicedText = sliceTokenText(tokens, curIndex + 1, nextBar.index);
 
-        const isControlCell = isTableControlCell(innerTokens[0], curIndex + 1, tokens);
+        const isControlCell = isTableControlCell(
+            innerTokens[0],
+            curIndex + 1,
+            tokens,
+        );
         let cellNode: TableControlCellNode | TableCellNode;
 
-        if (
-            innerTokens.length !== 0 &&
-            isControlCell
-        ) {
+        if (innerTokens.length !== 0 && isControlCell) {
             const controlParserResult = parseControlCell(slicedText);
             result.diagnostic.push(...controlParserResult.diagnostic);
 
@@ -200,12 +206,14 @@ function parseTableLine(
         }
 
         if (!isControlCell && result.line!.type == NodeType.TableControlRow) {
-            result.diagnostic.push(nodeToDiagnose(
-                cellNode,
-                DiagnoseSeverity.Error,
-                DiagnoseErrorType.ApplyParserError,
-                'Expected control sequence, got text'
-            ))
+            result.diagnostic.push(
+                nodeToDiagnose(
+                    cellNode,
+                    DiagnoseSeverity.Error,
+                    DiagnoseErrorType.ApplyParserError,
+                    'Expected control sequence, got text',
+                ),
+            );
             result.line!.type = NodeType.TableRow;
         }
 
@@ -261,20 +269,24 @@ export const parseTable: TokenParser = function (tokens, index) {
         return null;
     }
     if (rows[0].type !== NodeType.TableRow) {
-        diagnostic.push(nodeToDiagnose(
-            rows[0],
-            DiagnoseSeverity.Error,
-            DiagnoseErrorType.ApplyParserError,
-            'The first table row must be not control'
-        ))
+        diagnostic.push(
+            nodeToDiagnose(
+                rows[0],
+                DiagnoseSeverity.Error,
+                DiagnoseErrorType.ApplyParserError,
+                'The first table row must be not control',
+            ),
+        );
     }
     if (rows[1].type !== NodeType.TableControlRow) {
-        diagnostic.push(nodeToDiagnose(
-            rows[1],
-            DiagnoseSeverity.Error,
-            DiagnoseErrorType.ApplyParserError,
-            'The second table row must be control'
-        ))
+        diagnostic.push(
+            nodeToDiagnose(
+                rows[1],
+                DiagnoseSeverity.Error,
+                DiagnoseErrorType.ApplyParserError,
+                'The second table row must be control',
+            ),
+        );
     }
 
     const endToken = tokens.tokens[lastTokenIndex];

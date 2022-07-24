@@ -1,9 +1,5 @@
 import { CommandInfo, CommandInfoCallback } from '../struct';
-import {
-    AllReferencesNode,
-    ProcessedNodeType,
-    ReferenceNode,
-} from '../node';
+import { AllReferencesNode, ProcessedNodeType, ReferenceNode } from '../node';
 import { Node, NodeAbstract } from '../../ast/node';
 
 interface ArgsType {}

@@ -1,8 +1,7 @@
-import {CommandInfo, CommandInfoCallback} from '../struct';
-import {ProcessedNodeType, ReferenceKeyNode} from "../node/struct";
+import { CommandInfo, CommandInfoCallback } from '../struct';
+import { ProcessedNodeType, ReferenceKeyNode } from '../node/struct';
 
-interface ArgsType {
-}
+interface ArgsType {}
 
 const callback: CommandInfoCallback<ArgsType, string> = function (
     ctx,

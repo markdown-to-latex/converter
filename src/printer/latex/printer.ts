@@ -73,7 +73,7 @@ export function getLatexHeader(
     }
 
     return {
-        result: lazyResult(text) + '\n\n',
+        result: `\n${lazyResult(text)}\n\n`,
         diagnostic,
     };
 }
@@ -365,7 +365,7 @@ export function getLatexInlineMath(
     text: string,
     _: LatexPrinterConfiguration,
 ): string {
-    return `\\displaystyle ${text}`;
+    return `$\\displaystyle ${text}$`;
 }
 
 export function getLatexCodeSpan(

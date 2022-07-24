@@ -40,9 +40,7 @@ export class ContextE {
         return createContextPictureLabel(this.c, label);
     }
 
-    public createPictureLabelData(
-        data: Readonly<ContextPictureInfo>,
-    ): number {
+    public createPictureLabelData(data: Readonly<ContextPictureInfo>): number {
         return createContextPictureLabelData(this.c, data);
     }
 
@@ -62,9 +60,7 @@ export class ContextE {
         return createContextTableLabel(this.c, label);
     }
 
-    public createTableLabelData(
-        data: Readonly<ContextTableInfo>,
-    ): number {
+    public createTableLabelData(data: Readonly<ContextTableInfo>): number {
         return createContextTableLabelData(this.c, data);
     }
 

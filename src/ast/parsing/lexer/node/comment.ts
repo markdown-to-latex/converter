@@ -2,8 +2,13 @@ import { TokenParser, TokenPredicate } from '../struct';
 import { TokenType } from '../../tokenizer';
 import { findTokenOrNull } from '../index';
 import { CommentNode, NodeType } from '../../../node';
+import { isPrevTokenDelimiter } from './breaks';
 
 export const isComment: TokenPredicate = function (token, index, node) {
+    if (!isPrevTokenDelimiter(token, index, node)) {
+        return false;
+    }
+
     return token.type === TokenType.JoinableSpecial && token.text === '//';
 };
 

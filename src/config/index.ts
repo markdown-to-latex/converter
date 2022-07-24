@@ -1,5 +1,5 @@
-import {Validator, ValidatorResult} from 'jsonschema';
-import {MarkDownToLaTeXConverter} from './types';
+import { Validator, ValidatorResult } from 'jsonschema';
+import { MarkDownToLaTeXConverter } from './types';
 import * as path from 'path';
 import * as JSON5 from 'json5';
 import * as fs from 'fs';

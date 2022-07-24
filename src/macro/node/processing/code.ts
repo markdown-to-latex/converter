@@ -40,7 +40,7 @@ const callback: ProcessingInfoCallback<CodeNode> = function (ctx, data) {
     }
     const index = ctx.createPictureLabelData({
         label: codeNode.label,
-        name: codeNode.name
+        name: codeNode.name,
     });
 
     return [
