@@ -69,9 +69,9 @@ describe('convertMarkdownFiles', function () {
         expect(content).toContain('\\setlength{\\belowdisplayshortskip}{0pt}');
     });
 
-    test('another.tex correct link to image, defined in main.md', () => {
+    test('another.tex correct link to image, defined in main.mxd', () => {
         const content = fs.readFileSync(fileParameters.another.pathTex, 'utf8');
 
-        expect(content).toContain('Image from main.md 1');
+        expect(content).toContain('Image from main.mxd 1');
     });
 });
