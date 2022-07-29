@@ -4,7 +4,7 @@ exports[`Applications Undefined application, should throw error 1`] = `
 Array [
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Application with nope does not exist",
     "pos": Object {
       "end": Object {
@@ -22,7 +22,7 @@ Array [
   },
   Object {
     "errorType": 5,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Index -1 is out of range application letters",
     "pos": Object {
       "end": Object {
@@ -50,7 +50,7 @@ exports[`Applications Unused application, should throw error 1`] = `
 Array [
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused application label code-full",
     "pos": Object {
       "end": Object {
@@ -166,7 +166,7 @@ exports[`References Undefined reference, should throw error 1`] = `
 Array [
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Reference with nope does not exist",
     "pos": Object {
       "end": Object {
@@ -194,7 +194,7 @@ exports[`References Unused reference, should throw error 1`] = `
 Array [
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused reference label ref",
     "pos": Object {
       "end": Object {
@@ -320,7 +320,7 @@ exports[`latex picture after table (#52) Picture right after the table 1`] = `
 Array [
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused picture label gray-square",
     "pos": Object {
       "end": Object {
@@ -338,7 +338,7 @@ Array [
   },
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused table label table",
     "pos": Object {
       "end": Object {
@@ -400,7 +400,7 @@ exports[`latex picture after table (#52) Table + text + picture 1`] = `
 Array [
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused picture label gray-square",
     "pos": Object {
       "end": Object {
@@ -418,7 +418,7 @@ Array [
   },
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused table label table",
     "pos": Object {
       "end": Object {
@@ -539,7 +539,7 @@ exports[`simple md to latex docs printer Header + Image + Code + Image 1`] = `
 Array [
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused picture label img-1",
     "pos": Object {
       "end": Object {
@@ -557,7 +557,7 @@ Array [
   },
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused picture label code-1",
     "pos": Object {
       "end": Object {
@@ -575,7 +575,7 @@ Array [
   },
   Object {
     "errorType": 2,
-    "filePath": "C:\\\\Users\\\\Toliak\\\\WebstormProjects\\\\md-to-latex-converter\\\\filepath",
+    "filePath": "[PATH]",
     "message": "Unused picture label img-2",
     "pos": Object {
       "end": Object {

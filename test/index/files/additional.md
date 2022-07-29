@@ -3,6 +3,7 @@
 Formula:
 
 $$
+math
 y = bx + c
 $$
 

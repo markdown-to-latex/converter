@@ -7,4 +7,5 @@ module.exports = {
             // tsconfig: '<rootDir>/test/tsconfig.json',
         },
     },
+    snapshotSerializers: ['<rootDir>/test/serializers'],
 };
