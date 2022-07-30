@@ -8,14 +8,34 @@ import {
     OpCodeNode,
     ParagraphNode,
 } from '../ast/node';
-import { ContextE, initContext } from './context';
+import { Context, ContextE, initContext } from './context';
 import { parseMacro } from './function';
 import { processNode } from './node';
 import { NodeProcessed } from './node/struct';
 import { DiagnoseList } from '../diagnose';
 
-export function applyMacros(fileNode: FileNode): DiagnoseList {
-    const context = new ContextE(initContext(fileNode));
+export function applyMacrosFull(
+    fileNode: FileNode,
+    srcContext?: Context,
+): DiagnoseList {
+    const { context, diagnostic } = applyMacros(fileNode, srcContext);
+
+    context.diagnostic = [];
+    new ContextE(context).diagnoseAll();
+
+    return [...diagnostic, ...context.diagnostic];
+}
+
+export interface ApplyMacrosResult {
+    context: Context;
+    diagnostic: DiagnoseList;
+}
+
+export function applyMacros(
+    fileNode: FileNode,
+    srcContext?: Context,
+): ApplyMacrosResult {
+    const context = new ContextE(srcContext ?? initContext(fileNode));
 
     // TODO: maybe make a while for nested macros
 
@@ -48,8 +68,10 @@ export function applyMacros(fileNode: FileNode): DiagnoseList {
 
     clearance(fileNode);
 
-    context.diagnoseAll();
-    return context.c.diagnostic;
+    return {
+        context: context.c,
+        diagnostic: context.c.diagnostic,
+    };
 }
 
 /**

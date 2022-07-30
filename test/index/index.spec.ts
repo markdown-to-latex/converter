@@ -72,6 +72,6 @@ describe('convertMarkdownFiles', function () {
     test('another.tex correct link to image, defined in main.mxd', () => {
         const content = fs.readFileSync(fileParameters.another.pathTex, 'utf8');
 
-        expect(content).toContain('Image from main.mxd 1');
+        expect(content).toContain('Image from main.mxd 2');
     });
 });

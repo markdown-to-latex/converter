@@ -67,12 +67,23 @@ export interface DiagnoseInfo {
 
 export type DiagnoseList = DiagnoseInfo[];
 
+export function printDiagnosticList(
+    diagnostic: DiagnoseList,
+    printer: (message: string) => void = console.log,
+): void {
+    for (const diagnose of diagnostic) {
+        const message = diagnoseToString(diagnose);
+        printer(message);
+    }
+}
+
 export function diagnoseToString(diag: DiagnoseInfo) {
     let message = diag.message ? `: ${diag.message}` : '';
+
+    // `${diagnose.filePath}:${diagnose.pos.start.line}:${diagnose.pos.start.column} - ${diagnose.severity} ${diagnose.message}`
     return (
-        `${diag.errorType} MD${diag.errorType}${message} ` +
-        `at ${textPositionToString(diag.pos.start)} - ` +
-        `${textPositionToString(diag.pos.end)} in ${diag.filePath}`
+        `${diag.filePath}:${diag.pos.start.line}:${diag.pos.start.column} ` +
+        `${diag.severity} MD${diag.errorType}${message} `
     );
 }
 

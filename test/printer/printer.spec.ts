@@ -1,6 +1,6 @@
 import { MarkDownToLaTeXConverter } from '../../src/config/types';
 import { parseFile } from '../../src/ast/parsing';
-import { applyMacros } from '../../src/macro';
+import { applyMacrosFull } from '../../src/macro';
 import { buildConfig, createLatexPrinter } from '../../src/printer/latex';
 import { DiagnoseList } from '../../src/diagnose';
 
@@ -16,7 +16,7 @@ function processingChain(
         'filepath',
     );
 
-    const macroDiagnostic = applyMacros(fileNode);
+    const macroDiagnostic = applyMacrosFull(fileNode);
 
     const printer = createLatexPrinter(buildConfig(config?.latex));
     const { result, diagnostic: printerDiagnostic } = printer.processNode(

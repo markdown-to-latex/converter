@@ -1,7 +1,7 @@
 import { rawNodeTemplate } from '../ast/parsing/lexer/utils';
 import { applyVisitors } from '../../src/ast/parsing/lexer';
 import { FileNode, ParagraphNode } from '../../src/ast/node';
-import { applyMacros } from '../../src/macro';
+import { applyMacrosFull } from '../../src/macro';
 
 describe('tables', () => {
     test('table', () => {
@@ -18,7 +18,7 @@ describe('tables', () => {
         const { nodes } = applyVisitors([rawNode]);
         (rawNode.parent as FileNode).children = nodes;
 
-        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        const diagnostic = applyMacrosFull(rawNode.parent as FileNode);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toMatchSnapshot();
     });
@@ -37,7 +37,7 @@ describe('tables', () => {
         const { nodes } = applyVisitors([rawNode]);
         (rawNode.parent as FileNode).children = nodes;
 
-        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        const diagnostic = applyMacrosFull(rawNode.parent as FileNode);
         expect(diagnostic).toHaveLength(3);
         expect(diagnostic).toMatchSnapshot();
     });
@@ -60,7 +60,7 @@ The name
         const { nodes } = applyVisitors([rawNode]);
         (rawNode.parent as FileNode).children = nodes;
 
-        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        const diagnostic = applyMacrosFull(rawNode.parent as FileNode);
         expect(diagnostic).toHaveLength(3);
         expect(diagnostic).toMatchSnapshot();
     });
@@ -78,7 +78,7 @@ Look at the pic. !PK[image-label-2] and !PK[image-label].
         const { nodes } = applyVisitors([rawNode]);
         (rawNode.parent as FileNode).children = nodes;
 
-        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        const diagnostic = applyMacrosFull(rawNode.parent as FileNode);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toMatchSnapshot();
     });
@@ -101,7 +101,7 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
         const { nodes, diagnostic: diagnostic1 } = applyVisitors([rawNode]);
         (rawNode.parent as FileNode).children = nodes;
 
-        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        const diagnostic = applyMacrosFull(rawNode.parent as FileNode);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toMatchSnapshot();
     });
@@ -127,7 +127,7 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
         const { nodes, diagnostic: diagnostic1 } = applyVisitors([rawNode]);
         (rawNode.parent as FileNode).children = nodes;
 
-        const diagnostic = applyMacros(rawNode.parent as FileNode);
+        const diagnostic = applyMacrosFull(rawNode.parent as FileNode);
         expect(diagnostic).toHaveLength(1);
         expect(diagnostic).toMatchSnapshot();
         expect(nodes).toMatchSnapshot();
