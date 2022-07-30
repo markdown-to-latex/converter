@@ -11,13 +11,14 @@ import path from 'path';
 import { StringE } from '../../extension/string';
 import { applyVisitors } from './lexer';
 import { DiagnoseList } from '../../diagnose';
+import { LINE_SPLIT_REGEXP } from '../../extension/regexp';
 
 export function fullContentPos(
     content: string | StringE,
 ): StartEndTextPosition {
     const contentE = StringE.from(content);
 
-    const lines = contentE.splitE(/\r?\n/);
+    const lines = contentE.splitE(LINE_SPLIT_REGEXP);
     return createStartEndTextPos(
         1,
         1,

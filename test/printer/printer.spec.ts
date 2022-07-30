@@ -146,6 +146,16 @@ $$$
         expect(result.result).toMatchSnapshot();
     });
 
+    test('Inline formula must be wrapped with spaces', () => {
+        const result = processingChain(`
+Inlined formula $\`\\sigma^2_w(t)=\\omega_0(t)\\sigma^2_0(t)+\\omega_1(t)\\sigma^2_1(t)\`$
+into the sentence.
+`);
+
+        expect(result.diagnostic).toHaveLength(0);
+        expect(result.result).toMatchSnapshot();
+    });
+
     test('bold and italic', () => {
         const result = processingChain(`**Bold**: *testing*`);
 

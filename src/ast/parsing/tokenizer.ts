@@ -30,7 +30,8 @@ const JOINABLE_TOKEN_TYPES: TokenType[] = [
     TokenType.Delimiter,
 ];
 
-const SPACER_REGEXP = new RegExp(/[ \t\r]/);
+const DELIMITER_REGEXP = new RegExp(/[\r\n]/);
+const SPACER_REGEXP = new RegExp(/[ \t]/);
 const SEPARATED_SPECIAL_REGEXP = new RegExp(/[\[\]{}!@%^&()+\\,.<>;:'"|№?]/);
 const JOINABLE_SPECIAL_REGEXP = new RegExp(/[`#$*\-_\/~=]/);
 const NUMBER_REGEXP = new RegExp(/\d/);
@@ -56,7 +57,7 @@ function isCharNumber(char: string): boolean {
 }
 
 function isCharDelimiter(char: string): boolean {
-    return char === '\n';
+    return !!char.match(DELIMITER_REGEXP);
 }
 
 function getCharType(char: string): TokenType {

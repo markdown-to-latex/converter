@@ -4069,6 +4069,82 @@ Array [
 ]
 `;
 
+exports[`macro parsing CRLF bug 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "keyArgs": Object {
+          "key": Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 19,
+                "start": 14,
+              },
+              "text": "value",
+              "type": "Text",
+            },
+          ],
+          "name": Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 45,
+                "start": 32,
+              },
+              "text": "another value",
+              "type": "Text",
+            },
+          ],
+        },
+        "label": "",
+        "opcode": "Macro",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 48,
+          "start": 0,
+        },
+        "posArgs": Array [],
+        "type": "OpCode",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 48,
+            "start": 0,
+          },
+          "text": "!Macro[](@key value)(@name
+    another value
+)",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 48,
+        "start": 0,
+      },
+      "raw": "!Macro[](@key value)(@name
+    another value
+)",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 48,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
 exports[`macro parsing Complex macro with name, label, pos and key args 1`] = `
 Array [
   Object {
@@ -4378,6 +4454,183 @@ Array [
       "start": 1,
     },
     "type": "Paragraph",
+  },
+]
+`;
+
+exports[`table parsing CRLF bug 1`] = `
+Array [
+  Object {
+    "header": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 5,
+                  "start": 1,
+                },
+                "text": "asda",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 5,
+              "start": 1,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 12,
+                  "start": 6,
+                },
+                "text": "asdasd",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 12,
+              "start": 6,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 13,
+          "start": 0,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 20,
+              "start": 16,
+            },
+            "type": "TableControlCell",
+          },
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 27,
+              "start": 21,
+            },
+            "type": "TableControlCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 28,
+          "start": 15,
+        },
+        "type": "TableControlRow",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 47,
+            "start": 0,
+          },
+          "text": "|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 47,
+        "start": 0,
+      },
+      "raw": "|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 43,
+      "start": 0,
+    },
+    "rows": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 35,
+                  "start": 31,
+                },
+                "text": "asda",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 35,
+              "start": 31,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 42,
+                  "start": 36,
+                },
+                "text": "asdasd",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 42,
+              "start": 36,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 43,
+          "start": 30,
+        },
+        "type": "TableRow",
+      },
+    ],
+    "type": "Table",
   },
 ]
 `;

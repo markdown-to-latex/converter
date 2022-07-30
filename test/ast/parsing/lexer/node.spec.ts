@@ -286,6 +286,19 @@ describe('macro parsing', () => {
 
         expect(nodes).toMatchSnapshot();
     });
+
+    test('CRLF bug', () => {
+        const rawNode = rawNodeTemplate(`!Macro[](@key value)(@name\r
+    another value\r
+)`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as ParagraphNode;
+        expect(node).not.toBeUndefined();
+        expect(node.children[0].type).toEqual(NodeType.OpCode);
+
+        expect(nodes).toMatchSnapshot();
+    });
 });
 
 describe('table parsing', () => {
@@ -322,11 +335,26 @@ describe('table parsing', () => {
         expect(nodes).toMatchSnapshot();
     });
 
-    test('End line bug ', () => {
+    test('End line bug', () => {
         const rawNode = rawNodeTemplate(`|asda|asdasd|
 |----|------|
 |asda|asdasd|
 
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as TableNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Table);
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('CRLF bug', () => {
+        const rawNode = rawNodeTemplate(`|asda|asdasd|\r
+|----|------|\r
+|asda|asdasd|\r
+\r
 `);
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);

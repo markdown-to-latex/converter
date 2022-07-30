@@ -3986,3 +3986,181 @@ Array [
   },
 ]
 `;
+
+exports[`Honorable mention List bug 1`] = `Array []`;
+
+exports[`Honorable mention List bug 2`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 58,
+          "start": 1,
+        },
+        "text": "Image fragments are grouped together based on similarity,",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 83,
+              "start": 60,
+            },
+            "text": "simple italic text here",
+            "type": "Text",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 84,
+          "start": 59,
+        },
+        "type": "Em",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 173,
+          "start": 85,
+        },
+        "text": "but unlike standard k-means clustering and such cluster analysis methods. Code shown in ",
+        "type": "Text",
+      },
+      Object {
+        "keyArgs": Object {},
+        "label": "inline-code",
+        "opcode": "PK",
+        "parent": [Circular],
+        "pos": Object {
+          "end": 189,
+          "start": 173,
+        },
+        "posArgs": Array [],
+        "type": "OpCode",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 190,
+          "start": 189,
+        },
+        "text": ".",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 327,
+            "start": 0,
+          },
+          "text": "
+Image fragments are grouped together based on similarity,
+*simple italic text here*
+but unlike standard k-means clustering and such cluster analysis methods.
+Code shown in !PK[inline-code].
+
+![gray-square](./assets/img/example.png)(@w 6cm)(@name
+    orci varius natoque penatibus et magnis dis parturient montes gray square
+)
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 327,
+        "start": 0,
+      },
+      "raw": "
+Image fragments are grouped together based on similarity,
+*simple italic text here*
+but unlike standard k-means clustering and such cluster analysis methods.
+Code shown in !PK[inline-code].
+
+![gray-square](./assets/img/example.png)(@w 6cm)(@name
+    orci varius natoque penatibus et magnis dis parturient montes gray square
+)
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 190,
+      "start": 1,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "href": "./assets/img/example.png",
+    "label": "gray-square",
+    "name": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 324,
+          "start": 251,
+        },
+        "text": "orci varius natoque penatibus et magnis dis parturient montes gray square",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 327,
+            "start": 0,
+          },
+          "text": "
+Image fragments are grouped together based on similarity,
+*simple italic text here*
+but unlike standard k-means clustering and such cluster analysis methods.
+Code shown in !PK[inline-code].
+
+![gray-square](./assets/img/example.png)(@w 6cm)(@name
+    orci varius natoque penatibus et magnis dis parturient montes gray square
+)
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 327,
+        "start": 0,
+      },
+      "raw": "
+Image fragments are grouped together based on similarity,
+*simple italic text here*
+but unlike standard k-means clustering and such cluster analysis methods.
+Code shown in !PK[inline-code].
+
+![gray-square](./assets/img/example.png)(@w 6cm)(@name
+    orci varius natoque penatibus et magnis dis parturient montes gray square
+)
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 326,
+      "start": 192,
+    },
+    "type": "Image",
+    "width": "6cm",
+  },
+]
+`;

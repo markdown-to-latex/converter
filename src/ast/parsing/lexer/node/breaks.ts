@@ -1,5 +1,5 @@
 import { TokenParser, TokenPredicate } from '../struct';
-import { TokenType } from '../../tokenizer';
+import { Token, TokenType } from '../../tokenizer';
 import {
     BrNode,
     NodeType,
@@ -7,6 +7,13 @@ import {
     RawNodeType,
     SoftBreakNode,
 } from '../../../node';
+import { LINE_SPLIT_REGEXP } from '../../../../extension/regexp';
+
+export function getDelimiterBreaks(token: Token): number {
+    return token.type !== TokenType.Delimiter
+        ? 0
+        : Array.from(token.text.matchAll(LINE_SPLIT_REGEXP)).length;
+}
 
 export const isPrevTokenDelimiter: TokenPredicate = function (
     token,
@@ -21,7 +28,7 @@ export const isParagraphBreak: TokenPredicate = function (token, index, node) {
         return false;
     }
 
-    return token.text.length >= 2;
+    return getDelimiterBreaks(token) >= 2;
 };
 
 export const isSoftBreak: TokenPredicate = function (token, index, node) {
@@ -29,7 +36,7 @@ export const isSoftBreak: TokenPredicate = function (token, index, node) {
         return false;
     }
 
-    return token.text.length == 1;
+    return getDelimiterBreaks(token) == 1;
 };
 
 export const isTextBreak: TokenPredicate = function (token, index, node) {
@@ -39,7 +46,7 @@ export const isTextBreak: TokenPredicate = function (token, index, node) {
 
     return (
         node.tokens[index + 1]?.type === TokenType.Delimiter &&
-        node.tokens[index + 1]?.text.length === 1
+        getDelimiterBreaks(node.tokens[index + 1]) === 1
     );
 };
 

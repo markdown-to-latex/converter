@@ -8,6 +8,20 @@ describe('Honorable mention', () => {
         'Bold with del with code span',
         '**asdas ==`lol==` adas**',
     );
+
+    snapshotTestTemplate(
+        'List bug',
+        `
+Image fragments are grouped together based on similarity,
+*simple italic text here*
+but unlike standard k-means clustering and such cluster analysis methods.
+Code shown in !PK[inline-code].
+
+![gray-square](./assets/img/example.png)(@w 6cm)(@name
+    orci varius natoque penatibus et magnis dis parturient montes gray square
+)
+`,
+    );
 });
 
 test('Complex File', () => {

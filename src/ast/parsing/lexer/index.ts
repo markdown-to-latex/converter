@@ -343,7 +343,7 @@ function nodeJoiner(nodes: Node[]): void {
         nodes.splice(0, 1);
     }
 
-    // TODO: Trim nodes
+    // Trim start and end
     while (nodes.length) {
         const textNode = nodes[0] as TextNode;
 
@@ -376,13 +376,18 @@ function nodeJoiner(nodes: Node[]): void {
 
         if (currentNode.type === RawNodeType.SoftBreak) {
             if (
-                prevNode.type === NodeType.Text &&
+                (<(NodeType | RawNodeType)[]>[
+                    NodeType.FormulaSpan,
+                    NodeType.CodeSpan,
+                    NodeType.LatexSpan,
+                    NodeType.Text,
+                ]).indexOf(prevNode.type) !== -1 &&
                 nodes[index + 1]?.type === NodeType.Text
             ) {
-                const prevNodeText = prevNode as Node & NodeText;
+                const nextNodeText = nodes[index + 1] as Node & NodeText;
 
-                prevNodeText.pos.end = currentNode.pos.end;
-                prevNodeText.text += ' ';
+                nextNodeText.pos.end = currentNode.pos.end;
+                nextNodeText.text = ' ' + nextNodeText.text;
             }
 
             nodes.splice(index, 1);
@@ -421,6 +426,19 @@ function nodeJoiner(nodes: Node[]): void {
             nodes.splice(index, 1);
             continue;
         }
+
+        // if (
+        //     currentNode.type === NodeType.Text &&
+        //     (<(NodeType | RawNodeType)[]>[
+        //         NodeType.FormulaSpan,
+        //         NodeType.CodeSpan,
+        //         NodeType.LatexSpan,
+        //     ]).indexOf(prevNode.type) !== -1 &&
+        //     !(currentNode as TextNode).text.startsWith(' ')
+        // ) {
+        //     const currentTextNode = currentNode as TextNode;
+        //     currentTextNode.text = ' ' + currentTextNode.text;
+        // }
 
         ++index;
     }
@@ -525,7 +543,6 @@ function parseTokensNodeByType(
 
 const parsersByType: Record<TokenType, TokenParser[]> = {
     [TokenType.JoinableSpecial]: [
-        parseList,
         parseCodeSpan,
         parseStrongWithOptionalEm,
         parseDel,
@@ -534,6 +551,7 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
         parseEm,
         parseHeading,
         parseHr,
+        parseList,
         parseCode,
         parseFormulaSpan,
         parseFormulaOrLatex,

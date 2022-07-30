@@ -638,6 +638,11 @@ def main():
 "
 `;
 
+exports[`simple md to latex docs printer Inline formula must be wrapped with spaces 1`] = `
+"Inlined formula $\\\\displaystyle \\\\sigma^2_w(t)=\\\\omega_0(t)\\\\sigma^2_0(t)+\\\\omega_1(t)\\\\sigma^2_1(t)$ into the sentence.
+"
+`;
+
 exports[`simple md to latex docs printer ListItem + Br + Text must have 2 line breaks 1`] = `
 "\\\\hspace{0cm}а)\\\\,Item
 

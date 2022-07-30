@@ -9,7 +9,7 @@ import {
 } from '../../../node';
 import { applyVisitors, findTokenOrNull, sliceTokenText } from '../index';
 import { DiagnoseList } from '../../../../diagnose';
-import { isPrevTokenDelimiter } from './breaks';
+import { getDelimiterBreaks, isPrevTokenDelimiter } from './breaks';
 
 export interface IsListItemResult {
     result: boolean;
@@ -133,7 +133,7 @@ function parseListItem(
 
     while (lineDelimiterIndex < tokens.tokens.length) {
         const prevIndex = lineDelimiterIndex + 1;
-        if (delimiter && delimiter.token.text.length > 1) {
+        if (delimiter && getDelimiterBreaks(delimiter.token) > 1) {
             break; // Found \n\n
         }
 

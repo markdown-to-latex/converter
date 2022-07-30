@@ -14,6 +14,7 @@ import {
     tokenToDiagnose,
 } from '../index';
 import { DiagnoseList, DiagnoseSeverity } from '../../../../diagnose';
+import { getDelimiterBreaks } from './breaks';
 
 export const isMacro: TokenPredicate = function (token, index, node) {
     if (!(token.type === TokenType.SeparatedSpecial && token.text === '!')) {
@@ -133,7 +134,7 @@ export function getMacroArgs(
             (tokens.tokens[spacerTokenIndex]?.type === TokenType.Spacer ||
                 (tokens.tokens[spacerTokenIndex]?.type ===
                     TokenType.Delimiter &&
-                    tokens.tokens[spacerTokenIndex].text.length <= 1))
+                    getDelimiterBreaks(tokens.tokens[spacerTokenIndex]) <= 1))
         ) {
             keyToken = tokens.tokens[keyTokenIndex];
         }
@@ -170,6 +171,8 @@ export function getMacroArgs(
             };
         } else {
             if (Object.keys(keyArgs).length !== 0) {
+                console.log(Object.keys(keyArgs));
+                console.log(posArgs.length);
                 diagnostic.push(
                     tokenToDiagnose(
                         tokens,
