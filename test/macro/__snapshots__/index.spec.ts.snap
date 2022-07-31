@@ -1144,7 +1144,7 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
                   "type": "OpCode",
                 },
                 "pos": Object {
-                  "end": 67,
+                  "end": 63,
                   "start": 56,
                 },
                 "text": "2017).     ",

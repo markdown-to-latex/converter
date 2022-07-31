@@ -117,6 +117,95 @@ Text",
 ]
 `;
 
+exports[`Comment parsing Comment 1`] = `
+Array [
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 19,
+            "start": 0,
+          },
+          "text": "
+// line 1
+
+line 2
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 19,
+        "start": 0,
+      },
+      "raw": "
+// line 1
+
+line 2
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 12,
+      "start": 1,
+    },
+    "type": "Comment",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 18,
+          "start": 12,
+        },
+        "text": "line 2",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 19,
+            "start": 0,
+          },
+          "text": "
+// line 1
+
+line 2
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 19,
+        "start": 0,
+      },
+      "raw": "
+// line 1
+
+line 2
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 18,
+      "start": 12,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
 exports[`Del parsing Simple del 1`] = `
 Array [
   Object {
@@ -535,7 +624,7 @@ Array [
           "end": 41,
           "start": 26,
         },
-        "text": "New sample text",
+        "text": " New sample text",
         "type": "Text",
       },
     ],
@@ -1389,7 +1478,7 @@ Array [
           "end": 59,
           "start": 44,
         },
-        "text": "New sample text",
+        "text": " New sample text",
         "type": "Text",
       },
     ],
@@ -4343,7 +4432,7 @@ Array [
               "children": Array [],
               "parent": [Circular],
               "pos": Object {
-                "end": 41,
+                "end": 37,
                 "start": 25,
               },
               "text": "text before     ",
@@ -4635,7 +4724,7 @@ Array [
 ]
 `;
 
-exports[`table parsing End line bug  1`] = `
+exports[`table parsing End line bug 1`] = `
 Array [
   Object {
     "header": Array [

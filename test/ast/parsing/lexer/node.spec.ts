@@ -1,6 +1,7 @@
 import {
     CodeNode,
     CodeSpanNode,
+    CommentNode,
     FileNode,
     FormulaNode,
     FormulaSpanNode,
@@ -758,5 +759,23 @@ describe('Spaces parsing', () => {
             NodeType.ThinNonBreakingSpace,
         );
         expect(paragraphNode.children[4].type).toEqual(NodeType.Text);
+    });
+});
+
+describe('Comment parsing', () => {
+    test('Comment', () => {
+        const rawNode = rawNodeTemplate(`
+// line 1
+
+line 2
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        const commentNode = nodes[0] as CommentNode;
+        expect(commentNode.type).toEqual(NodeType.Comment);
+        const paragraphNode = nodes[1] as ParagraphNode;
+        expect(paragraphNode.type).toEqual(NodeType.Paragraph);
+
+        expect(nodes).toMatchSnapshot();
     });
 });
