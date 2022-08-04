@@ -35,6 +35,7 @@ export const enum NodeType {
     Del = 'Del', // through-lined text
 
     // Custom
+    Underline = 'Underline',
     File = 'File',
     TableControlCell = 'TableControlCell',
     TableControlRow = 'TableControlRow',
@@ -60,9 +61,27 @@ export const SPAN_NODE_TYPES: NodeType[] = [
     NodeType.CodeSpan,
     NodeType.Br,
     NodeType.Del,
+    NodeType.Underline,
     NodeType.LatexSpan,
     NodeType.FormulaSpan,
     NodeType.Comment,
+];
+
+export const TEXT_LIKE_NODES: (NodeType | RawNodeType)[] = [
+    NodeType.Escape,
+    NodeType.Text,
+    NodeType.Link,
+    NodeType.Strong,
+    NodeType.Em,
+    NodeType.CodeSpan,
+    NodeType.Br,
+    NodeType.Del,
+    NodeType.Underline,
+    NodeType.OpCode,
+    NodeType.LatexSpan,
+    NodeType.FormulaSpan,
+    NodeType.NonBreakingSpace,
+    NodeType.ThinNonBreakingSpace,
 ];
 
 export type StartEndNumberPosition = StartEndPosition<number>;
@@ -213,6 +232,10 @@ export interface HrNode extends Node {
 
 export interface DelNode extends Node, NodeChildren {
     type: NodeType.Del;
+}
+
+export interface UnderlineNode extends Node, NodeChildren {
+    type: NodeType.Underline;
 }
 
 export interface FileNode extends Node, NodeChildren {

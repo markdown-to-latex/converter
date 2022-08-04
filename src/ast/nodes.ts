@@ -41,6 +41,7 @@ const NodesByTypeMap = {
     [NodeType.Br]: {} as nodes.BrNode,
     [NodeType.Del]: {} as nodes.DelNode,
 
+    [NodeType.Underline]: {} as nodes.UnderlineNode,
     [NodeType.File]: {} as nodes.FileNode,
     [NodeType.TableCell]: {} as nodes.TableCellNode,
     [NodeType.TableRow]: {} as nodes.TableRowNode,

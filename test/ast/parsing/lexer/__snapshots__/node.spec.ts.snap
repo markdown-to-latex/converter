@@ -2960,6 +2960,81 @@ Array [
 ]
 `;
 
+exports[`Underline parsing Simple underline 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 0,
+        },
+        "text": "Text with ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 21,
+              "start": 11,
+            },
+            "text": "underlined",
+            "type": "Text",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 22,
+          "start": 10,
+        },
+        "type": "Underline",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 27,
+          "start": 22,
+        },
+        "text": "-text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 27,
+            "start": 0,
+          },
+          "text": "Text with _underlined_-text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 27,
+        "start": 0,
+      },
+      "raw": "Text with _underlined_-text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 27,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
 exports[`code block lexer check Complex raw node 1`] = `
 Array [
   Object {

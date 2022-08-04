@@ -294,6 +294,14 @@ export const processingVisitors: ProcessingVisitors = {
             diagnostic: childrenResult.diagnostic,
         };
     },
+    [NodeType.Underline]: (printer, node) => {
+        const childrenResult = printer.processNodeList(printer, node.children);
+
+        return {
+            result: `\\underline{${childrenResult.result}}`,
+            diagnostic: childrenResult.diagnostic,
+        };
+    },
     [NodeType.Em]: (printer, node) => {
         const childrenResult = printer.processNodeList(printer, node.children);
         return {

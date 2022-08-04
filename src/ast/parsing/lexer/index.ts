@@ -8,6 +8,7 @@ import {
     positionToTextPosition,
     RawNode,
     RawNodeType,
+    TEXT_LIKE_NODES,
     TextNode,
     TokensNode,
 } from '../../node';
@@ -44,6 +45,7 @@ import { parseFormulaSpan } from './node/formulaSpan';
 import { parseLatexSpan } from './node/latexSpan';
 import { parseFormulaOrLatex } from './node/formulaOrLatex';
 import { parseNonBreakingSpace, parseThinNonBreakingSpace } from './node/space';
+import { parseUnderline } from './node/underline';
 
 class FatalError extends Error {}
 
@@ -447,23 +449,6 @@ function nodeJoiner(nodes: Node[]): void {
 function applyParagraphs(roNodes: Readonly<Node[]>): Node[] {
     const nodes: Node[] = [...roNodes];
 
-    // TODO: move into ast/node/struct.ts
-    const TEXT_LIKE_NODES: (NodeType | RawNodeType)[] = [
-        NodeType.Escape,
-        NodeType.Text,
-        NodeType.Link,
-        NodeType.Strong,
-        NodeType.Em,
-        NodeType.CodeSpan,
-        NodeType.Br,
-        NodeType.Del,
-        NodeType.OpCode,
-        NodeType.LatexSpan,
-        NodeType.FormulaSpan,
-        NodeType.NonBreakingSpace,
-        NodeType.ThinNonBreakingSpace,
-    ];
-
     let lastTextNodeIndex: number | null = null;
     let i = 0;
     while (i < nodes.length) {
@@ -549,6 +534,7 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
         parseNonBreakingSpace,
         parseThinNonBreakingSpace,
         parseEm,
+        parseUnderline,
         parseHeading,
         parseHr,
         parseList,

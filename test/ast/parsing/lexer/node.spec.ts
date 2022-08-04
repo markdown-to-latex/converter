@@ -637,6 +637,21 @@ describe('Del parsing', () => {
     });
 });
 
+describe('Underline parsing', () => {
+    test('Simple underline', () => {
+        const rawNode = rawNodeTemplate(`Text with _underlined_-text`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        const paragraphNode = nodes[0] as ParagraphNode;
+        expect(paragraphNode.children).toHaveLength(3);
+        expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
+        expect(paragraphNode.children[1].type).toEqual(NodeType.Underline);
+        expect(paragraphNode.children[2].type).toEqual(NodeType.Text);
+
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
 describe('Paragraph parsing', () => {
     test('Complex', () => {
         const rawNode = rawNodeTemplate(`## Not a paragraph
