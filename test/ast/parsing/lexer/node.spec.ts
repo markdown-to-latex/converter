@@ -365,6 +365,16 @@ describe('table parsing', () => {
 
         expect(nodes).toMatchSnapshot();
     });
+
+    test('No linebreak', () => {
+        const rawNode = rawNodeTemplate(`||||`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        expect(nodes[0].type).toEqual(NodeType.Blockquote);
+
+        expect(nodes).toMatchSnapshot();
+    });
 });
 
 describe('List parsing', () => {
@@ -476,6 +486,16 @@ Text`);
 
         expect(nodes).toMatchSnapshot();
     });
+
+    test('No linebreak', () => {
+        const rawNode = rawNodeTemplate(`> Line 1`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        expect(nodes[0].type).toEqual(NodeType.Blockquote);
+
+        expect(nodes).toMatchSnapshot();
+    });
 });
 
 describe('Hr parsing', function () {
@@ -503,6 +523,16 @@ Text 2
         expect(nodes[0].type).toEqual(NodeType.Paragraph);
         expect(nodes[1].type).toEqual(NodeType.Hr);
         expect(nodes[2].type).toEqual(NodeType.Paragraph);
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('No linebreak', () => {
+        const rawNode = rawNodeTemplate(`-----`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        expect(nodes[0].type).toEqual(NodeType.Blockquote);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -790,6 +820,16 @@ line 2
         expect(commentNode.type).toEqual(NodeType.Comment);
         const paragraphNode = nodes[1] as ParagraphNode;
         expect(paragraphNode.type).toEqual(NodeType.Paragraph);
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('No linebreak', () => {
+        const rawNode = rawNodeTemplate(`// Comment`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        expect(nodes[0].type).toEqual(NodeType.Blockquote);
 
         expect(nodes).toMatchSnapshot();
     });
