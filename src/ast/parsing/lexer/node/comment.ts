@@ -25,7 +25,7 @@ export const parseComment: TokenParser = function (tokens, index) {
     );
     const lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
 
-    const endToken = tokens.tokens[lineDelimiterIndex];
+    const endToken = tokens.tokens[lineDelimiterIndex - 1];
     const commentNode: CommentNode = {
         type: NodeType.Comment,
         parent: tokens.parent,

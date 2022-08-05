@@ -45,7 +45,7 @@ export const parseBlockquote: TokenParser = function (tokens, index) {
     );
     const lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
 
-    const endToken = tokens.tokens[lineDelimiterIndex];
+    const endToken = tokens.tokens[lineDelimiterIndex - 1];
     const blockquoteNode: BlockquoteNode = {
         type: NodeType.Blockquote,
         parent: tokens.parent,

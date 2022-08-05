@@ -63,7 +63,7 @@ Text",
       "type": "File",
     },
     "pos": Object {
-      "end": 27,
+      "end": 26,
       "start": 0,
     },
     "type": "Blockquote",
@@ -117,6 +117,51 @@ Text",
 ]
 `;
 
+exports[`Blockquote parsing No linebreak 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 8,
+          "start": 2,
+        },
+        "text": "Line 1",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 8,
+            "start": 0,
+          },
+          "text": "> Line 1",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 8,
+        "start": 0,
+      },
+      "raw": "> Line 1",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 8,
+      "start": 0,
+    },
+    "type": "Blockquote",
+  },
+]
+`;
+
 exports[`Comment parsing Comment 1`] = `
 Array [
   Object {
@@ -150,7 +195,7 @@ line 2
       "type": "File",
     },
     "pos": Object {
-      "end": 12,
+      "end": 10,
       "start": 1,
     },
     "type": "Comment",
@@ -202,6 +247,39 @@ line 2
       "start": 12,
     },
     "type": "Paragraph",
+  },
+]
+`;
+
+exports[`Comment parsing No linebreak 1`] = `
+Array [
+  Object {
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 10,
+            "start": 0,
+          },
+          "text": "// Comment",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 10,
+        "start": 0,
+      },
+      "raw": "// Comment",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 10,
+      "start": 0,
+    },
+    "type": "Comment",
   },
 ]
 `;
@@ -1128,6 +1206,51 @@ Text 2
     "pos": Object {
       "end": 20,
       "start": 14,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`Hr parsing No linebreak -> not a hr 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 5,
+          "start": 0,
+        },
+        "text": "-----",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "-----",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 5,
+        "start": 0,
+      },
+      "raw": "-----",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 5,
+      "start": 0,
     },
     "type": "Paragraph",
   },
@@ -4795,6 +4918,217 @@ Array [
       },
     ],
     "type": "Table",
+  },
+]
+`;
+
+exports[`table parsing Empty cells 1`] = `
+Array [
+  Object {
+    "header": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 7,
+                  "start": 2,
+                },
+                "text": "Col 1",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 7,
+              "start": 2,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 13,
+                  "start": 8,
+                },
+                "text": "Col 2",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 13,
+              "start": 8,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 14,
+          "start": 1,
+        },
+        "type": "TableRow",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 20,
+              "start": 16,
+            },
+            "type": "TableControlCell",
+          },
+          Object {
+            "align": "Default",
+            "joinColsRight": undefined,
+            "joinRowsUp": undefined,
+            "parent": [Circular],
+            "pos": Object {
+              "end": 26,
+              "start": 21,
+            },
+            "type": "TableControlCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 27,
+          "start": 15,
+        },
+        "type": "TableControlRow",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 39,
+            "start": 0,
+          },
+          "text": "
+|Col 1|Col 2|
+|----|-----|
+|Content||
+",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 39,
+        "start": 0,
+      },
+      "raw": "
+|Col 1|Col 2|
+|----|-----|
+|Content||
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 38,
+      "start": 1,
+    },
+    "rows": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 36,
+                  "start": 29,
+                },
+                "text": "Content",
+                "type": "Text",
+              },
+            ],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 36,
+              "start": 29,
+            },
+            "type": "TableCell",
+          },
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 37,
+              "start": 37,
+            },
+            "type": "TableCell",
+          },
+        ],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 38,
+          "start": 28,
+        },
+        "type": "TableRow",
+      },
+    ],
+    "type": "Table",
+  },
+]
+`;
+
+exports[`table parsing Empty header cells, not a table 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 4,
+          "start": 0,
+        },
+        "text": "||||",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 4,
+            "start": 0,
+          },
+          "text": "||||",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 4,
+        "start": 0,
+      },
+      "raw": "||||",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 4,
+      "start": 0,
+    },
+    "type": "Paragraph",
   },
 ]
 `;

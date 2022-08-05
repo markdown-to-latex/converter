@@ -366,12 +366,26 @@ describe('table parsing', () => {
         expect(nodes).toMatchSnapshot();
     });
 
-    test('No linebreak', () => {
+    test('Empty header cells, not a table', () => {
         const rawNode = rawNodeTemplate(`||||`);
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(1);
-        expect(nodes[0].type).toEqual(NodeType.Blockquote);
+        expect(nodes[0].type).toEqual(NodeType.Paragraph);
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('Empty cells', () => {
+        const rawNode = rawNodeTemplate(`
+|Col 1|Col 2|
+|----|-----|
+|Content||
+`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        expect(nodes[0].type).toEqual(NodeType.Table);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -527,12 +541,12 @@ Text 2
         expect(nodes).toMatchSnapshot();
     });
 
-    test('No linebreak', () => {
+    test('No linebreak -> not a hr', () => {
         const rawNode = rawNodeTemplate(`-----`);
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(1);
-        expect(nodes[0].type).toEqual(NodeType.Blockquote);
+        expect(nodes[0].type).toEqual(NodeType.Paragraph);
 
         expect(nodes).toMatchSnapshot();
     });
@@ -829,7 +843,7 @@ line 2
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(1);
-        expect(nodes[0].type).toEqual(NodeType.Blockquote);
+        expect(nodes[0].type).toEqual(NodeType.Comment);
 
         expect(nodes).toMatchSnapshot();
     });

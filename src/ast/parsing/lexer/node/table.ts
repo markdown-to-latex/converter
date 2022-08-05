@@ -150,11 +150,10 @@ function parseTableLine(
         const innerTokens = tokens.tokens.slice(curIndex + 1, nextBar.index);
         const slicedText = sliceTokenText(tokens, curIndex + 1, nextBar.index);
 
-        const isControlCell = isTableControlCell(
-            innerTokens[0],
-            curIndex + 1,
-            tokens,
-        );
+        const isControlCell =
+            innerTokens.length !== 0
+                ? isTableControlCell(innerTokens[0], curIndex + 1, tokens)
+                : false;
         let cellNode: TableControlCellNode | TableCellNode;
 
         if (innerTokens.length !== 0 && isControlCell) {

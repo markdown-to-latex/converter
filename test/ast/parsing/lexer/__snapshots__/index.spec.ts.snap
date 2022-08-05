@@ -951,7 +951,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       "type": "File",
     },
     "pos": Object {
-      "end": 497,
+      "end": 496,
       "start": 446,
     },
     "type": "Comment",
@@ -1123,7 +1123,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       "type": "File",
     },
     "pos": Object {
-      "end": 520,
+      "end": 518,
       "start": 497,
     },
     "type": "Comment",
@@ -2912,7 +2912,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       "type": "File",
     },
     "pos": Object {
-      "end": 1599,
+      "end": 1597,
       "start": 1315,
     },
     "type": "Blockquote",
