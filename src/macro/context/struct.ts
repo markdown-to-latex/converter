@@ -1,10 +1,10 @@
-import { FileNode, Node, NodeType } from '../../ast/node';
+import { FileNode, Node, NodeType, TextNode } from '../../ast/node';
 import { DiagnoseList } from '../../diagnose';
 import { NodeApplication, NodeProcessed } from '../node';
 
 export interface ContextApplicationInfo {
     title: Node[];
-    label: string;
+    label: TextNode;
 }
 
 export interface ContextApplicationContentInfo extends ContextApplicationInfo {
@@ -12,7 +12,7 @@ export interface ContextApplicationContentInfo extends ContextApplicationInfo {
 }
 
 export interface ContextReferenceInfo {
-    label: string;
+    label: TextNode;
 }
 
 export interface ContextReferenceContentInfo extends ContextReferenceInfo {
@@ -20,12 +20,12 @@ export interface ContextReferenceContentInfo extends ContextReferenceInfo {
 }
 
 export interface ContextPictureInfo {
-    label: string;
+    label: TextNode;
     name: Node[];
 }
 
 export interface ContextTableInfo {
-    label: string;
+    label: TextNode;
     name: Node[];
 }
 

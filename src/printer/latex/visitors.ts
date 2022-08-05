@@ -256,7 +256,7 @@ export const processingVisitors: ProcessingVisitors = {
         return {
             result: getLatexLinkText(
                 childrenResult.result,
-                new LatexString(node.href, printer.config).prepare(
+                new LatexString(node.href.text, printer.config).prepare(
                     NodeType.Link,
                 ).s,
                 childrenResult.result,
@@ -275,7 +275,7 @@ export const processingVisitors: ProcessingVisitors = {
                 pictureTitle: nameResult.result,
                 height: node.height,
                 width: node.width,
-                href: node.href,
+                href: node.href.text,
                 removeSpace: isNodeBeforeBoxed(node),
             },
             printer.config,

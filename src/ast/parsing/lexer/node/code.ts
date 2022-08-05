@@ -217,6 +217,9 @@ export const parseCode: TokenParser = function (tokens, index) {
         label: label,
         name: argsResult.name,
     };
+    if (label) {
+        label.parent = codeNode;
+    }
 
     parsePosArgsResult.result.forEach(v =>
         v.forEach(v => (v.parent = codeNode)),

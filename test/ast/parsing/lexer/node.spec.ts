@@ -93,7 +93,7 @@ Code block
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toBeUndefined();
-        expect(node.label).toEqual('label');
+        expect(node.label?.text).toEqual('label');
         expect(node.text).toEqual('Code block');
     });
 
@@ -109,7 +109,7 @@ Code block
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toEqual('test-language');
-        expect(node.label).toEqual('label');
+        expect(node.label?.text).toEqual('label');
         expect(node.text).toEqual('Code block');
 
         expect(node.name).toMatchSnapshot();
@@ -129,7 +129,7 @@ Code block
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toEqual('kotlin');
-        expect(node.label).toEqual('label');
+        expect(node.label?.text).toEqual('label');
         expect(node.text).toEqual('Code block');
 
         expect(node.name).toMatchSnapshot();
@@ -151,7 +151,7 @@ Code block
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
         expect(node.lang).toEqual('test-language');
-        expect(node.label).toEqual('label');
+        expect(node.label?.text).toEqual('label');
 
         expect(node.name).toMatchSnapshot();
     });

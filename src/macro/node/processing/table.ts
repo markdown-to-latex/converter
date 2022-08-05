@@ -4,7 +4,7 @@ import {
     ProcessingInfoCallback,
     TableProcessedNode,
 } from '../struct';
-import { NodeType, TableNode } from '../../../ast/node';
+import { NodeType, TableNode, TextNode } from '../../../ast/node';
 import { fallbackNameNodes } from '../utils';
 import {
     DiagnoseErrorType,
@@ -13,14 +13,27 @@ import {
 } from '../../../diagnose';
 
 function fallbackTableNode(tableNode: TableNode): TableProcessedNode {
-    return {
+    const labelNode: TextNode = {
+        type: NodeType.Text,
+        parent: null,
+        pos: {
+            start: tableNode.pos.start,
+            end: tableNode.pos.start,
+        },
+        text: 'unknown-table-1',
+    };
+
+    const fallbackTableNode: TableProcessedNode = {
         ...tableNode,
 
         type: ProcessedNodeType.TableProcessed,
         name: fallbackNameNodes(tableNode),
-        label: 'unknown-table-1',
+        label: labelNode,
         index: -1,
     };
+    labelNode.parent = fallbackTableNode;
+
+    return fallbackTableNode;
 }
 
 const callback: ProcessingInfoCallback<TableNode> = function (ctx, data) {

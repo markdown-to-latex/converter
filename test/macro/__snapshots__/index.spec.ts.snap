@@ -3,15 +3,139 @@
 exports[`pictures multiple pictures 1`] = `
 Array [
   Object {
-    "href": "test.png",
+    "href": Object {
+      "parent": Object {
+        "href": [Circular],
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 14,
+            "start": 3,
+          },
+          "text": "image-label",
+          "type": "Text",
+        },
+        "name": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 41,
+              "start": 38,
+            },
+            "text": "asd",
+            "type": "Text",
+          },
+        ],
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 147,
+            "start": 0,
+          },
+          "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 42,
+          "start": 1,
+        },
+        "type": "Image",
+        "width": "14cm",
+      },
+      "pos": Object {
+        "end": 24,
+        "start": 16,
+      },
+      "text": "test.png",
+      "type": "Text",
+    },
     "index": 0,
-    "label": "image-label",
+    "label": Object {
+      "parent": Object {
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 24,
+            "start": 16,
+          },
+          "text": "test.png",
+          "type": "Text",
+        },
+        "label": [Circular],
+        "name": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 41,
+              "start": 38,
+            },
+            "text": "asd",
+            "type": "Text",
+          },
+        ],
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 147,
+            "start": 0,
+          },
+          "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 42,
+          "start": 1,
+        },
+        "type": "Image",
+        "width": "14cm",
+      },
+      "pos": Object {
+        "end": 14,
+        "start": 3,
+      },
+      "text": "image-label",
+      "type": "Text",
+    },
     "name": Array [
       Object {
         "children": Array [],
         "parent": Object {
-          "href": "test.png",
-          "label": "image-label",
+          "href": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 24,
+              "start": 16,
+            },
+            "text": "test.png",
+            "type": "Text",
+          },
+          "label": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 14,
+              "start": 3,
+            },
+            "text": "image-label",
+            "type": "Text",
+          },
           "name": Array [
             [Circular],
           ],
@@ -146,15 +270,139 @@ Look at the pic. !PK[image-label-2] and !PK[image-label].
     "type": "Paragraph",
   },
   Object {
-    "href": "test.png",
+    "href": Object {
+      "parent": Object {
+        "href": [Circular],
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 118,
+            "start": 105,
+          },
+          "text": "image-label-2",
+          "type": "Text",
+        },
+        "name": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 145,
+              "start": 142,
+            },
+            "text": "asd",
+            "type": "Text",
+          },
+        ],
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 147,
+            "start": 0,
+          },
+          "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 146,
+          "start": 103,
+        },
+        "type": "Image",
+        "width": "14cm",
+      },
+      "pos": Object {
+        "end": 128,
+        "start": 120,
+      },
+      "text": "test.png",
+      "type": "Text",
+    },
     "index": 1,
-    "label": "image-label-2",
+    "label": Object {
+      "parent": Object {
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 128,
+            "start": 120,
+          },
+          "text": "test.png",
+          "type": "Text",
+        },
+        "label": [Circular],
+        "name": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 145,
+              "start": 142,
+            },
+            "text": "asd",
+            "type": "Text",
+          },
+        ],
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 147,
+            "start": 0,
+          },
+          "raw": "
+![image-label](test.png)(@w 14cm)(@n asd)
+
+Look at the pic. !PK[image-label-2] and !PK[image-label].
+
+![image-label-2](test.png)(@w 14cm)(@n asd)
+",
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 146,
+          "start": 103,
+        },
+        "type": "Image",
+        "width": "14cm",
+      },
+      "pos": Object {
+        "end": 118,
+        "start": 105,
+      },
+      "text": "image-label-2",
+      "type": "Text",
+    },
     "name": Array [
       Object {
         "children": Array [],
         "parent": Object {
-          "href": "test.png",
-          "label": "image-label-2",
+          "href": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 128,
+              "start": 120,
+            },
+            "text": "test.png",
+            "type": "Text",
+          },
+          "label": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 118,
+              "start": 105,
+            },
+            "text": "image-label-2",
+            "type": "Text",
+          },
           "name": Array [
             [Circular],
           ],
@@ -336,8 +584,24 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-3",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 47,
+                      "start": 42,
+                    },
+                    "text": "ref-3",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 41,
+                      "start": 40,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -404,8 +668,24 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -592,8 +872,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -643,8 +939,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
               Object {
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -694,8 +1006,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -745,8 +1073,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
               Object {
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -796,8 +1140,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -847,8 +1207,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
               Object {
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -898,8 +1274,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -949,8 +1341,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
               Object {
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -1000,8 +1408,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -1051,8 +1475,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
               Object {
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -1102,8 +1542,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -1153,8 +1609,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
               Object {
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -1205,8 +1677,24 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
                 "children": Array [],
                 "parent": Object {
                   "keyArgs": Object {},
-                  "label": "ref-1",
-                  "opcode": "R",
+                  "label": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 9,
+                      "start": 4,
+                    },
+                    "text": "ref-1",
+                    "type": "Text",
+                  },
+                  "opcode": Object {
+                    "parent": [Circular],
+                    "pos": Object {
+                      "end": 3,
+                      "start": 2,
+                    },
+                    "text": "R",
+                    "type": "Text",
+                  },
                   "parent": Object {
                     "children": Array [],
                     "parent": Object {
@@ -1319,7 +1807,7 @@ Array [
     "message": "Cannot use non-span nodes at argument name",
     "pos": Object {
       "end": Object {
-        "absolute": 57,
+        "absolute": 62,
         "column": 4,
         "line": 7,
       },
@@ -1337,17 +1825,35 @@ Array [
     "message": "Table must be followed by !T[] macros",
     "pos": Object {
       "end": Object {
-        "absolute": 102,
+        "absolute": 107,
         "column": 14,
         "line": 12,
       },
       "start": Object {
-        "absolute": 61,
+        "absolute": 66,
         "column": 1,
         "line": 10,
       },
     },
     "severity": "ERROR",
+  },
+  Object {
+    "errorType": 2,
+    "filePath": "test.md",
+    "message": "Unused picture label a",
+    "pos": Object {
+      "end": Object {
+        "absolute": 62,
+        "column": 4,
+        "line": 7,
+      },
+      "start": Object {
+        "absolute": 41,
+        "column": 1,
+        "line": 5,
+      },
+    },
+    "severity": "WARNING",
   },
   Object {
     "errorType": 2,
@@ -1654,14 +2160,97 @@ Array [
       },
     ],
     "index": 0,
-    "label": "table-label",
+    "label": Object {
+      "parent": Object {
+        "keyArgs": Object {},
+        "label": [Circular],
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 21,
+            "start": 20,
+          },
+          "text": "T",
+          "type": "Text",
+        },
+        "parent": Object {
+          "children": Array [],
+          "parent": Object {
+            "children": [Circular],
+            "parent": null,
+            "path": "test.md",
+            "pos": Object {
+              "end": 88,
+              "start": 0,
+            },
+            "raw": "
+!TK[table-label]
+
+!T[table-label](a table)
+
+|asda|asdasd|
+|----|------|
+|asda|asdasd|
+
+",
+            "type": "File",
+          },
+          "pos": Object {
+            "end": 43,
+            "start": 19,
+          },
+          "type": "Paragraph",
+        },
+        "pos": Object {
+          "end": 43,
+          "start": 19,
+        },
+        "posArgs": Array [
+          Array [
+            Object {
+              "children": Array [],
+              "parent": [Circular],
+              "pos": Object {
+                "end": 42,
+                "start": 35,
+              },
+              "text": "a table",
+              "type": "Text",
+            },
+          ],
+        ],
+        "type": "OpCode",
+      },
+      "pos": Object {
+        "end": 33,
+        "start": 22,
+      },
+      "text": "table-label",
+      "type": "Text",
+    },
     "name": Array [
       Object {
         "children": Array [],
         "parent": Object {
           "keyArgs": Object {},
-          "label": "table-label",
-          "opcode": "T",
+          "label": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 33,
+              "start": 22,
+            },
+            "text": "table-label",
+            "type": "Text",
+          },
+          "opcode": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 21,
+              "start": 20,
+            },
+            "text": "T",
+            "type": "Text",
+          },
           "parent": Object {
             "children": Array [],
             "parent": Object {

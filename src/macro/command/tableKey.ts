@@ -1,9 +1,10 @@
 import { CommandInfo, CommandInfoCallback } from '../struct';
 import { ProcessedNodeType, TableKeyNode } from '../node/struct';
+import { TextNode } from '../../ast/node';
 
 interface ArgsType {}
 
-const callback: CommandInfoCallback<ArgsType, string> = function (
+const callback: CommandInfoCallback<ArgsType, TextNode> = function (
     ctx,
     data,
     args,

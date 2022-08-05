@@ -1260,8 +1260,24 @@ Array [
 exports[`Image parsing Extended image 1`] = `
 Array [
   Object {
-    "href": "../../image.png",
-    "label": "image-label",
+    "href": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 30,
+        "start": 15,
+      },
+      "text": "../../image.png",
+      "type": "Text",
+    },
+    "label": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 13,
+        "start": 2,
+      },
+      "text": "image-label",
+      "type": "Text",
+    },
     "name": Array [
       Object {
         "children": Array [],
@@ -1339,8 +1355,24 @@ Array [
 exports[`Image parsing Image args with aliases 1`] = `
 Array [
   Object {
-    "href": "../../image.png",
-    "label": "image-label",
+    "href": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 30,
+        "start": 15,
+      },
+      "text": "../../image.png",
+      "type": "Text",
+    },
+    "label": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 13,
+        "start": 2,
+      },
+      "text": "image-label",
+      "type": "Text",
+    },
     "name": Array [
       Object {
         "children": Array [],
@@ -1395,8 +1427,24 @@ Array [
 exports[`Image parsing Markdown-like image 1`] = `
 Array [
   Object {
-    "href": "../../image.png",
-    "label": "image-label",
+    "href": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 30,
+        "start": 15,
+      },
+      "text": "../../image.png",
+      "type": "Text",
+    },
+    "label": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 13,
+        "start": 2,
+      },
+      "text": "image-label",
+      "type": "Text",
+    },
     "parent": Object {
       "children": Array [
         Object {
@@ -3480,7 +3528,15 @@ Array [
   Object {
     "children": Array [],
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 18,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "test-language",
       "name": [Circular],
       "parent": Object {
@@ -3528,7 +3584,15 @@ Code block
   },
   Object {
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 18,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "test-language",
       "name": [Circular],
       "parent": Object {
@@ -3577,7 +3641,15 @@ Code block
   Object {
     "children": Array [],
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 18,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "test-language",
       "name": [Circular],
       "parent": Object {
@@ -3631,7 +3703,15 @@ Array [
   Object {
     "children": Array [],
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 5,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "kotlin",
       "name": [Circular],
       "parent": Object {
@@ -3683,7 +3763,15 @@ Code block
   },
   Object {
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 5,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "kotlin",
       "name": [Circular],
       "parent": Object {
@@ -3736,7 +3824,15 @@ Code block
   Object {
     "children": Array [],
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 5,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "kotlin",
       "name": [Circular],
       "parent": Object {
@@ -3956,7 +4052,15 @@ Array [
   Object {
     "children": Array [],
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 18,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "test-language",
       "name": [Circular],
       "parent": Object {
@@ -4012,7 +4116,15 @@ Code block
   },
   Object {
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 18,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "test-language",
       "name": [Circular],
       "parent": Object {
@@ -4069,7 +4181,15 @@ Code block
   Object {
     "children": Array [],
     "parent": Object {
-      "label": "label",
+      "label": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 23,
+          "start": 18,
+        },
+        "text": "label",
+        "type": "Text",
+      },
       "lang": "test-language",
       "name": [Circular],
       "parent": Object {
@@ -4172,7 +4292,15 @@ Array [
             "type": "Text",
           },
         ],
-        "href": "li-nk",
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 29,
+            "start": 24,
+          },
+          "text": "li-nk",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 30,
@@ -4250,7 +4378,15 @@ Array [
             "type": "Text",
           },
         ],
-        "href": "li-nk",
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 21,
+            "start": 16,
+          },
+          "text": "li-nk",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 22,
@@ -4305,8 +4441,24 @@ Array [
     "children": Array [
       Object {
         "keyArgs": Object {},
-        "label": "(@key ",
-        "opcode": "Macro",
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 13,
+            "start": 7,
+          },
+          "text": "(@key ",
+          "type": "Text",
+        },
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 6,
+            "start": 1,
+          },
+          "text": "Macro",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 14,
@@ -4387,8 +4539,24 @@ Array [
             },
           ],
         },
-        "label": "",
-        "opcode": "Macro",
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 7,
+            "start": 7,
+          },
+          "text": "",
+          "type": "Text",
+        },
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 6,
+            "start": 1,
+          },
+          "text": "Macro",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 48,
@@ -4451,8 +4619,24 @@ Array [
             },
           ],
         },
-        "label": "label-text",
-        "opcode": "Macro",
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 17,
+            "start": 7,
+          },
+          "text": "label-text",
+          "type": "Text",
+        },
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 6,
+            "start": 1,
+          },
+          "text": "Macro",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 63,
@@ -4533,7 +4717,15 @@ Array [
       Object {
         "keyArgs": Object {},
         "label": null,
-        "opcode": "Macro",
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 6,
+            "start": 1,
+          },
+          "text": "Macro",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 15,
@@ -4617,8 +4809,24 @@ Array [
             },
           ],
         },
-        "label": "label-text",
-        "opcode": "Macro",
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 18,
+            "start": 8,
+          },
+          "text": "label-text",
+          "type": "Text",
+        },
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 7,
+            "start": 2,
+          },
+          "text": "Macro",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 121,
@@ -4652,7 +4860,15 @@ Array [
                 ],
               },
               "label": null,
-              "opcode": "Macro2",
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 48,
+                  "start": 42,
+                },
+                "text": "Macro2",
+                "type": "Text",
+              },
               "parent": [Circular],
               "pos": Object {
                 "end": 58,
@@ -5535,7 +5751,15 @@ Array [
                     "type": "Text",
                   },
                 ],
-                "href": "link",
+                "href": Object {
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 94,
+                    "start": 90,
+                  },
+                  "text": "link",
+                  "type": "Text",
+                },
                 "parent": [Circular],
                 "pos": Object {
                   "end": 95,
@@ -5833,7 +6057,15 @@ Array [
                     "type": "Text",
                   },
                 ],
-                "href": "link",
+                "href": Object {
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 120,
+                    "start": 116,
+                  },
+                  "text": "link",
+                  "type": "Text",
+                },
                 "parent": [Circular],
                 "pos": Object {
                   "end": 121,

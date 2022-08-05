@@ -10,41 +10,45 @@ import {
     DiagnoseSeverity,
     nodeToDiagnose,
 } from '../../diagnose';
+import { TextNode } from '../../ast/node';
 
 export function getOrCreateContextPictureLabelIndex(
     ctx: Context,
-    label: string,
+    label: TextNode,
 ): number {
     const pictureData = ctx.data.picture;
-    const index = pictureData.labels.indexOf(label);
+    const index = pictureData.labels.indexOf(label.text);
     if (index !== -1) {
-        ++pictureData.labelToRefs[label].refs;
+        ++pictureData.labelToRefs[label.text].refs;
         return index;
     }
 
     return createContextPictureLabel(ctx, label);
 }
 
-export function createContextPictureLabel(ctx: Context, label: string): number {
+export function createContextPictureLabel(
+    ctx: Context,
+    label: TextNode,
+): number {
     const pictureData = ctx.data.picture;
-    const index = pictureData.labels.indexOf(label);
+    const index = pictureData.labels.indexOf(label.text);
     if (index !== -1) {
         ctx.diagnostic.push(
             nodeToDiagnose(
                 ctx.temp.node!,
                 DiagnoseSeverity.Warning,
                 DiagnoseErrorType.ContextError,
-                `Picture with label ${label} already exists`,
+                `Picture with label ${label.text} already exists`,
             ),
         );
         return index;
     }
 
-    pictureData.labelToRefs[label] = {
+    pictureData.labelToRefs[label.text] = {
         node: ctx.temp.node,
         refs: 1,
     };
-    pictureData.labels.push(label);
+    pictureData.labels.push(label.text);
     return pictureData.labels.length - 1;
 }
 
@@ -54,19 +58,19 @@ export function createContextPictureLabelData(
 ): number {
     const pictureData = ctx.data.picture;
     const index = getOrCreateContextPictureLabelIndex(ctx, data.label);
-    if (data.label in pictureData.labelToInfo) {
+    if (data.label.text in pictureData.labelToInfo) {
         ctx.diagnostic.push(
             nodeToDiagnose(
                 ctx.temp.node,
                 DiagnoseSeverity.Warning,
                 DiagnoseErrorType.ContextError,
-                `Picture with label ${data.label} already exists`,
+                `Picture with label ${data.label.text} already exists`,
             ),
         );
         return index;
     }
 
-    pictureData.labelToInfo[data.label] = data;
+    pictureData.labelToInfo[data.label.text] = data;
 
     return index;
 }
@@ -108,38 +112,38 @@ export function diagnoseContextUnusedPictureLabels(ctx: Context): void {
 
 export function getOrCreateContextTableLabelIndex(
     ctx: Context,
-    label: string,
+    label: TextNode,
 ): number {
     const tableData = ctx.data.table;
-    const index = tableData.labels.indexOf(label);
+    const index = tableData.labels.indexOf(label.text);
     if (index !== -1) {
-        ++tableData.labelToRefs[label].refs;
+        ++tableData.labelToRefs[label.text].refs;
         return index;
     }
 
     return createContextTableLabel(ctx, label);
 }
 
-export function createContextTableLabel(ctx: Context, label: string): number {
+export function createContextTableLabel(ctx: Context, label: TextNode): number {
     const tableData = ctx.data.table;
-    const index = tableData.labels.indexOf(label);
+    const index = tableData.labels.indexOf(label.text);
     if (index !== -1) {
         ctx.diagnostic.push(
             nodeToDiagnose(
                 ctx.temp.node,
                 DiagnoseSeverity.Warning,
                 DiagnoseErrorType.ContextError,
-                `Table with label ${label} already exists`,
+                `Table with label ${label.text} already exists`,
             ),
         );
         return index;
     }
 
-    tableData.labelToRefs[label] = {
+    tableData.labelToRefs[label.text] = {
         node: ctx.temp.node,
         refs: 1,
     };
-    tableData.labels.push(label);
+    tableData.labels.push(label.text);
     return tableData.labels.length - 1;
 }
 
@@ -149,7 +153,7 @@ export function createContextTableLabelData(
 ): number {
     const tableData = ctx.data.table;
     const index = getOrCreateContextTableLabelIndex(ctx, data.label);
-    if (data.label in tableData.labelToInfo) {
+    if (data.label.text in tableData.labelToInfo) {
         ctx.diagnostic.push(
             nodeToDiagnose(
                 ctx.temp.node,
@@ -161,7 +165,7 @@ export function createContextTableLabelData(
         return index;
     }
 
-    tableData.labelToInfo[data.label] = data;
+    tableData.labelToInfo[data.label.text] = data;
     return index;
 }
 
@@ -202,30 +206,30 @@ export function diagnoseContextUnusedTableLabels(ctx: Context): void {
 
 export function getContextApplicationLabelIndex(
     ctx: Context,
-    label: string,
+    label: TextNode,
 ): number {
     const applicationData = ctx.data.application;
-    if (!(label in applicationData.labelToInfo)) {
+    if (!(label.text in applicationData.labelToInfo)) {
         ctx.diagnostic.push(
             nodeToDiagnose(
                 ctx.temp.node,
                 DiagnoseSeverity.Error,
                 DiagnoseErrorType.ContextError,
-                `Application with ${label} does not exist`,
+                `Application with ${label.text} does not exist`,
             ),
         );
         return -1;
     }
 
     const labels = applicationData.labels;
-    const labelIndex = labels.indexOf(label);
+    const labelIndex = labels.indexOf(label.text);
     if (labelIndex !== -1) {
-        ++applicationData.labelToRefs[label].refs;
+        ++applicationData.labelToRefs[label.text].refs;
         return labelIndex;
     }
 
-    ++applicationData.labelToRefs[label].refs;
-    labels.push(label);
+    ++applicationData.labelToRefs[label.text].refs;
+    labels.push(label.text);
     return labels.length - 1;
 }
 
@@ -234,23 +238,23 @@ export function createContextApplication(
     data: Readonly<ContextApplicationContentInfo>,
 ): void {
     const applicationData = ctx.data.application;
-    if (data.label in applicationData.labelToInfo) {
+    if (data.label.text in applicationData.labelToInfo) {
         ctx.diagnostic.push(
             nodeToDiagnose(
                 ctx.temp.node,
                 DiagnoseSeverity.Warning,
                 DiagnoseErrorType.ContextError,
-                `Application with ${data.label} already exist`,
+                `Application with ${data.label.text} already exist`,
             ),
         );
         return;
     }
 
-    applicationData.labelToRefs[data.label] = {
+    applicationData.labelToRefs[data.label.text] = {
         node: ctx.temp.node,
         refs: 1,
     };
-    applicationData.labelToInfo[data.label] = data;
+    applicationData.labelToInfo[data.label.text] = data;
 }
 
 export function diagnoseContextUnusedApplicationLabels(ctx: Context): void {
@@ -273,30 +277,30 @@ export function diagnoseContextUnusedApplicationLabels(ctx: Context): void {
 
 export function getContextReferenceLabelIndex(
     ctx: Context,
-    label: string,
+    label: TextNode,
 ): number {
     const referenceData = ctx.data.reference;
-    if (!(label in referenceData.labelToInfo)) {
+    if (!(label.text in referenceData.labelToInfo)) {
         ctx.diagnostic.push(
             nodeToDiagnose(
                 ctx.temp.node,
                 DiagnoseSeverity.Error,
                 DiagnoseErrorType.ContextError,
-                `Reference with ${label} does not exist`,
+                `Reference with ${label.text} does not exist`,
             ),
         );
         return -1;
     }
 
     const labels = referenceData.labels;
-    const labelIndex = labels.indexOf(label);
+    const labelIndex = labels.indexOf(label.text);
     if (labelIndex !== -1) {
-        ++referenceData.labelToRefs[label].refs;
+        ++referenceData.labelToRefs[label.text].refs;
         return labelIndex;
     }
 
-    ++referenceData.labelToRefs[label].refs;
-    labels.push(label);
+    ++referenceData.labelToRefs[label.text].refs;
+    labels.push(label.text);
     return labels.length - 1;
 }
 
@@ -305,23 +309,23 @@ export function createContextReference(
     data: Readonly<ContextReferenceContentInfo>,
 ): void {
     const referenceData = ctx.data.reference;
-    if (data.label in referenceData.labelToInfo) {
+    if (data.label.text in referenceData.labelToInfo) {
         ctx.diagnostic.push(
             nodeToDiagnose(
                 ctx.temp.node,
                 DiagnoseSeverity.Warning,
                 DiagnoseErrorType.ContextError,
-                `Reference with ${data.label} already exist`,
+                `Reference with ${data.label.text} already exist`,
             ),
         );
         return;
     }
 
-    referenceData.labelToRefs[data.label] = {
+    referenceData.labelToRefs[data.label.text] = {
         node: ctx.temp.node,
         refs: 1,
     };
-    referenceData.labelToInfo[data.label] = data;
+    referenceData.labelToInfo[data.label.text] = data;
 }
 
 export function diagnoseContextUnusedReferenceLabels(ctx: Context): void {

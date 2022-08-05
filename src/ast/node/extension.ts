@@ -5,8 +5,6 @@ import {
     getNodeLeftNeighbourLeaf,
     getNodeParentFile,
     getNodeRightNeighbourLeaf,
-    NodeListProps,
-    NodeParentData,
     replaceNode,
     traverseNodeChildren,
     traverseNodeChildrenDeepDepth,
@@ -17,13 +15,11 @@ import {
     DiagnoseSeverity,
     nodeToDiagnose,
 } from '../../diagnose';
-import { StringE } from '../../extension/string';
 
 export interface NodeEParentData<T extends Node = Node> {
     node: NodeE<T>;
     index: number;
     container: Node[];
-    property: NodeListProps;
 }
 
 export class NodeE<T extends Node = Node> {

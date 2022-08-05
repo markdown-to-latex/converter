@@ -1,41 +1,91 @@
 import { FileNode, Node, NodeAbstract, NodeType } from './struct';
 
-const nodeListProps = ['children', 'rows', 'header', 'name'] as const;
+interface NodeWithProbChildren {
+    children?: Node[];
+    rows?: Node[];
+    header?: Node[];
+    name?: Node[];
+    posArgs?: Node[][];
+    keyArgs?: Record<string, Node[]>;
+    opcode?: Node | null;
+    label?: Node | null;
+    href?: Node | string | null;
+}
 
-export type NodeListProps = typeof nodeListProps[number];
-
-type NodeWithAnyChildren = {
-    [ListKey in NodeListProps]?: Node[];
-};
+const nodeListProcessors = [
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'children')
+            ? [node.children ?? []]
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'rows')
+            ? [node.rows ?? []]
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'header')
+            ? [node.header ?? []]
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'name')
+            ? [node.name ?? []]
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'posArgs')
+            ? node.posArgs ?? []
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'keyArgs')
+            ? Object.values(node.keyArgs ?? {})
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'opcode')
+            ? !!node.opcode
+                ? [[node.opcode]]
+                : []
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'label')
+            ? !!node.label
+                ? [[node.label]]
+                : []
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'href') &&
+        typeof node.href !== 'string'
+            ? !!node.href
+                ? [[node.href]]
+                : []
+            : null,
+] as ((node: NodeWithProbChildren) => NodeAbstract[][] | null)[];
 
 export interface NodeParentData {
     node: Node;
     index: number;
     container: Node[];
-    property: NodeListProps;
 }
 
 export function* traverseNodeChildren(
-    originalNode: Readonly<Node>,
+    originalNode: Readonly<NodeAbstract>,
 ): Generator<NodeParentData, void, never> {
-    const parent = originalNode as NodeWithAnyChildren;
+    const parent = originalNode as NodeWithProbChildren;
 
-    for (const prop of nodeListProps) {
-        const toProcess = parent[prop];
-        if (!Array.isArray(toProcess)) {
-            continue;
-        }
+    const childrenContainers = nodeListProcessors
+        .map(fun => fun(parent))
+        .filter<NodeAbstract[][]>(
+            (n: NodeAbstract[][] | null): n is NodeAbstract[][] => !!n,
+        )
+        .flatMap(n => n) as Node[][];
 
-        for (let i = 0; i < toProcess.length; i++) {
-            let child = toProcess[i];
+    for (const container of childrenContainers) {
+        for (let i = 0; i < container.length; i++) {
+            let child = container[i] as Node;
             yield {
                 node: child,
                 index: i,
-                container: toProcess,
-                property: prop,
+                container: container,
             };
 
-            if (child !== toProcess[i]) {
+            if (child !== container[i]) {
                 --i;
             }
         }
@@ -46,13 +96,11 @@ function* __traverseNodeChildrenDeepDepth(
     originalNode: Readonly<Node>,
     index: number,
     container: Node[],
-    property: NodeListProps,
 ): Generator<NodeParentData, void, never> {
     yield {
         node: originalNode,
         index: index,
         container: container,
-        property: property, // a little workaround
     };
 
     const iter = traverseNodeChildren(originalNode);
@@ -64,7 +112,6 @@ function* __traverseNodeChildrenDeepDepth(
             data.node,
             data.index,
             data.container,
-            data.property,
         );
         let innerValue = innerIter.next();
         while (!innerValue.done) {
@@ -79,7 +126,7 @@ function* __traverseNodeChildrenDeepDepth(
 export function* traverseNodeChildrenDeepDepth(
     originalNode: Readonly<Node>,
 ): Generator<NodeParentData, void, never> {
-    const iter = __traverseNodeChildrenDeepDepth(originalNode, 0, [], 'rows');
+    const iter = __traverseNodeChildrenDeepDepth(originalNode, 0, []);
     let value = iter.next();
     while (!value.done) {
         yield value.value;
@@ -88,15 +135,13 @@ export function* traverseNodeChildrenDeepDepth(
 }
 
 export function getNodeAllChildren(originalNode: Readonly<Node>): Node[] {
-    const node = originalNode as NodeWithAnyChildren;
-
     return Array.from(traverseNodeChildren(originalNode)).map(
         data => data.node,
     );
 }
 
 // TODO: also look at children
-export function getNodeLeftNeighbourLeaf(node: Node): Node | null {
+export function getNodeLeftNeighbourLeaf(node: NodeAbstract): Node | null {
     const parent = node.parent;
     if (parent === null) {
         return null;
@@ -110,7 +155,8 @@ export function getNodeLeftNeighbourLeaf(node: Node): Node | null {
         if (data.index === 0) {
             return getNodeLeftNeighbourLeaf(parent);
         }
-        let left = data.container[data.index - 1] as NodeWithAnyChildren & Node;
+        let left = data.container[data.index - 1] as NodeWithProbChildren &
+            Node;
 
         while (
             left &&
@@ -118,7 +164,7 @@ export function getNodeLeftNeighbourLeaf(node: Node): Node | null {
             left.children.length !== 0
         ) {
             const child = left.children[left.children.length - 1];
-            left = child as NodeWithAnyChildren & Node;
+            left = child as NodeWithProbChildren & Node;
         }
 
         return left;
@@ -143,7 +189,7 @@ export function getNodeRightNeighbourLeaf(
         if (data.index === data.container.length - 1) {
             return getNodeRightNeighbourLeaf(parent);
         }
-        let right = data.container[data.index + 1] as NodeWithAnyChildren &
+        let right = data.container[data.index + 1] as NodeWithProbChildren &
             Node;
 
         while (
@@ -152,7 +198,7 @@ export function getNodeRightNeighbourLeaf(
             right.children.length !== 0
         ) {
             const child = right.children[0];
-            right = child as NodeWithAnyChildren & Node;
+            right = child as NodeWithProbChildren & Node;
         }
 
         return right;

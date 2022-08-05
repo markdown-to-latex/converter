@@ -1,5 +1,5 @@
 import { CommandInfo, CommandInfoCallback } from '../struct';
-import { Node } from '../../ast/node';
+import { Node, TextNode } from '../../ast/node';
 import { ArgInfoType } from '../args';
 import {
     DiagnoseErrorType,
@@ -11,7 +11,7 @@ interface ArgsType {
     name?: Node[];
 }
 
-const callback: CommandInfoCallback<ArgsType, string> = function (
+const callback: CommandInfoCallback<ArgsType, TextNode> = function (
     ctx,
     data,
     args,

@@ -1,6 +1,6 @@
 import { TokenParser, TokenPredicate } from '../struct';
 import { Token, TokenType } from '../../tokenizer';
-import { ImageNode, Node, NodeType, TextNode } from '../../../node';
+import { ImageNode, Node, NodeType, TokensNode } from '../../../node';
 import { DiagnoseList } from '../../../../diagnose';
 import {
     getMacroArgs,
@@ -71,7 +71,7 @@ export const parseImage: TokenParser = function (tokens, index) {
     if (macroArgsResult.posArgs.length === 0) {
         return null; // TODO: diagnostic error
     }
-    const imageUrl = macroArgsResult.posArgs.splice(0, 1)[0];
+    const imageUrl: TokensNode = macroArgsResult.posArgs.splice(0, 1)[0];
 
     const parsePosArgsResult = parseMacroPosArgs(macroArgsResult.posArgs);
     diagnostic.push(...parsePosArgsResult.diagnostic);
@@ -109,9 +109,19 @@ export const parseImage: TokenParser = function (tokens, index) {
         },
         parent: tokens.parent,
         label: label,
-        href: imageUrl.text,
+        href: {
+            type: NodeType.Text,
+            parent: null,
+            pos: { ...imageUrl.pos },
+            text: imageUrl.text,
+        },
         ...argsResult,
     };
+
+    if (label) {
+        label.parent = imageNode;
+    }
+    imageNode.href.parent = imageNode;
 
     argsResult.name?.forEach(v => (v.parent = imageNode));
 

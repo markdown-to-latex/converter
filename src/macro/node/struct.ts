@@ -8,6 +8,7 @@ import {
     NodeType,
     OpCodeNode,
     TableNode,
+    TextNode,
 } from '../../ast/node';
 import { ContextE } from '../context';
 
@@ -59,7 +60,7 @@ export interface TableProcessedNode
     extends NodeProcessed,
         Omit<TableNode, 'type'> {
     type: ProcessedNodeType.TableProcessed;
-    label: string;
+    label: TextNode;
     name: Node[];
     width?: string;
     height?: string;
@@ -70,7 +71,7 @@ export interface PictureProcessedNode
     extends NodeProcessed,
         Omit<ImageNode, 'type'> {
     type: ProcessedNodeType.PictureProcessed;
-    label: string;
+    label: TextNode;
     name: Node[];
     index: number;
 }
@@ -79,7 +80,7 @@ export interface CodeProcessedNode
     extends NodeProcessed,
         Omit<CodeNode, 'type'> {
     type: ProcessedNodeType.CodeProcessed;
-    label: string;
+    label: TextNode;
     name: Node[];
     lang: string;
     index: number;
@@ -134,8 +135,12 @@ export interface RawApplicationNode
 export interface PictureApplicationNode
     extends NodeProcessed,
         NodeApplication,
-        Omit<PictureProcessedNode, 'type' | 'name' | 'label' | 'index'> {
+        Omit<
+            PictureProcessedNode,
+            'type' | 'name' | 'label' | 'index' | 'href'
+        > {
     type: ProcessedNodeType.PictureApplication;
+    href: string;
     title: Node[];
     rotated: boolean;
 }

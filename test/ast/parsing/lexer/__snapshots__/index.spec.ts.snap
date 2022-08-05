@@ -202,7 +202,15 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
             "type": "Text",
           },
         ],
-        "href": "https://github.com/markedjs/marked/",
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 77,
+            "start": 42,
+          },
+          "text": "https://github.com/markedjs/marked/",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 78,
@@ -233,7 +241,15 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
             "type": "Text",
           },
         ],
-        "href": "http://daringfireball.net/projects/markdown",
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 150,
+            "start": 107,
+          },
+          "text": "http://daringfireball.net/projects/markdown",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 151,
@@ -2483,7 +2499,15 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
             "type": "Text",
           },
         ],
-        "href": "http://daringfireball.net/projects/markdown",
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1306,
+            "start": 1263,
+          },
+          "text": "http://daringfireball.net/projects/markdown",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 1307,
@@ -2942,7 +2966,15 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
             "type": "Text",
           },
         ],
-        "href": "/demo/?text=",
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1697,
+            "start": 1685,
+          },
+          "text": "/demo/?text=",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 1698,
@@ -3318,8 +3350,24 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
     "type": "Heading",
   },
   Object {
-    "href": "test.png",
-    "label": "image-label",
+    "href": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 1760,
+        "start": 1752,
+      },
+      "text": "test.png",
+      "type": "Text",
+    },
+    "label": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 1750,
+        "start": 1739,
+      },
+      "text": "image-label",
+      "type": "Text",
+    },
     "parent": Object {
       "children": Array [
         Object {
@@ -3493,10 +3541,26 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
   },
   Object {
     "height": "6cm",
-    "href": "
+    "href": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 1794,
+        "start": 1780,
+      },
+      "text": "
     test.png
 ",
-    "label": "image-label-1",
+      "type": "Text",
+    },
+    "label": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 1778,
+        "start": 1765,
+      },
+      "text": "image-label-1",
+      "type": "Text",
+    },
     "name": Array [
       Object {
         "children": Array [],
@@ -3694,8 +3758,24 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       },
       Object {
         "keyArgs": Object {},
-        "label": "image-label",
-        "opcode": "PL",
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1890,
+            "start": 1879,
+          },
+          "text": "image-label",
+          "type": "Text",
+        },
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1878,
+            "start": 1876,
+          },
+          "text": "PL",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 1891,
@@ -3716,8 +3796,24 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       },
       Object {
         "keyArgs": Object {},
-        "label": "image-label-2",
-        "opcode": "PL",
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1913,
+            "start": 1900,
+          },
+          "text": "image-label-2",
+          "type": "Text",
+        },
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 1899,
+            "start": 1897,
+          },
+          "text": "PL",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 1914,
@@ -4035,8 +4131,24 @@ Array [
       },
       Object {
         "keyArgs": Object {},
-        "label": "inline-code",
-        "opcode": "PK",
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 188,
+            "start": 177,
+          },
+          "text": "inline-code",
+          "type": "Text",
+        },
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 176,
+            "start": 174,
+          },
+          "text": "PK",
+          "type": "Text",
+        },
         "parent": [Circular],
         "pos": Object {
           "end": 189,
@@ -4102,8 +4214,24 @@ Code shown in !PK[inline-code].
     "type": "Paragraph",
   },
   Object {
-    "href": "./assets/img/example.png",
-    "label": "gray-square",
+    "href": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 231,
+        "start": 207,
+      },
+      "text": "./assets/img/example.png",
+      "type": "Text",
+    },
+    "label": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 205,
+        "start": 194,
+      },
+      "text": "gray-square",
+      "type": "Text",
+    },
     "name": Array [
       Object {
         "children": Array [],

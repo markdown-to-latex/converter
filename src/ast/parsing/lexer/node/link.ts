@@ -7,7 +7,13 @@ import {
     sliceTokenText,
     unexpectedEof,
 } from '../index';
-import { LinkNode, NodeType, RawNodeType, TokensNode } from '../../../node';
+import {
+    LinkNode,
+    NodeType,
+    RawNodeType,
+    TextNode,
+    TokensNode,
+} from '../../../node';
 
 export const parseLink: TokenParser = function (tokens, index) {
     const token = tokens.tokens[index];
@@ -67,6 +73,23 @@ export const parseLink: TokenParser = function (tokens, index) {
         text: sliceTokenText(tokens, index + 1, closingBracketResult.index),
     };
 
+    const hrefStartToken = tokens.tokens[argOpenBracketIndex + 1];
+    const hrefStopToken = tokens.tokens[argCloseBracketResult.index - 1];
+    const hrefText = tokens.tokens
+        .slice(argOpenBracketIndex + 1, argCloseBracketResult.index)
+        .map(v => v.text)
+        .join('');
+
+    const hrefTextNode: TextNode = {
+        type: NodeType.Text,
+        text: hrefText,
+        parent: null,
+        pos: {
+            start: hrefStartToken.pos,
+            end: hrefStopToken.pos + hrefStopToken.text.length,
+        },
+    };
+
     const linkNode: LinkNode = {
         type: NodeType.Link,
         parent: tokens.parent,
@@ -75,12 +98,10 @@ export const parseLink: TokenParser = function (tokens, index) {
             end: endToken.pos + endToken.text.length,
         },
         children: [childNode],
-        href: tokens.tokens
-            .slice(argOpenBracketIndex + 1, argCloseBracketResult.index)
-            .map(v => v.text)
-            .join(''),
+        href: hrefTextNode,
     };
     childNode.parent = linkNode;
+    hrefTextNode.parent = linkNode;
 
     const result = applyVisitors([childNode]);
     linkNode.children = [...result.nodes];

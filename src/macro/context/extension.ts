@@ -24,6 +24,7 @@ import {
     getOrCreateContextPictureLabelIndex,
     getOrCreateContextTableLabelIndex,
 } from './function';
+import { TextNode } from '../../ast/node';
 
 export class ContextE {
     c: Context;
@@ -32,11 +33,11 @@ export class ContextE {
         this.c = c;
     }
 
-    public getOrCreatePictureLabelIndex(label: string): number {
+    public getOrCreatePictureLabelIndex(label: TextNode): number {
         return getOrCreateContextPictureLabelIndex(this.c, label);
     }
 
-    public createPictureLabel(label: string): number {
+    public createPictureLabel(label: TextNode): number {
         return createContextPictureLabel(this.c, label);
     }
 
@@ -52,11 +53,11 @@ export class ContextE {
         diagnoseContextUnusedPictureLabels(this.c);
     }
 
-    public getOrCreateTableLabelIndex(label: string): number {
+    public getOrCreateTableLabelIndex(label: TextNode): number {
         return getOrCreateContextTableLabelIndex(this.c, label);
     }
 
-    public createTableLabel(label: string): number {
+    public createTableLabel(label: TextNode): number {
         return createContextTableLabel(this.c, label);
     }
 
@@ -72,7 +73,7 @@ export class ContextE {
         diagnoseContextUnusedTableLabels(this.c);
     }
 
-    public getApplicationLabelIndex(label: string): number {
+    public getApplicationLabelIndex(label: TextNode): number {
         return getContextApplicationLabelIndex(this.c, label);
     }
 
@@ -86,7 +87,7 @@ export class ContextE {
         diagnoseContextUnusedApplicationLabels(this.c);
     }
 
-    public getReferenceLabelIndex(label: string): number {
+    public getReferenceLabelIndex(label: TextNode): number {
         return getContextReferenceLabelIndex(this.c, label);
     }
 

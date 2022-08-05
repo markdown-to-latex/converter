@@ -4,7 +4,13 @@ import {
     ProcessingInfo,
     ProcessingInfoCallback,
 } from '../struct';
-import { CodeNode, NodeType } from '../../../ast/node';
+import {
+    CodeNode,
+    Node,
+    NodeAbstract,
+    NodeType,
+    TextNode,
+} from '../../../ast/node';
 import { fallbackNameNodes } from '../utils';
 import {
     DiagnoseErrorType,
@@ -13,15 +19,27 @@ import {
 } from '../../../diagnose';
 
 function fallbackCodeNode(codeNode: CodeNode): CodeProcessedNode {
-    return {
+    const labelNode: TextNode = {
+        type: NodeType.Text,
+        parent: null,
+        pos: codeNode.label?.pos ?? {
+            start: codeNode.pos.start,
+            end: codeNode.pos.start,
+        },
+        text: codeNode.label?.text ?? 'unknown-code-1',
+    };
+    const fallbackCodeNode: CodeProcessedNode = {
         ...codeNode,
 
         type: ProcessedNodeType.CodeProcessed,
         name: fallbackNameNodes(codeNode),
-        label: 'unknown-code-1',
+        label: labelNode,
         lang: 'text',
         index: -1,
     };
+    labelNode.parent = fallbackCodeNode as NodeAbstract;
+
+    return fallbackCodeNode;
 }
 
 const callback: ProcessingInfoCallback<CodeNode> = function (ctx, data) {

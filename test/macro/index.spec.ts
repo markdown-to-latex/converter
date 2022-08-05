@@ -47,7 +47,7 @@ describe('tables', () => {
 !TK[table-label]
 
 !T[table-label](@name
-\`\`\`
+\`\`\`[a]()
 The name
 \`\`\`
 )
@@ -61,7 +61,6 @@ The name
         (rawNode.parent as FileNode).children = nodes;
 
         const diagnostic = applyMacrosFull(rawNode.parent as FileNode);
-        expect(diagnostic).toHaveLength(3);
         expect(diagnostic).toMatchSnapshot();
     });
 });

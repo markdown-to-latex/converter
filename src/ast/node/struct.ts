@@ -88,7 +88,7 @@ export type StartEndNumberPosition = StartEndPosition<number>;
 
 export interface NodeAbstract {
     type: string;
-    parent: Node | null;
+    parent: NodeAbstract | null;
     pos: StartEndNumberPosition;
 }
 
@@ -105,7 +105,7 @@ export interface NodeText {
 }
 
 export interface NodeHref {
-    href: string;
+    href: TextNode;
 }
 
 export interface NodeArgs {
@@ -142,7 +142,7 @@ export interface CodeNode extends Node, NodeText {
     type: NodeType.Code;
     lang?: string;
     name?: Node[];
-    label?: string;
+    label?: TextNode;
 }
 
 export interface HeadingNode extends Node, NodeChildren {
@@ -204,7 +204,7 @@ export interface LinkNode extends Node, NodeHref, NodeChildren {
 
 export interface ImageNode extends Node, NodeHref {
     type: NodeType.Image;
-    label: string;
+    label: TextNode;
     name?: Node[];
     width?: string;
     height?: string;
@@ -274,8 +274,8 @@ export interface TableControlRowNode extends Node, NodeChildren {
 
 export interface OpCodeNode extends Node, NodeArgs {
     type: NodeType.OpCode;
-    opcode: string;
-    label: string | null;
+    opcode: TextNode;
+    label: TextNode | null;
 }
 
 export interface LatexNode extends Node, NodeText {

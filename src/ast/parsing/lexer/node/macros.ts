@@ -5,6 +5,7 @@ import {
     NodeType,
     OpCodeNode,
     RawNodeType,
+    TextNode,
     TokensNode,
 } from '../../../node';
 import {
@@ -35,7 +36,7 @@ export const isMacro: TokenPredicate = function (token, index, node) {
 
 export interface GetMacroLabelResult {
     index: number;
-    label: string | null;
+    label: TextNode | null;
     diagnostic: DiagnoseList;
 }
 
@@ -73,11 +74,24 @@ export function getMacroLabel(
         };
     }
 
+    const labelStartToken = tokens.tokens[index + 1];
+    const labelEndToken = tokens.tokens[endTokenResult.index - 1];
+    const labelText = tokens.tokens
+        .slice(index + 1, endTokenResult.index)
+        .map(v => v.text)
+        .join('');
+    const labelTextNode: TextNode = {
+        type: NodeType.Text,
+        parent: null,
+        pos: {
+            start: labelStartToken.pos,
+            end: labelEndToken.pos + labelEndToken.text.length,
+        },
+        text: labelText,
+    };
+
     return {
-        label: tokens.tokens
-            .slice(index + 1, endTokenResult.index)
-            .map(v => v.text)
-            .join(''),
+        label: labelTextNode,
         index: endTokenResult.index + 1,
         diagnostic: [],
     };
@@ -139,7 +153,7 @@ export function getMacroArgs(
             keyToken = tokens.tokens[keyTokenIndex];
         }
 
-        const endToken = tokens.tokens[endTokenResult.index];
+        const endToken = tokens.tokens[endTokenResult.index - 1];
         if (keyToken) {
             if (keyToken.text in keyArgs) {
                 diagnostic.push(
@@ -171,8 +185,6 @@ export function getMacroArgs(
             };
         } else {
             if (Object.keys(keyArgs).length !== 0) {
-                console.log(Object.keys(keyArgs));
-                console.log(posArgs.length);
                 diagnostic.push(
                     tokenToDiagnose(
                         tokens,
@@ -260,7 +272,16 @@ export const parseMacro: TokenParser = function (tokens, index) {
         return null;
     }
 
-    const name = tokens.tokens[index + 1]!.text;
+    const nameToken = tokens.tokens[index + 1];
+    const nameTextNode: TextNode = {
+        type: NodeType.Text,
+        parent: null,
+        pos: {
+            start: nameToken.pos,
+            end: nameToken.pos + nameToken.text.length,
+        },
+        text: nameToken.text,
+    };
 
     const diagnostic: DiagnoseList = [];
     const labelResult = getMacroLabel(tokens, index + 2);
@@ -288,8 +309,13 @@ export const parseMacro: TokenParser = function (tokens, index) {
         keyArgs: parseKeyArgsResult.result,
         parent: tokens.parent,
         label,
-        opcode: name,
+        opcode: nameTextNode,
     };
+
+    if (label) {
+        label.parent = macrosNode;
+    }
+    nameTextNode.parent = macrosNode;
 
     parsePosArgsResult.result.forEach(v =>
         v.forEach(v => (v.parent = macrosNode)),

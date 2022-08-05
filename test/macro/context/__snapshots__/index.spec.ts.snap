@@ -46,7 +46,15 @@ Object {
   "application": Object {
     "labelToInfo": Object {
       "app-1": Object {
-        "label": "app-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "app-1",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -194,10 +202,26 @@ Object {
   "application": Object {
     "labelToInfo": Object {
       "app-1": Object {
-        "label": "app-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "app-1",
+          "type": "Text",
+        },
       },
       "app-2": Object {
-        "label": "app-2",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "app-2",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -249,10 +273,26 @@ Object {
   "application": Object {
     "labelToInfo": Object {
       "app-1": Object {
-        "label": "app-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "app-1",
+          "type": "Text",
+        },
       },
       "app-2": Object {
-        "label": "app-2",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "app-2",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -335,7 +375,15 @@ Object {
   "picture": Object {
     "labelToInfo": Object {
       "pic-1": Object {
-        "label": "pic-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "pic-1",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -511,10 +559,26 @@ Object {
   "picture": Object {
     "labelToInfo": Object {
       "pic-1": Object {
-        "label": "pic-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "pic-1",
+          "type": "Text",
+        },
       },
       "pic-2": Object {
-        "label": "pic-2",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "pic-2",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -569,13 +633,37 @@ Object {
   "picture": Object {
     "labelToInfo": Object {
       "pic-1": Object {
-        "label": "pic-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "pic-1",
+          "type": "Text",
+        },
       },
       "pic-2": Object {
-        "label": "pic-2",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "pic-2",
+          "type": "Text",
+        },
       },
       "pic-3": Object {
-        "label": "pic-3",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "pic-3",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -688,7 +776,15 @@ Object {
   "reference": Object {
     "labelToInfo": Object {
       "ref-1": Object {
-        "label": "ref-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "ref-1",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -836,10 +932,26 @@ Object {
   "reference": Object {
     "labelToInfo": Object {
       "ref-1": Object {
-        "label": "ref-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "ref-1",
+          "type": "Text",
+        },
       },
       "ref-2": Object {
-        "label": "ref-2",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "ref-2",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -891,10 +1003,26 @@ Object {
   "reference": Object {
     "labelToInfo": Object {
       "ref-1": Object {
-        "label": "ref-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "ref-1",
+          "type": "Text",
+        },
       },
       "ref-2": Object {
-        "label": "ref-2",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 5,
+            "start": 0,
+          },
+          "text": "ref-2",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -939,7 +1067,7 @@ Array [
   Object {
     "errorType": 2,
     "filePath": "null",
-    "message": "Table with label table-1 already exists",
+    "message": "Table with label [object Object] already exists",
     "pos": Object {
       "end": Object {
         "absolute": 1,
@@ -977,7 +1105,15 @@ Object {
   "table": Object {
     "labelToInfo": Object {
       "table-1": Object {
-        "label": "table-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "table-1",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -1153,10 +1289,26 @@ Object {
   "table": Object {
     "labelToInfo": Object {
       "table-1": Object {
-        "label": "table-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "table-1",
+          "type": "Text",
+        },
       },
       "table-2": Object {
-        "label": "table-2",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "table-2",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {
@@ -1211,13 +1363,37 @@ Object {
   "table": Object {
     "labelToInfo": Object {
       "table-1": Object {
-        "label": "table-1",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "table-1",
+          "type": "Text",
+        },
       },
       "table-2": Object {
-        "label": "table-2",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "table-2",
+          "type": "Text",
+        },
       },
       "table-3": Object {
-        "label": "table-3",
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "table-3",
+          "type": "Text",
+        },
       },
     },
     "labelToRefs": Object {

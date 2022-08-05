@@ -10,17 +10,30 @@ import {
     DiagnoseSeverity,
     nodeToDiagnose,
 } from '../../../diagnose';
-import { ImageNode, NodeType } from '../../../ast/node';
+import { ImageNode, NodeType, TextNode } from '../../../ast/node';
 
 function fallbackImageNode(imageNode: ImageNode): PictureProcessedNode {
-    return {
+    const labelNode: TextNode = {
+        type: NodeType.Text,
+        parent: null,
+        pos: imageNode.label?.pos ?? {
+            start: imageNode.pos.start,
+            end: imageNode.pos.start,
+        },
+        text: imageNode.label?.text ?? 'unknown-picture-1',
+    };
+
+    const fallbackPictureNode: PictureProcessedNode = {
         ...imageNode,
 
         type: ProcessedNodeType.PictureProcessed,
         name: fallbackNameNodes(imageNode),
-        label: 'unknown-picture-1',
+        label: labelNode,
         index: -1,
     };
+    labelNode.parent = fallbackPictureNode;
+
+    return fallbackPictureNode;
 }
 
 const callback: ProcessingInfoCallback<ImageNode> = function (ctx, data) {

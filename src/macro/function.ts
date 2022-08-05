@@ -57,7 +57,7 @@ export function parseMacro(
     data: NodeEParentData<OpCodeNode>,
 ): NodeAbstract[] {
     const opCodeNode = data.node.n;
-    const macros = opCodeNode.opcode.toUpperCase();
+    const macros = opCodeNode.opcode.text.toUpperCase();
     const command = ALL_COMMAND_LIST.find(d => d.name.toUpperCase() === macros);
     if (!command) {
         ctx.c.diagnostic.push(

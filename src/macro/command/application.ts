@@ -4,8 +4,8 @@ import {
     PictureApplicationNode,
     ProcessedNodeType,
     RawApplicationNode,
-} from '../node/struct';
-import { Node } from '../../ast/node';
+} from '../node';
+import { Node, TextNode } from '../../ast/node';
 import { ArgInfoType } from '../args';
 import {
     DiagnoseErrorType,
@@ -21,7 +21,7 @@ interface RawArgsType extends ArgsType {
     content?: Node[];
 }
 
-const callbackRaw: CommandInfoCallback<RawArgsType, string> = function (
+const callbackRaw: CommandInfoCallback<RawArgsType, TextNode> = function (
     ctx,
     data,
     args,
@@ -75,7 +75,7 @@ interface __PictureArgsType extends ArgsType {
     rotated: boolean;
 }
 
-const __callbackPicture: CommandInfoCallback<__PictureArgsType, string> =
+const __callbackPicture: CommandInfoCallback<__PictureArgsType, TextNode> =
     function (ctx, data, args) {
         const node: PictureApplicationNode = {
             type: ProcessedNodeType.PictureApplication,
@@ -137,7 +137,7 @@ const callbackPicture = (rotated: boolean) =>
                 rotated: rotated,
             },
         });
-    } as CommandInfoCallback<PictureArgsType, string>;
+    } as CommandInfoCallback<PictureArgsType, TextNode>;
 
 const applicationPictureArgs = [
     {
@@ -163,7 +163,7 @@ interface CodeArgsType {
     columns?: string;
 }
 
-const callbackCode: CommandInfoCallback<CodeArgsType, string> = function (
+const callbackCode: CommandInfoCallback<CodeArgsType, TextNode> = function (
     ctx,
     data,
     args,
