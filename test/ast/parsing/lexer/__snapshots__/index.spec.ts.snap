@@ -3758,6 +3758,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       },
       Object {
         "keyArgs": Object {},
+        "keys": Object {},
         "label": Object {
           "parent": [Circular],
           "pos": Object {
@@ -3796,6 +3797,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       },
       Object {
         "keyArgs": Object {},
+        "keys": Object {},
         "label": Object {
           "parent": [Circular],
           "pos": Object {
@@ -4131,6 +4133,7 @@ Array [
       },
       Object {
         "keyArgs": Object {},
+        "keys": Object {},
         "label": Object {
           "parent": [Circular],
           "pos": Object {

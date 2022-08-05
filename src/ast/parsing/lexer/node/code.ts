@@ -7,12 +7,7 @@ import {
     tokenToDiagnose,
     unexpectedEof,
 } from '../index';
-import {
-    DiagnoseErrorType,
-    DiagnoseList,
-    DiagnoseSeverity,
-    nodesToDiagnose,
-} from '../../../../diagnose';
+import { DiagnoseList, DiagnoseSeverity } from '../../../../diagnose';
 import { isPrevTokenDelimiter } from './breaks';
 import {
     getMacroArgs,
@@ -149,6 +144,7 @@ export const parseCode: TokenParser = function (tokens, index) {
                 end: endArgToken.pos + endArgToken.text.length,
             },
             posArgs: parsePosArgsResult.result,
+            keys: macroArgsResult.keys,
             keyArgs: parseKeyArgsResult.result,
             parent: tokens.parent,
         },
@@ -221,6 +217,7 @@ export const parseCode: TokenParser = function (tokens, index) {
         label.parent = codeNode;
     }
 
+    Object.values(macroArgsResult.keys).forEach(v => (v.parent = codeNode));
     parsePosArgsResult.result.forEach(v =>
         v.forEach(v => (v.parent = codeNode)),
     );

@@ -4441,6 +4441,7 @@ Array [
     "children": Array [
       Object {
         "keyArgs": Object {},
+        "keys": Object {},
         "label": Object {
           "parent": [Circular],
           "pos": Object {
@@ -4539,6 +4540,26 @@ Array [
             },
           ],
         },
+        "keys": Object {
+          "key": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 13,
+              "start": 10,
+            },
+            "text": "key",
+            "type": "Text",
+          },
+          "name": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 26,
+              "start": 22,
+            },
+            "text": "name",
+            "type": "Text",
+          },
+        },
         "label": Object {
           "parent": [Circular],
           "pos": Object {
@@ -4618,6 +4639,17 @@ Array [
               "type": "Text",
             },
           ],
+        },
+        "keys": Object {
+          "keyArgName": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 54,
+              "start": 44,
+            },
+            "text": "keyArgName",
+            "type": "Text",
+          },
         },
         "label": Object {
           "parent": [Circular],
@@ -4716,6 +4748,7 @@ Array [
     "children": Array [
       Object {
         "keyArgs": Object {},
+        "keys": Object {},
         "label": null,
         "opcode": Object {
           "parent": [Circular],
@@ -4809,6 +4842,17 @@ Array [
             },
           ],
         },
+        "keys": Object {
+          "keyArgName": Object {
+            "parent": [Circular],
+            "pos": Object {
+              "end": 106,
+              "start": 96,
+            },
+            "text": "keyArgName",
+            "type": "Text",
+          },
+        },
         "label": Object {
           "parent": [Circular],
           "pos": Object {
@@ -4858,6 +4902,17 @@ Array [
                     "type": "Text",
                   },
                 ],
+              },
+              "keys": Object {
+                "key": Object {
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 53,
+                    "start": 50,
+                  },
+                  "text": "key",
+                  "type": "Text",
+                },
               },
               "label": null,
               "opcode": Object {

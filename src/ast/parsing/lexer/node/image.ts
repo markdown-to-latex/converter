@@ -1,6 +1,6 @@
 import { TokenParser, TokenPredicate } from '../struct';
 import { Token, TokenType } from '../../tokenizer';
-import { ImageNode, Node, NodeType, TokensNode } from '../../../node';
+import { ImageNode, Node, NodeType, TextNode, TokensNode } from '../../../node';
 import { DiagnoseList } from '../../../../diagnose';
 import {
     getMacroArgs,
@@ -89,6 +89,7 @@ export const parseImage: TokenParser = function (tokens, index) {
                 end: endToken.pos + endToken.text.length,
             },
             posArgs: parsePosArgsResult.result,
+            keys: macroArgsResult.keys,
             keyArgs: parseKeyArgsResult.result,
             parent: tokens.parent,
         },
@@ -101,6 +102,12 @@ export const parseImage: TokenParser = function (tokens, index) {
         height?: string;
     };
 
+    const hrefTextNode: TextNode = {
+        type: NodeType.Text,
+        parent: null,
+        pos: { ...imageUrl.pos },
+        text: imageUrl.text,
+    };
     const imageNode: ImageNode = {
         type: NodeType.Image,
         pos: {
@@ -109,19 +116,14 @@ export const parseImage: TokenParser = function (tokens, index) {
         },
         parent: tokens.parent,
         label: label,
-        href: {
-            type: NodeType.Text,
-            parent: null,
-            pos: { ...imageUrl.pos },
-            text: imageUrl.text,
-        },
+        href: hrefTextNode,
         ...argsResult,
     };
 
     if (label) {
         label.parent = imageNode;
     }
-    imageNode.href.parent = imageNode;
+    hrefTextNode.parent = imageNode;
 
     argsResult.name?.forEach(v => (v.parent = imageNode));
 

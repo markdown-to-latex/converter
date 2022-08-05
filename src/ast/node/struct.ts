@@ -110,6 +110,7 @@ export interface NodeHref {
 
 export interface NodeArgs {
     posArgs: Node[][];
+    keys: Record<string, TextNode>;
     keyArgs: Record<string, Node[]>;
 }
 

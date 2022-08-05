@@ -1,4 +1,4 @@
-import { FileNode, Node, NodeAbstract, NodeType } from './struct';
+import { FileNode, Node, NodeAbstract, NodeType, TextNode } from './struct';
 
 interface NodeWithProbChildren {
     children?: Node[];
@@ -6,6 +6,7 @@ interface NodeWithProbChildren {
     header?: Node[];
     name?: Node[];
     posArgs?: Node[][];
+    keys?: Record<string, TextNode>;
     keyArgs?: Record<string, Node[]>;
     opcode?: Node | null;
     label?: Node | null;
@@ -32,6 +33,10 @@ const nodeListProcessors = [
     node =>
         Object.prototype.hasOwnProperty.call(node, 'posArgs')
             ? node.posArgs ?? []
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'keys')
+            ? Object.values(node.keys ?? {}).map(n => [n])
             : null,
     node =>
         Object.prototype.hasOwnProperty.call(node, 'keyArgs')

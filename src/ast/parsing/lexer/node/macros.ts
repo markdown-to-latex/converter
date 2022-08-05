@@ -100,6 +100,7 @@ export function getMacroLabel(
 export interface GetMacroArgsResult {
     index: number;
     posArgs: TokensNode[];
+    keys: Record<string, TextNode>;
     keyArgs: Record<string, TokensNode>;
     diagnostic: DiagnoseList;
 }
@@ -110,6 +111,7 @@ export function getMacroArgs(
 ): GetMacroArgsResult {
     const posArgs: TokensNode[] = [];
     const keyArgs: Record<string, TokensNode> = {};
+    const keys: Record<string, TextNode> = {};
 
     let argsIndex = index;
     let argsToken: Token | null = tokens.tokens[argsIndex] ?? null;
@@ -125,6 +127,7 @@ export function getMacroArgs(
             return {
                 posArgs,
                 keyArgs,
+                keys,
                 index: argsIndex,
                 diagnostic: [
                     tokenToDiagnose(
@@ -166,6 +169,15 @@ export function getMacroArgs(
                 );
             }
 
+            keys[keyToken.text] = {
+                type: NodeType.Text,
+                text: keyToken.text,
+                pos: {
+                    start: keyToken.pos,
+                    end: keyToken.pos + keyToken.text.length,
+                },
+                parent: tokens,
+            };
             keyArgs[keyToken.text] = {
                 type: RawNodeType.Tokens,
                 parent: tokens,
@@ -221,6 +233,7 @@ export function getMacroArgs(
     return {
         posArgs,
         keyArgs,
+        keys,
         index: argsIndex,
         diagnostic: diagnostic,
     };
@@ -306,6 +319,7 @@ export const parseMacro: TokenParser = function (tokens, index) {
             end: endToken.pos + endToken.text.length,
         },
         posArgs: parsePosArgsResult.result,
+        keys: macroArgsResult.keys,
         keyArgs: parseKeyArgsResult.result,
         parent: tokens.parent,
         label,
@@ -317,6 +331,7 @@ export const parseMacro: TokenParser = function (tokens, index) {
     }
     nameTextNode.parent = macrosNode;
 
+    Object.values(macroArgsResult.keys).forEach(v => (v.parent = macrosNode));
     parsePosArgsResult.result.forEach(v =>
         v.forEach(v => (v.parent = macrosNode)),
     );
