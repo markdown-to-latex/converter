@@ -47,7 +47,9 @@ describe('convertMarkdownFiles', function () {
     test('main.tex correct content', () => {
         const content = fs.readFileSync(fileParameters.main.pathTex, 'utf8');
 
-        expect(content).toContain('\\subtitle{Main file with content}');
+        expect(content).toContain(
+            '\\section{\\uppercase{Main file with content}}',
+        );
         expect(content).toContain('\\setlength{\\belowcaptionskip}{-4ex}');
         expect(content).not.toContain(
             '\\addtolength{\\belowcaptionskip}{-1em}',
@@ -61,7 +63,7 @@ describe('convertMarkdownFiles', function () {
     test('another.tex correct content', () => {
         const content = fs.readFileSync(fileParameters.another.pathTex, 'utf8');
 
-        expect(content).toContain('\\section{Additional file}');
+        expect(content).toContain('\\subsection{Additional file}');
         expect(content).toContain('Formula:');
         expect(content).toContain('\\setlength{\\abovedisplayskip}{-0.9em}');
         expect(content).toContain('\\setlength{\\belowdisplayskip}{0pt}');

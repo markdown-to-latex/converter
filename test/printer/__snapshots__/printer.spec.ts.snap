@@ -72,20 +72,19 @@ Array [
 exports[`Applications Unused application, should throw error 2`] = `""`;
 
 exports[`Applications with list 1`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 Code from application А describes image from application Б.
 
 See application В.
 
-\\\\subtitle{Applications}
+\\\\section{\\\\uppercase{Applications}}
 
 \\\\pagebreak
-\\\\subtitle{Приложение А}
+\\\\section{\\\\uppercase{Приложение А}}
 
-\\\\section*{Листинг кода из файла template-full2.py}
+\\\\sectionbutitiscentered{Листинг кода из файла template-full2.py}
 
-\\\\vspace{1em}
 \\\\fontsize{\\\\applicationcodefontsize}{\\\\applicationcodefontsize}\\\\selectfont
 
 \\\\inputminted[baselinestretch=\\\\applicationcodelineheight]{python}{./assets/code/template-full2.py}
@@ -95,11 +94,10 @@ See application В.
 \\\\pagebreak
 \\\\begin{landscape}
     \\\\thispagestyle{empty}
-    \\\\subtitle{Приложение Б}
+    \\\\section{\\\\uppercase{Приложение Б}}
 
-    \\\\section*{Large scheme}
+    \\\\sectionbutitiscentered{Large scheme}
     
-    \\\\vspace{1em}
     \\\\begin{center}
     \\\\includegraphics[height=13.8cm]{./assets/img/circuit.png}
     \\\\end{center}
@@ -109,11 +107,10 @@ See application В.
 \\\\end{landscape}
 
 \\\\pagebreak
-\\\\subtitle{Приложение В}
+\\\\section{\\\\uppercase{Приложение В}}
 
-\\\\section*{Листинг кода из файла template-full.py}
+\\\\sectionbutitiscentered{Листинг кода из файла template-full.py}
 
-\\\\vspace{1em}
 \\\\fontsize{\\\\applicationcodefontsize}{\\\\applicationcodefontsize}\\\\selectfont
 
 \\\\inputminted[baselinestretch=\\\\applicationcodelineheight]{python}{./assets/code/template-full.py}
@@ -123,18 +120,17 @@ See application В.
 `;
 
 exports[`Applications with multiple columns 1`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 See application А.
 
-\\\\subtitle{Applications}
+\\\\section{\\\\uppercase{Applications}}
 
 \\\\pagebreak
-\\\\subtitle{Приложение А}
+\\\\section{\\\\uppercase{Приложение А}}
 
-\\\\section*{Листинг кода из файла template-full.py}
+\\\\sectionbutitiscentered{Листинг кода из файла template-full.py}
 
-\\\\vspace{1em}
 \\\\fontsize{\\\\applicationcodefontsize}{\\\\applicationcodefontsize}\\\\selectfont
 \\\\begin{multicols}{2}
 \\\\inputminted[baselinestretch=\\\\applicationcodelineheight]{python}{./assets/code/template-full.py}
@@ -154,7 +150,7 @@ exports[`CodeSpan Quote 1`] = `
 `;
 
 exports[`Escapes Default escapes 1`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 \\\\underline{https://testing.url/com?some=thing\\\\&wtf\\\\#xdxdxd}
 
@@ -216,11 +212,11 @@ Array [
 exports[`References Unused reference, should throw error 2`] = `""`;
 
 exports[`References with list 1`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 Code from reference 1 describes image from reference 2.
 
-\\\\subtitle{References}
+\\\\section{\\\\uppercase{References}}
 
 1.\\\\,H.\\\\,Y.~Ignat. <<Reference~2>> // Some Journal, 1867
 
@@ -479,7 +475,7 @@ Sample text line
 `;
 
 exports[`simple md to latex docs printer Code + Code 1`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 Code in 1 и 2.
 
@@ -522,7 +518,7 @@ exports[`simple md to latex docs printer Del node 1`] = `
 `;
 
 exports[`simple md to latex docs printer Header + Formula 1`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 \\\\setlength{\\\\abovedisplayskip}{-0.9em}
 \\\\setlength{\\\\belowdisplayskip}{0pt}
@@ -595,7 +591,7 @@ Array [
 `;
 
 exports[`simple md to latex docs printer Header + Image + Code + Image 2`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 \\\\setlength{\\\\intextsep}{3em}
 \\\\setlength{\\\\belowcaptionskip}{-4ex}
@@ -667,14 +663,14 @@ Some text here
 `;
 
 exports[`simple md to latex docs printer Paragraph 1`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 Text
 "
 `;
 
 exports[`simple md to latex docs printer Subheader + List + Code Span 1`] = `
-"\\\\subtitle{Header}
+"\\\\section{\\\\uppercase{Header}}
 
 \\\\hspace{0cm}-\\\\,A
 
@@ -682,7 +678,7 @@ exports[`simple md to latex docs printer Subheader + List + Code Span 1`] = `
 
 \\\\hspace{0cm}-\\\\,C
 
-\\\\section{Subheader}
+\\\\subsection{Subheader}
 
 \\\\hspace{0cm}а)\\\\,X
 

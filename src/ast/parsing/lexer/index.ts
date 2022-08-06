@@ -382,6 +382,10 @@ function nodeJoiner(nodes: Node[]): void {
                     NodeType.FormulaSpan,
                     NodeType.CodeSpan,
                     NodeType.LatexSpan,
+                    NodeType.Link,
+                    NodeType.Strong,
+                    NodeType.Em,
+                    NodeType.Del,
                     NodeType.Text,
                 ]).indexOf(prevNode.type) !== -1 &&
                 nodes[index + 1]?.type === NodeType.Text

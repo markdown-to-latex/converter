@@ -46,9 +46,9 @@ export interface PrinterFunctionResult {
 }
 
 const headerByDepth: ((text: string) => string)[] = [
-    text => `\\subtitle{${text}}`,
-    text => `\\section{${text}}`,
+    text => `\\section{\\uppercase{${text}}}`,
     text => `\\subsection{${text}}`,
+    text => `\\subsubsection{${text}}`,
 ];
 
 export function getLatexHeader(
@@ -409,7 +409,7 @@ export function getLatexRawApplication(
 ): string {
     return `
 \\pagebreak
-\\subtitle{Приложение ${index}}
+\\section{\\uppercase{Приложение ${index}}}
 
 ${innerText}
 `;
@@ -429,11 +429,10 @@ export function getLatexRotatedPicture(
 \\pagebreak
 \\begin{landscape}
     \\thispagestyle{empty}
-    \\subtitle{Приложение ${data.index}}
+    \\section{\\uppercase{Приложение ${data.index}}}
 
-    \\section*{${data.title}}
+    \\sectionbutitiscentered{${data.title}}
     
-    \\vspace{1em}
     \\begin{center}
     \\includegraphics[height=13.8cm]{${data.filepath}}
     \\end{center}
@@ -450,11 +449,10 @@ export function getLatexPicture(
 ): string {
     return `
 \\pagebreak
-\\subtitle{Приложение ${data.index}}
+\\section{\\uppercase{Приложение ${data.index}}}
 
-\\section*{${data.title}}
+\\sectionbutitiscentered{${data.title}}
 
-\\vspace{1em}
 \\begin{center}
 \\includegraphics[width=16.9cm]{${data.filepath}}
 \\end{center}
@@ -475,11 +473,10 @@ export function getLatexApplicationCode(
 ): string {
     return `
 \\pagebreak
-\\subtitle{Приложение ${data.index}}
+\\section{\\uppercase{Приложение ${data.index}}}
 
-\\section*{Листинг кода из файла ${data.filename}}
+\\sectionbutitiscentered{Листинг кода из файла ${data.filename}}
 
-\\vspace{1em}
 \\fontsize{\\applicationcodefontsize}{\\applicationcodefontsize}\\selectfont
 ${data.columns !== 1 ? `\\begin{multicols}{${data.columns}}` : ''}
 \\inputminted[baselinestretch=\\applicationcodelineheight]{${data.language}}{${
