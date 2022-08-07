@@ -75,28 +75,29 @@ export function convertYaxmFile(
     };
 }
 
-export interface ConvertMarkdownFilesArgs {
+export interface ConvertYaxmFilesArgs {
     rootDir: string;
     buildConfig: YAXMBuild;
     severity?: DiagnoseSeverity;
 }
 
-export interface ConvertMarkdownFilesFileResult {
+export interface ConvertYaxmFilesFileResult {
     fileInfo: FileInfo;
     fileNode: FileNode;
     success: boolean;
 }
 
-export interface ConvertMarkdownFilesResult {
-    result: ConvertMarkdownFilesFileResult[];
+export interface ConvertYaxmFilesResult {
+    result: ConvertYaxmFilesFileResult[];
     diagnostic: DiagnoseList;
+    success: boolean;
 }
 
-export function convertMarkdownFiles({
+export function convertYaxmFiles({
     rootDir,
     buildConfig,
     severity,
-}: ConvertMarkdownFilesArgs): ConvertMarkdownFilesResult {
+}: ConvertYaxmFilesArgs): ConvertYaxmFilesResult {
     severity = DiagnoseSeverity.Error;
     const diagnostic: DiagnoseList = [];
 
@@ -107,11 +108,12 @@ export function convertMarkdownFiles({
         return {
             result: [],
             diagnostic,
+            success: false,
         };
     }
     let macrosContext: Context | undefined = undefined;
 
-    const result: ConvertMarkdownFilesFileResult[] = [];
+    const result: ConvertYaxmFilesFileResult[] = [];
 
     for (const fileInfo of globalConfig.files) {
         const filepath = fileInfo.path;
@@ -128,7 +130,7 @@ export function convertMarkdownFiles({
         result.push({
             fileInfo,
             fileNode: processedFileNode,
-            success: diagnoseListHasSeverity(printerDiagnostic, severity),
+            success: !diagnoseListHasSeverity(printerDiagnostic, severity),
         });
     }
 
@@ -140,6 +142,7 @@ export function convertMarkdownFiles({
     return {
         result,
         diagnostic,
+        success: result.find(v => !v.success) === undefined,
     };
 }
 
