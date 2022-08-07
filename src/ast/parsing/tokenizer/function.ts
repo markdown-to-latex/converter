@@ -1,7 +1,4 @@
-/**
- * Used for selecting certain tokens
- */
-import { RawNodeType, TokensNode } from '../node';
+import { RawNodeType, TokensNode } from '../../node';
 
 export interface Token {
     text: string;
@@ -72,6 +69,7 @@ function getCharType(char: string): TokenType {
     }
     if (isCharSeparatedSpecial(char)) {
         return TokenType.SeparatedSpecial;
+        7;
     }
     if (isCharLetter(char) || isCharNumber(char)) {
         return TokenType.Letter;

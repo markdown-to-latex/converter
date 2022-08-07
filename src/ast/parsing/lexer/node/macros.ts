@@ -14,7 +14,7 @@ import {
     sliceTokenText,
     tokenToDiagnose,
 } from '../index';
-import { DiagnoseList, DiagnoseSeverity } from '../../../../diagnose';
+import { DiagnoseList, DiagnoseSeverity } from '../../../../diagnostic';
 import { getDelimiterBreaks } from './breaks';
 
 export const isMacro: TokenPredicate = function (token, index, node) {

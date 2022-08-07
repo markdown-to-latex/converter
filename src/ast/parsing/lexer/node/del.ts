@@ -12,7 +12,7 @@ import {
     RawNodeType,
     TokensNode,
 } from '../../../node';
-import { DiagnoseList } from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnostic';
 
 export const isDel: TokenPredicate = function (token, index, node) {
     return token.type === TokenType.JoinableSpecial && token.text === '==';

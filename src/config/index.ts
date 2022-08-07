@@ -1,5 +1,5 @@
 import { Validator, ValidatorResult } from 'jsonschema';
-import { MarkDownToLaTeXConverter } from './types';
+import { YAXMBuild } from './types';
 import * as path from 'path';
 import * as JSON5 from 'json5';
 import * as fs from 'fs';
@@ -14,13 +14,8 @@ export class ConfigReaderError extends Error {
     }
 }
 
-export function validateConfig(
-    data: MarkDownToLaTeXConverter,
-): ValidatorResult {
-    const schemaPath = path.resolve(
-        __dirname,
-        '../../md-to-latex-converter.schema.json',
-    );
+export function validateConfig(data: YAXMBuild): ValidatorResult {
+    const schemaPath = path.resolve(__dirname, '../../yaxm-build.schema.json');
     const schemaContent = fs.readFileSync(schemaPath, 'utf8');
     const schema = JSON5.parse(schemaContent);
 
@@ -30,17 +25,6 @@ export function validateConfig(
     });
 }
 
-export function readConfig(filepath: string): MarkDownToLaTeXConverter {
-    const content = fs.readFileSync(filepath, 'utf8');
-    const config = yaml.load(content) as MarkDownToLaTeXConverter;
+// --- api
 
-    const validationResult = validateConfig(config);
-    if (validationResult.errors.length > 0) {
-        console.log(`Error happen while validating "${filepath}".`);
-        throw new ConfigReaderError(
-            JSON.stringify(validationResult.errors.map(e => e.toString())),
-        );
-    }
-
-    return config;
-}
+export * from './types';

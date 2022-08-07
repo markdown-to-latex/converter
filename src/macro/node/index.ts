@@ -28,3 +28,5 @@ export function processNode(
 }
 
 export * from './struct';
+export * from './utils';
+export * as processing from './processing';

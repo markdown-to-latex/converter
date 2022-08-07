@@ -12,7 +12,7 @@ import {
     StrongNode,
     TokensNode,
 } from '../../../node';
-import { DiagnoseList } from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnostic';
 
 export const isStrong: TokenPredicate = function (token, index, node) {
     return (

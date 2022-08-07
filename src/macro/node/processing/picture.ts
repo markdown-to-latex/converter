@@ -9,7 +9,7 @@ import {
     DiagnoseErrorType,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../../../diagnose';
+} from '../../../diagnostic';
 import { ImageNode, NodeType, TextNode } from '../../../ast/node';
 
 function fallbackImageNode(imageNode: ImageNode): PictureProcessedNode {

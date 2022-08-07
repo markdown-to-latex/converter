@@ -8,7 +8,7 @@ import {
     TokensNode,
 } from '../../../node';
 import { applyVisitors, findTokenOrNull, sliceTokenText } from '../index';
-import { DiagnoseList } from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnostic';
 import { getDelimiterBreaks, isPrevTokenDelimiter } from './breaks';
 
 export interface IsListItemResult {

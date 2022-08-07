@@ -1,7 +1,7 @@
 import { TokenParser, TokenPredicate } from '../struct';
 import { Token, TokenType } from '../../tokenizer';
 import { ImageNode, Node, NodeType, TextNode, TokensNode } from '../../../node';
-import { DiagnoseList } from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnostic';
 import {
     getMacroArgs,
     getMacroLabel,

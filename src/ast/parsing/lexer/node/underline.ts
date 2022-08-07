@@ -12,7 +12,7 @@ import {
     TokensNode,
     UnderlineNode,
 } from '../../../node';
-import { DiagnoseList } from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnostic';
 
 export const isUnderline: TokenPredicate = function (token, index, node) {
     return token.type === TokenType.JoinableSpecial && token.text === '_';

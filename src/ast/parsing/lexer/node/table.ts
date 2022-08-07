@@ -17,7 +17,7 @@ import {
     DiagnoseList,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../../../../diagnose';
+} from '../../../../diagnostic';
 import { isPrevTokenDelimiter } from './breaks';
 
 const isTableControlCell: TokenPredicate = function (token, index, node) {

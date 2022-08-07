@@ -11,7 +11,7 @@ import {
     DiagnoseErrorType,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../../diagnose';
+} from '../../diagnostic';
 
 interface ArgsType {
     title?: Node[];

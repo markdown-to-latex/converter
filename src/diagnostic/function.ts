@@ -1,24 +1,15 @@
 import {
-    copyStartEndPos,
+    DiagnoseErrorType,
+    DiagnoseSeverity,
+    DiagnoseInfo,
+    DiagnoseList,
+} from './struct';
+import {
     getNodeParentFile,
     Node,
     NodeAbstract,
-} from '../ast/node';
-import path from 'path';
-import {
     positionToTextPosition,
-    StartEndPosition,
-    StartEndTextPosition,
-    TextPosition,
-    textPositionToString,
-} from '../ast/node/position';
-
-export enum DiagnoseSeverity {
-    Fatal = 'FATAL', // The app cannot continue
-    Error = 'ERROR', // The app can complete the current step and then exit
-    Warning = 'WARNING', // Should be fixed
-    Info = 'INFO', // Just info
-}
+} from '../ast/node';
 
 const severityToPriority: {
     [key in DiagnoseSeverity]: number;
@@ -40,32 +31,6 @@ const severityToPriority: {
 export function isSeverityGEq(left: DiagnoseSeverity, right: DiagnoseSeverity) {
     return severityToPriority[left] >= severityToPriority[right];
 }
-
-export enum DiagnoseErrorType {
-    ApplyParserError,
-    InternalError,
-    ContextError,
-    MacrosError,
-    PrinterError,
-    LatexPrinterError,
-    OtherError,
-}
-
-export interface DiagnosePosition extends TextPosition {
-    absolute: number;
-}
-
-export type DiagnoseStartEndPosition = StartEndPosition<DiagnosePosition>;
-
-export interface DiagnoseInfo {
-    severity: DiagnoseSeverity;
-    errorType: DiagnoseErrorType;
-    pos: DiagnoseStartEndPosition;
-    filePath: string;
-    message?: string;
-}
-
-export type DiagnoseList = DiagnoseInfo[];
 
 export function printDiagnosticList(
     diagnostic: DiagnoseList,

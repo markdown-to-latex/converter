@@ -8,7 +8,7 @@ import {
     sliceTokenText,
 } from '../index';
 import { EmNode, NodeType, RawNodeType, TokensNode } from '../../../node';
-import { DiagnoseList } from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnostic';
 
 export const isEm: TokenPredicate = function (token, index, node) {
     return token.type === TokenType.JoinableSpecial && token.text === '*';

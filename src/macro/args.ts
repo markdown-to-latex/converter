@@ -11,7 +11,7 @@ import {
     DiagnoseSeverity,
     nodesToDiagnose,
     nodeToDiagnose,
-} from '../diagnose';
+} from '../diagnostic';
 
 export const enum ArgInfoType {
     NodeArray = 'NodeArray',

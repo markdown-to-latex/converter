@@ -1,5 +1,5 @@
 import { FileNode, Node, NodeType, TextNode } from '../../ast/node';
-import { DiagnoseList } from '../../diagnose';
+import { DiagnoseList } from '../../diagnostic';
 import { NodeApplication, NodeProcessed } from '../node';
 
 export interface ContextApplicationInfo {

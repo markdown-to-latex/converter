@@ -37,10 +37,6 @@ export function copyStartEndPos(
     };
 }
 
-export function textPositionToString(pos: TextPosition) {
-    return `${pos.line}:${pos.column}`;
-}
-
 export function textPositionEq(
     left: TextPosition,
     right: TextPosition,
@@ -67,10 +63,6 @@ export function textPositionGEq(
 
 export function copyTextPosition(pos: TextPosition): TextPosition {
     return { ...pos };
-}
-
-export interface StringTextPosition extends TextPosition {
-    str: string;
 }
 
 export function splitLinesWithTextPositions(
@@ -125,15 +117,5 @@ export function positionToTextPosition(
         // line and column starts from 1
         line: index + 1,
         column: position - lines[index].pos + 1,
-    };
-}
-
-export function addTextPosition(
-    base: TextPosition,
-    current: TextPosition,
-): TextPosition {
-    return {
-        line: base.line - 1 + (current.line - 1) + 1,
-        column: current.column,
     };
 }

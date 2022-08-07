@@ -5,10 +5,32 @@ import {
     RawNodeType,
 } from '../../../../src/ast/node';
 import { applyVisitors } from '../../../../src/ast/parsing/lexer';
-import { fileToNode } from '../../../../src';
 
 export function rawNodeTemplate(content: string): RawNode {
-    return fileToNode(content, 'test.md');
+    const fileNode: FileNode = {
+        type: NodeType.File,
+        parent: null,
+        pos: {
+            start: 0,
+            end: content.length,
+        },
+        raw: content,
+        path: 'test.md',
+        children: [],
+    };
+
+    const rawNode: RawNode = {
+        type: RawNodeType.Raw,
+        parent: fileNode,
+        pos: {
+            start: 0,
+            end: content.length,
+        },
+        text: content,
+    };
+    fileNode.children.push(rawNode);
+
+    return rawNode;
 }
 
 export function snapshotTestTemplate(name: string, content: string) {

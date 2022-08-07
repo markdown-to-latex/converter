@@ -1,0 +1,41 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "title": "YAXM Build",
+    "description": "Yet Another eXtended Markdown Configuration Schema",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "files": {
+            "type": "array",
+            "description": "Files to process",
+            "uniqueItems": true,
+            "items": {
+                "$ref": "#/definitions/FileInfo"
+            }
+        }
+    },
+    "required": ["files"],
+    "additionalProperties": false,
+    "definitions": {
+        "FileInfo": {
+            "type": "object",
+            "description": "File information",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "Path to the file",
+                    "minLength": 1
+                },
+                "out": {
+                    "type": "string",
+                    "description": "Output file path",
+                    "minLength": 1
+                }
+            },
+            "required": ["path", "out"],
+            "additionalProperties": false
+        }
+    }
+}

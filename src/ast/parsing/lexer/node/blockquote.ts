@@ -8,7 +8,7 @@ import {
     RawNodeType,
     TokensNode,
 } from '../../../node';
-import { DiagnoseList } from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnostic';
 import { isPrevTokenDelimiter } from './breaks';
 
 export const isBlockquote: TokenPredicate = function (token, index, node) {

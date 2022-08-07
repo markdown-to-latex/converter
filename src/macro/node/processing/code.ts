@@ -16,7 +16,7 @@ import {
     DiagnoseErrorType,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../../../diagnose';
+} from '../../../diagnostic';
 
 function fallbackCodeNode(codeNode: CodeNode): CodeProcessedNode {
     const labelNode: TextNode = {

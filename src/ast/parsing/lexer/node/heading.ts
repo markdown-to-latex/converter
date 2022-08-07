@@ -2,7 +2,7 @@ import { TokenParser, TokenPredicate } from '../struct';
 import { Token, TokenType } from '../../tokenizer';
 import { applyVisitors, findTokenOrNull, sliceTokenText } from '../index';
 import { HeadingNode, NodeType, RawNodeType, TokensNode } from '../../../node';
-import { DiagnoseList } from '../../../../diagnose';
+import { DiagnoseList } from '../../../../diagnostic';
 import { isPrevTokenDelimiter } from './breaks';
 
 export const isHeading: TokenPredicate = function (token, index, node) {

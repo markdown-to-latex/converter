@@ -1,6 +1,6 @@
 import { Token } from '../tokenizer';
 import { Node, TokensNode } from '../../node';
-import { DiagnoseList } from '../../../diagnose';
+import { DiagnoseList } from '../../../diagnostic';
 
 export type TokenPredicate = (
     token: Token,
