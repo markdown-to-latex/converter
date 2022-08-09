@@ -1,5 +1,0 @@
-files:
-    - path: files/main.mxd
-      out: out/main.tex
-    - path: files/additional.mxd
-      out: out/another.tex

@@ -11,7 +11,7 @@ import {
     DiagnoseList,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../../../../diagnose';
+} from '../../../../diagnostic';
 import { isPrevTokenDelimiter } from './breaks';
 
 export const isLatex: TokenPredicate = function (token, index, node) {

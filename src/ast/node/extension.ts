@@ -14,7 +14,7 @@ import {
     DiagnoseInfo,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../../diagnose';
+} from '../../diagnostic';
 
 export interface NodeEParentData<T extends Node = Node> {
     node: NodeE<T>;

@@ -7,7 +7,7 @@ import {
     tokenToDiagnose,
     unexpectedEof,
 } from '../index';
-import { DiagnoseList, DiagnoseSeverity } from '../../../../diagnose';
+import { DiagnoseList, DiagnoseSeverity } from '../../../../diagnostic';
 import { isPrevTokenDelimiter } from './breaks';
 import {
     getMacroArgs,

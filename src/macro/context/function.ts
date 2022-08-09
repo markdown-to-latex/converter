@@ -9,7 +9,7 @@ import {
     DiagnoseErrorType,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../../diagnose';
+} from '../../diagnostic';
 import { TextNode } from '../../ast/node';
 
 export function getOrCreateContextPictureLabelIndex(

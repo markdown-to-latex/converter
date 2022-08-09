@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StringE getLinesWithThextPositions With custom base 1`] = `
+exports[`splitLinesWithTextPositions With custom base 1`] = `
 Array [
   Object {
     "pos": 15,
@@ -20,3 +20,4 @@ Array [
   },
 ]
 `;
+

@@ -1,24 +1,18 @@
 import {
     createStartEndTextPos,
     FileNode,
-    NodeE,
     NodeType,
     RawNode,
     RawNodeType,
     StartEndTextPosition,
 } from '../node';
 import path from 'path';
-import { StringE } from '../../extension/string';
 import { applyVisitors } from './lexer';
-import { DiagnoseList } from '../../diagnose';
-import { LINE_SPLIT_REGEXP } from '../../extension/regexp';
+import { DiagnoseList } from '../../diagnostic';
+import { LINE_SPLIT_REGEXP } from './tokenizer';
 
-export function fullContentPos(
-    content: string | StringE,
-): StartEndTextPosition {
-    const contentE = StringE.from(content);
-
-    const lines = contentE.splitE(LINE_SPLIT_REGEXP);
+export function fullContentPos(content: string): StartEndTextPosition {
+    const lines = content.split(LINE_SPLIT_REGEXP);
     return createStartEndTextPos(
         1,
         1,
@@ -65,3 +59,8 @@ export function parseFile(content: string, filePath: string): ParseFileResult {
         diagnostic: result.diagnostic,
     };
 }
+
+// --- api
+
+export * as lexer from './lexer';
+export * as tokenizer from './tokenizer';

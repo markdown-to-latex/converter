@@ -1,6 +1,6 @@
 import * as nodes from '../ast/node';
 import { NodeType } from './node';
-import { RawNodeType } from '../ast/node';
+import { RawNodeType } from './node';
 
 const RawNodesByTypeMap = {
     [RawNodeType.Raw]: {} as nodes.RawNode,

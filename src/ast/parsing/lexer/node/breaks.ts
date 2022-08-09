@@ -1,5 +1,5 @@
 import { TokenParser, TokenPredicate } from '../struct';
-import { Token, TokenType } from '../../tokenizer';
+import { LINE_SPLIT_REGEXP, Token, TokenType } from '../../tokenizer';
 import {
     BrNode,
     NodeType,
@@ -7,7 +7,6 @@ import {
     RawNodeType,
     SoftBreakNode,
 } from '../../../node';
-import { LINE_SPLIT_REGEXP } from '../../../../extension/regexp';
 
 export function getDelimiterBreaks(token: Token): number {
     return token.type !== TokenType.Delimiter

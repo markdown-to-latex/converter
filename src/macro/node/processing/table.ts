@@ -10,7 +10,7 @@ import {
     DiagnoseErrorType,
     DiagnoseSeverity,
     nodeToDiagnose,
-} from '../../../diagnose';
+} from '../../../diagnostic';
 
 function fallbackTableNode(tableNode: TableNode): TableProcessedNode {
     const labelNode: TextNode = {
