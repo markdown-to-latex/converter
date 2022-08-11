@@ -1,4 +1,4 @@
-import { RawNodeType, TokensNode } from '../../node';
+import { RawNodeType, TokensNode } from "../../node";
 
 export interface Token {
     text: string;
@@ -13,120 +13,98 @@ export interface TokenizeResult {
 }
 
 export const enum TokenType {
-    Spacer = 'Spacer' /* Spaces, tabs, line breaks */,
-    Letter = 'Letter' /* Any language letter and numbers */,
-    SeparatedSpecial = 'SeparatedSpecial' /* Brackets, semicolons */,
-    JoinableSpecial = 'JoinableSpecial' /* Octothorpe, backticks */,
-    Delimiter = 'Delimiter' /* Line break */,
-    Other = 'Other' /* Not matched characters */,
+    Spacer = "Spacer" /* Spaces, tabs, line breaks */,
+    SeparatedSpecial = "SeparatedSpecial" /* Brackets, semicolons */,
+    JoinableSpecial = "JoinableSpecial" /* Octothorpe, backticks */,
+    Delimiter = "Delimiter" /* Line break */,
+    Letter = "Letter" /* Not parsed. Any language letter and numbers */,
 }
 
-const JOINABLE_TOKEN_TYPES: TokenType[] = [
-    TokenType.Spacer,
-    TokenType.Letter,
-    TokenType.Delimiter,
-];
-
-const DELIMITER_REGEXP = new RegExp(/[\r\n]/);
-const SPACER_REGEXP = new RegExp(/[ \t]/);
-const SEPARATED_SPECIAL_REGEXP = new RegExp(/[\[\]{}!@%^&()+\\,.<>;:'"|№?]/);
-const JOINABLE_SPECIAL_REGEXP = new RegExp(/[`#$*\-_\/~=]/);
-const NUMBER_REGEXP = new RegExp(/\d/);
-
-function isCharSeparatedSpecial(char: string): boolean {
-    return !!char.match(SEPARATED_SPECIAL_REGEXP);
+export interface RegExpTokenData {
+    tokenType: TokenType;
+    charRegExpStr: string;
+    joinable: boolean;
 }
 
-function isCharJoinableSpecial(char: string): boolean {
-    return !!char.match(JOINABLE_SPECIAL_REGEXP);
-}
+const REGEXP_CHARS = {
+    spacer: ' \\t',
+    separatedSpecial: '\\[\\]{}!@%\\^&()+\\\\,.<>\\;:\'\"|№?',
+    joinableSpecial: '#*\\-_\\/~=',
+    doubleJoinableSpecial: '$`',
+    delimiter: '\\r\\n',
+} as const
 
-function isCharSpacer(char: string): boolean {
-    return !!char.match(SPACER_REGEXP);
-}
+type RegExpTypes = keyof typeof REGEXP_CHARS | 'letter';
 
-function isCharLetter(char: string): boolean {
-    return char.toLowerCase() !== char.toUpperCase();
-}
-
-function isCharNumber(char: string): boolean {
-    return !!char.match(NUMBER_REGEXP);
-}
-
-function isCharDelimiter(char: string): boolean {
-    return !!char.match(DELIMITER_REGEXP);
-}
-
-function getCharType(char: string): TokenType {
-    if (isCharDelimiter(char)) {
-        return TokenType.Delimiter;
+const REGEXP_TOKEN_DATA_BY_GROUP_NAME: Record<RegExpTypes, RegExpTokenData> = {
+    spacer: {
+        tokenType: TokenType.Spacer,
+        charRegExpStr: `[${REGEXP_CHARS.spacer}]`,
+        joinable: true
+    },
+    separatedSpecial: {
+        tokenType: TokenType.SeparatedSpecial,
+        charRegExpStr: `[${REGEXP_CHARS.separatedSpecial}]`,
+        joinable: false
+    },
+    joinableSpecial: {
+        tokenType: TokenType.JoinableSpecial,
+        charRegExpStr: `(?<__jSpecialIn>[${REGEXP_CHARS.joinableSpecial}])\\k<__jSpecialIn>*`,
+        joinable: false
+    },
+    doubleJoinableSpecial: {
+        tokenType: TokenType.JoinableSpecial,
+        charRegExpStr: `[${REGEXP_CHARS.doubleJoinableSpecial}]`,
+        joinable: true
+    },
+    delimiter: {
+        tokenType: TokenType.Delimiter,
+        charRegExpStr: `[${REGEXP_CHARS.delimiter}]`,
+        joinable: true
+    },
+    letter: {
+        tokenType: TokenType.Letter,
+        charRegExpStr: `[^${REGEXP_CHARS.spacer}${REGEXP_CHARS.separatedSpecial}${REGEXP_CHARS.joinableSpecial}${REGEXP_CHARS.doubleJoinableSpecial}${REGEXP_CHARS.delimiter}]`,
+        joinable: true
     }
-    if (isCharSpacer(char)) {
-        return TokenType.Spacer;
-    }
-    if (isCharJoinableSpecial(char)) {
-        return TokenType.JoinableSpecial;
-    }
-    if (isCharSeparatedSpecial(char)) {
-        return TokenType.SeparatedSpecial;
-        7;
-    }
-    if (isCharLetter(char) || isCharNumber(char)) {
-        return TokenType.Letter;
-    }
+} as const;
 
-    return TokenType.Other;
-}
-
-function createToken(char: string, pos: number): Token {
-    return {
-        text: char,
-        pos: pos,
-        type: getCharType(char),
-    };
-}
+const TOKENIZING_REGEXP = new RegExp(
+    Object.entries(REGEXP_TOKEN_DATA_BY_GROUP_NAME)
+        .map(([key, value]) => {
+            const multiplier = value.joinable ? "+" : "";
+            return `(?<${key}>${value.charRegExpStr}${multiplier})`;
+        })
+        .join("|"),
+    "g"
+);
+console.log(TOKENIZING_REGEXP);
 
 export function tokenize(text: string, basePos: number = 0): TokenizeResult {
-    const joinables = ['$', '`'];
-
-    const tokens: Token[] = [];
-    let currentToken: Token | null = null;
-
-    for (const [i, c] of text.split('').map((v, i) => [i, v] as const)) {
-        if (!currentToken) {
-            currentToken = createToken(c, i + basePos);
-            continue;
+    const tokens = Array.from(text.matchAll(TOKENIZING_REGEXP)).flatMap(result => {
+        const keyResult = Object.entries(REGEXP_TOKEN_DATA_BY_GROUP_NAME)
+            .map(([k, v]) => [k, v, result.groups?.[k]] as const)
+            .find<[string, RegExpTokenData, string]>(
+                (
+                    prev: readonly [string, RegExpTokenData, string | undefined]
+                ): prev is [string, RegExpTokenData, string] => !!prev[2]
+            );
+        if (!keyResult) {
+            return [];
         }
 
-        const type = getCharType(c);
-        const currentTokenEndChar =
-            currentToken.text[currentToken.text.length - 1];
-        if (
-            type === currentToken.type &&
-            JOINABLE_TOKEN_TYPES.indexOf(type) !== -1
-        ) {
-            currentToken.text += c;
-        } else if (
-            type === TokenType.JoinableSpecial &&
-            (currentTokenEndChar === c ||
-                (joinables.indexOf(currentTokenEndChar) !== -1 &&
-                    joinables.indexOf(c) !== -1))
-        ) {
-            currentToken.text += c;
-        } else {
-            tokens.push(currentToken);
-            currentToken = createToken(c, i + basePos);
-        }
-    }
-
-    if (currentToken) {
-        tokens.push(currentToken);
-    }
+        const [key, data, regexpResult] = keyResult;
+        return [{
+            type: data.tokenType,
+            pos: result.index,
+            text: regexpResult
+        }] as Token[];
+    });
 
     return {
         text,
         basePos,
-        tokens: tokens,
+        tokens: tokens
     };
 }
 
@@ -142,8 +120,8 @@ export function tokensToNode(tokens: TokenizeResult): TokensNode {
             start: tokens.basePos,
             end: lastToken
                 ? lastToken.pos + lastToken.text.length
-                : tokens.basePos,
+                : tokens.basePos
         },
-        parent: null,
+        parent: null
     };
 }

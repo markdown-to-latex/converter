@@ -1,7 +1,7 @@
 import {
     copyTextPosition,
     positionToTextPosition,
-    splitLinesWithTextPositions,
+    splitLinesWithPositions,
     TextPosition,
     textPositionEq,
     textPositionG,
@@ -11,7 +11,7 @@ describe('splitLinesWithTextPositions', () => {
     const STRING = 'Line 1\nLine 2\r\n Line asdas 3 \nLine 4';
 
     test('With custom base', () => {
-        const result = splitLinesWithTextPositions(STRING, 15);
+        const result = splitLinesWithPositions(STRING, 15);
         const original = '123456789012345' + STRING;
 
         expect(original.slice(result[3].pos, result[3].pos + 5)).toEqual(

@@ -471,7 +471,6 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
     [TokenType.Delimiter]: [parseSoftBreak, parseParagraphBreak],
     [TokenType.Spacer]: [parseList, parseTextBreak],
     [TokenType.Letter]: [parseList],
-    [TokenType.Other]: [],
 };
 
 export function tokenToDiagnose(

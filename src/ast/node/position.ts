@@ -65,30 +65,37 @@ export function copyTextPosition(pos: TextPosition): TextPosition {
     return { ...pos };
 }
 
-export function splitLinesWithTextPositions(
-    text: string,
-    base: number = 0,
-): {
+export interface LineWithPosition {
     str: string;
     pos: number;
-}[] {
-    return text.split('\n').map((str, i, lines) => ({
-        str: str.replace(/\r$/, ''),
-        pos:
-            base +
-            lines
-                .slice(0, i)
-                .map(s => `${s}\n`)
-                .join('').length,
+}
+
+export function splitLinesWithPositions(
+    text: string,
+    base: number = 0,
+): LineWithPosition[] {
+    const linesPositions: [string, number][] = [];
+    text.split('\n').forEach((v, i) => {
+        linesPositions.push([
+            v,
+            i === 0
+                ? base
+                : linesPositions[i - 1][1] +
+                  linesPositions[i - 1][0].length +
+                  1,
+        ]);
+    });
+
+    return linesPositions.map(([v, pos]) => ({
+        str: v.endsWith('\r') ? v.slice(0, v.length - 1) : v,
+        pos,
     }));
 }
 
-export function positionToTextPosition(
-    text: string,
+export function linesToTextPosition(
+    lines: LineWithPosition[],
     position: number,
 ): TextPosition {
-    const lines = splitLinesWithTextPositions(text);
-
     const index: number | null = (() => {
         for (let i = 0; i < lines.length; ++i) {
             const line = lines[i];
@@ -118,4 +125,13 @@ export function positionToTextPosition(
         line: index + 1,
         column: position - lines[index].pos + 1,
     };
+}
+
+export function positionToTextPosition(
+    text: string,
+    position: number,
+): TextPosition {
+    const lines = splitLinesWithPositions(text);
+
+    return linesToTextPosition(lines, position);
 }
