@@ -22,6 +22,14 @@ Code shown in !PK[inline-code].
 )
 `,
     );
+
+    snapshotTestTemplate(
+        'List bug 2',
+        `Blandy~J.,~~Orendorff~J.,~~Tindall~L.
+Programming Rust. Fast, Safe Systems Development / Second Edition.
+Sebastopol: O'Reilly Media,
+2021.`,
+    );
 });
 
 test('Complex File', () => {
