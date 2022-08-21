@@ -28,8 +28,8 @@ export interface RegExpTokenData {
 
 const REGEXP_CHARS = {
     spacer: ' \\t',
-    separatedSpecial: '\\[\\]{}!@%\\^&()+\\\\,.<>\\;:\'"|№?',
-    joinableSpecial: '#*\\-_\\/~=',
+    separatedSpecial: '\\[\\]{}!@%\\^&()+\\\\,.\\;:\'"|№?',
+    joinableSpecial: '#*\\-_\\/~=<>',
     doubleJoinableSpecial: '$`',
     delimiter: '\\r\\n',
 } as const;

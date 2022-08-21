@@ -221,6 +221,30 @@ describe('link simple check', () => {
 
         expect(nodes).toMatchSnapshot();
     });
+
+    test('Link Simple should act greedly', () => {
+        const rawNode = rawNodeTemplate('Hello < a < b > text');
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as ParagraphNode;
+        expect(node).not.toBeUndefined();
+        const link = node.children[1] as LinkNode;
+        expect(link.type).toEqual(NodeType.Link);
+        expect(link.href.text).toEqual(' a < b ');
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('Link Simple should not be confused with guillemets', () => {
+        const rawNode = rawNodeTemplate('Hello <<name>> text');
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as ParagraphNode;
+        expect(node).not.toBeUndefined();
+        expect(node.children).toHaveLength(1);
+
+        expect(nodes).toMatchSnapshot();
+    });
 });
 
 describe('macro parsing', () => {

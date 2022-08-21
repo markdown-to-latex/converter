@@ -5060,6 +5060,124 @@ Array [
 ]
 `;
 
+exports[`link simple check Link Simple should act greedly 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 6,
+          "start": 0,
+        },
+        "text": "Hello ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 14,
+            "start": 7,
+          },
+          "text": " a < b ",
+          "type": "Text",
+        },
+        "parent": [Circular],
+        "pos": Object {
+          "end": 15,
+          "start": 6,
+        },
+        "type": "Link",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 20,
+          "start": 15,
+        },
+        "text": " text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 20,
+            "start": 0,
+          },
+          "text": "Hello < a < b > text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 20,
+        "start": 0,
+      },
+      "raw": "Hello < a < b > text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 20,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`link simple check Link Simple should not be confused with guillemets 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 19,
+          "start": 0,
+        },
+        "text": "Hello <<name>> text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 19,
+            "start": 0,
+          },
+          "text": "Hello <<name>> text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 19,
+        "start": 0,
+      },
+      "raw": "Hello <<name>> text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 19,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
 exports[`link simple check Simple Link Simple in text 1`] = `
 Array [
   Object {

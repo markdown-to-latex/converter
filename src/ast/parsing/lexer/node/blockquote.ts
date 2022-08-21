@@ -16,7 +16,10 @@ export const isBlockquote: TokenPredicate = function (token, index, node) {
         return false;
     }
 
-    if (token.type !== TokenType.SeparatedSpecial) {
+    if (
+        token.type !== TokenType.SeparatedSpecial &&
+        token.type !== TokenType.JoinableSpecial
+    ) {
         return false;
     }
     if (token.text !== '>') {

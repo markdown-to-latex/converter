@@ -41,12 +41,12 @@ export const parseLinkSimple: TokenParser = function (tokens, index) {
         return null;
     }
 
-    const closingBracketResult = findTokenClosingBracket(tokens, index);
+    const closingBracketResult = findTokenClosingBracket(tokens, index, true);
     if (!closingBracketResult) {
         return unexpectedEof(
             tokens,
             index,
-            'Unable to find closing bracket for link',
+            'Unable to find closing bracket for link simple',
         );
     }
 

@@ -92,6 +92,7 @@ const brackets: Record<string, string> = {
     '(': ')', // Argument
     '`': '`', // Code Span
     '<': '>', // Link Simple
+    '<<<': '>>>', // Guillemet
     '$`': '`$', // Formula Span
 };
 
@@ -116,7 +117,7 @@ export function findTokenClosingBracket(
     for (let i = index + 1; i < tokens.tokens.length; ++i) {
         const token = tokens.tokens[i];
         if (isParagraphBreak(token, i, tokens)) {
-            return null; // break breaks the brackets
+            return null; // linebreak breaks the brackets
         }
 
         if (
@@ -199,12 +200,6 @@ export function isOpenArgumentBracket(
     }
 
     return token.text == '(';
-}
-
-interface TrimWithPositionsResult {
-    result: string;
-    leftTrim: number;
-    rightTrim: number;
 }
 
 interface ParseTokensNodeResult {
@@ -455,7 +450,9 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
         parseEm,
         parseUnderline,
         parseHeading,
+        parseBlockquote,
         parseHr,
+        parseLinkSimple,
         parseList,
         parseCode,
         parseFormulaSpan,
@@ -465,12 +462,10 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
     ],
     [TokenType.SeparatedSpecial]: [
         parseLink,
-        parseLinkSimple,
         parseMacro,
         parseImage,
         parseTable,
         parseList,
-        parseBlockquote,
     ],
     [TokenType.Delimiter]: [parseSoftBreak, parseParagraphBreak],
     [TokenType.Spacer]: [parseList, parseTextBreak],
