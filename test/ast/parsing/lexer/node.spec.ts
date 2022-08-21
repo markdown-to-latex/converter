@@ -209,6 +209,19 @@ describe('link check', () => {
     });
 });
 
+describe('link simple check', () => {
+    test('Simple Link Simple in text', () => {
+        const rawNode = rawNodeTemplate('Hello <li-nk> text');
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as ParagraphNode;
+        expect(node).not.toBeUndefined();
+        expect(node.children[1].type).toEqual(NodeType.Link);
+
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
 describe('macro parsing', () => {
     test('Complex macro with name, label, pos and key args', () => {
         const rawNode = rawNodeTemplate(
@@ -423,10 +436,10 @@ Additional text 1
     test('List with list', () => {
         const rawNode = rawNodeTemplate(`3. Text 1
 Additional text 1
-    * Item
-    * Next Item
+    - Item
+    - Next Item
         - One more item \`:)\`
-    * Conclusion
+    - Conclusion
 4. Text \`2\`
 5. **Text** 3`);
         const { nodes, diagnostic } = applyVisitors([rawNode]);
@@ -443,7 +456,6 @@ Additional text 1
 
 Text`);
 
-        // TODO: wrong
         const { nodes, diagnostic } = applyVisitors([rawNode]);
         expect(diagnostic).toHaveLength(0);
         expect(nodes).toHaveLength(2);
@@ -451,6 +463,38 @@ Text`);
         const paragraphNode = nodes[1] as ParagraphNode;
         expect(paragraphNode.type).toEqual(NodeType.Paragraph);
         expect(paragraphNode.children[0].type).toEqual(NodeType.Text);
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('Unordered List with different bullets', () => {
+        const rawNode = rawNodeTemplate(`
+- Item 2
++ Item 3
+        `);
+
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(1);
+        const list = nodes[0] as ListNode;
+        expect(list.type).toEqual(NodeType.List);
+        expect(list.children).toHaveLength(2);
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('Unordered List with SeparatedSpecial bullets', () => {
+        const rawNode = rawNodeTemplate(`Some text:
++ Item 1
++ Item 2
+        `);
+
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toHaveLength(2);
+        const list = nodes[1] as ListNode;
+        expect(list.type).toEqual(NodeType.List);
+        expect(list.children).toHaveLength(2);
 
         expect(nodes).toMatchSnapshot();
     });

@@ -37,7 +37,7 @@ export const parseLink: TokenParser = function (tokens, index) {
 
     const argOpenBracket = tokens.tokens[argOpenBracketIndex];
     if (!isOpenArgumentBracket(tokens, argOpenBracketIndex)) {
-        return null; // No bracket => thats not a link
+        return null; // No bracket => that's not a link
     }
 
     const argCloseBracketResult = findTokenClosingBracket(
@@ -103,6 +103,7 @@ export const parseLink: TokenParser = function (tokens, index) {
     childNode.parent = linkNode;
     hrefTextNode.parent = linkNode;
 
+    // TODO: why the label is being parsed like a Node List ?
     const result = applyVisitors([childNode]);
     linkNode.children = [...result.nodes];
 

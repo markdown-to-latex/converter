@@ -45,6 +45,7 @@ import { parseMacro } from './node/macros';
 import { parseImage } from './node/image';
 import { parseTable } from './node/table';
 import { parseBlockquote } from './node/blockquote';
+import {parseLinkSimple} from "./node/linkSimple";
 
 interface FindTokenResult {
     token: Token;
@@ -90,6 +91,7 @@ const brackets: Record<string, string> = {
     '{': '}', // Reserved
     '(': ')', // Argument
     '`': '`', // Code Span
+    '<': '>', // Link Simple
     '$`': '`$', // Formula Span
 };
 
@@ -463,9 +465,11 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
     ],
     [TokenType.SeparatedSpecial]: [
         parseLink,
+        parseLinkSimple,
         parseMacro,
         parseImage,
         parseTable,
+        parseList,
         parseBlockquote,
     ],
     [TokenType.Delimiter]: [parseSoftBreak, parseParagraphBreak],

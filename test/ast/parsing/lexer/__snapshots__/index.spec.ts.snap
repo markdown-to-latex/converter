@@ -4295,3 +4295,167 @@ Code shown in !PK[inline-code].
   },
 ]
 `;
+
+exports[`Honorable mention List item error defining bug 1`] = `
+Array [
+  Object {
+    "errorType": 0,
+    "filePath": "test.md",
+    "message": "Unable to found closing label bracket",
+    "pos": Object {
+      "end": Object {
+        "absolute": 31,
+        "column": 14,
+        "line": 3,
+      },
+      "start": Object {
+        "absolute": 30,
+        "column": 13,
+        "line": 3,
+      },
+    },
+    "severity": "ERROR",
+  },
+  Object {
+    "errorType": 0,
+    "filePath": "test.md",
+    "message": "Unable to find closing bracket for link",
+    "pos": Object {
+      "end": Object {
+        "absolute": 31,
+        "column": 14,
+        "line": 3,
+      },
+      "start": Object {
+        "absolute": 30,
+        "column": 13,
+        "line": 3,
+      },
+    },
+    "severity": "ERROR",
+  },
+]
+`;
+
+exports[`Honorable mention List item error defining bug 2`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 17,
+              "start": 11,
+            },
+            "text": "Item 1",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 1,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "keyArgs": Object {},
+            "keys": Object {},
+            "label": null,
+            "opcode": Object {
+              "parent": [Circular],
+              "pos": Object {
+                "end": 30,
+                "start": 29,
+              },
+              "text": "R",
+              "type": "Text",
+            },
+            "parent": [Circular],
+            "pos": Object {
+              "end": 30,
+              "start": 28,
+            },
+            "posArgs": Array [],
+            "type": "OpCode",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 37,
+          "start": 18,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 54,
+              "start": 48,
+            },
+            "text": "Item 3",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 63,
+          "start": 38,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": false,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 63,
+            "start": 0,
+          },
+          "text": "
+        - Item 1
+        - !R[wrong 
+        - Item 3
+        ",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 63,
+        "start": 0,
+      },
+      "raw": "
+        - Item 1
+        - !R[wrong 
+        - Item 3
+        ",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 63,
+      "start": 1,
+    },
+    "start": 0,
+    "type": "List",
+  },
+]
+`;

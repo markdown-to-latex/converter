@@ -1,17 +1,18 @@
-import { rawNodeTemplate, snapshotTestTemplate } from './utils';
+import {
+    rawNodeTemplate,
+    snapshotTestTemplateInner,
+} from './utils';
 import fs from 'fs';
 import path from 'path';
 import { applyVisitors } from '../../../../src/ast/parsing/lexer';
 
 describe('Honorable mention', () => {
-    snapshotTestTemplate(
-        'Bold with del with code span',
-        '**asdas ==`lol==` adas**',
-    );
+    test('Bold with del with code span', () =>
+        snapshotTestTemplateInner('**asdas ==`lol==` adas**'));
 
-    snapshotTestTemplate(
-        'List bug',
-        `
+    test('List bug', () =>
+        snapshotTestTemplateInner(
+            `
 Image fragments are grouped together based on similarity,
 *simple italic text here*
 but unlike standard k-means clustering and such cluster analysis methods.
@@ -21,7 +22,16 @@ Code shown in !PK[inline-code].
     orci varius natoque penatibus et magnis dis parturient montes gray square
 )
 `,
-    );
+        ));
+
+    test('List item error defining bug', () =>
+        snapshotTestTemplateInner(
+            `
+        - Item 1
+        - !R[wrong 
+        - Item 3
+        `,
+        ));
 
     snapshotTestTemplate(
         'List bug 2',

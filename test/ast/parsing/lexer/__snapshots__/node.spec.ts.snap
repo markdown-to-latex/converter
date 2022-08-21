@@ -1924,10 +1924,10 @@ Array [
           },
           "text": "3. Text 1
 Additional text 1
-    * Item
-    * Next Item
+    - Item
+    - Next Item
         - One more item \`:)\`
-    * Conclusion
+    - Conclusion
 4. Text \`2\`
 5. **Text** 3",
           "type": "Raw",
@@ -1941,10 +1941,10 @@ Additional text 1
       },
       "raw": "3. Text 1
 Additional text 1
-    * Item
-    * Next Item
+    - Item
+    - Next Item
         - One more item \`:)\`
-    * Conclusion
+    - Conclusion
 4. Text \`2\`
 5. **Text** 3",
       "type": "File",
@@ -2340,6 +2340,228 @@ Array [
       "start": 0,
     },
     "start": 1,
+    "type": "List",
+  },
+]
+`;
+
+exports[`List parsing Unordered List with SeparatedSpecial bullets 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 0,
+        },
+        "text": "Some text:",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 37,
+            "start": 0,
+          },
+          "text": "Some text:
++ Item 1
++ Item 2
+        ",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 37,
+        "start": 0,
+      },
+      "raw": "Some text:
++ Item 1
++ Item 2
+        ",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 10,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 19,
+              "start": 13,
+            },
+            "text": "Item 1",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 19,
+          "start": 11,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 28,
+              "start": 22,
+            },
+            "text": "Item 2",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 37,
+          "start": 20,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": false,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 37,
+            "start": 0,
+          },
+          "text": "Some text:
++ Item 1
++ Item 2
+        ",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 37,
+        "start": 0,
+      },
+      "raw": "Some text:
++ Item 1
++ Item 2
+        ",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 37,
+      "start": 11,
+    },
+    "start": 0,
+    "type": "List",
+  },
+]
+`;
+
+exports[`List parsing Unordered List with different bullets 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 9,
+              "start": 3,
+            },
+            "text": "Item 2",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 9,
+          "start": 1,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": [Circular],
+            "pos": Object {
+              "end": 18,
+              "start": 12,
+            },
+            "text": "Item 3",
+            "type": "Text",
+          },
+        ],
+        "loose": false,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 27,
+          "start": 10,
+        },
+        "task": false,
+        "type": "ListItem",
+      },
+    ],
+    "loose": false,
+    "ordered": false,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 27,
+            "start": 0,
+          },
+          "text": "
+- Item 2
++ Item 3
+        ",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 27,
+        "start": 0,
+      },
+      "raw": "
+- Item 2
++ Item 3
+        ",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 27,
+      "start": 1,
+    },
+    "start": 0,
     "type": "List",
   },
 ]
@@ -4428,6 +4650,79 @@ Array [
     },
     "pos": Object {
       "end": 27,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
+exports[`link simple check Simple Link Simple in text 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 6,
+          "start": 0,
+        },
+        "text": "Hello ",
+        "type": "Text",
+      },
+      Object {
+        "children": Array [],
+        "href": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 12,
+            "start": 7,
+          },
+          "text": "li-nk",
+          "type": "Text",
+        },
+        "parent": [Circular],
+        "pos": Object {
+          "end": 13,
+          "start": 6,
+        },
+        "type": "Link",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 18,
+          "start": 13,
+        },
+        "text": " text",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 18,
+            "start": 0,
+          },
+          "text": "Hello <li-nk> text",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 18,
+        "start": 0,
+      },
+      "raw": "Hello <li-nk> text",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 18,
       "start": 0,
     },
     "type": "Paragraph",

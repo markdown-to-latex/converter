@@ -33,12 +33,16 @@ export function rawNodeTemplate(content: string): RawNode {
     return rawNode;
 }
 
+export function snapshotTestTemplateInner(content: string) {
+    const rawNode = rawNodeTemplate(content);
+    const { nodes, diagnostic } = applyVisitors([rawNode]);
+
+    expect(diagnostic).toMatchSnapshot();
+    expect(nodes).toMatchSnapshot();
+}
+
 export function snapshotTestTemplate(name: string, content: string) {
     return test(name, () => {
-        const rawNode = rawNodeTemplate(content);
-        const { nodes, diagnostic } = applyVisitors([rawNode]);
-
-        expect(diagnostic).toMatchSnapshot();
-        expect(nodes).toMatchSnapshot();
+        snapshotTestTemplateInner(content);
     });
 }

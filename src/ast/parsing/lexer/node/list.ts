@@ -170,7 +170,7 @@ function parseListItem(
 
     const listItemNode: ListItemNode = {
         type: NodeType.ListItem,
-        parent: null,
+        parent: tokens.parent,
         children: [],
         pos: {
             start: tokens.tokens[beginIndex].pos,
