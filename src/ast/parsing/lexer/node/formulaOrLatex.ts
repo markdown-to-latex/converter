@@ -1,9 +1,10 @@
 import { TokenParser, TokenPredicate } from '../struct';
 import { TokenType } from '../../tokenizer';
-import { FormulaNode, LatexNode, NodeType } from '../../../node';
+import { FormulaNode, LatexNode, NodeType, TextNode } from '../../../node';
 import {
     findTokenOrNull,
     findTokenOrNullBackward,
+    sliceTokenText,
     unexpectedEof,
 } from '../index';
 import {
@@ -49,9 +50,10 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
 
     const diagnostic: DiagnoseList = [];
 
+    const targetStart = index + 1;
     const lineBreakResult = findTokenOrNull(
         tokens,
-        index + 1,
+        targetStart,
         t => t.type === TokenType.Delimiter,
     );
     if (!lineBreakResult) {
@@ -62,10 +64,14 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
         );
     }
 
-    let latexTarget: string = '';
-    for (let i = index + 1; i < lineBreakResult.index; ++i) {
+    let argStartIndex: number;
+    for (
+        argStartIndex = targetStart;
+        argStartIndex < lineBreakResult.index;
+        ++argStartIndex
+    ) {
         // TODO: encapsulate
-        const token = tokens.tokens[i];
+        const token = tokens.tokens[argStartIndex];
         if (
             [
                 TokenType.Letter,
@@ -75,10 +81,19 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
         ) {
             break;
         }
-
-        latexTarget ??= '';
-        latexTarget += token.text;
     }
+
+    const targetEnd = argStartIndex;
+    const targetEndToken = tokens.tokens[targetEnd - 1];
+    const targetNode: TextNode = {
+        type: NodeType.Text,
+        parent: tokens.parent,
+        pos: {
+            start: tokens.tokens[targetStart].pos,
+            end: targetEndToken.pos + targetEndToken.text.length,
+        },
+        text: sliceTokenText(tokens, targetStart, targetEnd),
+    };
 
     const endTokenResult = findTokenOrNull(
         tokens,
@@ -107,24 +122,41 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
         );
     }
 
-    const endToken = endTokenResult.token;
-    const latexNode: LatexNode | FormulaNode = {
-        type:
-            latexTarget === LatexTarget.Raw ? NodeType.Latex : NodeType.Formula,
+    const codeTextNode: TextNode = {
+        type: NodeType.Text,
+        parent: tokens.parent,
         pos: {
-            start: token.pos,
-            end: endToken.pos + endToken.text.length,
+            start: tokens.tokens[lineBreakResult.index + 1].pos,
+            end:
+                lineBreakEndResult.token.pos +
+                lineBreakEndResult.token.text.length,
         },
         text: tokens.tokens
             .slice(lineBreakResult.index + 1, lineBreakEndResult.index)
             .map(v => v.text)
             .join(''),
+    };
+
+    const endToken = endTokenResult.token;
+    const latexNode: LatexNode | FormulaNode = {
+        type:
+            targetNode.text === LatexTarget.Raw
+                ? NodeType.Latex
+                : NodeType.Formula,
+        pos: {
+            start: token.pos,
+            end: endToken.pos + endToken.text.length,
+        },
+        text: codeTextNode,
         parent: tokens.parent,
     };
 
+    targetNode.parent = latexNode;
+    codeTextNode.parent = latexNode;
+
     if (
         ([LatexTarget.Math, LatexTarget.Raw] as string[]).indexOf(
-            latexTarget,
+            targetNode.text,
         ) === -1
     ) {
         diagnostic.push(

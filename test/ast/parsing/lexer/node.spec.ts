@@ -808,7 +808,7 @@ New sample text
         let node = nodes[1] as LatexNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Latex);
-        expect(node.text).toEqual('\\textbf{Some bold text in raw latex}');
+        expect(node.text.text).toEqual('\\textbf{Some bold text in raw latex}');
 
         expect(nodes).toMatchSnapshot();
     });
@@ -827,7 +827,7 @@ New sample text
         let node = nodes[1] as FormulaNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Formula);
-        expect(node.text).toEqual('a = b + x');
+        expect(node.text.text).toEqual('a = b + x');
 
         expect(nodes).toMatchSnapshot();
     });

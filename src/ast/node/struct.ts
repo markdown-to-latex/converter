@@ -104,6 +104,10 @@ export interface NodeText {
     text: string;
 }
 
+export interface NodeTextNode {
+    text: TextNode;
+}
+
 export interface NodeHref {
     href: TextNode;
 }
@@ -141,7 +145,7 @@ export interface SpaceNode extends Node {
 
 export interface CodeNode extends Node {
     type: NodeType.Code;
-    code: TextNode;
+    code: TextNode; // TODO: inherit from NodeTextNode
     lang?: TextNode;
     name?: Node[];
     label?: TextNode;
@@ -282,7 +286,7 @@ export interface OpCodeNode extends Node, NodeArgs {
     label: TextNode | null;
 }
 
-export interface LatexNode extends Node, NodeText {
+export interface LatexNode extends Node, NodeTextNode {
     type: NodeType.Latex;
 }
 
@@ -290,7 +294,7 @@ export interface LatexSpanNode extends Node, NodeText {
     type: NodeType.LatexSpan;
 }
 
-export interface FormulaNode extends Node, NodeText {
+export interface FormulaNode extends Node, NodeTextNode {
     type: NodeType.Formula;
 }
 

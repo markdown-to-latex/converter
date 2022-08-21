@@ -616,7 +616,15 @@ New sample text
       "end": 29,
       "start": 12,
     },
-    "text": "a = b + x",
+    "text": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 26,
+        "start": 16,
+      },
+      "text": "a = b + x",
+      "type": "Text",
+    },
     "type": "Formula",
   },
   Object {
@@ -1563,7 +1571,15 @@ New sample text
       "end": 59,
       "start": 12,
     },
-    "text": "\\\\textbf{Some bold text in raw latex}",
+    "text": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 56,
+        "start": 19,
+      },
+      "text": "\\\\textbf{Some bold text in raw latex}",
+      "type": "Text",
+    },
     "type": "Latex",
   },
   Object {

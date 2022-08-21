@@ -2541,7 +2541,15 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
       "end": 1177,
       "start": 1140,
     },
-    "text": "i_{am} = the + for^{mula}",
+    "text": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 1174,
+        "start": 1148,
+      },
+      "text": "i_{am} = the + for^{mula}",
+      "type": "Text",
+    },
     "type": "Formula",
   },
   Object {
