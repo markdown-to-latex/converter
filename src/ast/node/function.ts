@@ -11,6 +11,10 @@ interface NodeWithProbChildren {
     opcode?: Node | null;
     label?: Node | null;
     href?: Node | string | null;
+    code?: Node;
+    text?: Node | string;
+    bullet?: Node;
+    lang?: Node;
 }
 
 const nodeListProcessors = [
@@ -59,6 +63,31 @@ const nodeListProcessors = [
         typeof node.href !== 'string'
             ? !!node.href
                 ? [[node.href]]
+                : []
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'code')
+            ? !!node.code
+                ? [[node.code]]
+                : []
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'text') &&
+        typeof node.text !== 'string'
+            ? !!node.text
+                ? [[node.text]]
+                : []
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'bullet')
+            ? !!node.bullet
+                ? [[node.bullet]]
+                : []
+            : null,
+    node =>
+        Object.prototype.hasOwnProperty.call(node, 'lang')
+            ? !!node.lang
+                ? [[node.lang]]
                 : []
             : null,
 ] as ((node: NodeWithProbChildren) => NodeAbstract[][] | null)[];

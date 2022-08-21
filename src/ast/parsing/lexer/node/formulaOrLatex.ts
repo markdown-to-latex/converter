@@ -139,6 +139,7 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
 
     const endToken = endTokenResult.token;
     const latexNode: LatexNode | FormulaNode = {
+        // TODO: save the target
         type:
             targetNode.text === LatexTarget.Raw
                 ? NodeType.Latex

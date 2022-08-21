@@ -170,13 +170,13 @@ function parseListItem(
         return null;
     }
 
-    const startToken = tokens.tokens[sliceStart];
+    const bulletEndToken = tokens.tokens[sliceStart - 1];
     const bulletTextNode: TextNode = {
         type: NodeType.Text,
         parent: tokens.parent,
         pos: {
             start: tokens.tokens[index].pos,
-            end: startToken.pos + startToken.text.length,
+            end: bulletEndToken.pos + bulletEndToken.text.length,
         },
         text: sliceTokenText(tokens, index, sliceStart),
     };
@@ -197,6 +197,7 @@ function parseListItem(
         task: false,
     };
 
+    const startToken = tokens.tokens[sliceStart];
     const tokensNode: TokensNode = {
         type: RawNodeType.Tokens,
         tokens: tokens.tokens.slice(sliceStart, sliceEnd),
