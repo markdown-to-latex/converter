@@ -4374,6 +4374,149 @@ Code shown in !PK[inline-code].
 ]
 `;
 
+exports[`Honorable mention List bug 2 1`] = `Array []`;
+
+exports[`Honorable mention List bug 2 2`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 6,
+          "start": 0,
+        },
+        "text": "Blandy",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 7,
+          "start": 6,
+        },
+        "type": "ThinNonBreakingSpace",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 10,
+          "start": 7,
+        },
+        "text": "J.,",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 12,
+          "start": 10,
+        },
+        "type": "NonBreakingSpace",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 21,
+          "start": 12,
+        },
+        "text": "Orendorff",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 22,
+          "start": 21,
+        },
+        "type": "ThinNonBreakingSpace",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 25,
+          "start": 22,
+        },
+        "text": "J.,",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 27,
+          "start": 25,
+        },
+        "type": "NonBreakingSpace",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 34,
+          "start": 27,
+        },
+        "text": "Tindall",
+        "type": "Text",
+      },
+      Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 35,
+          "start": 34,
+        },
+        "type": "ThinNonBreakingSpace",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 138,
+          "start": 35,
+        },
+        "text": "L. Programming Rust. Fast, Safe Systems Development / Second Edition. Sebastopol: O'Reilly Media, 2021.",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 138,
+            "start": 0,
+          },
+          "text": "Blandy~J.,~~Orendorff~J.,~~Tindall~L.
+Programming Rust. Fast, Safe Systems Development / Second Edition.
+Sebastopol: O'Reilly Media,
+2021.",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 138,
+        "start": 0,
+      },
+      "raw": "Blandy~J.,~~Orendorff~J.,~~Tindall~L.
+Programming Rust. Fast, Safe Systems Development / Second Edition.
+Sebastopol: O'Reilly Media,
+2021.",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 138,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+]
+`;
+
 exports[`Honorable mention List item error defining bug 1`] = `
 Array [
   Object {

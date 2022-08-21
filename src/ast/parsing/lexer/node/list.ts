@@ -166,6 +166,10 @@ function parseListItem(
         lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
     }
 
+    if (sliceStart >= tokens.tokens.length) {
+        return null;
+    }
+
     const startToken = tokens.tokens[sliceStart];
     const bulletTextNode: TextNode = {
         type: NodeType.Text,
