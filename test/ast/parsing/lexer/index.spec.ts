@@ -1,7 +1,4 @@
-import {
-    rawNodeTemplate,
-    snapshotTestTemplateInner,
-} from './utils';
+import { rawNodeTemplate, snapshotTestTemplateInner } from './utils';
 import fs from 'fs';
 import path from 'path';
 import { applyVisitors } from '../../../../src/ast/parsing/lexer';
@@ -33,13 +30,13 @@ Code shown in !PK[inline-code].
         `,
         ));
 
-    snapshotTestTemplate(
-        'List bug 2',
-        `Blandy~J.,~~Orendorff~J.,~~Tindall~L.
+    test('List bug 2', () =>
+        snapshotTestTemplateInner(
+            `Blandy~J.,~~Orendorff~J.,~~Tindall~L.
 Programming Rust. Fast, Safe Systems Development / Second Edition.
 Sebastopol: O'Reilly Media,
 2021.`,
-    );
+        ));
 });
 
 test('Complex File', () => {

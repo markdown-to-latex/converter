@@ -16,6 +16,7 @@ import {
 export const enum ArgInfoType {
     NodeArray = 'NodeArray',
     Text = 'Text',
+    TextNode = 'TextNode',
 }
 
 export interface ArgInfo {
@@ -26,7 +27,10 @@ export interface ArgInfo {
     onlySpans: boolean; // No block nodes
 }
 
-export type ParsedMacrosArguments = Record<string, Node[] | string | null>;
+export type ParsedMacrosArguments = Record<
+    string,
+    Node[] | string | TextNode | null
+>;
 
 export interface ParseMacrosArgumentsResult {
     result: ParsedMacrosArguments;
@@ -36,6 +40,7 @@ export interface ParseMacrosArgumentsResult {
 interface _ArgInfoTypeType {
     [ArgInfoType.NodeArray]: Node[];
     [ArgInfoType.Text]: string;
+    [ArgInfoType.TextNode]: TextNode;
 }
 
 interface ConvertArgumentTypeResult<T extends ArgInfoType> {
@@ -71,17 +76,41 @@ const argumentConverter: {
         return { result: nodes, diagnostic: diagnostic };
     },
 
-    [ArgInfoType.Text]: nodes => {
+    [ArgInfoType.Text]: (nodes, info) => {
+        const result = argumentConverter[ArgInfoType.TextNode](nodes, info);
+        return {
+            ...result,
+            result: result.result.text,
+        };
+    },
+
+    [ArgInfoType.TextNode]: nodes => {
+        const nullTextNode: TextNode = {
+            type: NodeType.Text,
+            text: '',
+            parent: nodes.length === 0 ? null : nodes[0].parent,
+            pos:
+                nodes.length === 0
+                    ? {
+                          start: 0,
+                          end: 0,
+                      }
+                    : {
+                          start: nodes[0].pos.start,
+                          end: nodes[0].pos.start,
+                      },
+        };
+
         if (nodes.length === 0) {
             return {
-                result: '',
+                result: nullTextNode,
                 diagnostic: [],
             };
         }
 
         if (!(nodes.length === 1 && nodes[0].type === NodeType.Text)) {
             return {
-                result: '',
+                result: nullTextNode,
                 diagnostic: [
                     nodesToDiagnose(
                         nodes,
@@ -95,7 +124,7 @@ const argumentConverter: {
 
         const textNode = nodes[0] as TextNode;
         return {
-            result: textNode.text,
+            result: textNode,
             diagnostic: [],
         };
     },

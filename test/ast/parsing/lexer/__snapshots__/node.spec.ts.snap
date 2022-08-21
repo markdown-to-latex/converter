@@ -1694,6 +1694,15 @@ Array [
   Object {
     "children": Array [
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "3. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -1708,6 +1717,15 @@ Array [
           Object {
             "children": Array [
               Object {
+                "bullet": Object {
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 38,
+                    "start": 32,
+                  },
+                  "text": "- ",
+                  "type": "Text",
+                },
                 "children": Array [
                   Object {
                     "children": Array [],
@@ -1730,6 +1748,15 @@ Array [
                 "type": "ListItem",
               },
               Object {
+                "bullet": Object {
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 49,
+                    "start": 43,
+                  },
+                  "text": "- ",
+                  "type": "Text",
+                },
                 "children": Array [
                   Object {
                     "children": Array [],
@@ -1744,6 +1771,15 @@ Array [
                   Object {
                     "children": Array [
                       Object {
+                        "bullet": Object {
+                          "parent": [Circular],
+                          "pos": Object {
+                            "end": 68,
+                            "start": 63,
+                          },
+                          "text": "- ",
+                          "type": "Text",
+                        },
                         "children": Array [
                           Object {
                             "children": Array [],
@@ -1796,6 +1832,15 @@ Array [
                 "type": "ListItem",
               },
               Object {
+                "bullet": Object {
+                  "parent": [Circular],
+                  "pos": Object {
+                    "end": 100,
+                    "start": 88,
+                  },
+                  "text": "- ",
+                  "type": "Text",
+                },
                 "children": Array [
                   Object {
                     "children": Array [],
@@ -1839,6 +1884,15 @@ Array [
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 108,
+            "start": 101,
+          },
+          "text": "4. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -1870,6 +1924,15 @@ Array [
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 118,
+            "start": 113,
+          },
+          "text": "5. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [
@@ -1964,6 +2027,15 @@ Array [
   Object {
     "children": Array [
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "1. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -1986,6 +2058,15 @@ Array [
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 35,
+            "start": 28,
+          },
+          "text": "2. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2017,6 +2098,15 @@ Array [
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 45,
+            "start": 40,
+          },
+          "text": "3. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [
@@ -2105,6 +2195,15 @@ Array [
   Object {
     "children": Array [
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "3. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2213,6 +2312,15 @@ Array [
   Object {
     "children": Array [
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 7,
+            "start": 0,
+          },
+          "text": "1. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2235,6 +2343,15 @@ Array [
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 17,
+            "start": 10,
+          },
+          "text": "2. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2266,6 +2383,15 @@ Array [
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 27,
+            "start": 22,
+          },
+          "text": "3. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [
@@ -2396,6 +2522,15 @@ Array [
   Object {
     "children": Array [
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 17,
+            "start": 11,
+          },
+          "text": "+ ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2418,6 +2553,15 @@ Array [
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 26,
+            "start": 20,
+          },
+          "text": "+ ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2484,6 +2628,15 @@ Array [
   Object {
     "children": Array [
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 7,
+            "start": 1,
+          },
+          "text": "- ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2506,6 +2659,15 @@ Array [
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 16,
+            "start": 10,
+          },
+          "text": "+ ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2813,6 +2975,15 @@ text",
   Object {
     "children": Array [
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 98,
+            "start": 91,
+          },
+          "text": "1. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -2853,6 +3024,15 @@ text",
         "type": "ListItem",
       },
       Object {
+        "bullet": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 115,
+            "start": 108,
+          },
+          "text": "2. ",
+          "type": "Text",
+        },
         "children": Array [
           Object {
             "children": Array [],
@@ -3481,6 +3661,15 @@ New sample text
     "type": "Paragraph",
   },
   Object {
+    "code": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 27,
+        "start": 16,
+      },
+      "text": "Code block",
+      "type": "Text",
+    },
     "label": undefined,
     "lang": undefined,
     "name": undefined,
@@ -3519,7 +3708,6 @@ New sample text
       "end": 30,
       "start": 12,
     },
-    "text": "Code block",
     "type": "Code",
   },
   Object {
@@ -3750,6 +3938,15 @@ Array [
   Object {
     "children": Array [],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 63,
+          "start": 52,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -3759,7 +3956,15 @@ Array [
         "text": "label",
         "type": "Text",
       },
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 4,
+        },
+        "text": "test-language",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -3794,7 +3999,6 @@ Code block
         "end": 66,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -3806,6 +4010,15 @@ Code block
   },
   Object {
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 63,
+          "start": 52,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -3815,7 +4028,15 @@ Code block
         "text": "label",
         "type": "Text",
       },
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 4,
+        },
+        "text": "test-language",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -3850,7 +4071,6 @@ Code block
         "end": 66,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -3863,6 +4083,15 @@ Code block
   Object {
     "children": Array [],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 63,
+          "start": 52,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -3872,7 +4101,15 @@ Code block
         "text": "label",
         "type": "Text",
       },
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 4,
+        },
+        "text": "test-language",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -3907,7 +4144,6 @@ Code block
         "end": 66,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -3925,6 +4161,15 @@ Array [
   Object {
     "children": Array [],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 70,
+          "start": 59,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -3934,7 +4179,15 @@ Array [
         "text": "label",
         "type": "Text",
       },
-      "lang": "kotlin",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 56,
+          "start": 50,
+        },
+        "text": "kotlin",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -3973,7 +4226,6 @@ Code block
         "end": 73,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -3985,6 +4237,15 @@ Code block
   },
   Object {
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 70,
+          "start": 59,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -3994,7 +4255,15 @@ Code block
         "text": "label",
         "type": "Text",
       },
-      "lang": "kotlin",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 56,
+          "start": 50,
+        },
+        "text": "kotlin",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -4033,7 +4302,6 @@ Code block
         "end": 73,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -4046,6 +4314,15 @@ Code block
   Object {
     "children": Array [],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 70,
+          "start": 59,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -4055,7 +4332,15 @@ Code block
         "text": "label",
         "type": "Text",
       },
-      "lang": "kotlin",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 56,
+          "start": 50,
+        },
+        "text": "kotlin",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -4094,7 +4379,6 @@ Code block
         "end": 73,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -4112,8 +4396,25 @@ Array [
   Object {
     "children": Array [],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 58,
+          "start": 47,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": undefined,
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 4,
+        },
+        "text": "test-language",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -4148,7 +4449,6 @@ Code block
         "end": 61,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -4172,8 +4472,25 @@ Code block
       },
     ],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 58,
+          "start": 47,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": undefined,
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 4,
+        },
+        "text": "test-language",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -4208,7 +4525,6 @@ Code block
         "end": 61,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -4220,8 +4536,25 @@ Code block
   Object {
     "children": Array [],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 58,
+          "start": 47,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": undefined,
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 17,
+          "start": 4,
+        },
+        "text": "test-language",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -4256,7 +4589,6 @@ Code block
         "end": 61,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -4274,6 +4606,15 @@ Array [
   Object {
     "children": Array [],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 88,
+          "start": 77,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -4283,7 +4624,15 @@ Array [
         "text": "label",
         "type": "Text",
       },
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 74,
+          "start": 68,
+        },
+        "text": "kotlin",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -4326,7 +4675,6 @@ Code block
         "end": 91,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -4338,6 +4686,15 @@ Code block
   },
   Object {
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 88,
+          "start": 77,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -4347,7 +4704,15 @@ Code block
         "text": "label",
         "type": "Text",
       },
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 74,
+          "start": 68,
+        },
+        "text": "kotlin",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -4390,7 +4755,6 @@ Code block
         "end": 91,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -4403,6 +4767,15 @@ Code block
   Object {
     "children": Array [],
     "parent": Object {
+      "code": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 88,
+          "start": 77,
+        },
+        "text": "Code block",
+        "type": "Text",
+      },
       "label": Object {
         "parent": [Circular],
         "pos": Object {
@@ -4412,7 +4785,15 @@ Code block
         "text": "label",
         "type": "Text",
       },
-      "lang": "test-language",
+      "lang": Object {
+        "parent": [Circular],
+        "pos": Object {
+          "end": 74,
+          "start": 68,
+        },
+        "text": "kotlin",
+        "type": "Text",
+      },
       "name": [Circular],
       "parent": Object {
         "children": Array [
@@ -4455,7 +4836,6 @@ Code block
         "end": 91,
         "start": 1,
       },
-      "text": "Code block",
       "type": "Code",
     },
     "pos": Object {
@@ -4464,6 +4844,29 @@ Code block
     },
     "text": " Block",
     "type": "Text",
+  },
+]
+`;
+
+exports[`code block lexer check With two lang args 2`] = `
+Array [
+  Object {
+    "errorType": 0,
+    "filePath": "test.md",
+    "message": "Multiple \\"lang\\" definition",
+    "pos": Object {
+      "end": Object {
+        "absolute": 8,
+        "column": 8,
+        "line": 2,
+      },
+      "start": Object {
+        "absolute": 4,
+        "column": 4,
+        "line": 2,
+      },
+    },
+    "severity": "ERROR",
   },
 ]
 `;

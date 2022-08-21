@@ -12,15 +12,17 @@ import {
     NodeType,
     RawNodeType,
     TextNode,
-    TokensNode
+    TokensNode,
 } from '../../../node';
-import {TokenType} from "../../tokenizer";
-
+import { TokenType } from '../../tokenizer';
 
 /**
  * Angle bracket
  */
-export function isOpenLinkSimpleBracket(tokens: TokensNode, index: number): boolean {
+export function isOpenLinkSimpleBracket(
+    tokens: TokensNode,
+    index: number,
+): boolean {
     const token = tokens.tokens[index];
 
     if (

@@ -39,7 +39,7 @@ New sample text
         let node = nodes[1] as CodeNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
-        expect(node.text).toEqual('Code block');
+        expect(node.code.text).toEqual('Code block');
         expect(rawNode.text.slice(node.pos.start, node.pos.end)).toEqual(
             '```\nCode block\n```',
         );
@@ -60,8 +60,8 @@ New sample text
         let node = nodes[1] as CodeNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
-        expect(node.lang).toEqual('test-language');
-        expect(node.text).toEqual('Code block');
+        expect(node.lang?.text).toEqual('test-language');
+        expect(node.code.text).toEqual('Code block');
     });
 
     test('With name arg', () => {
@@ -75,8 +75,8 @@ Code block
         let node = nodes[0] as CodeNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
-        expect(node.lang).toEqual('test-language');
-        expect(node.text).toEqual('Code block');
+        expect(node.lang?.text).toEqual('test-language');
+        expect(node.code.text).toEqual('Code block');
 
         expect(node.name).toMatchSnapshot();
     });
@@ -92,9 +92,9 @@ Code block
         let node = nodes[0] as CodeNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
-        expect(node.lang).toBeUndefined();
+        expect(node.lang?.text).toBeUndefined();
         expect(node.label?.text).toEqual('label');
-        expect(node.text).toEqual('Code block');
+        expect(node.code.text).toEqual('Code block');
     });
 
     test('With all args', () => {
@@ -108,9 +108,9 @@ Code block
         let node = nodes[0] as CodeNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
-        expect(node.lang).toEqual('test-language');
+        expect(node.lang?.text).toEqual('test-language');
         expect(node.label?.text).toEqual('label');
-        expect(node.text).toEqual('Code block');
+        expect(node.code.text).toEqual('Code block');
 
         expect(node.name).toMatchSnapshot();
     });
@@ -128,9 +128,9 @@ Code block
         let node = nodes[0] as CodeNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
-        expect(node.lang).toEqual('kotlin');
+        expect(node.lang?.text).toEqual('kotlin');
         expect(node.label?.text).toEqual('label');
-        expect(node.text).toEqual('Code block');
+        expect(node.code.text).toEqual('Code block');
 
         expect(node.name).toMatchSnapshot();
     });
@@ -150,10 +150,11 @@ Code block
         let node = nodes[0] as CodeNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Code);
-        expect(node.lang).toEqual('test-language');
+        expect(node.lang?.text).toEqual('kotlin');
         expect(node.label?.text).toEqual('label');
 
         expect(node.name).toMatchSnapshot();
+        expect(diagnostic).toMatchSnapshot();
     });
 
     test('Error raw node', () => {

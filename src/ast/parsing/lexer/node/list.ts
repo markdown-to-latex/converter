@@ -5,6 +5,7 @@ import {
     ListNode,
     NodeType,
     RawNodeType,
+    TextNode,
     TokensNode,
 } from '../../../node';
 import { applyVisitors, findTokenOrNull, sliceTokenText } from '../index';
@@ -165,6 +166,17 @@ function parseListItem(
         lineDelimiterIndex = delimiter?.index ?? tokens.tokens.length;
     }
 
+    const startToken = tokens.tokens[sliceStart];
+    const bulletTextNode: TextNode = {
+        type: NodeType.Text,
+        parent: tokens.parent,
+        pos: {
+            start: tokens.tokens[index].pos,
+            end: startToken.pos + startToken.text.length,
+        },
+        text: sliceTokenText(tokens, index, sliceStart),
+    };
+
     const sliceEnd = lineDelimiterIndex;
     const endToken = tokens.tokens[sliceEnd - 1];
 
@@ -176,6 +188,7 @@ function parseListItem(
             start: tokens.tokens[beginIndex].pos,
             end: endToken.pos + endToken.text.length,
         },
+        bullet: bulletTextNode,
         loose: false,
         task: false,
     };
@@ -184,7 +197,7 @@ function parseListItem(
         type: RawNodeType.Tokens,
         tokens: tokens.tokens.slice(sliceStart, sliceEnd),
         pos: {
-            start: tokens.tokens[sliceStart].pos,
+            start: startToken.pos,
             end: endToken.pos + endToken.text.length,
         },
         parent: listItemNode,
@@ -194,6 +207,7 @@ function parseListItem(
     diagnostic.push(...visitorsResult.diagnostic);
 
     listItemNode.children = visitorsResult.nodes;
+    bulletTextNode.parent = listItemNode;
 
     return {
         item: listItemNode,

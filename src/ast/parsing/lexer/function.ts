@@ -45,7 +45,7 @@ import { parseMacro } from './node/macros';
 import { parseImage } from './node/image';
 import { parseTable } from './node/table';
 import { parseBlockquote } from './node/blockquote';
-import {parseLinkSimple} from "./node/linkSimple";
+import { parseLinkSimple } from './node/linkSimple';
 
 interface FindTokenResult {
     token: Token;

@@ -4,13 +4,7 @@ import {
     ProcessingInfo,
     ProcessingInfoCallback,
 } from '../struct';
-import {
-    CodeNode,
-    Node,
-    NodeAbstract,
-    NodeType,
-    TextNode,
-} from '../../../ast/node';
+import { CodeNode, NodeAbstract, NodeType, TextNode } from '../../../ast/node';
 import { fallbackNameNodes } from '../utils';
 import {
     DiagnoseErrorType,
@@ -34,10 +28,16 @@ function fallbackCodeNode(codeNode: CodeNode): CodeProcessedNode {
         type: ProcessedNodeType.CodeProcessed,
         name: fallbackNameNodes(codeNode),
         label: labelNode,
-        lang: 'text',
+        lang: {
+            type: NodeType.Text,
+            parent: null,
+            pos: { start: codeNode.pos.start, end: codeNode.pos.start },
+            text: 'text',
+        },
         index: -1,
     };
     labelNode.parent = fallbackCodeNode as NodeAbstract;
+    fallbackCodeNode.lang.parent = fallbackCodeNode as NodeAbstract;
 
     return fallbackCodeNode;
 }

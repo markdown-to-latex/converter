@@ -82,8 +82,9 @@ export interface CodeProcessedNode
     type: ProcessedNodeType.CodeProcessed;
     label: TextNode;
     name: Node[];
-    lang: string;
+    lang: TextNode;
     index: number;
+    code: TextNode;
 }
 
 export interface PictureKeyNode extends NodeProcessed {

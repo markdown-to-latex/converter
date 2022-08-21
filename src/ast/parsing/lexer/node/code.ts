@@ -1,9 +1,16 @@
 import { TokenParser, TokenPredicate } from '../struct';
 import { TokenType } from '../../tokenizer';
-import { CodeNode, Node, NodeType } from '../../../node';
+import {
+    CodeNode,
+    copyTextPosition,
+    Node,
+    NodeType,
+    TextNode,
+} from '../../../node';
 import {
     findTokenOrNull,
     findTokenOrNullBackward,
+    sliceTokenText,
     tokenToDiagnose,
     unexpectedEof,
 } from '../index';
@@ -15,11 +22,7 @@ import {
     parseMacroKeyArgs,
     parseMacroPosArgs,
 } from './macros';
-import {
-    ArgInfo,
-    ArgInfoType,
-    parseMacrosArguments,
-} from '../../../../macro/args';
+import { ArgInfo, ArgInfoType, parseMacrosArguments } from '../../../../macro';
 
 export const isCode: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(token, index, node)) {
@@ -54,7 +57,7 @@ const argInfo: ArgInfo[] = [
     {
         name: 'language',
         aliases: ['lang', 'l'],
-        type: ArgInfoType.Text,
+        type: ArgInfoType.TextNode,
         optional: true,
         onlySpans: true,
     },
@@ -68,9 +71,10 @@ export const parseCode: TokenParser = function (tokens, index) {
         return null;
     }
 
+    const languageNameStart = index + 1;
     let lineBreakResult = findTokenOrNull(
         tokens,
-        index + 1,
+        languageNameStart,
         t => t.type === TokenType.Delimiter,
     );
     if (!lineBreakResult) {
@@ -82,10 +86,9 @@ export const parseCode: TokenParser = function (tokens, index) {
         );
     }
 
-    let languageName: string | undefined = undefined;
     let argStartIndex;
     for (
-        argStartIndex = index + 1;
+        argStartIndex = languageNameStart;
         argStartIndex < lineBreakResult.index;
         ++argStartIndex
     ) {
@@ -100,10 +103,19 @@ export const parseCode: TokenParser = function (tokens, index) {
         ) {
             break;
         }
-
-        languageName ??= '';
-        languageName += token.text;
     }
+
+    const languageNameEnd = argStartIndex;
+    const languageNameEndToken = tokens.tokens[languageNameEnd - 1];
+    const languageNameNode: TextNode = {
+        type: NodeType.Text,
+        parent: tokens.parent,
+        pos: {
+            start: tokens.tokens[languageNameStart].pos,
+            end: languageNameEndToken.pos + languageNameEndToken.text.length,
+        },
+        text: sliceTokenText(tokens, languageNameStart, languageNameEnd),
+    };
 
     const labelResult = getMacroLabel(tokens, argStartIndex);
     diagnostic.push(...labelResult.diagnostic);
@@ -154,18 +166,24 @@ export const parseCode: TokenParser = function (tokens, index) {
 
     const argsResult = argParsingResult.result as {
         name?: Node[];
-        language?: string;
+        language?: TextNode;
     };
 
-    if (languageName && argsResult.language) {
+    if (languageNameNode.text && argsResult.language) {
         diagnostic.push(
             tokenToDiagnose(
                 tokens,
-                index + 1,
+                languageNameStart,
                 'Multiple "lang" definition',
                 DiagnoseSeverity.Error,
             ),
         );
+    }
+    if (argsResult.language) {
+        languageNameNode.text = argsResult.language.text;
+        languageNameNode.pos = {
+            ...argsResult.language.pos,
+        };
     }
 
     const endTokenResult = findTokenOrNull(
@@ -197,6 +215,21 @@ export const parseCode: TokenParser = function (tokens, index) {
         );
     }
 
+    const codeTextNode: TextNode = {
+        type: NodeType.Text,
+        parent: tokens.parent,
+        pos: {
+            start: tokens.tokens[lineBreakResult.index + 1].pos,
+            end:
+                lineBreakEndResult.token.pos +
+                lineBreakEndResult.token.text.length,
+        },
+        text: tokens.tokens
+            .slice(lineBreakResult.index + 1, lineBreakEndResult.index)
+            .map(v => v.text)
+            .join(''),
+    };
+
     const endToken = endTokenResult.token;
     const codeNode: CodeNode = {
         type: NodeType.Code,
@@ -204,18 +237,18 @@ export const parseCode: TokenParser = function (tokens, index) {
             start: token.pos,
             end: endToken.pos + endToken.text.length,
         },
-        text: tokens.tokens
-            .slice(lineBreakResult.index + 1, lineBreakEndResult.index)
-            .map(v => v.text)
-            .join(''),
+        code: codeTextNode,
         parent: tokens.parent,
-        lang: languageName ?? argsResult.language,
+        lang: languageNameNode.text ? languageNameNode : undefined,
         label: label,
         name: argsResult.name,
     };
     if (label) {
         label.parent = codeNode;
     }
+
+    languageNameNode.parent = codeNode;
+    codeTextNode.parent = codeNode;
 
     Object.values(macroArgsResult.keys).forEach(v => (v.parent = codeNode));
     parsePosArgsResult.result.forEach(v =>

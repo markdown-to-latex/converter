@@ -139,9 +139,10 @@ export interface SpaceNode extends Node {
     type: NodeType.Space;
 }
 
-export interface CodeNode extends Node, NodeText {
+export interface CodeNode extends Node {
     type: NodeType.Code;
-    lang?: string;
+    code: TextNode;
+    lang?: TextNode;
     name?: Node[];
     label?: TextNode;
 }
@@ -161,6 +162,7 @@ export interface BlockquoteNode extends Node, NodeChildren {
     type: NodeType.Blockquote;
 }
 
+// TODO: split ListNode into OrderedListNode and UnorderedListNode
 export interface ListNode extends Node, NodeChildren {
     type: NodeType.List;
     ordered: boolean;
@@ -170,6 +172,7 @@ export interface ListNode extends Node, NodeChildren {
 
 export interface ListItemNode extends Node, NodeChildren {
     type: NodeType.ListItem;
+    bullet: TextNode;
     task: boolean;
     checked?: boolean;
     loose: boolean;
