@@ -33,11 +33,13 @@ function createFallbackNode(node: Node, macroName: string): TextNode {
     };
 }
 
-const ALL_COMMAND_LIST: CommandInfo[] = [
+export const ALL_COMMAND_LIST: Readonly<CommandInfo[]> = [
     command.pictureKey,
+    command.pictureAmount,
 
     command.table,
     command.tableKey,
+    command.tableAmount,
 
     ...command.application,
     command.applicationKey,

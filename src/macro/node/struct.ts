@@ -6,7 +6,6 @@ import {
     NodeChildren,
     NodeE,
     NodeType,
-    OpCodeNode,
     TableNode,
     TextNode,
 } from '../../ast/node';
@@ -46,6 +45,9 @@ export const enum ProcessedNodeType {
     RawApplication = 'RawApplication',
     PictureApplication = 'PictureApplication',
     CodeApplication = 'CodeApplication',
+
+    PictureAmount = 'PictureAmount',
+    TableAmount = 'TableAmount',
 
     Reference = 'Reference',
 
@@ -152,4 +154,18 @@ export interface CodeApplicationNode extends NodeProcessed, NodeApplication {
     lang: string;
     directory: string;
     filename: string;
+}
+
+export interface PictureAmountNode extends NodeProcessed {
+    type: ProcessedNodeType.PictureAmount;
+
+    // TODO: get rid of lambdas
+    numberLazy: () => number;
+}
+
+export interface TableAmountNode extends NodeProcessed {
+    type: ProcessedNodeType.TableAmount;
+
+    // TODO: get rid of lambdas
+    numberLazy: () => number;
 }

@@ -42,7 +42,7 @@
         "typescript": "^4.7.4"
     },
     "dependencies": {
-        "json5": "^2.2.1",
+        "json5": "^2.2.3",
         "jsonschema": "^1.4.1"
     }
 }

@@ -16,6 +16,8 @@ const ProcessedNodesByTypeMap = {
     [ProcessedNodeType.PictureApplication]: {} as nodes.PictureApplicationNode,
     [ProcessedNodeType.CodeApplication]: {} as nodes.CodeApplicationNode,
     [ProcessedNodeType.Reference]: {} as nodes.ReferenceNode,
+    [ProcessedNodeType.PictureAmount]: {} as nodes.PictureAmountNode,
+    [ProcessedNodeType.TableAmount]: {} as nodes.TableAmountNode,
 } as const;
 
 export type ProcessedNodesByType = typeof ProcessedNodesByTypeMap;
