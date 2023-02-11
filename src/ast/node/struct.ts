@@ -11,7 +11,6 @@ export const enum RawNodeType {
 
 export const enum NodeType {
     // Default MarkDown Nodes
-    Space = 'Space',
     Code = 'Code',
     Heading = 'Heading',
     Table = 'Table',
@@ -21,8 +20,6 @@ export const enum NodeType {
     List = 'List',
     ListItem = 'ListItem',
     Paragraph = 'Paragraph',
-    Html = 'HTML',
-    Def = 'Def',
     Escape = 'Escape',
     Text = 'Text',
     Link = 'Link',
@@ -51,8 +48,6 @@ export const enum NodeType {
 }
 
 export const SPAN_NODE_TYPES: NodeType[] = [
-    NodeType.Space,
-    NodeType.Def,
     NodeType.Escape,
     NodeType.Text,
     NodeType.Link,
@@ -139,10 +134,6 @@ export interface TextBreakNode extends Node {
     type: RawNodeType.TextBreak;
 }
 
-export interface SpaceNode extends Node {
-    type: NodeType.Space;
-}
-
 export interface CodeNode extends Node {
     type: NodeType.Code;
     code: TextNode; // TODO: inherit from NodeTextNode
@@ -185,17 +176,6 @@ export interface ListItemNode extends Node, NodeChildren {
 export interface ParagraphNode extends Node, NodeChildren {
     type: NodeType.Paragraph;
     pre?: boolean;
-}
-
-export interface HtmlNode extends Node, NodeText {
-    type: NodeType.Html;
-    pre: boolean;
-}
-
-export interface DefNode extends Node, NodeHref {
-    type: NodeType.Def;
-    tag: string;
-    title: string;
 }
 
 export interface EscapeNode extends Node, NodeText {

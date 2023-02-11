@@ -367,7 +367,7 @@ function applyParagraphs(roNodes: Readonly<Node[]>): Node[] {
     let i = 0;
     while (i < nodes.length) {
         const node = nodes[i];
-        if (TEXT_LIKE_NODES.indexOf(node.type) === -1) {
+        if (TEXT_LIKE_NODES.indexOf(node.type as NodeType) === -1) {
             if (lastTextNodeIndex !== null) {
                 const paragraphChildren = nodes.splice(
                     lastTextNodeIndex,

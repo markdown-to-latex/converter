@@ -1,13 +1,13 @@
-import * as nodes from '../ast/node';
-import { NodeType } from './node';
-import { RawNodeType } from './node';
+import * as nodes from "../ast/node";
+import { NodeType } from "./node";
+import { RawNodeType } from "./node";
 
 const RawNodesByTypeMap = {
     [RawNodeType.Raw]: {} as nodes.RawNode,
     [RawNodeType.Tokens]: {} as nodes.TokensNode,
     [RawNodeType.SoftBreak]: {} as nodes.SoftBreakNode,
     [RawNodeType.ParagraphBreak]: {} as nodes.ParagraphBreakNode,
-    [RawNodeType.TextBreak]: {} as nodes.TextBreakNode,
+    [RawNodeType.TextBreak]: {} as nodes.TextBreakNode
 } as const;
 
 export type RawNodesByType = typeof RawNodesByTypeMap;
@@ -18,7 +18,6 @@ const _1 = RawNodesByTypeMap as {
 };
 
 const NodesByTypeMap = {
-    [NodeType.Space]: {} as nodes.SpaceNode,
     [NodeType.Code]: {} as nodes.CodeNode,
     [NodeType.Heading]: {} as nodes.HeadingNode,
     [NodeType.Table]: {} as nodes.TableNode,
@@ -28,8 +27,6 @@ const NodesByTypeMap = {
     [NodeType.List]: {} as nodes.ListNode,
     [NodeType.ListItem]: {} as nodes.ListItemNode,
     [NodeType.Paragraph]: {} as nodes.ParagraphNode,
-    [NodeType.Html]: {} as nodes.HtmlNode,
-    [NodeType.Def]: {} as nodes.DefNode,
     [NodeType.Escape]: {} as nodes.EscapeNode,
     [NodeType.Text]: {} as nodes.TextNode,
     [NodeType.Link]: {} as nodes.LinkNode,
@@ -53,7 +50,7 @@ const NodesByTypeMap = {
     [NodeType.NonBreakingSpace]: {} as nodes.NonBreakingSpaceNode,
     [NodeType.ThinNonBreakingSpace]: {} as nodes.ThinNonBreakingSpaceNode,
 
-    [NodeType.Comment]: {} as nodes.CommentNode,
+    [NodeType.Comment]: {} as nodes.CommentNode
 } as const;
 
 export type NodesByType = typeof NodesByTypeMap;
