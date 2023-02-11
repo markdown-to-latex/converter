@@ -53,6 +53,8 @@ const NodesByTypeMap = {
     [NodeType.Comment]: {} as nodes.CommentNode
 } as const;
 
+export const NodesArray = Object.keys(NodesByTypeMap) as NodeType[];
+
 export type NodesByType = typeof NodesByTypeMap;
 
 // Compile-time interface validation

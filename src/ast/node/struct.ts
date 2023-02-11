@@ -47,6 +47,9 @@ export const enum NodeType {
     Comment = 'Comment',
 }
 
+/**
+ * Is being used in command arguments
+ */
 export const SPAN_NODE_TYPES: NodeType[] = [
     NodeType.Escape,
     NodeType.Text,
@@ -62,7 +65,10 @@ export const SPAN_NODE_TYPES: NodeType[] = [
     NodeType.Comment,
 ];
 
-export const TEXT_LIKE_NODES: (NodeType | RawNodeType)[] = [
+/**
+ * The nodes, that will be wrapped into the paragraph
+ */
+export const TEXT_LIKE_NODES: (NodeType)[] = [
     NodeType.Escape,
     NodeType.Text,
     NodeType.Link,
@@ -78,6 +84,59 @@ export const TEXT_LIKE_NODES: (NodeType | RawNodeType)[] = [
     NodeType.NonBreakingSpace,
     NodeType.ThinNonBreakingSpace,
 ];
+
+/**
+ * The structure:
+ * ```
+ * - File node
+ *    |- Paragraph-like node
+ *    |      - Text-like node
+ *    |      - .....
+ *    |      - Text-like node
+ *    |- ...
+ *    |- Paragraph-like node
+ *    |      - Text-like node
+ *    |      - .....
+ *    |      - Text-like node
+ * - ...
+ * - File node
+ *    |- Paragraph-like node
+ *    |      - Text-like node
+ *    |      - .....
+ *    |      - Text-like node
+ *    |- ...
+ *    |- Paragraph-like node
+ *    |      - Text-like node
+ *    |      - .....
+ *    |      - Text-like node
+ * ```
+ */
+export const PARAGRAPH_LIKE_NODES: NodeType[] = [
+    NodeType.Paragraph,
+    NodeType.Code,
+    NodeType.Heading,
+    NodeType.Blockquote,
+    NodeType.List,
+    NodeType.Image,
+    NodeType.Latex,
+    NodeType.Formula,
+    NodeType.Table,
+    NodeType.Hr,
+]
+
+/**
+ * Control nodes and
+ * nodes that can be occurred only inside a container node
+ */
+export const SPECIAL_NODES: NodeType[] = [
+    NodeType.File,
+    NodeType.TableControlCell,
+    NodeType.TableControlRow,
+    NodeType.TableRow,
+    NodeType.TableCell,
+    NodeType.ListItem,
+    NodeType.Comment,
+]
 
 export type StartEndNumberPosition = StartEndPosition<number>;
 
