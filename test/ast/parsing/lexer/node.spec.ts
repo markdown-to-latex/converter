@@ -823,11 +823,56 @@ $$$
 New sample text
 `);
         const { nodes, diagnostic } = applyVisitors([rawNode]);
-        expect(diagnostic).toHaveLength(1);
+        expect(diagnostic).toHaveLength(1); // label should be math or raw
         let node = nodes[1] as FormulaNode;
         expect(node).not.toBeUndefined();
         expect(node.type).toEqual(NodeType.Formula);
         expect(node.text.text).toEqual('a = b + x');
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('With wrong target', () => {
+        const rawNode = rawNodeTemplate(`$$$asdasdasd
+a = b + x
+$$$`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(1);
+        let node = nodes[0] as FormulaNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Formula);
+        expect(node.text.text).toEqual('a = b + x');
+
+        expect(diagnostic).toMatchSnapshot();
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('With math target', () => {
+        const rawNode = rawNodeTemplate(`$$$math
+a = b + x
+$$$`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[0] as FormulaNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Formula);
+        expect(node.text.text).toEqual('a = b + x');
+
+        expect(nodes).toMatchSnapshot();
+    });
+
+    test('With label', () => {
+        const rawNode = rawNodeTemplate(`SimpleText !FK[eq1]
+$$$math[eq1]
+a = x + z
+$$$`);
+        const { nodes, diagnostic } = applyVisitors([rawNode]);
+        expect(diagnostic).toHaveLength(0);
+        let node = nodes[1] as FormulaNode;
+        expect(node).not.toBeUndefined();
+        expect(node.type).toEqual(NodeType.Formula);
+        expect(node.text.text).toEqual('a = x + z');
+        expect(node.label?.text).toEqual('eq1');
 
         expect(nodes).toMatchSnapshot();
     });

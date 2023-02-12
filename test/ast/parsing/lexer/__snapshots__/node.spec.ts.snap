@@ -581,6 +581,7 @@ New sample text
     "type": "Paragraph",
   },
   Object {
+    "label": undefined,
     "parent": Object {
       "children": Array [
         Object {
@@ -615,6 +616,15 @@ New sample text
     "pos": Object {
       "end": 29,
       "start": 12,
+    },
+    "target": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 15,
+        "start": 15,
+      },
+      "text": "",
+      "type": "Text",
     },
     "text": Object {
       "parent": [Circular],
@@ -676,6 +686,282 @@ New sample text
       "start": 30,
     },
     "type": "Paragraph",
+  },
+]
+`;
+
+exports[`Formula parsing With label 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 11,
+          "start": 0,
+        },
+        "text": "SimpleText ",
+        "type": "Text",
+      },
+      Object {
+        "keyArgs": Object {},
+        "keys": Object {},
+        "label": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 18,
+            "start": 15,
+          },
+          "text": "eq1",
+          "type": "Text",
+        },
+        "opcode": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 14,
+            "start": 12,
+          },
+          "text": "FK",
+          "type": "Text",
+        },
+        "parent": [Circular],
+        "pos": Object {
+          "end": 19,
+          "start": 11,
+        },
+        "posArgs": Array [],
+        "type": "OpCode",
+      },
+    ],
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 46,
+            "start": 0,
+          },
+          "text": "SimpleText !FK[eq1]
+$$$math[eq1]
+a = x + z
+$$$",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 46,
+        "start": 0,
+      },
+      "raw": "SimpleText !FK[eq1]
+$$$math[eq1]
+a = x + z
+$$$",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 19,
+      "start": 0,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "label": Object {
+      "parent": null,
+      "pos": Object {
+        "end": 31,
+        "start": 28,
+      },
+      "text": "eq1",
+      "type": "Text",
+    },
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 46,
+            "start": 0,
+          },
+          "text": "SimpleText !FK[eq1]
+$$$math[eq1]
+a = x + z
+$$$",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 46,
+        "start": 0,
+      },
+      "raw": "SimpleText !FK[eq1]
+$$$math[eq1]
+a = x + z
+$$$",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 46,
+      "start": 20,
+    },
+    "target": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 27,
+        "start": 23,
+      },
+      "text": "math",
+      "type": "Text",
+    },
+    "text": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 43,
+        "start": 33,
+      },
+      "text": "a = x + z",
+      "type": "Text",
+    },
+    "type": "Formula",
+  },
+]
+`;
+
+exports[`Formula parsing With math target 1`] = `
+Array [
+  Object {
+    "label": undefined,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 21,
+            "start": 0,
+          },
+          "text": "$$$math
+a = b + x
+$$$",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 21,
+        "start": 0,
+      },
+      "raw": "$$$math
+a = b + x
+$$$",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 21,
+      "start": 0,
+    },
+    "target": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 7,
+        "start": 3,
+      },
+      "text": "math",
+      "type": "Text",
+    },
+    "text": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 18,
+        "start": 8,
+      },
+      "text": "a = b + x",
+      "type": "Text",
+    },
+    "type": "Formula",
+  },
+]
+`;
+
+exports[`Formula parsing With wrong target 1`] = `
+Array [
+  Object {
+    "errorType": 0,
+    "filePath": "test.md",
+    "message": "Expected target (label) should be \\"math\\" or \\"raw\\". Using default value: \\"math\\"",
+    "pos": Object {
+      "end": Object {
+        "absolute": 26,
+        "column": 4,
+        "line": 3,
+      },
+      "start": Object {
+        "absolute": 0,
+        "column": 1,
+        "line": 1,
+      },
+    },
+    "severity": "WARNING",
+  },
+]
+`;
+
+exports[`Formula parsing With wrong target 2`] = `
+Array [
+  Object {
+    "label": undefined,
+    "parent": Object {
+      "children": Array [
+        Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 26,
+            "start": 0,
+          },
+          "text": "$$$asdasdasd
+a = b + x
+$$$",
+          "type": "Raw",
+        },
+      ],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 26,
+        "start": 0,
+      },
+      "raw": "$$$asdasdasd
+a = b + x
+$$$",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 26,
+      "start": 0,
+    },
+    "target": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 12,
+        "start": 3,
+      },
+      "text": "asdasdasd",
+      "type": "Text",
+    },
+    "text": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 23,
+        "start": 13,
+      },
+      "text": "a = b + x",
+      "type": "Text",
+    },
+    "type": "Formula",
   },
 ]
 `;

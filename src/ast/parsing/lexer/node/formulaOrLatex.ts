@@ -14,6 +14,7 @@ import {
     nodeToDiagnose,
 } from '../../../../diagnostic';
 import { isPrevTokenDelimiter } from './breaks';
+import {getMacroLabel} from "./macros";
 
 export const isLatex: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(token, index, node)) {
@@ -60,7 +61,7 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
         return unexpectedEof(
             tokens,
             index,
-            'Unable to find line break after code',
+            'Unable to find line break after formula/latex block',
         );
     }
 
@@ -77,7 +78,8 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
                 TokenType.Letter,
                 TokenType.SeparatedSpecial,
                 TokenType.JoinableSpecial,
-            ].indexOf(token.type) === -1
+            ].indexOf(token.type) === -1 ||
+            token.text === '['
         ) {
             break;
         }
@@ -94,6 +96,11 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
         },
         text: sliceTokenText(tokens, targetStart, targetEnd),
     };
+
+    const labelResult = getMacroLabel(tokens, argStartIndex);
+    diagnostic.push(...labelResult.diagnostic);
+
+    const label = labelResult.label ?? undefined;
 
     const endTokenResult = findTokenOrNull(
         tokens,
@@ -139,7 +146,7 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
 
     const endToken = endTokenResult.token;
     const latexNode: LatexNode | FormulaNode = {
-        // TODO: save the target
+        target: targetNode,
         type:
             targetNode.text === LatexTarget.Raw
                 ? NodeType.Latex
@@ -150,7 +157,19 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
         },
         text: codeTextNode,
         parent: tokens.parent,
+        label: label
     };
+
+    if (label && targetNode.text === LatexTarget.Raw) {
+        diagnostic.push(
+            nodeToDiagnose(
+                label,
+                DiagnoseSeverity.Warning,
+                DiagnoseErrorType.ApplyParserError,
+                'Label for Latex node is not available',
+            ),
+        );
+    }
 
     targetNode.parent = latexNode;
     codeTextNode.parent = latexNode;

@@ -19,6 +19,10 @@ export interface ContextReferenceContentInfo extends ContextReferenceInfo {
     content: Node[];
 }
 
+export interface ContextFormulaInfo {
+    label: TextNode;
+}
+
 export interface ContextPictureInfo {
     label: TextNode;
     name: Node[];
@@ -63,10 +67,19 @@ export interface ContextDataGeneric<T> {
     labelToInfo: Record<string, T>;
 }
 
+export function contextDataGenericEmpty(): ContextDataGeneric<any> {
+    return {
+        labels: [],
+        labelToRefs: {},
+        labelToInfo: {},
+    };
+}
+
 export type ContextApplicationData =
     ContextDataGeneric<ContextApplicationContentInfo>;
 export type ContextReferenceData =
     ContextDataGeneric<ContextReferenceContentInfo>;
+export type ContextFormulaData = ContextDataGeneric<ContextFormulaInfo>;
 export type ContextPictureData = ContextDataGeneric<ContextPictureInfo>;
 export type ContextTableData = ContextDataGeneric<ContextTableInfo>;
 
@@ -75,6 +88,7 @@ export interface ContextData {
     reference: ContextReferenceData;
     picture: ContextPictureData;
     table: ContextTableData;
+    formula: ContextFormulaData;
 }
 
 export interface Context {
@@ -96,26 +110,11 @@ export function initContext(node: FileNode): Context {
             table: null,
         },
         data: {
-            application: {
-                labels: [],
-                labelToRefs: {},
-                labelToInfo: {},
-            },
-            reference: {
-                labels: [],
-                labelToRefs: {},
-                labelToInfo: {},
-            },
-            picture: {
-                labels: [],
-                labelToRefs: {},
-                labelToInfo: {},
-            },
-            table: {
-                labels: [],
-                labelToRefs: {},
-                labelToInfo: {},
-            },
+            application: contextDataGenericEmpty(),
+            reference: contextDataGenericEmpty(),
+            picture: contextDataGenericEmpty(),
+            table: contextDataGenericEmpty(),
+            formula: contextDataGenericEmpty(),
         },
         diagnostic: [],
     };

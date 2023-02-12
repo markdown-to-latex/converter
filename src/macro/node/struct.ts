@@ -1,5 +1,6 @@
 import {
     CodeNode,
+    FormulaNode,
     ImageNode,
     Node,
     NodeAbstract,
@@ -31,11 +32,14 @@ export const enum ProcessedNodeType {
     TableProcessed = 'TableProcessed',
     PictureProcessed = 'PictureProcessed',
     CodeProcessed = 'CodeProcessed',
+    FormulaProcessed = 'FormulaProcessed',
+    FormulaNoLabelProcessed = 'FormulaNoLabelProcessed',
 
     PictureKey = 'PictureKey',
     TableKey = 'TableKey',
     ApplicationKey = 'ApplicationKey',
     ReferenceKey = 'ReferenceKey',
+    FormulaKey = 'FormulaKey',
 
     // LatexSpecific = 'LatexSpecific', // TODO
 
@@ -89,6 +93,20 @@ export interface CodeProcessedNode
     code: TextNode;
 }
 
+export interface FormulaProcessedNode
+    extends NodeProcessed,
+        Omit<FormulaNode, 'type'> {
+    type: ProcessedNodeType.FormulaProcessed;
+    label: TextNode;
+    index: number;
+}
+
+export interface FormulaNoLabelProcessedNode
+    extends NodeProcessed,
+        Omit<FormulaNode, 'type'> {
+    type: ProcessedNodeType.FormulaNoLabelProcessed;
+}
+
 export interface PictureKeyNode extends NodeProcessed {
     type: ProcessedNodeType.PictureKey;
     index: number;
@@ -106,6 +124,11 @@ export interface ApplicationKeyNode extends NodeProcessed {
 
 export interface ReferenceKeyNode extends NodeProcessed {
     type: ProcessedNodeType.ReferenceKey;
+    index: number;
+}
+
+export interface FormulaKeyNode extends NodeProcessed {
+    type: ProcessedNodeType.FormulaKey;
     index: number;
 }
 

@@ -48,6 +48,8 @@ export const ALL_COMMAND_LIST: Readonly<CommandInfo[]> = [
     command.reference,
     command.referenceKey,
     command.listAllReferences,
+
+    command.formulaKey,
 ];
 
 export function parseMacro(

@@ -1,6 +1,6 @@
 import {
     ContextApplicationContentInfo,
-    ContextApplicationInfo,
+    contextDataGenericEmpty,
     ContextE,
     ContextPictureInfo,
     ContextReferenceContentInfo,
@@ -36,26 +36,11 @@ function createSimpleContext(): ContextE {
             table: null,
         },
         data: {
-            application: {
-                labels: [],
-                labelToRefs: {},
-                labelToInfo: {},
-            },
-            reference: {
-                labels: [],
-                labelToRefs: {},
-                labelToInfo: {},
-            },
-            picture: {
-                labels: [],
-                labelToRefs: {},
-                labelToInfo: {},
-            },
-            table: {
-                labels: [],
-                labelToRefs: {},
-                labelToInfo: {},
-            },
+            application: contextDataGenericEmpty(),
+            reference: contextDataGenericEmpty(),
+            picture: contextDataGenericEmpty(),
+            table: contextDataGenericEmpty(),
+            formula: contextDataGenericEmpty(),
         },
         diagnostic: [],
         // writeDiagnosticList: () => {},

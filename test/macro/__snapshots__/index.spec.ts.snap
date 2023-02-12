@@ -1,5 +1,326 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`formulas formula with and without label 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 27,
+          "start": 1,
+        },
+        "text": "Reference to the formula: ",
+        "type": "Text",
+      },
+      Object {
+        "index": 0,
+        "parent": [Circular],
+        "pos": Object {
+          "end": 35,
+          "start": 27,
+        },
+        "type": "FormulaKey",
+      },
+      Object {
+        "children": Array [],
+        "parent": [Circular],
+        "pos": Object {
+          "end": 36,
+          "start": 35,
+        },
+        "text": ".",
+        "type": "Text",
+      },
+    ],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 86,
+        "start": 0,
+      },
+      "raw": "
+Reference to the formula: !FK[eq1].
+$$$math
+a = b + c
+$$$
+$$$math[eq1]
+c = a - b
+$$$
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 36,
+      "start": 1,
+    },
+    "type": "Paragraph",
+  },
+  Object {
+    "label": undefined,
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 86,
+        "start": 0,
+      },
+      "raw": "
+Reference to the formula: !FK[eq1].
+$$$math
+a = b + c
+$$$
+$$$math[eq1]
+c = a - b
+$$$
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 58,
+      "start": 37,
+    },
+    "target": Object {
+      "parent": Object {
+        "label": undefined,
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 86,
+            "start": 0,
+          },
+          "raw": "
+Reference to the formula: !FK[eq1].
+$$$math
+a = b + c
+$$$
+$$$math[eq1]
+c = a - b
+$$$
+",
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 58,
+          "start": 37,
+        },
+        "target": [Circular],
+        "text": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 55,
+            "start": 45,
+          },
+          "text": "a = b + c",
+          "type": "Text",
+        },
+        "type": "Formula",
+      },
+      "pos": Object {
+        "end": 44,
+        "start": 40,
+      },
+      "text": "math",
+      "type": "Text",
+    },
+    "text": Object {
+      "parent": Object {
+        "label": undefined,
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 86,
+            "start": 0,
+          },
+          "raw": "
+Reference to the formula: !FK[eq1].
+$$$math
+a = b + c
+$$$
+$$$math[eq1]
+c = a - b
+$$$
+",
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 58,
+          "start": 37,
+        },
+        "target": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 44,
+            "start": 40,
+          },
+          "text": "math",
+          "type": "Text",
+        },
+        "text": [Circular],
+        "type": "Formula",
+      },
+      "pos": Object {
+        "end": 55,
+        "start": 45,
+      },
+      "text": "a = b + c",
+      "type": "Text",
+    },
+    "type": "FormulaNoLabelProcessed",
+  },
+  Object {
+    "index": 0,
+    "label": Object {
+      "parent": null,
+      "pos": Object {
+        "end": 70,
+        "start": 67,
+      },
+      "text": "eq1",
+      "type": "Text",
+    },
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 86,
+        "start": 0,
+      },
+      "raw": "
+Reference to the formula: !FK[eq1].
+$$$math
+a = b + c
+$$$
+$$$math[eq1]
+c = a - b
+$$$
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 85,
+      "start": 59,
+    },
+    "target": Object {
+      "parent": Object {
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 70,
+            "start": 67,
+          },
+          "text": "eq1",
+          "type": "Text",
+        },
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 86,
+            "start": 0,
+          },
+          "raw": "
+Reference to the formula: !FK[eq1].
+$$$math
+a = b + c
+$$$
+$$$math[eq1]
+c = a - b
+$$$
+",
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 85,
+          "start": 59,
+        },
+        "target": [Circular],
+        "text": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 82,
+            "start": 72,
+          },
+          "text": "c = a - b",
+          "type": "Text",
+        },
+        "type": "Formula",
+      },
+      "pos": Object {
+        "end": 66,
+        "start": 62,
+      },
+      "text": "math",
+      "type": "Text",
+    },
+    "text": Object {
+      "parent": Object {
+        "label": Object {
+          "parent": null,
+          "pos": Object {
+            "end": 70,
+            "start": 67,
+          },
+          "text": "eq1",
+          "type": "Text",
+        },
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 86,
+            "start": 0,
+          },
+          "raw": "
+Reference to the formula: !FK[eq1].
+$$$math
+a = b + c
+$$$
+$$$math[eq1]
+c = a - b
+$$$
+",
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 85,
+          "start": 59,
+        },
+        "target": Object {
+          "parent": [Circular],
+          "pos": Object {
+            "end": 66,
+            "start": 62,
+          },
+          "text": "math",
+          "type": "Text",
+        },
+        "text": [Circular],
+        "type": "Formula",
+      },
+      "pos": Object {
+        "end": 82,
+        "start": 72,
+      },
+      "text": "c = a - b",
+      "type": "Text",
+    },
+    "type": "FormulaProcessed",
+  },
+]
+`;
+
 exports[`pictures multiple pictures 1`] = `
 Array [
   Object {

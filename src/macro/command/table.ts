@@ -29,6 +29,8 @@ const callback: CommandInfoCallback<ArgsType, TextNode> = function (
         return [];
     }
 
+    // TODO: check already existing temporary table in the context
+
     ctx.c.temp.table = {
         label: args.label,
         name: args.args.name,

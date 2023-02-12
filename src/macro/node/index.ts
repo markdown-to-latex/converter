@@ -4,11 +4,13 @@ import { NodeProcessed, ProcessingInfo } from './struct';
 import { Node, NodeEParentData } from '../../ast/node';
 import { ContextE } from '../context';
 import picture from './processing/picture';
+import formula from './processing/formula';
 
 const ALL_PROCESSING: ProcessingInfo<Node>[] = [
     picture as ProcessingInfo<Node>,
     table as ProcessingInfo<Node>,
     code as ProcessingInfo<Node>,
+    formula as ProcessingInfo<Node>,
 ];
 
 export function processNode(

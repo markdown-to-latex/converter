@@ -92,6 +92,7 @@ export const parseCode: TokenParser = function (tokens, index) {
         argStartIndex < lineBreakResult.index;
         ++argStartIndex
     ) {
+        // TODO: encapsulate
         const token = tokens.tokens[argStartIndex];
         if (
             [
@@ -148,8 +149,8 @@ export const parseCode: TokenParser = function (tokens, index) {
 
     const endArgToken = tokens.tokens[macroArgsResult.index - 1];
     const argParsingResult = parseMacrosArguments(
+        // Ephemeral node
         {
-            // Ephimeral node
             type: NodeType.OpCode,
             pos: {
                 start: token.pos,

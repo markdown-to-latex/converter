@@ -1,6 +1,7 @@
 import {
     Context,
     ContextApplicationContentInfo,
+    ContextFormulaInfo,
     ContextPictureInfo,
     ContextReferenceContentInfo,
     ContextTableInfo,
@@ -204,6 +205,104 @@ export function diagnoseContextUnusedTableLabels(ctx: Context): void {
     }
 }
 
+export function createContextFormulaLabelData(
+    ctx: Context,
+    data: Readonly<ContextFormulaInfo>,
+): number {
+    const formulaData = ctx.data.formula;
+    const index = getOrCreateContextFormulaLabelIndex(ctx, data.label);
+    if (data.label.text in formulaData.labelToInfo) {
+        ctx.diagnostic.push(
+            nodeToDiagnose(
+                ctx.temp.node,
+                DiagnoseSeverity.Warning,
+                DiagnoseErrorType.ContextError,
+                `Formula with label ${data.label} already exists`,
+            ),
+        );
+        return index;
+    }
+
+    formulaData.labelToInfo[data.label.text] = data;
+    return index;
+}
+
+export function getOrCreateContextFormulaLabelIndex(
+    ctx: Context,
+    label: TextNode,
+): number {
+    const formulaData = ctx.data.formula;
+    const index = formulaData.labels.indexOf(label.text);
+    if (index !== -1) {
+        ++formulaData.labelToRefs[label.text].refs;
+        return index;
+    }
+
+    return createContextFormulaLabel(ctx, label);
+}
+
+export function createContextFormulaLabel(
+    ctx: Context,
+    label: TextNode,
+): number {
+    const formulaData = ctx.data.formula;
+    const index = formulaData.labels.indexOf(label.text);
+    if (index !== -1) {
+        ctx.diagnostic.push(
+            nodeToDiagnose(
+                ctx.temp.node,
+                DiagnoseSeverity.Warning,
+                DiagnoseErrorType.ContextError,
+                `Table with label ${label.text} already exists`,
+            ),
+        );
+        return index;
+    }
+
+    formulaData.labelToRefs[label.text] = {
+        node: ctx.temp.node,
+        refs: 1,
+    };
+    formulaData.labels.push(label.text);
+    return formulaData.labels.length - 1;
+}
+
+export function diagnoseContextUndefinedFormulaLabels(ctx: Context): void {
+    const formulaData = ctx.data.formula;
+    const undefinedLabels = formulaData.labels.filter(
+        label => !(label in formulaData.labelToInfo),
+    );
+    for (const label of undefinedLabels) {
+        ctx.diagnostic.push(
+            nodeToDiagnose(
+                formulaData.labelToRefs[label].node,
+                DiagnoseSeverity.Error,
+                DiagnoseErrorType.ContextError,
+                `Undefined formula label ${label}`,
+            ),
+        );
+    }
+}
+
+// TODO: reduce copy-paste-ness
+export function diagnoseContextUnusedFormulaLabels(ctx: Context): void {
+    const formulaData = ctx.data.formula;
+    const unusedLabels = Object.keys(formulaData.labelToInfo)
+        .map(label => [formulaData.labelToRefs[label], label] as const)
+        .filter(([refInfo, _]) => refInfo.refs === 1);
+
+    for (const [_, label] of unusedLabels) {
+        ctx.diagnostic.push(
+            nodeToDiagnose(
+                formulaData.labelToRefs[label].node,
+                DiagnoseSeverity.Warning,
+                DiagnoseErrorType.ContextError,
+                `Unused formula label ${label}`,
+            ),
+        );
+    }
+}
+
 export function getContextApplicationLabelIndex(
     ctx: Context,
     label: TextNode,
@@ -255,6 +354,35 @@ export function createContextApplication(
         refs: 1,
     };
     applicationData.labelToInfo[data.label.text] = data;
+}
+
+export function getContextFormulaLabelIndex(
+    ctx: Context,
+    label: TextNode,
+): number {
+    const formulaData = ctx.data.formula;
+    if (!(label.text in formulaData.labelToInfo)) {
+        ctx.diagnostic.push(
+            nodeToDiagnose(
+                ctx.temp.node,
+                DiagnoseSeverity.Error,
+                DiagnoseErrorType.ContextError,
+                `Formula with ${label.text} does not exist`,
+            ),
+        );
+        return -1;
+    }
+
+    const labels = formulaData.labels;
+    const labelIndex = labels.indexOf(label.text);
+    if (labelIndex !== -1) {
+        ++formulaData.labelToRefs[label.text].refs;
+        return labelIndex;
+    }
+
+    ++formulaData.labelToRefs[label.text].refs;
+    labels.push(label.text);
+    return labels.length - 1;
 }
 
 export function diagnoseContextUnusedApplicationLabels(ctx: Context): void {
@@ -351,6 +479,8 @@ export function diagnoseContextAll(ctx: Context): void {
     diagnoseContextUnusedPictureLabels(ctx);
     diagnoseContextUndefinedTableLabels(ctx);
     diagnoseContextUnusedTableLabels(ctx);
+    diagnoseContextUndefinedFormulaLabels(ctx);
+    diagnoseContextUnusedFormulaLabels(ctx);
     diagnoseContextUnusedApplicationLabels(ctx);
     diagnoseContextUnusedReferenceLabels(ctx);
 }

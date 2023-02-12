@@ -1,12 +1,15 @@
 import {
     Context,
     ContextApplicationContentInfo,
+    ContextFormulaInfo,
     ContextPictureInfo,
     ContextReferenceContentInfo,
     ContextTableInfo,
 } from './struct';
 import {
     createContextApplication,
+    createContextFormulaLabel,
+    createContextFormulaLabelData,
     createContextPictureLabel,
     createContextPictureLabelData,
     createContextReference,
@@ -21,6 +24,7 @@ import {
     diagnoseContextUnusedTableLabels,
     getContextApplicationLabelIndex,
     getContextReferenceLabelIndex,
+    getOrCreateContextFormulaLabelIndex,
     getOrCreateContextPictureLabelIndex,
     getOrCreateContextTableLabelIndex,
 } from './function';
@@ -71,6 +75,18 @@ export class ContextE {
 
     public diagnoseUnusedTableLabels(): void {
         diagnoseContextUnusedTableLabels(this.c);
+    }
+
+    public getOrCreateFormulaLabelIndex(label: TextNode): number {
+        return getOrCreateContextFormulaLabelIndex(this.c, label);
+    }
+
+    public createFormulaLabel(label: TextNode): number {
+        return createContextFormulaLabel(this.c, label);
+    }
+
+    public createFormulaLabelData(data: Readonly<ContextFormulaInfo>): number {
+        return createContextFormulaLabelData(this.c, data);
     }
 
     public getApplicationLabelIndex(label: TextNode): number {

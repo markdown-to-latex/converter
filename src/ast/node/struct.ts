@@ -327,6 +327,7 @@ export interface OpCodeNode extends Node, NodeArgs {
 
 export interface LatexNode extends Node, NodeTextNode {
     type: NodeType.Latex;
+    target?: TextNode;
 }
 
 export interface LatexSpanNode extends Node, NodeText {
@@ -335,6 +336,8 @@ export interface LatexSpanNode extends Node, NodeText {
 
 export interface FormulaNode extends Node, NodeTextNode {
     type: NodeType.Formula;
+    target?: TextNode;
+    label?: TextNode;
 }
 
 export interface FormulaSpanNode extends Node, NodeText {

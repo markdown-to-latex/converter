@@ -83,6 +83,26 @@ Look at the pic. !PK[image-label-2] and !PK[image-label].
     });
 });
 
+describe('formulas', () => {
+    test('formula with and without label', () => {
+        const rawNode = rawNodeTemplate(`
+Reference to the formula: !FK[eq1].
+$$$math
+a = b + c
+$$$
+$$$math[eq1]
+c = a - b
+$$$
+`);
+        const { nodes } = applyVisitors([rawNode]);
+        (rawNode.parent as FileNode).children = nodes;
+
+        const diagnostic = applyMacrosFull(rawNode.parent as FileNode);
+        expect(diagnostic).toHaveLength(0);
+        expect(nodes).toMatchSnapshot();
+    });
+});
+
 describe('references', () => {
     test('simple reference', () => {
         const rawNode = rawNodeTemplate(`
