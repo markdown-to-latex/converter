@@ -1,13 +1,13 @@
-import * as nodes from "../ast/node";
-import { NodeType } from "./node";
-import { RawNodeType } from "./node";
+import * as nodes from '../ast/node';
+import { NodeType } from './node';
+import { RawNodeType } from './node';
 
 const RawNodesByTypeMap = {
     [RawNodeType.Raw]: {} as nodes.RawNode,
     [RawNodeType.Tokens]: {} as nodes.TokensNode,
     [RawNodeType.SoftBreak]: {} as nodes.SoftBreakNode,
     [RawNodeType.ParagraphBreak]: {} as nodes.ParagraphBreakNode,
-    [RawNodeType.TextBreak]: {} as nodes.TextBreakNode
+    [RawNodeType.TextBreak]: {} as nodes.TextBreakNode,
 } as const;
 
 export type RawNodesByType = typeof RawNodesByTypeMap;
@@ -50,7 +50,7 @@ const NodesByTypeMap = {
     [NodeType.NonBreakingSpace]: {} as nodes.NonBreakingSpaceNode,
     [NodeType.ThinNonBreakingSpace]: {} as nodes.ThinNonBreakingSpaceNode,
 
-    [NodeType.Comment]: {} as nodes.CommentNode
+    [NodeType.Comment]: {} as nodes.CommentNode,
 } as const;
 
 export const NodesArray = Object.keys(NodesByTypeMap) as NodeType[];

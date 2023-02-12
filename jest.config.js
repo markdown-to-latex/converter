@@ -8,5 +8,5 @@ module.exports = {
         },
     },
     snapshotSerializers: ['<rootDir>/test/serializers'],
-    setupFilesAfterEnv: ['jest-expect-message']
+    setupFilesAfterEnv: ['jest-expect-message'],
 };

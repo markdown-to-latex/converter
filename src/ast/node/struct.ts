@@ -68,7 +68,7 @@ export const SPAN_NODE_TYPES: NodeType[] = [
 /**
  * The nodes, that will be wrapped into the paragraph
  */
-export const TEXT_LIKE_NODES: (NodeType)[] = [
+export const TEXT_LIKE_NODES: NodeType[] = [
     NodeType.Escape,
     NodeType.Text,
     NodeType.Link,
@@ -122,7 +122,7 @@ export const PARAGRAPH_LIKE_NODES: NodeType[] = [
     NodeType.Formula,
     NodeType.Table,
     NodeType.Hr,
-]
+];
 
 /**
  * Control nodes and
@@ -136,7 +136,7 @@ export const SPECIAL_NODES: NodeType[] = [
     NodeType.TableCell,
     NodeType.ListItem,
     NodeType.Comment,
-]
+];
 
 export type StartEndNumberPosition = StartEndPosition<number>;
 

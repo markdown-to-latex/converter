@@ -1166,7 +1166,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 527,
+            "end": 523,
             "start": 520,
           },
           "text": "1. ",
@@ -1216,7 +1216,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 571,
+            "end": 568,
             "start": 565,
           },
           "text": "2. ",
@@ -1627,7 +1627,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 735,
+            "end": 733,
             "start": 731,
           },
           "text": "- ",
@@ -1678,7 +1678,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 824,
+            "end": 822,
             "start": 820,
           },
           "text": "- ",
@@ -1729,7 +1729,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 903,
+            "end": 901,
             "start": 899,
           },
           "text": "- ",
@@ -1780,7 +1780,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 993,
+            "end": 991,
             "start": 989,
           },
           "text": "- ",
@@ -2372,6 +2372,7 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
     "type": "Paragraph",
   },
   Object {
+    "label": undefined,
     "parent": Object {
       "children": Array [
         Object {
@@ -2540,6 +2541,15 @@ Look at the pic. !PL[image-label] and !PL[image-label-2].
     "pos": Object {
       "end": 1177,
       "start": 1140,
+    },
+    "target": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 1147,
+        "start": 1143,
+      },
+      "text": "math",
+      "type": "Text",
     },
     "text": Object {
       "parent": [Circular],

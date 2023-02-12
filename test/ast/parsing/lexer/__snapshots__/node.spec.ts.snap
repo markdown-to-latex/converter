@@ -1857,6 +1857,15 @@ New sample text
       "end": 59,
       "start": 12,
     },
+    "target": Object {
+      "parent": [Circular],
+      "pos": Object {
+        "end": 18,
+        "start": 15,
+      },
+      "text": "raw",
+      "type": "Text",
+    },
     "text": Object {
       "parent": [Circular],
       "pos": Object {

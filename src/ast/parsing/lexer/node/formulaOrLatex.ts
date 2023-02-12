@@ -14,7 +14,7 @@ import {
     nodeToDiagnose,
 } from '../../../../diagnostic';
 import { isPrevTokenDelimiter } from './breaks';
-import {getMacroLabel} from "./macros";
+import { getMacroLabel } from './macros';
 
 export const isLatex: TokenPredicate = function (token, index, node) {
     if (!isPrevTokenDelimiter(token, index, node)) {
@@ -157,8 +157,11 @@ export const parseFormulaOrLatex: TokenParser = function (tokens, index) {
         },
         text: codeTextNode,
         parent: tokens.parent,
-        label: label
     };
+
+    if (latexNode.type == NodeType.Formula) {
+        latexNode.label = label;
+    }
 
     if (label && targetNode.text === LatexTarget.Raw) {
         diagnostic.push(

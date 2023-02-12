@@ -68,7 +68,7 @@ describe('context pictures', () => {
         context.diagnoseAll();
 
         expect(context.c.diagnostic).toHaveLength(0);
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.picture).toMatchSnapshot();
     });
 
     test('create same key twice', () => {
@@ -85,7 +85,7 @@ describe('context pictures', () => {
 
         expect(context.c.diagnostic).toHaveLength(1);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.picture).toMatchSnapshot();
     });
 
     test('create undefined keys', () => {
@@ -98,7 +98,7 @@ describe('context pictures', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.picture).toMatchSnapshot();
     });
 
     test('create unused keys', () => {
@@ -115,7 +115,7 @@ describe('context pictures', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.picture).toMatchSnapshot();
     });
 });
 
@@ -139,7 +139,7 @@ describe('context tables', () => {
         context.diagnoseAll();
 
         expect(context.c.diagnostic).toHaveLength(0);
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.table).toMatchSnapshot();
     });
 
     test('create same key twice', () => {
@@ -156,7 +156,7 @@ describe('context tables', () => {
 
         expect(context.c.diagnostic).toHaveLength(1);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.table).toMatchSnapshot();
     });
 
     test('create undefined keys', () => {
@@ -169,7 +169,7 @@ describe('context tables', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.table).toMatchSnapshot();
     });
 
     test('create unused keys', () => {
@@ -186,7 +186,7 @@ describe('context tables', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.table).toMatchSnapshot();
     });
 });
 
@@ -210,7 +210,7 @@ describe('context application', () => {
         context.diagnoseAll();
 
         expect(context.c.diagnostic).toHaveLength(0);
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.application).toMatchSnapshot();
     });
 
     test('create same key twice', () => {
@@ -227,7 +227,7 @@ describe('context application', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.application).toMatchSnapshot();
     });
 
     test('create undefined keys', () => {
@@ -240,7 +240,7 @@ describe('context application', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.application).toMatchSnapshot();
     });
 
     test('create unused keys', () => {
@@ -257,7 +257,7 @@ describe('context application', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.application).toMatchSnapshot();
     });
 });
 
@@ -281,7 +281,7 @@ describe('context reference', () => {
         context.diagnoseAll();
 
         expect(context.c.diagnostic).toHaveLength(0);
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.reference).toMatchSnapshot();
     });
 
     test('create same key twice', () => {
@@ -298,7 +298,7 @@ describe('context reference', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.reference).toMatchSnapshot();
     });
 
     test('create undefined keys', () => {
@@ -311,7 +311,7 @@ describe('context reference', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.reference).toMatchSnapshot();
     });
 
     test('create unused keys', () => {
@@ -328,6 +328,6 @@ describe('context reference', () => {
 
         expect(context.c.diagnostic).toHaveLength(2);
         expect(context.c.diagnostic).toMatchSnapshot();
-        expect(context.c.data).toMatchSnapshot();
+        expect(context.c.data.reference).toMatchSnapshot();
     });
 });

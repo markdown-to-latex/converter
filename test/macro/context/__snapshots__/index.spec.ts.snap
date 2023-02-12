@@ -43,50 +43,33 @@ Array [
 
 exports[`context application create same key twice 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {
-      "app-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "app-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "app-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
+        "text": "app-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "app-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+  },
+  "labelToRefs": Object {
+    "app-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
         },
-        "refs": 1,
+        "type": "File",
       },
+      "refs": 1,
     },
-    "labels": Array [],
   },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labels": Array [],
 }
 `;
 
@@ -133,26 +116,9 @@ Array [
 
 exports[`context application create undefined keys 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labelToInfo": Object {},
+  "labelToRefs": Object {},
+  "labels": Array [],
 }
 `;
 
@@ -199,146 +165,112 @@ Array [
 
 exports[`context application create unused keys 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {
-      "app-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "app-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "app-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-      },
-      "app-2": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "app-2",
-          "type": "Text",
-        },
+        "text": "app-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "app-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+    "app-2": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-        "refs": 1,
-      },
-      "app-2": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 1,
+        "text": "app-2",
+        "type": "Text",
       },
     },
-    "labels": Array [],
   },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
+  "labelToRefs": Object {
+    "app-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
+    "app-2": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
   },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labels": Array [],
 }
 `;
 
 exports[`context application simple 1`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {
-      "app-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "app-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "app-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-      },
-      "app-2": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "app-2",
-          "type": "Text",
-        },
+        "text": "app-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "app-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+    "app-2": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-        "refs": 2,
-      },
-      "app-2": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 2,
+        "text": "app-2",
+        "type": "Text",
       },
     },
-    "labels": Array [
-      "app-2",
-      "app-1",
-    ],
   },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
+  "labelToRefs": Object {
+    "app-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
+    "app-2": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
   },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labels": Array [
+    "app-2",
+    "app-1",
+  ],
 }
 `;
 
@@ -367,52 +299,35 @@ Array [
 
 exports[`context pictures create same key twice 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {
-      "pic-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "pic-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "pic-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
+        "text": "pic-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "pic-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+  },
+  "labelToRefs": Object {
+    "pic-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
         },
-        "refs": 2,
+        "type": "File",
       },
+      "refs": 2,
     },
-    "labels": Array [
-      "pic-1",
-    ],
   },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labels": Array [
+    "pic-1",
+  ],
 }
 `;
 
@@ -459,52 +374,35 @@ Array [
 
 exports[`context pictures create undefined keys 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {
-      "pic-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+  "labelToInfo": Object {},
+  "labelToRefs": Object {
+    "pic-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
         },
-        "refs": 1,
+        "type": "File",
       },
-      "pic-3": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 1,
-      },
+      "refs": 1,
     },
-    "labels": Array [
-      "pic-1",
-      "pic-3",
-    ],
+    "pic-3": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
   },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labels": Array [
+    "pic-1",
+    "pic-3",
+  ],
 }
 `;
 
@@ -551,172 +449,138 @@ Array [
 
 exports[`context pictures create unused keys 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {
-      "pic-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "pic-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "pic-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-      },
-      "pic-2": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "pic-2",
-          "type": "Text",
-        },
+        "text": "pic-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "pic-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+    "pic-2": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-        "refs": 1,
-      },
-      "pic-2": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 1,
+        "text": "pic-2",
+        "type": "Text",
       },
     },
-    "labels": Array [
-      "pic-1",
-      "pic-2",
-    ],
   },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
+  "labelToRefs": Object {
+    "pic-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
+    "pic-2": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
   },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labels": Array [
+    "pic-1",
+    "pic-2",
+  ],
 }
 `;
 
 exports[`context pictures simple 1`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {
-      "pic-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "pic-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "pic-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-      },
-      "pic-2": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "pic-2",
-          "type": "Text",
-        },
-      },
-      "pic-3": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "pic-3",
-          "type": "Text",
-        },
+        "text": "pic-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "pic-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+    "pic-2": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-        "refs": 2,
-      },
-      "pic-2": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 2,
-      },
-      "pic-3": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 2,
+        "text": "pic-2",
+        "type": "Text",
       },
     },
-    "labels": Array [
-      "pic-3",
-      "pic-1",
-      "pic-2",
-    ],
+    "pic-3": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
+        },
+        "text": "pic-3",
+        "type": "Text",
+      },
+    },
   },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
+  "labelToRefs": Object {
+    "pic-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
+    "pic-2": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
+    "pic-3": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
   },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labels": Array [
+    "pic-3",
+    "pic-1",
+    "pic-2",
+  ],
 }
 `;
 
@@ -763,50 +627,33 @@ Array [
 
 exports[`context reference create same key twice 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {
-      "ref-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "ref-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "ref-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
+        "text": "ref-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "ref-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+  },
+  "labelToRefs": Object {
+    "ref-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
         },
-        "refs": 1,
+        "type": "File",
       },
+      "refs": 1,
     },
-    "labels": Array [],
   },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labels": Array [],
 }
 `;
 
@@ -853,26 +700,9 @@ Array [
 
 exports[`context reference create undefined keys 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
+  "labelToInfo": Object {},
+  "labelToRefs": Object {},
+  "labels": Array [],
 }
 `;
 
@@ -919,146 +749,112 @@ Array [
 
 exports[`context reference create unused keys 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {
-      "ref-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "ref-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "ref-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-      },
-      "ref-2": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "ref-2",
-          "type": "Text",
-        },
+        "text": "ref-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "ref-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+    "ref-2": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-        "refs": 1,
-      },
-      "ref-2": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 1,
+        "text": "ref-2",
+        "type": "Text",
       },
     },
-    "labels": Array [],
   },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
+  "labelToRefs": Object {
+    "ref-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
+    "ref-2": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
   },
+  "labels": Array [],
 }
 `;
 
 exports[`context reference simple 1`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {
-      "ref-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "ref-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "ref-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-      },
-      "ref-2": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 5,
-            "start": 0,
-          },
-          "text": "ref-2",
-          "type": "Text",
-        },
+        "text": "ref-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "ref-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+    "ref-2": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 5,
+          "start": 0,
         },
-        "refs": 2,
-      },
-      "ref-2": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 2,
+        "text": "ref-2",
+        "type": "Text",
       },
     },
-    "labels": Array [
-      "ref-2",
-      "ref-1",
-    ],
   },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
+  "labelToRefs": Object {
+    "ref-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
+    "ref-2": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
   },
+  "labels": Array [
+    "ref-2",
+    "ref-1",
+  ],
 }
 `;
 
@@ -1087,52 +883,35 @@ Array [
 
 exports[`context tables create same key twice 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {
-      "table-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 7,
-            "start": 0,
-          },
-          "text": "table-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "table-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 7,
+          "start": 0,
         },
+        "text": "table-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "table-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 2,
-      },
-    },
-    "labels": Array [
-      "table-1",
-    ],
   },
+  "labelToRefs": Object {
+    "table-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
+  },
+  "labels": Array [
+    "table-1",
+  ],
 }
 `;
 
@@ -1179,52 +958,35 @@ Array [
 
 exports[`context tables create undefined keys 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {
-      "table-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+  "labelToInfo": Object {},
+  "labelToRefs": Object {
+    "table-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
         },
-        "refs": 1,
+        "type": "File",
       },
-      "table-3": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 1,
-      },
+      "refs": 1,
     },
-    "labels": Array [
-      "table-1",
-      "table-3",
-    ],
+    "table-3": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
   },
+  "labels": Array [
+    "table-1",
+    "table-3",
+  ],
 }
 `;
 
@@ -1271,171 +1033,137 @@ Array [
 
 exports[`context tables create unused keys 2`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {
-      "table-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 7,
-            "start": 0,
-          },
-          "text": "table-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "table-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 7,
+          "start": 0,
         },
-      },
-      "table-2": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 7,
-            "start": 0,
-          },
-          "text": "table-2",
-          "type": "Text",
-        },
+        "text": "table-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "table-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+    "table-2": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 7,
+          "start": 0,
         },
-        "refs": 1,
-      },
-      "table-2": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 1,
+        "text": "table-2",
+        "type": "Text",
       },
     },
-    "labels": Array [
-      "table-1",
-      "table-2",
-    ],
   },
+  "labelToRefs": Object {
+    "table-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
+    "table-2": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 1,
+    },
+  },
+  "labels": Array [
+    "table-1",
+    "table-2",
+  ],
 }
 `;
 
 exports[`context tables simple 1`] = `
 Object {
-  "application": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "picture": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "reference": Object {
-    "labelToInfo": Object {},
-    "labelToRefs": Object {},
-    "labels": Array [],
-  },
-  "table": Object {
-    "labelToInfo": Object {
-      "table-1": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 7,
-            "start": 0,
-          },
-          "text": "table-1",
-          "type": "Text",
+  "labelToInfo": Object {
+    "table-1": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 7,
+          "start": 0,
         },
-      },
-      "table-2": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 7,
-            "start": 0,
-          },
-          "text": "table-2",
-          "type": "Text",
-        },
-      },
-      "table-3": Object {
-        "label": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 7,
-            "start": 0,
-          },
-          "text": "table-3",
-          "type": "Text",
-        },
+        "text": "table-1",
+        "type": "Text",
       },
     },
-    "labelToRefs": Object {
-      "table-1": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
+    "table-2": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 7,
+          "start": 0,
         },
-        "refs": 2,
-      },
-      "table-2": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 2,
-      },
-      "table-3": Object {
-        "node": Object {
-          "parent": null,
-          "pos": Object {
-            "end": 1,
-            "start": 0,
-          },
-          "type": "File",
-        },
-        "refs": 2,
+        "text": "table-2",
+        "type": "Text",
       },
     },
-    "labels": Array [
-      "table-3",
-      "table-1",
-      "table-2",
-    ],
+    "table-3": Object {
+      "label": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 7,
+          "start": 0,
+        },
+        "text": "table-3",
+        "type": "Text",
+      },
+    },
   },
+  "labelToRefs": Object {
+    "table-1": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
+    "table-2": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
+    "table-3": Object {
+      "node": Object {
+        "parent": null,
+        "pos": Object {
+          "end": 1,
+          "start": 0,
+        },
+        "type": "File",
+      },
+      "refs": 2,
+    },
+  },
+  "labels": Array [
+    "table-3",
+    "table-1",
+    "table-2",
+  ],
 }
 `;

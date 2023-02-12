@@ -5,21 +5,23 @@ import {
     ProcessingInfo,
     ProcessingInfoCallback,
 } from '../struct';
-import {FormulaNode, NodeType} from '../../../ast/node';
+import { FormulaNode, NodeType } from '../../../ast/node';
 
 const callback: ProcessingInfoCallback<FormulaNode> = function (ctx, data) {
     const formulaNode = data.node.n;
 
-    if (!(formulaNode.label)) {
-        return [{
-            ...formulaNode,
+    if (!formulaNode.label) {
+        return [
+            {
+                ...formulaNode,
 
-            type: ProcessedNodeType.FormulaNoLabelProcessed,
-            pos: {...formulaNode.pos},
-        } as FormulaNoLabelProcessedNode];
+                type: ProcessedNodeType.FormulaNoLabelProcessed,
+                pos: { ...formulaNode.pos },
+            } as FormulaNoLabelProcessedNode,
+        ];
     }
     const index = ctx.createFormulaLabelData({
-        label: formulaNode.label
+        label: formulaNode.label,
     });
 
     return [
@@ -27,7 +29,7 @@ const callback: ProcessingInfoCallback<FormulaNode> = function (ctx, data) {
             ...formulaNode,
 
             type: ProcessedNodeType.FormulaProcessed,
-            pos: {...formulaNode.pos},
+            pos: { ...formulaNode.pos },
             label: formulaNode.label,
             index,
         },

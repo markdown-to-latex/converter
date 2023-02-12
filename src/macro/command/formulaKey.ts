@@ -1,5 +1,5 @@
 import { CommandInfo, CommandInfoCallback } from '../struct';
-import {ApplicationKeyNode, FormulaKeyNode, ProcessedNodeType} from '../node';
+import { FormulaKeyNode, ProcessedNodeType } from '../node';
 import { TextNode } from '../../ast/node';
 
 interface ArgsType {}
