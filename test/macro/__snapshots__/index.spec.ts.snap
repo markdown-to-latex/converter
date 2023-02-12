@@ -900,41 +900,39 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
       Object {
         "children": Array [
           Object {
-            "children": Array [
-              Object {
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 47,
+                  "start": 42,
+                },
+                "text": "ref-3",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 41,
+                  "start": 40,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
                 "children": Array [],
                 "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 47,
-                      "start": 42,
-                    },
-                    "text": "ref-3",
-                    "type": "Text",
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 177,
+                    "start": 0,
                   },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 41,
-                      "start": 40,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 177,
-                        "start": 0,
-                      },
-                      "raw": "
+                  "raw": "
 !R[ref-1](
     A
 )
@@ -951,75 +949,41 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
 !LAR[]
 !LAA[]
 ",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 57,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 57,
-                    "start": 39,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
+                  "type": "File",
                 },
                 "pos": Object {
-                  "end": 55,
-                  "start": 54,
+                  "end": 57,
+                  "start": 1,
                 },
-                "text": "C",
-                "type": "Text",
+                "type": "Paragraph",
               },
-            ],
-            "index": 0,
-            "parent": [Circular],
+              "pos": Object {
+                "end": 57,
+                "start": 39,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
             "pos": Object {
               "end": 55,
               "start": 54,
             },
-            "type": "Reference",
+            "text": "C",
+            "type": "Text",
           },
-          Object {
-            "children": Array [
-              Object {
-                "children": Array [],
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 177,
-                        "start": 0,
-                      },
-                      "raw": "
+        ],
+        "index": 0,
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 177,
+            "start": 0,
+          },
+          "raw": "
 !R[ref-1](
     A
 )
@@ -1036,55 +1000,124 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
 !LAR[]
 !LAA[]
 ",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 57,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 19,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
+          "type": "File",
+        },
+        "pos": Object {
+          "end": 55,
+          "start": 54,
+        },
+        "type": "Reference",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
                 "pos": Object {
-                  "end": 17,
-                  "start": 16,
+                  "end": 9,
+                  "start": 4,
                 },
-                "text": "A",
+                "text": "ref-1",
                 "type": "Text",
               },
-            ],
-            "index": 1,
-            "parent": [Circular],
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 177,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    A
+)
+!R[ref-2](
+    B
+)
+!R[ref-3](
+    C
+)
+
+Block-Matching Convolutional Neural Network
+for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 57,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 19,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
             "pos": Object {
               "end": 17,
               "start": 16,
             },
-            "type": "Reference",
+            "text": "A",
+            "type": "Text",
           },
         ],
-        "parent": [Circular],
-        "pos": Object {
-          "end": 169,
-          "start": 163,
+        "index": 1,
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 177,
+            "start": 0,
+          },
+          "raw": "
+!R[ref-1](
+    A
+)
+!R[ref-2](
+    B
+)
+!R[ref-3](
+    C
+)
+
+Block-Matching Convolutional Neural Network
+for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+          "type": "File",
         },
-        "type": "AllReferences",
-      },
-      Object {
-        "children": Array [],
-        "parent": [Circular],
         "pos": Object {
-          "end": 176,
-          "start": 170,
+          "end": 17,
+          "start": 16,
         },
-        "type": "AllApplications",
+        "type": "Reference",
       },
     ],
     "parent": Object {
@@ -1115,10 +1148,45 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
       "type": "File",
     },
     "pos": Object {
-      "end": 176,
+      "end": 169,
       "start": 163,
     },
-    "type": "Paragraph",
+    "type": "AllReferences",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 177,
+        "start": 0,
+      },
+      "raw": "
+!R[ref-1](
+    A
+)
+!R[ref-2](
+    B
+)
+!R[ref-3](
+    C
+)
+
+Block-Matching Convolutional Neural Network
+for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 176,
+      "start": 170,
+    },
+    "type": "AllApplications",
   },
 ]
 `;
@@ -1190,313 +1258,39 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
       Object {
         "children": Array [
           Object {
-            "children": Array [
-              Object {
-                "children": Array [],
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
                 "pos": Object {
-                  "end": 20,
-                  "start": 16,
+                  "end": 9,
+                  "start": 4,
                 },
-                "text": "Ahn,",
+                "text": "ref-1",
                 "type": "Text",
               },
-              Object {
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
+              "opcode": Object {
+                "parent": [Circular],
                 "pos": Object {
-                  "end": 21,
-                  "start": 20,
+                  "end": 3,
+                  "start": 2,
                 },
-                "type": "ThinNonBreakingSpace",
-              },
-              Object {
-                "children": Array [],
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 35,
-                  "start": 21,
-                },
-                "text": "Byeongyong; Ik",
+                "text": "R",
                 "type": "Text",
               },
-              Object {
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 36,
-                  "start": 35,
-                },
-                "type": "ThinNonBreakingSpace",
-              },
-              Object {
+              "parent": Object {
                 "children": Array [],
                 "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
                   },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
+                  "raw": "
 !R[ref-1](
     Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
     \`Block-Matching Convolutional Neural Network for Image Denoising\`.
@@ -1508,600 +1302,876 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
 !LAR[]
 !LAA[]
 ",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
+                  "type": "File",
                 },
                 "pos": Object {
-                  "end": 40,
-                  "start": 36,
+                  "end": 156,
+                  "start": 1,
                 },
-                "text": "Cho,",
-                "type": "Text",
+                "type": "Paragraph",
               },
-              Object {
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 41,
-                  "start": 40,
-                },
-                "type": "ThinNonBreakingSpace",
+              "pos": Object {
+                "end": 156,
+                "start": 1,
               },
-              Object {
-                "children": Array [],
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 47,
-                  "start": 41,
-                },
-                "text": "Nam (3",
-                "type": "Text",
-              },
-              Object {
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 49,
-                  "start": 47,
-                },
-                "type": "NonBreakingSpace",
-              },
-              Object {
-                "children": Array [],
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 54,
-                  "start": 49,
-                },
-                "text": "April",
-                "type": "Text",
-              },
-              Object {
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 56,
-                  "start": 54,
-                },
-                "type": "NonBreakingSpace",
-              },
-              Object {
-                "children": Array [],
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 63,
-                  "start": 56,
-                },
-                "text": "2017).     ",
-                "type": "Text",
-              },
-              Object {
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 132,
-                  "start": 67,
-                },
-                "text": "Block-Matching Convolutional Neural Network for Image Denoising",
-                "type": "CodeSpan",
-              },
-              Object {
-                "children": Array [],
-                "parent": Object {
-                  "keyArgs": Object {},
-                  "keys": Object {},
-                  "label": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 9,
-                      "start": 4,
-                    },
-                    "text": "ref-1",
-                    "type": "Text",
-                  },
-                  "opcode": Object {
-                    "parent": [Circular],
-                    "pos": Object {
-                      "end": 3,
-                      "start": 2,
-                    },
-                    "text": "R",
-                    "type": "Text",
-                  },
-                  "parent": Object {
-                    "children": Array [],
-                    "parent": Object {
-                      "children": [Circular],
-                      "parent": null,
-                      "path": "test.md",
-                      "pos": Object {
-                        "end": 264,
-                        "start": 0,
-                      },
-                      "raw": "
-!R[ref-1](
-    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
-    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
-    arXiv:1704.00524
-)
-
-Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
-
-!LAR[]
-!LAA[]
-",
-                      "type": "File",
-                    },
-                    "pos": Object {
-                      "end": 156,
-                      "start": 1,
-                    },
-                    "type": "Paragraph",
-                  },
-                  "pos": Object {
-                    "end": 156,
-                    "start": 1,
-                  },
-                  "posArgs": Array [
-                    [Circular],
-                  ],
-                  "type": "OpCode",
-                },
-                "pos": Object {
-                  "end": 154,
-                  "start": 132,
-                },
-                "text": ".     arXiv:1704.00524",
-                "type": "Text",
-              },
-            ],
-            "index": 0,
-            "parent": [Circular],
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
             "pos": Object {
-              "end": 154,
+              "end": 20,
               "start": 16,
             },
-            "type": "Reference",
+            "text": "Ahn,",
+            "type": "Text",
+          },
+          Object {
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 21,
+              "start": 20,
+            },
+            "type": "ThinNonBreakingSpace",
+          },
+          Object {
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 35,
+              "start": 21,
+            },
+            "text": "Byeongyong; Ik",
+            "type": "Text",
+          },
+          Object {
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 36,
+              "start": 35,
+            },
+            "type": "ThinNonBreakingSpace",
+          },
+          Object {
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 40,
+              "start": 36,
+            },
+            "text": "Cho,",
+            "type": "Text",
+          },
+          Object {
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 41,
+              "start": 40,
+            },
+            "type": "ThinNonBreakingSpace",
+          },
+          Object {
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 47,
+              "start": 41,
+            },
+            "text": "Nam (3",
+            "type": "Text",
+          },
+          Object {
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 49,
+              "start": 47,
+            },
+            "type": "NonBreakingSpace",
+          },
+          Object {
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 54,
+              "start": 49,
+            },
+            "text": "April",
+            "type": "Text",
+          },
+          Object {
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 56,
+              "start": 54,
+            },
+            "type": "NonBreakingSpace",
+          },
+          Object {
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 63,
+              "start": 56,
+            },
+            "text": "2017).     ",
+            "type": "Text",
+          },
+          Object {
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 132,
+              "start": 67,
+            },
+            "text": "Block-Matching Convolutional Neural Network for Image Denoising",
+            "type": "CodeSpan",
+          },
+          Object {
+            "children": Array [],
+            "parent": Object {
+              "keyArgs": Object {},
+              "keys": Object {},
+              "label": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 9,
+                  "start": 4,
+                },
+                "text": "ref-1",
+                "type": "Text",
+              },
+              "opcode": Object {
+                "parent": [Circular],
+                "pos": Object {
+                  "end": 3,
+                  "start": 2,
+                },
+                "text": "R",
+                "type": "Text",
+              },
+              "parent": Object {
+                "children": Array [],
+                "parent": Object {
+                  "children": [Circular],
+                  "parent": null,
+                  "path": "test.md",
+                  "pos": Object {
+                    "end": 264,
+                    "start": 0,
+                  },
+                  "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+                  "type": "File",
+                },
+                "pos": Object {
+                  "end": 156,
+                  "start": 1,
+                },
+                "type": "Paragraph",
+              },
+              "pos": Object {
+                "end": 156,
+                "start": 1,
+              },
+              "posArgs": Array [
+                [Circular],
+              ],
+              "type": "OpCode",
+            },
+            "pos": Object {
+              "end": 154,
+              "start": 132,
+            },
+            "text": ".     arXiv:1704.00524",
+            "type": "Text",
           },
         ],
-        "parent": [Circular],
-        "pos": Object {
-          "end": 256,
-          "start": 250,
+        "index": 0,
+        "parent": Object {
+          "children": [Circular],
+          "parent": null,
+          "path": "test.md",
+          "pos": Object {
+            "end": 264,
+            "start": 0,
+          },
+          "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+          "type": "File",
         },
-        "type": "AllReferences",
-      },
-      Object {
-        "children": Array [],
-        "parent": [Circular],
         "pos": Object {
-          "end": 263,
-          "start": 257,
+          "end": 154,
+          "start": 16,
         },
-        "type": "AllApplications",
+        "type": "Reference",
       },
     ],
     "parent": Object {
@@ -2127,10 +2197,40 @@ Block-Matching Convolutional Neural Network for Image Denoising described in [!R
       "type": "File",
     },
     "pos": Object {
-      "end": 263,
+      "end": 256,
       "start": 250,
     },
-    "type": "Paragraph",
+    "type": "AllReferences",
+  },
+  Object {
+    "children": Array [],
+    "parent": Object {
+      "children": [Circular],
+      "parent": null,
+      "path": "test.md",
+      "pos": Object {
+        "end": 264,
+        "start": 0,
+      },
+      "raw": "
+!R[ref-1](
+    Ahn,~Byeongyong; Ik~Cho,~Nam (3~~April~~2017).
+    \`Block-Matching Convolutional Neural Network for Image Denoising\`.
+    arXiv:1704.00524
+)
+
+Block-Matching Convolutional Neural Network for Image Denoising described in [!RK[ref-1]].
+
+!LAR[]
+!LAA[]
+",
+      "type": "File",
+    },
+    "pos": Object {
+      "end": 263,
+      "start": 257,
+    },
+    "type": "AllApplications",
   },
 ]
 `;

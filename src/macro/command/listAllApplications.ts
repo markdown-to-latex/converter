@@ -6,6 +6,7 @@ import {
     ProcessedNodeType,
 } from '../node';
 import { TextNode } from '../../ast/node';
+import { unpackerParagraphOnce } from '../unpack';
 
 interface ArgsType {}
 
@@ -39,4 +40,5 @@ export default {
     name: 'LAA',
     callback: callback,
     labelOptional: true,
+    unpacker: unpackerParagraphOnce,
 } as CommandInfo;

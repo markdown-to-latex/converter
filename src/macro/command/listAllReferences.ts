@@ -1,6 +1,7 @@
 import { CommandInfo, CommandInfoCallback } from '../struct';
 import { AllReferencesNode, ProcessedNodeType, ReferenceNode } from '../node';
 import { Node, NodeAbstract, TextNode } from '../../ast/node';
+import { unpackerParagraphOnce } from '../unpack';
 
 interface ArgsType {}
 
@@ -44,4 +45,5 @@ export default {
     name: 'LAR',
     callback: callback,
     labelOptional: true,
+    unpacker: unpackerParagraphOnce,
 } as CommandInfo;

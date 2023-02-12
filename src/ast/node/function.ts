@@ -15,6 +15,7 @@ interface NodeWithProbChildren {
     text?: Node | string;
     bullet?: Node;
     lang?: Node;
+    target?: Node;
 }
 
 const nodeListProcessors = [
@@ -241,7 +242,7 @@ export function getNodeRightNeighbourLeaf(
     return getNodeRightNeighbourLeaf(parent);
 }
 
-export function findNodeData(node: Node): NodeParentData {
+export function findNodeData(node: NodeAbstract): NodeParentData {
     const parent = node.parent;
     if (parent === null) {
         throw new Error('Cannot find node data for a root node');

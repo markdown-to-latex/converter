@@ -151,4 +151,6 @@ for Image Denoising described in [!RK[ref-3], !RK[ref-1]].
         expect(diagnostic).toMatchSnapshot();
         expect(nodes).toMatchSnapshot();
     });
+
+    // TODO: !LAR / !LAA into the table cell for example
 });

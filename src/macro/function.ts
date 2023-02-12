@@ -52,13 +52,23 @@ export const ALL_COMMAND_LIST: Readonly<CommandInfo[]> = [
     command.formulaKey,
 ];
 
+export function getCommandFromOpCodeNode(
+    opCodeNode: OpCodeNode,
+): CommandInfo | null {
+    return getCommand(opCodeNode.opcode.text.toUpperCase());
+}
+
+export function getCommand(macros: string): CommandInfo | null {
+    return ALL_COMMAND_LIST.find(d => d.name.toUpperCase() === macros) || null;
+}
+
 export function parseMacro(
     ctx: ContextE,
     data: NodeEParentData<OpCodeNode>,
 ): NodeAbstract[] {
     const opCodeNode = data.node.n;
     const macros = opCodeNode.opcode.text.toUpperCase();
-    const command = ALL_COMMAND_LIST.find(d => d.name.toUpperCase() === macros);
+    const command = getCommandFromOpCodeNode(opCodeNode);
     if (!command) {
         ctx.c.diagnostic.push(
             nodeToDiagnose(
@@ -125,6 +135,44 @@ export function applyMacrosFull(
     return [...diagnostic, ...context.diagnostic];
 }
 
+function unpackMacrosNodes(fileNode: FileNode): DiagnoseList {
+    const diagnostic: DiagnoseList = [];
+
+    // TODO: reduce complexity
+    let invalidateIter;
+    do {
+        invalidateIter = false;
+
+        const nodeE = new NodeE(fileNode);
+        const iter = nodeE.traverseDeepDepth();
+        let value = iter.next();
+
+        while (!invalidateIter && !value.done) {
+            const data = value.value;
+            if (data.node.n.type !== NodeType.OpCode) {
+                value = iter.next();
+                continue;
+            }
+
+            const opCodeData = data as NodeEParentData<OpCodeNode>;
+            const command = getCommandFromOpCodeNode(opCodeData.node.n);
+            if (!command || !command.unpacker) {
+                value = iter.next();
+                continue;
+            }
+
+            const result = command.unpacker({ ...opCodeData });
+            diagnostic.push(...result.diagnostic);
+            if (result.result) {
+                invalidateIter = true;
+            }
+            value = iter.next();
+        }
+    } while (invalidateIter);
+
+    return diagnostic;
+}
+
 export interface ApplyMacrosResult {
     context: Context;
     diagnostic: DiagnoseList;
@@ -135,6 +183,9 @@ export function applyMacros(
     srcContext?: Context,
 ): ApplyMacrosResult {
     const context = new ContextE(srcContext ?? initContext(fileNode));
+
+    const unpackDiag = unpackMacrosNodes(fileNode);
+    context.c.diagnostic.push(...unpackDiag);
 
     // TODO: maybe make a while for nested macros
 
