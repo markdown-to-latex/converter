@@ -59,7 +59,7 @@ export function getCommandFromOpCodeNode(
 }
 
 export function getCommand(macros: string): CommandInfo | null {
-    return ALL_COMMAND_LIST.find(d => d.name.toUpperCase() === macros) || null;
+    return ALL_COMMAND_LIST.find(d => d.name.toUpperCase() === macros) ?? null;
 }
 
 export function parseMacro(
