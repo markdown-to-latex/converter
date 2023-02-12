@@ -4576,7 +4576,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 15,
+            "end": 11,
             "start": 9,
           },
           "text": "- ",
@@ -4607,7 +4607,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 29,
+            "end": 28,
             "start": 26,
           },
           "text": "- ",
@@ -4649,7 +4649,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 52,
+            "end": 48,
             "start": 46,
           },
           "text": "- ",

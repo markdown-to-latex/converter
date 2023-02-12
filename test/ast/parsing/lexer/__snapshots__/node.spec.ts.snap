@@ -2008,7 +2008,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 7,
+            "end": 3,
             "start": 0,
           },
           "text": "3. ",
@@ -2031,7 +2031,7 @@ Array [
                 "bullet": Object {
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 38,
+                    "end": 34,
                     "start": 32,
                   },
                   "text": "- ",
@@ -2062,7 +2062,7 @@ Array [
                 "bullet": Object {
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 49,
+                    "end": 45,
                     "start": 43,
                   },
                   "text": "- ",
@@ -2085,7 +2085,7 @@ Array [
                         "bullet": Object {
                           "parent": [Circular],
                           "pos": Object {
-                            "end": 68,
+                            "end": 65,
                             "start": 63,
                           },
                           "text": "- ",
@@ -2146,7 +2146,7 @@ Array [
                 "bullet": Object {
                   "parent": [Circular],
                   "pos": Object {
-                    "end": 100,
+                    "end": 90,
                     "start": 88,
                   },
                   "text": "- ",
@@ -2198,7 +2198,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 108,
+            "end": 104,
             "start": 101,
           },
           "text": "4. ",
@@ -2238,7 +2238,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 118,
+            "end": 116,
             "start": 113,
           },
           "text": "5. ",
@@ -2341,7 +2341,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 7,
+            "end": 3,
             "start": 0,
           },
           "text": "1. ",
@@ -2372,7 +2372,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 35,
+            "end": 31,
             "start": 28,
           },
           "text": "2. ",
@@ -2412,7 +2412,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 45,
+            "end": 43,
             "start": 40,
           },
           "text": "3. ",
@@ -2509,7 +2509,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 7,
+            "end": 3,
             "start": 0,
           },
           "text": "3. ",
@@ -2626,7 +2626,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 7,
+            "end": 3,
             "start": 0,
           },
           "text": "1. ",
@@ -2657,7 +2657,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 17,
+            "end": 13,
             "start": 10,
           },
           "text": "2. ",
@@ -2697,7 +2697,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 27,
+            "end": 25,
             "start": 22,
           },
           "text": "3. ",
@@ -2836,7 +2836,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 17,
+            "end": 13,
             "start": 11,
           },
           "text": "+ ",
@@ -2867,7 +2867,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 26,
+            "end": 22,
             "start": 20,
           },
           "text": "+ ",
@@ -2942,7 +2942,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 7,
+            "end": 3,
             "start": 1,
           },
           "text": "- ",
@@ -2973,7 +2973,7 @@ Array [
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 16,
+            "end": 12,
             "start": 10,
           },
           "text": "+ ",
@@ -3289,7 +3289,7 @@ text",
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 98,
+            "end": 94,
             "start": 91,
           },
           "text": "1. ",
@@ -3338,7 +3338,7 @@ text",
         "bullet": Object {
           "parent": [Circular],
           "pos": Object {
-            "end": 115,
+            "end": 111,
             "start": 108,
           },
           "text": "2. ",
