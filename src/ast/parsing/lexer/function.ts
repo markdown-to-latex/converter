@@ -455,6 +455,10 @@ const parsersByType: Record<TokenType, TokenParser[]> = {
         parseLinkSimple,
         parseList,
         parseCode,
+
+        // TODO: check the implementation
+        // parseGuillemet,
+
         parseFormulaSpan,
         parseFormulaOrLatex,
         parseLatexSpan,
